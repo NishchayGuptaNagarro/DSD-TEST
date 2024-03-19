@@ -1,16 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Breadcrump from './component/Breadcrump/Breadcrump'
-
+import './App.css';
+import {createTheme, ThemeProvider} from '@mui/material';
+import AvailableStock from './screens/AvailableStock/AvailableStock.tsx';
+import CssBaseline from '@mui/material/CssBaseline';
 function App() {
-
-  return (
-    <>
-    <h3>Warehouse Admin </h3>
-    </>
-  )
+	const theme = createTheme({
+		typography: {
+			fontFamily: '"Montserrat", sans-serif',
+		},
+		palette: {
+			background: {
+				default: '#F1F2F6',
+			},
+		},
+	});
+	return (
+		<>
+			<ThemeProvider theme={theme}>
+				<CssBaseline />
+				<AvailableStock></AvailableStock>
+			</ThemeProvider>
+		</>
+	);
 }
 
-export default App
+export default App;
