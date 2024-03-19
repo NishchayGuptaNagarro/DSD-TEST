@@ -146,20 +146,20 @@ function CardStack() {
       <DetailsCard
         heading={'Warehouse Name & ID'}
         icon={<HomeIcon />}
-        detail1={'Supply Chain Solutions'}
-        detail2={'1545-8895-448R'}
+        mainInfo={'Supply Chain Solutions'}
+        secondaryInfo={'1545-8895-448R'}
       />
       <DetailsCard
         heading={'Manager Name & ID'}
         icon={<PersonIcon />}
-        detail1={'Alexandra Gabrielle'}
-        detail2={'55689'}
+        mainInfo={'Alexandra Gabrielle'}
+        secondaryInfo={'55689'}
       />
       <DetailsCard
         heading={'Date'}
         icon={<CalendarIcon />}
-        detail1={date}
-        detail2={day}
+        mainInfo={date}
+        secondaryInfo={day}
       />
     </Stack>
   );

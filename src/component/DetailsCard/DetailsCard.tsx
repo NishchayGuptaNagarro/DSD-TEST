@@ -3,19 +3,14 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import './DetailsCard.scss';
-import {ReactElement} from 'react';
+import {DetailsCardProps} from './propTypes/types.ts';
 
 function DetailsCard({
   heading,
   icon,
-  detail1,
-  detail2,
-}: {
-  heading: string;
-  icon: ReactElement<SVGSVGElement>;
-  detail1: string;
-  detail2: string;
-}) {
+  mainInfo,
+  secondaryInfo,
+}: DetailsCardProps) {
   return (
     // Initial width of card is defined using flexBasis
     <Card variant={'outlined'} sx={{borderRadius: 3, flexBasis: 400}}>
@@ -34,10 +29,10 @@ function DetailsCard({
           {icon}
         </Stack>
         <Typography fontWeight={600} fontSize={18}>
-          {detail1}
+          {mainInfo}
         </Typography>
         <Typography fontWeight={400} fontSize={18}>
-          {detail2}
+          {secondaryInfo}
         </Typography>
       </CardContent>
     </Card>

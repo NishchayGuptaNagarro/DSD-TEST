@@ -6,5 +6,5 @@ This component is a UI component that generates a card.
 
 1. heading: string -> Heading we want to give our card
 2. icon: ReactElement<SVGSVGElement> -> Icon we want in our card heading
-3. detail1: string -> This is main detail is displayed larger.
-4. detail2: string -> This is secondary detail, is smaller
+3. mainInfo: string -> This is main detail is displayed larger.
+4. secondaryInfo: string -> This is secondary detail, is smaller
