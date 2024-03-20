@@ -16,7 +16,6 @@ import dateIcon from '../../assets/Date.svg';
 import managerIcon from '../../assets/Manager.svg';
 import warehouseIcon from '../../assets/Warehouse.svg';
 
-// TODO add svg icons to card components and the commit
 function AvailableStock() {
   // Heading and subheading passed to 'Page Heading' component
   const heading = 'My Warehouse Available Stock';
