@@ -1,9 +1,7 @@
-import {ReactElement} from 'react';
-
 // Interface defining Details Card Component Props
 export interface DetailsCardProps {
   heading: string;
-  icon: ReactElement<SVGSVGElement>;
+  icon: string;
   mainInfo: string;
   secondaryInfo: string;
 }

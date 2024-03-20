@@ -26,7 +26,7 @@ function DetailsCard({
           <Typography fontWeight={500} sx={{color: '#929BAD'}}>
             {heading}
           </Typography>
-          {icon}
+          <img src={icon} alt={'icon'} />
         </Stack>
         <Typography fontWeight={600} fontSize={18}>
           {mainInfo}
