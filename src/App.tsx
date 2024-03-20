@@ -1,7 +1,8 @@
-import './App.css';
+import './App.scss';
 import {createTheme, ThemeProvider} from '@mui/material';
-import AvailableStock from './screens/AvailableStock/AvailableStock.tsx';
-import CssBaseline from '@mui/material/CssBaseline';
+import Login from './screens/Login/Login.tsx';
+import ScopedCssBaseline from '@mui/material/ScopedCssBaseline';
+// import AvailableStock from './screens/AvailableStock/AvailableStock.tsx';
 function App() {
   const theme = createTheme({
     typography: {
@@ -15,9 +16,11 @@ function App() {
   });
   return (
     <>
+      {/*Make sure all components using material ui goes inside this*/}
       <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <AvailableStock></AvailableStock>
+        {/*this baseline provides grey background used in all screens except login so keep all screens inside it except login*/}
+        <ScopedCssBaseline>{/*<AvailableStock />*/}</ScopedCssBaseline>
+        <Login />
       </ThemeProvider>
     </>
   );

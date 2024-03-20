@@ -71,6 +71,7 @@ function AvailableStock() {
       field: 'name',
       headerName: 'Product',
       flex: 0.8,
+      headerClassName: 'font-lg',
       // passing 'Product Icon' element to render cell function, so it is rendered instead of product name
       renderCell: params => {
         return (
@@ -85,14 +86,16 @@ function AvailableStock() {
     },
     {
       field: 'description',
+      headerClassName: 'font-lg',
       headerName: 'Product Description',
       flex: 1,
-      cellClassName: 'productText',
+      cellClassName: 'productText font-md',
       sortable: false,
     },
     {
       field: 'quantity',
       headerName: 'Quantity',
+      headerClassName: 'font-lg',
       flex: 0.5,
       cellClassName: 'quantity',
       sortable: false,
@@ -100,11 +103,12 @@ function AvailableStock() {
     {
       field: 'uom',
       headerName: 'UOM',
+      headerClassName: 'font-lg',
       flex: 0.4,
       valueGetter: () => {
         return 'Unit';
       },
-      cellClassName: 'productText',
+      cellClassName: 'productText font-md',
       sortable: false,
     },
   ];

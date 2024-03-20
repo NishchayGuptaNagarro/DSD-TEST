@@ -37,7 +37,6 @@ export default function Table({rows, columns, getRowId}: TableProps) {
         [`& .${gridClasses.columnHeader}`]: {
           paddingLeft: 3,
           fontWeight: 700,
-          fontSize: 18,
           color: '#C1C2CD',
         },
         [`& .${gridClasses.columnHeaders}`]: {

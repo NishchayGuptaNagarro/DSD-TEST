@@ -28,10 +28,10 @@ function DetailsCard({
           </Typography>
           <img src={icon} alt={'icon'} />
         </Stack>
-        <Typography fontWeight={600} fontSize={18}>
+        <Typography className={'font-lg'} fontWeight={600}>
           {mainInfo}
         </Typography>
-        <Typography fontWeight={400} fontSize={18}>
+        <Typography className={'font-lg'} fontWeight={400}>
           {secondaryInfo}
         </Typography>
       </CardContent>
