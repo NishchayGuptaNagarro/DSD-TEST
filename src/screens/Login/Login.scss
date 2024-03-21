@@ -1,5 +1,6 @@
 $label-color:rgba(52, 71, 103, 1);
 $input-bg-color:rgba(236, 236, 237, 1);
+$error-color: rgba(211, 47, 47,1);
 
 .truck-image {
   width: 100%;
@@ -7,15 +8,25 @@ $input-bg-color:rgba(236, 236, 237, 1);
   object-fit: cover;
 
 }
+//IMPORTANT write all classes related to login form inside '.login-form' so they only affect this form and not entire application
+
 .login-form {
   display: flex;
   flex-direction: column;
-  padding: 0 20% 0 20%;
+  padding: 0 20%;
   gap: 10px;
+
+  @media(width>=1440px){
+    padding: 0 30%;
+  }
   .form-label {
     font-weight: 600;
     color: $label-color;
+    &.form-label-error{
+      color:$error-color;
+    }
   }
+
   .form-input {
     color: $label-color;
     background-color: $input-bg-color;
@@ -31,7 +42,13 @@ $input-bg-color:rgba(236, 236, 237, 1);
     &:focus-visible {
       outline-color: $label-color;
     }
+    &.form-input-error{
+      outline: 1px solid $error-color !important;
+      //  Reason for adding 'important' to this property was that outline was being override on focus visible
+      //  but it should stay red until error is resolved
+    }
   }
+
   .form-checkbox {
     margin-right: 5px;
     cursor: pointer;

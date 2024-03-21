@@ -5,32 +5,38 @@ import './Login.scss';
 import logo from '../../assets/Logo.svg';
 import {Typography} from '@mui/material';
 import Button from '@mui/material/Button';
-import {ChangeEvent, FormEvent, useState} from 'react';
+import {useFormik} from 'formik';
+import * as Yup from 'yup';
 function Login() {
   // TODO replace a tag with LINK when routing is added
-  // TODO add css for error
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [checkbox, setCheckBox] = useState(false);
+  // TODO improve transparent text box if it is decided to be included
 
-  function handleEmail(event: ChangeEvent<HTMLInputElement>) {
-    setEmail(event.target.value);
-  }
-  function handlePassword(event: ChangeEvent<HTMLInputElement>) {
-    setPassword(event.target.value);
-  }
-  function handleCheckbox(event: ChangeEvent<HTMLInputElement>) {
-    setCheckBox(event.target.checked);
-  }
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault(); //to prevent page refresh
-    console.log(email, password, checkbox);
-  }
+  // Using formik and yup to handle form states, validation and submission
+  // we can add more validations in validation schema as per requirement
+  const formik = useFormik({
+    initialValues: {
+      userId: '',
+      password: '',
+      checkbox: false,
+    },
+    validationSchema: Yup.object({
+      userId: Yup.string().required('*Required'),
+      password: Yup.string().required('*Required'),
+    }),
+    onSubmit: values => {
+      console.log(values);
+    },
+  });
+
+  const userIdError = formik.touched.userId && formik.errors.userId;
+  const passwordError = formik.touched.password && formik.errors.password;
   return (
     <>
       <Grid container justifyContent="space-between">
-        <Grid item xs={8}>
+        <Grid item xs={6}>
+          {/*Parent Stack containing Heading + Form heading + form */}
           <Stack padding={8} spacing={3}>
+            {/*Stack Containing Heading + Logo*/}
             <Stack
               direction="row"
               justifyContent="center"
@@ -45,7 +51,7 @@ function Login() {
                 NotionEdge
               </Typography>
             </Stack>
-            <Box textAlign={'center'}>
+            <Box textAlign={'center'} paddingTop={{xl: 8}}>
               <Typography
                 className={'font-xl'}
                 component={'h2'}
@@ -62,39 +68,63 @@ function Login() {
               </Typography>
             </Box>
             {/*----------------------------------------login form--------------------------------------------------*/}
-            <form className={'login-form'} onSubmit={handleSubmit}>
+            <form className={'login-form '} onSubmit={formik.handleSubmit}>
               <label
-                className={'form-label font-md'}
+                className={`form-label font-md  ${userIdError ? 'form-label-error' : ''}`}
                 htmlFor="login-form-email">
                 User ID
               </label>
               <input
                 id="login-form-email"
-                className={'form-input font-sm'}
-                type={'text'}
-                value={email}
-                onChange={handleEmail}
+                className={`form-input font-sm  ${userIdError ? 'form-input-error' : ''} `}
+                type="text"
+                name="userId"
+                value={formik.values.userId}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
+              {/*Error message -> To be displayed in case inputs are touched and there is error*/}
+              {userIdError && (
+                <Typography
+                  color={'error'}
+                  marginTop={-2}
+                  className={'font-xsm'}>
+                  {formik.errors.userId}
+                </Typography>
+              )}
               <label
-                className={'form-label font-md'}
+                className={`form-label font-md  ${passwordError ? 'form-label-error' : ''}`}
                 htmlFor="login-form-password">
                 Password
               </label>
+
               <input
                 id="login-form-password"
-                className={'form-input font-sm'}
-                type={'password'}
-                value={password}
-                onChange={handlePassword}
+                className={`form-input font-sm  ${passwordError ? 'form-input-error' : ''}`}
+                type="password"
+                name="password"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
+              {passwordError && (
+                <Typography
+                  marginTop={-2}
+                  color={'error'}
+                  className={'font-xsm'}>
+                  {formik.errors.password}
+                </Typography>
+              )}
               <Stack direction={'row'} justifyContent="space-between">
                 <span>
                   <input
                     id="login-form-checkbox"
                     className={'form-checkbox'}
                     type="checkbox"
-                    checked={checkbox}
-                    onChange={handleCheckbox}
+                    name="checkbox"
+                    checked={formik.values.checkbox}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                   />
                   <label
                     className={'font-md form-checkbox-label'}
@@ -117,7 +147,7 @@ function Login() {
             </form>
           </Stack>
         </Grid>
-        <Grid item xs={4} p={2} height={'100vh'}>
+        <Grid item xs={6} p={2} height={'100vh'}>
           <Box
             sx={{
               height: '100%',
