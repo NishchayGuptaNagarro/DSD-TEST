@@ -15,6 +15,7 @@ import {format} from 'date-fns';
 import dateIcon from '../../assets/Date.svg';
 import managerIcon from '../../assets/Manager.svg';
 import warehouseIcon from '../../assets/Warehouse.svg';
+import Sidebar from '../../component/Sidebar/Sidebar.tsx';
 
 function AvailableStock() {
   // Heading and subheading passed to 'Page Heading' component
@@ -120,8 +121,9 @@ function AvailableStock() {
 
   return (
     <Grid container>
-      <Grid item xs={2}>
-        <Box sx={{height: '100%', backgroundColor: '#3c3d43'}}></Box>
+      <Grid item xs padding={2}>
+        <Sidebar/>
+        {/* <Box sx={{height: '100%', backgroundColor: '#3c3d43'}}></Box> */}
       </Grid>
       <Grid item xs={10}>
         <Stack>

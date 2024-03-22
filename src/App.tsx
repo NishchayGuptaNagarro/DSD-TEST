@@ -1,26 +1,44 @@
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import './App.css';
-import {createTheme, ThemeProvider} from '@mui/material';
-import AvailableStock from './screens/AvailableStock/AvailableStock.tsx';
-import CssBaseline from '@mui/material/CssBaseline';
+import React, {Suspense} from 'react';
+const Sidebar = React.lazy(() => import('./component/Sidebar/Sidebar'));
+const Breadcrump = React.lazy(
+  () => import('./component/Breadcrump/Breadcrump'),
+);
+
+const AvailableStock = React.lazy(
+  () => import('./screens/AvailableStock/AvailableStock'),
+);
+
 function App() {
-  const theme = createTheme({
-    typography: {
-      fontFamily: '"Montserrat", sans-serif',
-    },
-    palette: {
-      background: {
-        default: '#F1F2F6',
-      },
-    },
-  });
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <AvailableStock></AvailableStock>
-      </ThemeProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<Loading />}>
+                <AvailableStock />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/breadcrump"
+            element={
+              <Suspense fallback={<Loading />}>
+                <Breadcrump />
+              </Suspense>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
     </>
   );
+}
+
+function Loading() {
+  return <div>Loading...</div>;
 }
 
 export default App;
