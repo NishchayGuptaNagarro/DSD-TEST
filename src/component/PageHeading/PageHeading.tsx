@@ -7,10 +7,10 @@ function PageHeading({heading, subHeading}: PageHeadingProps) {
   return (
     <>
       <Box sx={{color: '#344767'}} marginBottom={2}>
-        <Typography variant="h2" fontWeight={700} fontSize={25}>
+        <Typography className={'font-xl'} variant="h2" fontWeight={700}>
           {heading}
         </Typography>
-        <Typography variant="h3" fontWeight={400} fontSize={18}>
+        <Typography className={'font-lg'} variant="h3" fontWeight={400}>
           {subHeading}
         </Typography>
       </Box>
