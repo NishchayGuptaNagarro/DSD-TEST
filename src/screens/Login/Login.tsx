@@ -7,12 +7,16 @@ import {Typography} from '@mui/material';
 import Button from '@mui/material/Button';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
+import {useNavigate} from 'react-router-dom';
+
 function Login() {
   // TODO replace a tag with LINK when routing is added
   // TODO improve transparent text box if it is decided to be included
 
   // Using formik and yup to handle form states, validation and submission
   // we can add more validations in validation schema as per requirement
+  const navigator = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       userId: '',
@@ -20,11 +24,12 @@ function Login() {
       checkbox: false,
     },
     validationSchema: Yup.object({
-      userId: Yup.string().required('*Required'),
+      userId: Yup.string().email('Enter a valid email').required('*Required'),
       password: Yup.string().required('*Required'),
     }),
     onSubmit: values => {
       console.log(values);
+      navigator('/');
     },
   });
 
@@ -32,7 +37,10 @@ function Login() {
   const passwordError = formik.touched.password && formik.errors.password;
   return (
     <>
-      <Grid container justifyContent="space-between">
+      <Grid
+        container
+        justifyContent="space-between"
+        sx={{backgroundColor: 'white'}}>
         <Grid item xs={6}>
           {/*Parent Stack containing Heading + Form heading + form */}
           <Stack padding={8} spacing={3}>
