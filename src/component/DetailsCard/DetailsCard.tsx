@@ -23,15 +23,18 @@ function DetailsCard({
           justifyContent="space-between"
           alignItems="center"
           marginBottom={1}>
-          <Typography fontWeight={500} sx={{color: '#929BAD'}}>
+          <Typography
+            className={'font-sm'}
+            fontWeight={500}
+            sx={{color: '#929BAD'}}>
             {heading}
           </Typography>
           <img src={icon} alt={'icon'} />
         </Stack>
-        <Typography className={'font-lg'} fontWeight={600}>
+        <Typography className={'font-md'} fontWeight={600}>
           {mainInfo}
         </Typography>
-        <Typography className={'font-lg'} fontWeight={400}>
+        <Typography className={'font-md'} fontWeight={400}>
           {secondaryInfo}
         </Typography>
       </CardContent>

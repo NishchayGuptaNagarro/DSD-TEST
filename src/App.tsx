@@ -9,9 +9,11 @@ import {lazy, Suspense} from 'react';
 // const Breadcrump = lazy(() => import('./component/Breadcrump/Breadcrump'));
 
 const AvailableStock = lazy(
-  () => import('./screens/AvailableStock/AvailableStock'),
+  () => import('./screens/AvailableStock/AvailableStock.tsx'),
 );
-
+const ForgotPassword = lazy(
+  () => import('./screens/ForgotPassword/ForgotPassword.tsx'),
+);
 function App() {
   const theme = createTheme({
     typography: {
@@ -40,6 +42,14 @@ function App() {
                 }
               />
               <Route path="/login" element={<Login />} />
+              <Route
+                path="/forgotpassword"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <ForgotPassword />
+                  </Suspense>
+                }
+              />
             </Routes>
           </ScopedCssBaseline>
         </BrowserRouter>

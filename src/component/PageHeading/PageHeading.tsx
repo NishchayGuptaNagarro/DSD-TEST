@@ -10,7 +10,7 @@ function PageHeading({heading, subHeading}: PageHeadingProps) {
         <Typography className={'font-xl'} variant="h2" fontWeight={700}>
           {heading}
         </Typography>
-        <Typography className={'font-lg'} variant="h3" fontWeight={400}>
+        <Typography className={'font-md'} variant="h3" fontWeight={400}>
           {subHeading}
         </Typography>
       </Box>
