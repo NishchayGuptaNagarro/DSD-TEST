@@ -7,10 +7,9 @@ import {Typography} from '@mui/material';
 import Button from '@mui/material/Button';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 function Login() {
-  // TODO replace a tag with LINK when routing is added
   // TODO improve transparent text box if it is decided to be included
 
   // Using formik and yup to handle form states, validation and submission
@@ -37,13 +36,10 @@ function Login() {
   const passwordError = formik.touched.password && formik.errors.password;
   return (
     <>
-      <Grid
-        container
-        justifyContent="space-between"
-        sx={{backgroundColor: 'white'}}>
+      <Grid container sx={{backgroundColor: 'white'}}>
         <Grid item xs={6}>
           {/*Parent Stack containing Heading + Form heading + form */}
-          <Stack padding={8} spacing={3}>
+          <Stack padding={6.4} spacing={3}>
             {/*Stack Containing Heading + Logo*/}
             <Stack
               direction="row"
@@ -140,9 +136,11 @@ function Login() {
                     Remember me
                   </label>
                 </span>
-                <a className={'form-label font-md form-link'} href={'#'}>
+                <Link
+                  className={'form-label font-md form-link'}
+                  to={'/forgotpassword'}>
                   Forgot password
-                </a>
+                </Link>
               </Stack>
               <Button
                 className={'font-md'}

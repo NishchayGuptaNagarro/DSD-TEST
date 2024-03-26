@@ -16,7 +16,7 @@ export default function Table({rows, columns, getRowId}: TableProps) {
           },
         },
       }}
-      columnHeaderHeight={78}
+      columnHeaderHeight={50}
       pageSizeOptions={[5]}
       autoHeight={true}
       disableColumnMenu
@@ -27,7 +27,7 @@ export default function Table({rows, columns, getRowId}: TableProps) {
         borderRadius: 3,
         [`& .${gridClasses.cell}`]: {
           paddingTop: 1,
-          paddingBottom: 2,
+          paddingBottom: 1,
           paddingLeft: 3,
         },
         [`& .${gridClasses.cell}:focus, & .${gridClasses.columnHeader}:focus`]:
@@ -38,9 +38,6 @@ export default function Table({rows, columns, getRowId}: TableProps) {
           paddingLeft: 3,
           fontWeight: 700,
           color: '#C1C2CD',
-        },
-        [`& .${gridClasses.columnHeaders}`]: {
-          paddingTop: 2,
         },
       }}
     />

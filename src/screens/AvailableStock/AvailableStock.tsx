@@ -125,17 +125,17 @@ function AvailableStock() {
 
   return (
     <Grid container>
-      <Grid item xs padding={2}>
-        <Sidebar/>
+      <Grid item xs={2} padding={1}>
+        <Sidebar />
         {/* <Box sx={{height: '100%', backgroundColor: '#3c3d43'}}></Box> */}
       </Grid>
       <Grid item xs={10}>
         <Stack>
-          <Box padding={5} paddingBottom={0}>
+          <Box padding={4} paddingBottom={0}>
             <PageHeading heading={heading} subHeading={subHeading} />
             <CardStack />
           </Box>
-          <Box padding={5}>
+          <Box padding={4}>
             <Table rows={rows} columns={columns} getRowId={getRowId} />
           </Box>
         </Stack>
