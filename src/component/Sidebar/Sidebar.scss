@@ -14,7 +14,7 @@
 .nav-menu-active {
   height: 98%;
   background: linear-gradient(180deg, #3c3d43 0%, #1e1e1e 100%);
-  width: 100%;
+  // width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,8 +28,8 @@
     margin-top: 10%;
 
     .open-logo-img {
-      height: 7vh;
-      width: 12vw;
+      height: 5.8vh;
+      width: 13vw;
     }
   }
 
@@ -49,7 +49,7 @@
         justify-content: center;
         color: white;
         .icon-img {
-          height: 5vh;
+          height: 4vh;
         }
       }
       .options-right {
@@ -111,21 +111,18 @@
 
 .bottom-icons-open {
   position: absolute;
-  bottom: 0;
+  bottom: 6%;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 18%;
-
 
   .bottom-icons-container {
     display: flex;
     flex-direction: row;
     width: 100%;
-    padding-left: 20%;
+    padding-left: 10%;
     margin-top: 15%;
-
 
     .bottom-text {
       font-family: 'Montserrat';
@@ -133,7 +130,7 @@
       font-size: 0.7rem;
       color: white;
       align-self: center;
-      padding-left: 5%;
+      padding-left: 8%;
     }
   }
 }
@@ -178,7 +175,6 @@
 
         .nav-menu-list {
           margin-top: 90%;
-     
         }
       }
     }

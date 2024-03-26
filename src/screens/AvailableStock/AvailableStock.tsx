@@ -129,7 +129,7 @@ function AvailableStock() {
         <Sidebar />
         {/* <Box sx={{height: '100%', backgroundColor: '#3c3d43'}}></Box> */}
       </Grid>
-      <Grid item xs={10}>
+      <Grid item xs={10} sx={{height:'100vh'}}>
         <Stack>
           <Box padding={4} paddingBottom={0}>
             <PageHeading heading={heading} subHeading={subHeading} />
