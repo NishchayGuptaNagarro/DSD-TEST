@@ -11,8 +11,8 @@ function ProductIcon({productName, productId, productImage}: ProductIconProps) {
         alt={productName}
         src={productImage}
         sx={{
-          width: 63,
-          height: 63,
+          width: 45,
+          height: 45,
         }}
       />
       <Stack>
