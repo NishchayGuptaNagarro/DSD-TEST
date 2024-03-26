@@ -72,7 +72,7 @@ function AvailableStock() {
       field: 'name',
       headerName: 'Product',
       flex: 0.8,
-      headerClassName: 'font-lg',
+      headerClassName: 'font-md',
       // passing 'Product Icon' element to render cell function, so it is rendered instead of product name
       renderCell: params => {
         return (
@@ -87,29 +87,29 @@ function AvailableStock() {
     },
     {
       field: 'description',
-      headerClassName: 'font-lg',
+      headerClassName: 'font-md',
       headerName: 'Product Description',
       flex: 1,
-      cellClassName: 'productText font-md',
+      cellClassName: 'productText font-sm',
       sortable: false,
     },
     {
       field: 'quantity',
       headerName: 'Quantity',
-      headerClassName: 'font-lg',
+      headerClassName: 'font-md',
       flex: 0.5,
-      cellClassName: 'quantity',
+      cellClassName: 'quantity font-sm',
       sortable: false,
     },
     {
       field: 'uom',
       headerName: 'UOM',
-      headerClassName: 'font-lg',
+      headerClassName: 'font-md',
       flex: 0.4,
       valueGetter: () => {
         return 'Unit';
       },
-      cellClassName: 'productText font-md',
+      cellClassName: 'productText font-sm',
       sortable: false,
     },
   ];
@@ -129,13 +129,13 @@ function AvailableStock() {
         <Sidebar />
         {/* <Box sx={{height: '100%', backgroundColor: '#3c3d43'}}></Box> */}
       </Grid>
-      <Grid item xs={10}>
+      <Grid item xs={10} sx={{height: '100vh', overflowY: 'scroll'}}>
         <Stack>
-          <Box padding={4} paddingBottom={0}>
+          <Box padding={2} paddingBottom={0}>
             <PageHeading heading={heading} subHeading={subHeading} />
             <CardStack />
           </Box>
-          <Box padding={4}>
+          <Box padding={2}>
             <Table rows={rows} columns={columns} getRowId={getRowId} />
           </Box>
         </Stack>

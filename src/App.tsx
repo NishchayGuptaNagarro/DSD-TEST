@@ -1,10 +1,10 @@
 import './App.scss';
-import {createTheme, ThemeProvider} from '@mui/material';
+import {createTheme, CssBaseline, ThemeProvider} from '@mui/material';
 import Login from './screens/Login/Login.tsx';
-import ScopedCssBaseline from '@mui/material/ScopedCssBaseline';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
 import {lazy, Suspense} from 'react';
+import Loading from './screens/Loading/Loading.tsx';
 // const Sidebar = lazy(() => import('./component/Sidebar/Sidebar'));
 // const Breadcrump = lazy(() => import('./component/Breadcrump/Breadcrump'));
 
@@ -31,34 +31,30 @@ function App() {
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           {/*this baseline provides grey background used in all screens */}
-          <ScopedCssBaseline>
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <Suspense fallback={<Loading />}>
-                    <AvailableStock />
-                  </Suspense>
-                }
-              />
-              <Route path="/login" element={<Login />} />
-              <Route
-                path="/forgotpassword"
-                element={
-                  <Suspense fallback={<Loading />}>
-                    <ForgotPassword />
-                  </Suspense>
-                }
-              />
-            </Routes>
-          </ScopedCssBaseline>
+          <CssBaseline />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Suspense fallback={<Loading />}>
+                  <AvailableStock />
+                </Suspense>
+              }
+            />
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/forgotpassword"
+              element={
+                <Suspense fallback={<Loading />}>
+                  <ForgotPassword />
+                </Suspense>
+              }
+            />
+          </Routes>
         </BrowserRouter>
       </ThemeProvider>
     </>
   );
-}
-function Loading() {
-  return <div>Loading...</div>;
 }
 
 export default App;
