@@ -14,7 +14,7 @@ import {MdOutlineKeyboardArrowUp} from 'react-icons/md';
 import {useNavigate} from 'react-router-dom';
 
 function Sidebar() {
-  const [showbar, setShowbBar] = useState<boolean>(false);
+  const [showbar, setShowbBar] = useState<boolean>(true);
   const [navData, setNavData] = useState<SideBarOption[]>([
     {
       id: 1,
@@ -47,10 +47,10 @@ function Sidebar() {
 
   const navigate = useNavigate();
 
-  const showSideBar = (): void => {
-    setShowbBar(!showbar);
-    console.log(showbar);
-  };
+  // const showSideBar = (): void => {
+  //   setShowbBar(!showbar);
+  //   console.log(showbar);
+  // };
 
   const openSubmenu = (id: number): void => {
     console.log('reaching here');
@@ -82,7 +82,7 @@ function Sidebar() {
               <img
                 src={openImg}
                 className="open-logo-img"
-                onClick={showSideBar}
+                // onClick={showSideBar}
                 alt="no-image-present"></img>
             </div>
 
@@ -142,7 +142,7 @@ function Sidebar() {
               <img
                 src={closed}
                 alt="No image present"
-                onClick={showSideBar}
+                // onClick={showSideBar}
                 className="img-closed"></img>
             </div>
             <div className="mid-icons">
@@ -168,7 +168,7 @@ function Sidebar() {
               <img
                 src={Signout}
                 alt="alternate-image"
-                style={{height: '5vh', width: '2vw'}}
+                style={{height: '4vh'}}
               />
               <p className="bottom-text">Sign out</p>
             </div>
@@ -177,7 +177,7 @@ function Sidebar() {
               <img
                 src={Settings}
                 alt="alternate-image"
-                style={{height: '5vh', width: '2vw'}}
+                style={{height: '4vh'}}
               />
               <p className="bottom-text">Settings</p>
             </div>
