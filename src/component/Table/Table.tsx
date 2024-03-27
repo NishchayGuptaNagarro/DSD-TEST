@@ -16,7 +16,7 @@ export default function Table({rows, columns, getRowId}: TableProps) {
           },
         },
       }}
-      columnHeaderHeight={50}
+      columnHeaderHeight={45}
       pageSizeOptions={[5]}
       autoHeight={true}
       disableColumnMenu

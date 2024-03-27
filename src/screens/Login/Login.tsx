@@ -165,7 +165,7 @@ function Login() {
             {/*This textbox can be further improved if it is decided to be kept in final code*/}
             <div className={'transparent-textbox'}>
               &#34; Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Atque, quis? &#34;
+              Atque, quis?&#34;
               <br />
               <br />
               Thomas Edison

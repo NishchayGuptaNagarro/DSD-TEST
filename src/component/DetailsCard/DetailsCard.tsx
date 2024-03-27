@@ -13,10 +13,14 @@ function DetailsCard({
 }: DetailsCardProps) {
   return (
     // Initial width of card is defined using flexBasis
-    <Card variant={'outlined'} sx={{borderRadius: 3, flexBasis: 400}}>
+    <Card
+      className={'details-card'}
+      variant={'outlined'}
+      sx={{borderRadius: 3, flexBasis: 400}}>
       <CardContent
         sx={{
           color: '#354766',
+          padding: 1,
         }}>
         <Stack
           direction="row"
@@ -24,17 +28,17 @@ function DetailsCard({
           alignItems="center"
           marginBottom={1}>
           <Typography
-            className={'font-sm'}
+            className={'font-xsm'}
             fontWeight={500}
             sx={{color: '#929BAD'}}>
             {heading}
           </Typography>
           <img src={icon} alt={'icon'} />
         </Stack>
-        <Typography className={'font-md'} fontWeight={600}>
+        <Typography className={'font-sm'} fontWeight={600}>
           {mainInfo}
         </Typography>
-        <Typography className={'font-md'} fontWeight={400}>
+        <Typography className={'font-sm'} fontWeight={400}>
           {secondaryInfo}
         </Typography>
       </CardContent>
