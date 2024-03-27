@@ -14,6 +14,9 @@ const AvailableStock = lazy(
 const ForgotPassword = lazy(
   () => import('./screens/ForgotPassword/ForgotPassword.tsx'),
 );
+const SelectDriver = lazy(
+  () => import('./screens/SelectDriver/SelectDriver.tsx'),
+);
 function App() {
   const theme = createTheme({
     typography: {
@@ -33,20 +36,28 @@ function App() {
           {/*this baseline provides grey background used in all screens */}
           <CssBaseline />
           <Routes>
+            <Route path="/" element={<Login />} />
             <Route
-              path="/"
+              path="/forgotpassword"
+              element={
+                <Suspense fallback={<Loading />}>
+                  <ForgotPassword />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/availablestock"
               element={
                 <Suspense fallback={<Loading />}>
                   <AvailableStock />
                 </Suspense>
               }
             />
-            <Route path="/login" element={<Login />} />
             <Route
-              path="/forgotpassword"
+              path="/selectdriver"
               element={
                 <Suspense fallback={<Loading />}>
-                  <ForgotPassword />
+                  <SelectDriver />
                 </Suspense>
               }
             />
