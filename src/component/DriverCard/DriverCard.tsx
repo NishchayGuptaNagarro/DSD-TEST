@@ -4,14 +4,23 @@ import Avatar from '@mui/material/Avatar';
 import Paper from '@mui/material/Paper';
 import Radio from '@mui/material/Radio';
 import {DriverCardProps} from './propTypes/types.ts';
-function DriverCard({driver, selected, handleSelected}: DriverCardProps) {
+import FormControlLabel from '@mui/material/FormControlLabel';
+import './DriverCard.scss';
+function DriverCard({driver, selectedDriverId}: DriverCardProps) {
   return (
-    <Paper variant="outlined" sx={{p: 1, borderRadius: 2}}>
+    <Paper
+      className={`driver-card ${selectedDriverId == driver.driverId ? 'selected' : ''}`}
+      variant="outlined"
+      sx={{
+        p: 0.8,
+        borderRadius: 2,
+      }}>
       <Stack
         alignItems="center"
         direction="row"
         spacing={1}
-        justifyContent={'space-around'}>
+        height={'100%'}
+        justifyContent={'space-between'}>
         {/*Avatar component displays image in a circular icon*/}
         <Avatar
           sx={{
@@ -29,7 +38,14 @@ function DriverCard({driver, selected, handleSelected}: DriverCardProps) {
             {driver.driverId}
           </Typography>
         </Stack>
-        <Radio checked={selected} onChange={handleSelected} size={'small'} />
+        {/*  This component needs to be wrapped around radio group of mui in its parent component*/}
+        {/*  This can be replaced with a simple radio button in case we want to make this component reusable*/}
+        {/*  But since it was used only in a single page and mui approach was simpler I used this*/}
+        <FormControlLabel
+          value={driver.driverId}
+          control={<Radio size={'small'} />}
+          label={''}
+        />
       </Stack>
     </Paper>
   );

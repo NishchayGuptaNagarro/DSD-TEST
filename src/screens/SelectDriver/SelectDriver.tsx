@@ -4,12 +4,33 @@ import Box from '@mui/material/Box';
 import Sidebar from '../../component/Sidebar/Sidebar.tsx';
 import PageHeading from '../../component/PageHeading/PageHeading.tsx';
 import Paper from '@mui/material/Paper';
-import DriverCard from '../../component/DriverCard/DriverCard.tsx';
 import {Container} from '@mui/material';
+import {Driver} from './propTypes/types.ts';
+import {ChangeEvent, useState} from 'react';
+import DriverNameGrid from '../../component/DriverNameGrid/DriverNameGrid.tsx';
 
 function SelectDriver() {
   const heading = 'Create Loading Order';
   const subHeading = 'To create a loading order, Please follow the steps';
+
+  //MOCK DATA
+  const driverArray: Driver[] = [
+    {driverId: 'DRV001', driverName: 'Lewis Hamilton'},
+    {driverId: 'DRV002', driverName: 'Max Verstappen'},
+    {driverId: 'DRV003', driverName: 'Fernando Alonso'},
+    {driverId: 'DRV004', driverName: 'Charles Leclerc'},
+    {driverId: 'DRV005', driverName: 'Sergio Perez'},
+    {driverId: 'DRV006', driverName: 'Sebastian Vettel'},
+    {driverId: 'DRV007', driverName: 'Lando Norris'},
+    {driverId: 'DRV008', driverName: 'Daniel Ricciardo'},
+  ];
+
+  const [selectedDriver, setSelectedDriver] = useState<string>('');
+
+  function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
+    setSelectedDriver(event.target.value);
+    console.log(event.target.value);
+  }
   return (
     <Grid container>
       <Grid item xs={2} padding={1}>
@@ -22,7 +43,11 @@ function SelectDriver() {
           </Box>
           <Container>
             <Paper elevation={1} sx={{p: 1.5}}>
-              <CardGrid />
+              <DriverNameGrid
+                driverArray={driverArray}
+                selectedDriverId={selectedDriver}
+                handleDriverSelection={handleDriverSelection}
+              />
             </Paper>
           </Container>
         </Stack>
@@ -32,31 +57,3 @@ function SelectDriver() {
 }
 
 export default SelectDriver;
-
-function CardGrid() {
-  return (
-    <Box display={'grid'} gap={2} gridTemplateColumns={'repeat(4,1fr)'}>
-      <DriverCard
-        driver={{driverName: 'driver', driverId: 'D10'}}
-        selected={false}
-        handleSelected={() => {
-          console.log('i was clicked');
-        }}
-      />
-      <DriverCard
-        driver={{driverName: 'driver', driverId: 'D10'}}
-        selected={false}
-        handleSelected={() => {
-          console.log('i was clicked');
-        }}
-      />
-      <DriverCard
-        driver={{driverName: 'driver', driverId: 'D10'}}
-        selected={false}
-        handleSelected={() => {
-          console.log('i was clicked');
-        }}
-      />
-    </Box>
-  );
-}
