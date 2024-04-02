@@ -16,12 +16,13 @@ import deliveryIcon from '../../assets/Delivery.svg';
 import hybridIcon from '../../assets/Hybrid.svg';
 
 import {useState, MouseEvent, ChangeEvent, useRef, useEffect} from 'react';
+import {useOutletContext} from 'react-router-dom';
+import {DriverOutletContext} from '../../screens/SelectDriver/SelectDriver.tsx';
 
-function DriverNameGrid({
-  driverArray,
-  selectedDriverId,
-  handleDriverSelection,
-}: DriverNameGridProps) {
+function DriverNameGrid() {
+  const {driverArray, selectedDriverId, handleDriverSelection} =
+    useOutletContext<DriverOutletContext>();
+
   // State containing driver type
   const [driverType, setDriverType] = useState<
     'vanSeller' | 'delivery' | 'hybrid'

@@ -6,14 +6,19 @@ import PageHeading from '../../component/PageHeading/PageHeading.tsx';
 import Paper from '@mui/material/Paper';
 import {Container} from '@mui/material';
 import {Driver} from './propTypes/types.ts';
-import {ChangeEvent, useState} from 'react';
+import {ChangeEvent, useContext, useEffect, useState} from 'react';
 import DriverNameGrid from '../../component/DriverNameGrid/DriverNameGrid.tsx';
-import {Row} from '../../component/Table/propTypes/types.ts';
+import {Row, TableProps} from '../../component/Table/propTypes/types.ts';
 import {GridColDef} from '@mui/x-data-grid';
 import ProductIcon from '../../component/ProductIcon/ProductIcon.tsx';
 import Table from '../../component/Table/Table.tsx';
 import './SelectDriver.scss';
 import Timeline from '../../component/Timeline/Timeline.tsx';
+import timelineContext from '../../context/timeline/timelineContext.ts';
+
+import {Outlet, useNavigate} from 'react-router';
+import {DriverNameGridProps} from '../../component/DriverNameGrid/propTypes/types.ts';
+export interface DriverOutletContext extends DriverNameGridProps, TableProps {}
 
 function SelectDriver() {
   const heading = 'Create Loading Order';
@@ -107,6 +112,15 @@ function SelectDriver() {
 
   // -----------------------------------------END OF MOCK DATA-------------------------------------------------------------------
   const [selectedDriver, setSelectedDriver] = useState<string>('');
+  const navigate = useNavigate();
+  const {currentStep, steps, decreaseSteps, increaseSteps, stepsComplete} =
+    useContext(timelineContext) || {};
+
+  useEffect(() => {
+    console.log(`${steps[currentStep - 1]}`);
+    navigate(`${steps[currentStep - 1]}`);
+  }, [currentStep]);
+
   function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
     setSelectedDriver(event.target.value);
     console.log(event.target.value);
@@ -176,7 +190,9 @@ function SelectDriver() {
   }
   return (
     <Grid container className={'select-driver-screen'}>
-      <Grid item xs={2} padding={1}>
+      <Grid item xs={2} sx={{padding: 1}}>
+        {' '}
+        {/* Moved padding to sx prop */}
         <Sidebar />
       </Grid>
       <Grid item xs={10} sx={{height: '100vh', overflowY: 'scroll'}}>
@@ -188,18 +204,47 @@ function SelectDriver() {
             textAlign={'center'}>
             <PageHeading heading={heading} subHeading={subHeading} />
           </Box>
-          <Container>
-            <Paper elevation={1} sx={{p: 1.5}}>
-              <Timeline />
-              <DriverNameGrid
-                driverArray={driverArray}
-                selectedDriverId={selectedDriver}
-                handleDriverSelection={handleDriverSelection}
-              />
-              {/*TODO add buttons here*/}
-              {/*<Table rows={rows} columns={columns} getRowId={getRowId} />*/}
-            </Paper>
-          </Container>
+          <Paper elevation={1} sx={{p: 1.5}}>
+            <Timeline />
+            {/* <DriverNameGrid
+            driverArray={driverArray}
+            selectedDriverId={selectedDriver}
+            handleDriverSelection={handleDriverSelection}
+          /> */}
+            {/*TODO add buttons here*/}
+            {/* <Table rows={rows} columns={columns} getRowId={getRowId} /> */}
+            <Outlet
+              context={
+                {
+                  driverArray: driverArray,
+                  selectedDriverId: selectedDriver,
+                  handleDriverSelection: handleDriverSelection,
+                  rows: rows,
+                  columns: columns,
+                  getRowId: getRowId,
+                } satisfies DriverOutletContext
+              }></Outlet>
+            <div className="buttons-group">
+              <button
+                className="btn-item"
+                onClick={() => {
+                  currentStep > 1 ? decreaseSteps() : stepsComplete();
+                }}
+                disabled={currentStep === 1}>
+                Back
+              </button>
+
+              <button
+                className="btn-item"
+                onClick={() => {
+                  currentStep === steps.length
+                    ? stepsComplete()
+                    : increaseSteps();
+                }}>
+                {currentStep === steps.length ? 'Finish' : 'Next'}
+              </button>
+            </div>
+          </Paper>
         </Stack>
       </Grid>
     </Grid>

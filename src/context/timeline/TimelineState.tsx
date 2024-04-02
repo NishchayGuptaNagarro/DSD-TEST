@@ -6,7 +6,7 @@ type UserProvidedProps = {
 };
 
 const TimeLineState: React.FC<UserProvidedProps> = ({children}) => {
-  const steps: string[] = ['select', 'verification', 'activation'];
+  const steps: string[] = ['driver', 'order'];
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [complete, setComplete] = useState<boolean>(false);
 

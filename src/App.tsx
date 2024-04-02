@@ -15,20 +15,16 @@ const ForgotPassword = lazy(
 );
 
 const TimeLine = lazy(() => import('./component/Timeline/Timeline.tsx'));
-const SelectDriver = lazy(
-  () => import('./component/Timeline/SelectDriver.tsx'),
+const DriverName = lazy(
+  () => import('./component/DriverNameGrid/DriverNameGrid.tsx'),
 );
-const Verification = lazy(
-  () => import('./component/Timeline/Verification.tsx'),
-);
-
-const ActiveDriver = lazy(
-  () => import('./component/Timeline/ActiveDriver.tsx'),
-);
+const Table = lazy(() => import('./component/Table/Table.tsx'));
 
 const SelectDriverScreen = lazy(
   () => import('./screens/SelectDriver/SelectDriver.tsx'),
 );
+
+const OrderTable = lazy(() => import('./component/OrderTable/OrderTable.tsx'));
 
 function App() {
   const theme = createTheme({
@@ -68,42 +64,34 @@ function App() {
                 }
               />
               <Route
-                path="/selectdriverscreen"
+                path="/driverscreen"
                 element={
                   <Suspense fallback={<Loading />}>
                     <SelectDriverScreen />
                   </Suspense>
-                }
-              />
-              <Route
-                path="/timeline"
-                element={
-                  <Suspense fallback={<Loading />}>
-                    <TimeLine />
-                  </Suspense>
                 }>
                 <Route
-                  path="select"
+                  path="timeline"
                   element={
                     <Suspense fallback={<Loading />}>
-                      <SelectDriver />
+                      <TimeLine />
                     </Suspense>
                   }
                 />
                 <Route
-                  path="verification"
+                  path="driver"
                   element={
                     <Suspense fallback={<Loading />}>
-                      <Verification />
+                      <DriverName />
                     </Suspense>
                   }
                 />
 
                 <Route
-                  path="activation"
+                  path="order"
                   element={
                     <Suspense fallback={<Loading />}>
-                      <ActiveDriver />
+                      <OrderTable />
                     </Suspense>
                   }
                 />

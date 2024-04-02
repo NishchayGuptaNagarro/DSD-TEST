@@ -10,7 +10,7 @@ interface TimeLineProp {
 const Timeline: React.FC<TimeLineProp> = () => {
   const {currentStep, steps, complete, rememberSteps} =
     useContext(timelineContext) || {};
-  const navigate = useNavigate();
+ 
 
   //When someone refresh the page this method will get called//
   useEffect(() => {
@@ -18,9 +18,6 @@ const Timeline: React.FC<TimeLineProp> = () => {
   }, []);
 
   //whenever the value of currentStep will alter itself it will navigate accordingly//
-  useEffect(() => {
-    // navigate(`${steps[currentStep - 1]}`);
-  }, [currentStep]);
 
   //function to transform the first letter to capital//
   function capitalizeFirstLetter(str: string) {
@@ -52,7 +49,7 @@ const Timeline: React.FC<TimeLineProp> = () => {
             </div>
           ))}
         </div>
-        <Outlet />
+      
       </div>
     </>
   );
