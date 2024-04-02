@@ -14,6 +14,7 @@ import ProductIcon from '../../component/ProductIcon/ProductIcon.tsx';
 import Table from '../../component/Table/Table.tsx';
 import './SelectDriver.scss';
 import Timeline from '../../component/Timeline/Timeline.tsx';
+import DriverSignature from '../../component/DriverSignature/DriverSignature.tsx';
 
 function SelectDriver() {
   const heading = 'Create Loading Order';
@@ -191,13 +192,14 @@ function SelectDriver() {
           <Container>
             <Paper elevation={1} sx={{p: 1.5}}>
               <Timeline />
-              <DriverNameGrid
-                driverArray={driverArray}
-                selectedDriverId={selectedDriver}
-                handleDriverSelection={handleDriverSelection}
-              />
+              {/*<DriverNameGrid*/}
+              {/*  driverArray={driverArray}*/}
+              {/*  selectedDriverId={selectedDriver}*/}
+              {/*  handleDriverSelection={handleDriverSelection}*/}
+              {/*/>*/}
               {/*TODO add buttons here*/}
               {/*<Table rows={rows} columns={columns} getRowId={getRowId} />*/}
+              <DriverSignature />
             </Paper>
           </Container>
         </Stack>

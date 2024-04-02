@@ -76,7 +76,7 @@ function App() {
                 }
               />
               <Route
-                path="/timeline"
+                path="/selectdriver"
                 element={
                   <Suspense fallback={<Loading />}>
                     <TimeLine />
