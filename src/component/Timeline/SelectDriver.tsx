@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import {useContext} from 'react';
 import timelineContext from '../../context/timeline/timelineContext';
 import {useNavigate} from 'react-router';
 

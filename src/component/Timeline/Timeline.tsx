@@ -19,7 +19,7 @@ const Timeline: React.FC<TimeLineProp> = () => {
 
   //whenever the value of currentStep will alter itself it will navigate accordingly//
   useEffect(() => {
-    navigate(`${steps[currentStep - 1]}`);
+    // navigate(`${steps[currentStep - 1]}`);
   }, [currentStep]);
 
   //function to transform the first letter to capital//

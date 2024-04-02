@@ -13,6 +13,7 @@ import {GridColDef} from '@mui/x-data-grid';
 import ProductIcon from '../../component/ProductIcon/ProductIcon.tsx';
 import Table from '../../component/Table/Table.tsx';
 import './SelectDriver.scss';
+import Timeline from '../../component/Timeline/Timeline.tsx';
 
 function SelectDriver() {
   const heading = 'Create Loading Order';
@@ -180,17 +181,23 @@ function SelectDriver() {
       </Grid>
       <Grid item xs={10} sx={{height: '100vh', overflowY: 'scroll'}}>
         <Stack>
-          <Box padding={2} paddingBottom={0} textAlign={'center'}>
+          <Box
+            padding={2}
+            paddingBottom={0}
+            marginBottom={5}
+            textAlign={'center'}>
             <PageHeading heading={heading} subHeading={subHeading} />
           </Box>
           <Container>
             <Paper elevation={1} sx={{p: 1.5}}>
+              <Timeline />
               <DriverNameGrid
                 driverArray={driverArray}
                 selectedDriverId={selectedDriver}
                 handleDriverSelection={handleDriverSelection}
               />
-              <Table rows={rows} columns={columns} getRowId={getRowId} />
+              {/*TODO add buttons here*/}
+              {/*<Table rows={rows} columns={columns} getRowId={getRowId} />*/}
             </Paper>
           </Container>
         </Stack>
