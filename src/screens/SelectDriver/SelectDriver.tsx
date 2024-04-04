@@ -113,12 +113,17 @@ function SelectDriver() {
   // -----------------------------------------END OF MOCK DATA-------------------------------------------------------------------
   const [selectedDriver, setSelectedDriver] = useState<string>('');
   const navigate = useNavigate();
-  const {currentStep, steps, decreaseSteps, increaseSteps, stepsComplete} =
-    useContext(timelineContext) || {};
+  const {
+    currentStep,
+    steps,
+    decreaseSteps,
+    increaseSteps,
+    stepsComplete,
+    orderRoutes,
+  } = useContext(timelineContext) || {};
 
   useEffect(() => {
-    console.log(`${steps[currentStep - 1]}`);
-    navigate(`${steps[currentStep - 1]}`);
+    navigate(`${orderRoutes[currentStep - 1]}`);
   }, [currentStep]);
 
   function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {

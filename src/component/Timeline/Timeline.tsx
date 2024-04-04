@@ -10,7 +10,6 @@ interface TimeLineProp {
 const Timeline: React.FC<TimeLineProp> = () => {
   const {currentStep, steps, complete, rememberSteps} =
     useContext(timelineContext) || {};
- 
 
   //When someone refresh the page this method will get called//
   useEffect(() => {
@@ -43,13 +42,14 @@ const Timeline: React.FC<TimeLineProp> = () => {
                 ) : null}
               </div>
               {/* completed text will be shown as white and non completed as in faded white */}
-              <p className={`${i + 1 <= currentStep ? 'active' : 'disable'}`}>
-                {capitalizeFirstLetter(step)}
+              <p
+                className={`${i + 1 <= currentStep ? 'active' : 'disable'}`}
+                style={{paddingTop: '0.5rem'}}>
+                {` ${i + 1}.  ${capitalizeFirstLetter(step)}`}
               </p>
             </div>
           ))}
         </div>
-      
       </div>
     </>
   );

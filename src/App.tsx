@@ -18,10 +18,13 @@ const TimeLine = lazy(() => import('./component/Timeline/Timeline.tsx'));
 const DriverName = lazy(
   () => import('./component/DriverNameGrid/DriverNameGrid.tsx'),
 );
-const Table = lazy(() => import('./component/Table/Table.tsx'));
 
 const SelectDriverScreen = lazy(
   () => import('./screens/SelectDriver/SelectDriver.tsx'),
+);
+
+const DriverSignature = lazy(
+  () => import('./component/DriverSignature/DriverSignature.tsx'),
 );
 
 const OrderTable = lazy(() => import('./component/OrderTable/OrderTable.tsx'));
@@ -95,7 +98,16 @@ function App() {
                     </Suspense>
                   }
                 />
+                <Route
+                  path="signature"
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <DriverSignature />
+                    </Suspense>
+                  }></Route>
               </Route>
+
+              <Route path="/signature" element={<DriverSignature />}></Route>
             </Routes>
           </BrowserRouter>
         </ThemeProvider>

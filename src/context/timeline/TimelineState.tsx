@@ -6,7 +6,12 @@ type UserProvidedProps = {
 };
 
 const TimeLineState: React.FC<UserProvidedProps> = ({children}) => {
-  const steps: string[] = ['driver', 'order'];
+  const steps: string[] = [
+    'Select Driver',
+    'Verification/Validation',
+    'Activation',
+  ];
+  const orderRoutes: string[] = ['driver', 'order', 'signature'];
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [complete, setComplete] = useState<boolean>(false);
 
@@ -64,6 +69,7 @@ const TimeLineState: React.FC<UserProvidedProps> = ({children}) => {
         increaseSteps,
         decreaseSteps,
         rememberSteps,
+        orderRoutes,
       }}>
       {children}
     </TimelineContext.Provider>
