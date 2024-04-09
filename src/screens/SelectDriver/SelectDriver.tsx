@@ -4,21 +4,19 @@ import Box from '@mui/material/Box';
 import Sidebar from '../../component/Sidebar/Sidebar.tsx';
 import PageHeading from '../../component/PageHeading/PageHeading.tsx';
 import Paper from '@mui/material/Paper';
-import {Container} from '@mui/material';
-import {Driver} from './propTypes/types.ts';
+
+import {Driver, DriverOutletContext} from './propTypes/types.ts';
 import {ChangeEvent, useContext, useEffect, useState} from 'react';
-import DriverNameGrid from '../../component/DriverNameGrid/DriverNameGrid.tsx';
-import {Row, TableProps} from '../../component/Table/propTypes/types.ts';
+
+import {Row} from '../../component/Table/propTypes/types.ts';
 import {GridColDef} from '@mui/x-data-grid';
 import ProductIcon from '../../component/ProductIcon/ProductIcon.tsx';
-import Table from '../../component/Table/Table.tsx';
+
 import './SelectDriver.scss';
 import Timeline from '../../component/Timeline/Timeline.tsx';
 import timelineContext from '../../context/timeline/timelineContext.ts';
 
 import {Outlet, useNavigate} from 'react-router';
-import {DriverNameGridProps} from '../../component/DriverNameGrid/propTypes/types.ts';
-export interface DriverOutletContext extends DriverNameGridProps, TableProps {}
 
 function SelectDriver() {
   const heading = 'Create Loading Order';
@@ -209,15 +207,11 @@ function SelectDriver() {
             textAlign={'center'}>
             <PageHeading heading={heading} subHeading={subHeading} />
           </Box>
-          <Paper elevation={1} sx={{p: 1.5}}>
+          <Paper
+            elevation={1}
+            sx={{p: 1.5, minHeight: 430, position: 'relative'}}>
             <Timeline />
-            {/* <DriverNameGrid
-            driverArray={driverArray}
-            selectedDriverId={selectedDriver}
-            handleDriverSelection={handleDriverSelection}
-          /> */}
-            {/*TODO add buttons here*/}
-            {/* <Table rows={rows} columns={columns} getRowId={getRowId} /> */}
+            {/*This outlet will display child components all props are provided in context*/}
             <Outlet
               context={
                 {
@@ -229,6 +223,8 @@ function SelectDriver() {
                   getRowId: getRowId,
                 } satisfies DriverOutletContext
               }></Outlet>
+            <br />
+            <br />
             <div className="buttons-group">
               <button
                 className="btn-item"

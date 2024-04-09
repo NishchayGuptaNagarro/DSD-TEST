@@ -9,7 +9,7 @@ export default function Table({rows, columns, getRowId}: TableProps) {
       columns={columns}
       getRowId={getRowId}
       getRowHeight={() => 'auto'} //Passing function to automatically set row height of each row
-      getEstimatedRowHeight={() => 200} //giving estimated row height for performance enhancements
+      getEstimatedRowHeight={() => 62} //giving estimated row height for performance enhancements
       initialState={{
         pagination: {
           paginationModel: {

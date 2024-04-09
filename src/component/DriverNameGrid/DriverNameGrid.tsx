@@ -3,11 +3,11 @@ import Box from '@mui/material/Box';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
+import {DriverNameGridHeaderProps} from './propTypes/types.ts';
 import {
-  DriverNameGridHeaderProps,
-  DriverNameGridProps,
-} from './propTypes/types.ts';
-import {Driver} from '../../screens/SelectDriver/propTypes/types.ts';
+  Driver,
+  DriverOutletContext,
+} from '../../screens/SelectDriver/propTypes/types.ts';
 import DriverCard from '../DriverCard/DriverCard.tsx';
 import './DriverNameGrid.scss';
 
@@ -17,9 +17,9 @@ import hybridIcon from '../../assets/Hybrid.svg';
 
 import {useState, MouseEvent, ChangeEvent, useRef, useEffect} from 'react';
 import {useOutletContext} from 'react-router-dom';
-import {DriverOutletContext} from '../../screens/SelectDriver/SelectDriver.tsx';
 
 function DriverNameGrid() {
+  // Getting required props from outlet context
   const {driverArray, selectedDriverId, handleDriverSelection} =
     useOutletContext<DriverOutletContext>();
 

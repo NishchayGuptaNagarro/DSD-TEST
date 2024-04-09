@@ -13,8 +13,6 @@ const AvailableStock = lazy(
 const ForgotPassword = lazy(
   () => import('./screens/ForgotPassword/ForgotPassword.tsx'),
 );
-
-const TimeLine = lazy(() => import('./component/Timeline/Timeline.tsx'));
 const DriverName = lazy(
   () => import('./component/DriverNameGrid/DriverNameGrid.tsx'),
 );
@@ -67,20 +65,12 @@ function App() {
                 }
               />
               <Route
-                path="/driverscreen"
+                path="/createloadingorder"
                 element={
                   <Suspense fallback={<Loading />}>
                     <SelectDriverScreen />
                   </Suspense>
                 }>
-                <Route
-                  path="timeline"
-                  element={
-                    <Suspense fallback={<Loading />}>
-                      <TimeLine />
-                    </Suspense>
-                  }
-                />
                 <Route
                   path="driver"
                   element={
@@ -106,8 +96,6 @@ function App() {
                     </Suspense>
                   }></Route>
               </Route>
-
-              <Route path="/signature" element={<DriverSignature />}></Route>
             </Routes>
           </BrowserRouter>
         </ThemeProvider>

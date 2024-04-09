@@ -68,16 +68,19 @@
 
 .buttons-group {
   display: flex;
-  justify-content: space-around;
+  position: absolute;
+  width: 98%;
+  bottom: 5px;
+  justify-content: space-between;
 }
 
 .btn-item {
   background-color: black;
-  margin-left: 2rem;
   color: white;
   width: 5rem;
   height: 1.8rem;
   border-radius: 0.3rem;
+  cursor: pointer;
 }
 
 /* .active:not(:first-child)::before {

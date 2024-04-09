@@ -4,9 +4,17 @@ import Box from '@mui/material/Box';
 import CachedIcon from '@mui/icons-material/Cached';
 import {useState} from 'react';
 import {imageUrl} from './Image';
+import DropDownButton from '../DropDownButton/DropDownButton.tsx';
 function DriverSignature() {
   const [isSignatureLoaded, setIsSignatureLoaded] = useState(false);
   const [showLoading, setShowLoading] = useState(false);
+  const actions = ['Activate', 'Reject']; //More actions can be added to this array in future
+
+  // This function will be called when our action is clicked
+  function handleAction(selectedIndex: number) {
+    console.log(selectedIndex + ' i was clicked');
+  }
+
   function fetchSignature() {
     setShowLoading(true);
     setTimeout(() => {
@@ -47,23 +55,8 @@ function DriverSignature() {
           alignItems={'center'}
           gap={4}>
           <label className={'form-label'}>Action:</label>
-          {isSignatureLoaded ? (
-            <Button
-              variant="contained"
-              disableElevation
-              sx={{
-                bgcolor: 'success.light',
-                '&:hover': {
-                  bgcolor: 'success.main',
-                },
-              }}>
-              Activate
-            </Button>
-          ) : (
-            <Button disableElevation variant={'contained'} color={'error'}>
-              Reject
-            </Button>
-          )}
+          {/*This button will display list of all actions*/}
+          <DropDownButton options={actions} handleClick={handleAction} />
         </Box>
       </form>
     </>

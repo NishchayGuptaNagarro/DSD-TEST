@@ -1,6 +1,7 @@
 import {useOutletContext} from 'react-router-dom';
-import {DriverOutletContext} from '../../screens/SelectDriver/SelectDriver';
+
 import Table from '../Table/Table';
+import {DriverOutletContext} from '../../screens/SelectDriver/propTypes/types.ts';
 
 const OrderTable = () => {
   const {rows, columns, getRowId} = useOutletContext<DriverOutletContext>();
