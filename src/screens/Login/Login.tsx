@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import {Link, useNavigate} from 'react-router-dom';
+import {api} from '../../axios/api';
 
 function Login() {
   // TODO improve transparent text box if it is decided to be included
@@ -26,8 +27,16 @@ function Login() {
       userId: Yup.string().email('Enter a valid email').required('*Required'),
       password: Yup.string().required('*Required'),
     }),
-    onSubmit: values => {
+    onSubmit: async values => {
       console.log(values);
+      const res: any = await api.post('accounts/login', {
+        email: 'moksh.gupta@nagarro.com',
+        password: 'MOksh@123456',
+      });
+      console.log(res);
+      //store token in local storage
+      //decode token
+      
       navigator('/');
     },
   });
