@@ -127,7 +127,6 @@ function AvailableStock() {
     <Grid container>
       <Grid item xs={2} padding={1}>
         <Sidebar />
-        {/* <Box sx={{height: '100%', backgroundColor: '#3c3d43'}}></Box> */}
       </Grid>
       <Grid item xs={10} sx={{height: '100vh', overflowY: 'scroll'}}>
         <Stack>

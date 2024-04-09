@@ -17,3 +17,10 @@
 .font-xsm{
     font-size: 0.75rem !important;
 }
+//Can be used to center anything
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
