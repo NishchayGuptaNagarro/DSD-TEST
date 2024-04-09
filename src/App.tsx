@@ -1,5 +1,5 @@
 import './App.scss';
-import {createTheme, CssBaseline, Select, ThemeProvider} from '@mui/material';
+import {createTheme, CssBaseline, ThemeProvider} from '@mui/material';
 import Login from './screens/Login/Login.tsx';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
@@ -13,18 +13,19 @@ const AvailableStock = lazy(
 const ForgotPassword = lazy(
   () => import('./screens/ForgotPassword/ForgotPassword.tsx'),
 );
-
-const TimeLine = lazy(() => import('./component/Timeline/Timeline.tsx'));
-const SelectDriver = lazy(
-  () => import('./component/Timeline/SelectDriver.tsx'),
-);
-const Verification = lazy(
-  () => import('./component/Timeline/Verification.tsx'),
+const DriverName = lazy(
+  () => import('./component/DriverNameGrid/DriverNameGrid.tsx'),
 );
 
-const ActiveDriver = lazy(
-  () => import('./component/Timeline/ActiveDriver.tsx'),
+const SelectDriverScreen = lazy(
+  () => import('./screens/SelectDriver/SelectDriver.tsx'),
 );
+
+const DriverSignature = lazy(
+  () => import('./component/DriverSignature/DriverSignature.tsx'),
+);
+
+const OrderTable = lazy(() => import('./component/OrderTable/OrderTable.tsx'));
 
 function App() {
   const theme = createTheme({
@@ -47,14 +48,14 @@ function App() {
             <CssBaseline />
             <Routes>
               <Route
-                path="/"
+                path="/availablestock"
                 element={
                   <Suspense fallback={<Loading />}>
                     <AvailableStock />
                   </Suspense>
                 }
               />
-              <Route path="/login" element={<Login />} />
+              <Route path="/" element={<Login />} />
               <Route
                 path="/forgotpassword"
                 element={
@@ -64,37 +65,36 @@ function App() {
                 }
               />
               <Route
-                path="/timeline"
+                path="/createloadingorder"
                 element={
                   <Suspense fallback={<Loading />}>
-                    <TimeLine />
+                    <SelectDriverScreen />
                   </Suspense>
                 }>
                 <Route
-                  path="select"
+                  path="driver"
                   element={
                     <Suspense fallback={<Loading />}>
-                      <SelectDriver />
-                    </Suspense>
-                  }
-                />
-                <Route
-                  path="verification"
-                  element={
-                    <Suspense fallback={<Loading />}>
-                      <Verification />
+                      <DriverName />
                     </Suspense>
                   }
                 />
 
                 <Route
-                  path="activation"
+                  path="order"
                   element={
                     <Suspense fallback={<Loading />}>
-                      <ActiveDriver />
+                      <OrderTable />
                     </Suspense>
                   }
                 />
+                <Route
+                  path="signature"
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <DriverSignature />
+                    </Suspense>
+                  }></Route>
               </Route>
             </Routes>
           </BrowserRouter>

@@ -28,7 +28,7 @@ function Login() {
     }),
     onSubmit: values => {
       console.log(values);
-      navigator('/');
+      navigator('/availablestock');
     },
   });
 
