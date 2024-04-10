@@ -1,31 +1,55 @@
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import {GridColDef} from '@mui/x-data-grid';
+
+import {ChangeEvent, useContext, useEffect, useState} from 'react';
+import {Outlet, useNavigate} from 'react-router';
+import {AxiosResponse} from 'axios';
+
 import Sidebar from '../../component/Sidebar/Sidebar.tsx';
 import PageHeading from '../../component/PageHeading/PageHeading.tsx';
-import Paper from '@mui/material/Paper';
-
-import {ApiDriverData, Driver, DriverOutletContext} from './propTypes/types.ts';
-import {ChangeEvent, useContext, useEffect, useState} from 'react';
-
-import {Row} from '../../component/Table/propTypes/types.ts';
-import {GridColDef} from '@mui/x-data-grid';
 import ProductIcon from '../../component/ProductIcon/ProductIcon.tsx';
-
-import './SelectDriver.scss';
 import Timeline from '../../component/Timeline/Timeline.tsx';
 import timelineContext from '../../context/timeline/timelineContext.ts';
-
-import {Outlet, useNavigate} from 'react-router';
 import {api} from '../../axios/api.ts';
+import {ApiDriverData, Driver, DriverOutletContext} from './propTypes/types.ts';
+import {Row} from '../../component/Table/propTypes/types.ts';
+
+import './SelectDriver.scss';
 import driverJSON from '../../axios/driver.json';
-import {AxiosResponse} from 'axios';
+import productJSON from '../../axios/products 1.json';
+import LanguageSelect from '../../component/LanguageSelect/LanguageSelect.tsx';
 
 function SelectDriver() {
   const heading = 'Create Loading Order';
   const subHeading = 'To create a loading order, Please follow the steps';
   const [driverArray, setDriverArray] = useState<Driver[]>([]);
+  const [rows, setRows] = useState<Row[]>([]);
+  const navigate = useNavigate();
+  async function fetchRows() {
+    let response;
+    try {
+      response = await api.get('/account/initialstock');
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+      response = productJSON.data.map(product => {
+        const parsedRes: Row = {
+          productId: Number(product.product_id),
+          name: product.description,
+          description: product.description,
+          imageSrc: 'data:image/png;base64,' + product.img.product_image,
+          initialStock: 100,
+          result: 20,
+        };
 
+        return parsedRes;
+      });
+      setRows(response);
+    }
+  }
   async function fetchDrivers() {
     let response: AxiosResponse<ApiDriverData>;
     let driverData: Driver[];
@@ -37,7 +61,7 @@ function SelectDriver() {
       driverData = driverJSON.data.map(driver => {
         const parsedRes: Driver = {
           driverName: driver.username,
-          driverId: driver.employee_id,
+          driverId: driver.user_id,
           driverType: driver.business_role_id as
             | 'VAN-SELLER'
             | 'DELIVERY'
@@ -51,63 +75,13 @@ function SelectDriver() {
 
   useEffect(() => {
     fetchDrivers();
+    fetchRows();
   }, []);
-  //---------------------------------------------------------------------MOCK DATA--------------------------------------------------------------------
-  const rows: Row[] = [
-    {
-      productId: 145642,
-      name: 'Coco-cola',
-      imageSrc: '/Coco.jpg',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipi',
-      quantity: 3000,
-      initialStock: 300,
-      result: 20,
-    },
-    {
-      productId: 27888,
-      name: 'Pepsi',
-      imageSrc: '/Sprite.png',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis earum enim iusto',
-      quantity: 2500,
-      initialStock: 200,
-      result: 10,
-    },
-    {
-      productId: 36545,
-      name: 'Fanta',
-      imageSrc: '/Coco.jpg',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis earum enim iusto',
-      quantity: 2000,
-      initialStock: 280,
-      result: 40,
-    },
-    {
-      productId: 44512,
-      name: 'Sprite',
-      imageSrc: '/Sprite.png',
-      description:
-        'Lorem ipsum dolor sit amet,ont tempora. Aperiam at autem disti',
-      quantity: 1500,
-      initialStock: 100,
-      result: 0,
-    },
-    {
-      productId: 58712,
-      name: 'Mountain Dew',
-      imageSrc: '/Coco.jpg',
-      description:
-        'Lorem ipsum dolor sit amet, consecteturgni mpora. Aperiam at autem disti',
-      quantity: 1800,
-      initialStock: 800,
-      result: 90,
-    },
-  ];
 
-  // -----------------------------------------END OF MOCK DATA-------------------------------------------------------------------
-  const [selectedDriver, setSelectedDriver] = useState<string>('');
-  const navigate = useNavigate();
+  const [selectedDriver, setSelectedDriver] = useState<string>(
+    localStorage.getItem('selected_driver') || '',
+  );
+
   const {
     currentStep,
     steps,
@@ -119,11 +93,15 @@ function SelectDriver() {
 
   useEffect(() => {
     navigate(`${orderRoutes[currentStep - 1]}`);
+    if (!localStorage.getItem('user')) {
+      console.log('hello');
+      navigate('/');
+    }
   }, [currentStep]);
 
   function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
     setSelectedDriver(event.target.value);
-    console.log(event.target.value);
+    localStorage.setItem('selected_driver', event.target.value);
   }
 
   // Table Column Definition
@@ -150,7 +128,7 @@ function SelectDriver() {
       headerClassName: 'font-md',
       headerName: 'Product Description',
       flex: 0.8,
-      cellClassName: 'productText font-sm',
+      cellClassName: 'productText font-xsm',
       sortable: false,
     },
     {
@@ -188,65 +166,72 @@ function SelectDriver() {
       throw new Error('row id should be number');
     }
   }
-  return (
-    <Grid container className={'select-driver-screen'}>
-      <Grid item xs={2} sx={{padding: 1}}>
-        {' '}
-        {/* Moved padding to sx prop */}
-        <Sidebar />
-      </Grid>
-      <Grid item xs={10} sx={{height: '100vh', overflowY: 'scroll'}}>
-        <Stack>
-          <Box
-            padding={2}
-            paddingBottom={0}
-            marginBottom={5}
-            textAlign={'center'}>
-            <PageHeading heading={heading} subHeading={subHeading} />
-          </Box>
-          <Paper
-            elevation={1}
-            sx={{p: 1.5, minHeight: 430, position: 'relative'}}>
-            <Timeline />
-            {/*This outlet will display child components all props are provided in context*/}
-            <Outlet
-              context={
-                {
-                  driverArray: driverArray,
-                  selectedDriverId: selectedDriver,
-                  handleDriverSelection: handleDriverSelection,
-                  rows: rows,
-                  columns: columns,
-                  getRowId: getRowId,
-                } satisfies DriverOutletContext
-              }></Outlet>
+  if (localStorage.getItem('user')) {
+    return (
+      <Grid container className={'select-driver-screen'}>
+        <Grid item xs={2} sx={{padding: 1}}>
+          <Sidebar />
+        </Grid>
+        <Grid item xs={10} sx={{height: '100vh', overflowY: 'scroll'}}>
+          <Stack>
+            <span className={'language-select'}>
+              <LanguageSelect />
+            </span>
             <br />
             <br />
-            <div className="buttons-group">
-              <button
-                className="btn-item"
-                onClick={() => {
-                  currentStep > 1 ? decreaseSteps() : stepsComplete();
-                }}
-                disabled={currentStep === 1}>
-                Back
-              </button>
+            <Box
+              padding={2}
+              paddingBottom={0}
+              marginBottom={5}
+              textAlign={'center'}>
+              <PageHeading heading={heading} subHeading={subHeading} />
+            </Box>
+            <Paper
+              elevation={1}
+              sx={{p: 1.5, minHeight: 400, position: 'relative'}}>
+              <Timeline />
+              {/*This outlet will display child components all props are provided in context*/}
+              <Outlet
+                context={
+                  {
+                    driverArray: driverArray,
+                    selectedDriverId: selectedDriver,
+                    handleDriverSelection: handleDriverSelection,
+                    rows: rows,
+                    columns: columns,
+                    getRowId: getRowId,
+                  } satisfies DriverOutletContext
+                }></Outlet>
+              <br />
+              <br />
+              <div className="buttons-group">
+                <button
+                  className="btn-item"
+                  onClick={() => {
+                    currentStep > 1 ? decreaseSteps() : stepsComplete();
+                  }}
+                  disabled={currentStep === 1}>
+                  Back
+                </button>
 
-              <button
-                className="btn-item"
-                onClick={() => {
-                  currentStep === steps.length
-                    ? stepsComplete()
-                    : increaseSteps();
-                }}>
-                {currentStep === steps.length ? 'Finish' : 'Next'}
-              </button>
-            </div>
-          </Paper>
-        </Stack>
+                <button
+                  className="btn-item"
+                  onClick={() => {
+                    currentStep === steps.length
+                      ? stepsComplete()
+                      : increaseSteps();
+                  }}>
+                  {currentStep === steps.length ? 'Finish' : 'Next'}
+                </button>
+              </div>
+            </Paper>
+          </Stack>
+        </Grid>
       </Grid>
-    </Grid>
-  );
+    );
+  } else {
+    return null;
+  }
 }
 
 export default SelectDriver;

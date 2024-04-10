@@ -46,7 +46,7 @@ function DriverNameGrid() {
   // Use effect will trigger array filter
   useEffect(() => {
     filterDriverArray(searchText);
-  }, [driverType, searchText]);
+  }, [driverType, searchText, driverArray]);
 
   function handleDriverTypeChange(
     _: MouseEvent<HTMLElement>,

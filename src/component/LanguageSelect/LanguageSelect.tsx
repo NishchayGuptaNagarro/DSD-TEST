@@ -17,17 +17,17 @@ function LanguageSelect() {
   //   Styles for list
   const sxProp = {
     bgcolor: 'background.paper',
-    width: 200,
+    width: 180,
     p: 0.5,
     borderRadius: 6,
     ['.language-select-btn.MuiListItemButton-root']: {
       color: 'rgba(52, 71, 103, 1)',
-      px: 1,
-      py: 1,
+      px: 0.5,
+      py: 0.5,
       borderRadius: 10,
       ['.MuiListItemText-primary']: {
         fontWeight: 500,
-        fontSize: 17,
+        fontSize: 15,
       },
     },
   };

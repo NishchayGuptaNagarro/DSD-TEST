@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, {AxiosResponse} from 'axios';
 
 export const URL = 'https://django-backend.cfapps.eu20-001.hana.ondemand.com/';
 
@@ -17,7 +17,7 @@ api.interceptors.request.use((request: any) => {
 });
 
 api.interceptors.response.use(
-  (response: any) => {
+  (response: AxiosResponse) => {
     // console.log('Response now :', JSON.stringify(response));
     return response;
   },
