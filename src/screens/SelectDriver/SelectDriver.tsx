@@ -5,7 +5,7 @@ import Sidebar from '../../component/Sidebar/Sidebar.tsx';
 import PageHeading from '../../component/PageHeading/PageHeading.tsx';
 import Paper from '@mui/material/Paper';
 
-import {Driver, DriverOutletContext} from './propTypes/types.ts';
+import {ApiDriverData, Driver, DriverOutletContext} from './propTypes/types.ts';
 import {ChangeEvent, useContext, useEffect, useState} from 'react';
 
 import {Row} from '../../component/Table/propTypes/types.ts';
@@ -17,45 +17,42 @@ import Timeline from '../../component/Timeline/Timeline.tsx';
 import timelineContext from '../../context/timeline/timelineContext.ts';
 
 import {Outlet, useNavigate} from 'react-router';
+import {api} from '../../axios/api.ts';
+import driverJSON from '../../axios/driver.json';
+import {AxiosResponse} from 'axios';
 
 function SelectDriver() {
   const heading = 'Create Loading Order';
   const subHeading = 'To create a loading order, Please follow the steps';
+  const [driverArray, setDriverArray] = useState<Driver[]>([]);
 
+  async function fetchDrivers() {
+    let response: AxiosResponse<ApiDriverData>;
+    let driverData: Driver[];
+    try {
+      response = await api.get('/warehouse/drivers');
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+      driverData = driverJSON.data.map(driver => {
+        const parsedRes: Driver = {
+          driverName: driver.username,
+          driverId: driver.employee_id,
+          driverType: driver.business_role_id as
+            | 'VAN-SELLER'
+            | 'DELIVERY'
+            | 'HYBRID',
+        }; //Type assertion will be removed when real APIs are used
+        return parsedRes;
+      });
+      setDriverArray(driverData);
+    }
+  }
+
+  useEffect(() => {
+    fetchDrivers();
+  }, []);
   //---------------------------------------------------------------------MOCK DATA--------------------------------------------------------------------
-  const driverArray: Driver[] = [
-    {driverName: 'Max Verstappen', driverId: 'DRV002', driverType: 'vanSeller'},
-    {driverName: 'Sergio Perez', driverId: 'DRV005', driverType: 'vanSeller'},
-    {
-      driverName: 'Daniel Ricciardo',
-      driverId: 'DRV008',
-      driverType: 'vanSeller',
-    },
-    {driverName: 'Pierre Gasly', driverId: 'DRV011', driverType: 'vanSeller'},
-    {
-      driverName: 'Alexander Albon',
-      driverId: 'DRV014',
-      driverType: 'vanSeller',
-    },
-    {
-      driverName: 'Sebastian Vettel',
-      driverId: 'DRV006',
-      driverType: 'delivery',
-    },
-    {driverName: 'Valtteri Bottas', driverId: 'DRV009', driverType: 'delivery'},
-    {
-      driverName: 'Carlos Sainz Jr.',
-      driverId: 'DRV012',
-      driverType: 'delivery',
-    },
-    {driverName: 'Yuki Tsunoda', driverId: 'DRV015', driverType: 'delivery'},
-    {driverName: 'Lewis Hamilton', driverId: 'DRV001', driverType: 'hybrid'},
-    {driverName: 'Charles Leclerc', driverId: 'DRV004', driverType: 'hybrid'},
-    {driverName: 'Lando Norris', driverId: 'DRV007', driverType: 'hybrid'},
-    {driverName: 'Esteban Ocon', driverId: 'DRV010', driverType: 'hybrid'},
-    {driverName: 'Lance Stroll', driverId: 'DRV013', driverType: 'hybrid'},
-    {driverName: 'Fernando Alonso', driverId: 'DRV003', driverType: 'delivery'},
-  ];
   const rows: Row[] = [
     {
       productId: 145642,

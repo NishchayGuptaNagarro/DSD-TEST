@@ -25,8 +25,8 @@ function DriverNameGrid() {
 
   // State containing driver type
   const [driverType, setDriverType] = useState<
-    'vanSeller' | 'delivery' | 'hybrid'
-  >('vanSeller');
+    'VAN-SELLER' | 'DELIVERY' | 'HYBRID'
+  >('VAN-SELLER');
 
   // State containing array filtered after driver type and search text
   const [filteredArray, setFilteredArray] = useState<Driver[]>([]);
@@ -50,7 +50,7 @@ function DriverNameGrid() {
 
   function handleDriverTypeChange(
     _: MouseEvent<HTMLElement>,
-    value: 'vanSeller' | 'delivery' | 'hybrid',
+    value: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID',
   ) {
     setDriverType(value);
   }
@@ -130,7 +130,7 @@ function DriverNameGridHeader({
         <ToggleButton
           className={'font-xsm'}
           sx={{fontWeight: '600'}}
-          value="vanSeller">
+          value="VAN-SELLER">
           <img src={vanSellerIcon} alt={'icon'} />
           Van-Seller
         </ToggleButton>
@@ -138,14 +138,14 @@ function DriverNameGridHeader({
         <ToggleButton
           className={'font-xsm'}
           sx={{fontWeight: '600'}}
-          value="delivery">
+          value="DELIVERY">
           <img src={deliveryIcon} alt={'icon'} />
           Delivery
         </ToggleButton>
         <ToggleButton
           className={'font-xsm'}
           sx={{fontWeight: '600'}}
-          value="hybrid">
+          value="HYBRID">
           <img src={hybridIcon} alt={'icon'} />
           Hybrid
         </ToggleButton>

@@ -9,7 +9,11 @@ import * as Yup from 'yup';
 import './ForgotPassword.scss';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {Link} from 'react-router-dom';
+import {api} from '../../axios/api.ts';
+import {useState} from 'react';
 function ForgotPassword() {
+  const [apiResponse, setApiResponse] = useState('');
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -17,8 +21,16 @@ function ForgotPassword() {
     validationSchema: Yup.object({
       email: Yup.string().email('Enter a valid email').required('*Required'),
     }),
-    onSubmit: values => {
+    onSubmit: async values => {
       console.log(values);
+      try {
+        const response = await api.post('accounts/forgot-password', {
+          identifier: values.email,
+        });
+        setApiResponse(response.data.msg);
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
 
@@ -85,6 +97,14 @@ function ForgotPassword() {
                 {formik.errors.email}
               </Typography>
             )}
+            {apiResponse !== '' && (
+              <Typography
+                className={'font-xsm'}
+                color={'rgb(43,56,84)'}
+                fontWeight={600}>
+                {apiResponse}
+              </Typography>
+            )}
 
             <Button
               className={'font-md'}
@@ -94,7 +114,7 @@ function ForgotPassword() {
               disableElevation>
               Reset password
             </Button>
-            <Link className={'form-label font-md form-link'} to={'/login'}>
+            <Link className={'form-label font-md form-link'} to={'/'}>
               <ArrowBackIcon fontSize={'small'} sx={{marginRight: 2}} />
               Back to login
             </Link>

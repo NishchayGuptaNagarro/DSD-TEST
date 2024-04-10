@@ -9,14 +9,50 @@ import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import {Link, useNavigate} from 'react-router-dom';
 import {api} from '../../axios/api';
+import {jwtDecode} from 'jwt-decode';
+import {useState} from 'react';
+import {AxiosResponse} from 'axios';
+import {LoginApiResponse} from './propTypes/types.ts';
 
 function Login() {
   // TODO improve transparent text box if it is decided to be included
-
+  // TODO add language selection
+  // TODO create interface for response
   // Using formik and yup to handle form states, validation and submission
   // we can add more validations in validation schema as per requirement
   const navigator = useNavigate();
+  const [apiError, setApiError] = useState('');
+  async function authenticateUser(values: {
+    userId: string;
+    password: string;
+    checkbox: boolean;
+  }) {
+    console.log(values);
+    try {
+      const res: AxiosResponse<LoginApiResponse> = await api.post(
+        'accounts/login',
+        {
+          email: 'moksh.gupta@nagarro.com',
+          password: 'MOksh@123456',
+        },
+      );
+      const responseData = res.data;
+      if (responseData.status_code == 200 && responseData.data) {
+        localStorage.setItem('access_token', responseData.data.access_token);
+        const user = jwtDecode(responseData.data.access_token);
 
+        localStorage.setItem('user', JSON.stringify(user));
+        navigator('/availablestock');
+      } else {
+        throw new Error(responseData.msg);
+      }
+    } catch (error) {
+      console.log(error);
+      if (error instanceof Error) {
+        setApiError(error.message);
+      }
+    }
+  }
   const formik = useFormik({
     initialValues: {
       userId: '',
@@ -28,16 +64,7 @@ function Login() {
       password: Yup.string().required('*Required'),
     }),
     onSubmit: async values => {
-      console.log(values);
-      const res: any = await api.post('accounts/login', {
-        email: 'moksh.gupta@nagarro.com',
-        password: 'MOksh@123456',
-      });
-      console.log(res);
-      //store token in local storage
-      //decode token
-      
-      navigator('/');
+      await authenticateUser(values);
     },
   });
 
@@ -126,6 +153,14 @@ function Login() {
                   color={'error'}
                   className={'font-xsm'}>
                   {formik.errors.password}
+                </Typography>
+              )}
+              {apiError !== '' && (
+                <Typography
+                  color={'error'}
+                  marginTop={-2}
+                  className={'font-xsm'}>
+                  {apiError}
                 </Typography>
               )}
               <Stack direction={'row'} justifyContent="space-between">

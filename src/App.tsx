@@ -6,6 +6,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {lazy, Suspense} from 'react';
 import Loading from './screens/Loading/Loading.tsx';
 import TimeLineState from './context/timeline/TimelineState.tsx';
+import LanguageSelect from './component/LanguageSelect/LanguageSelect.tsx';
 
 const AvailableStock = lazy(
   () => import('./screens/AvailableStock/AvailableStock.tsx'),
@@ -47,6 +48,7 @@ function App() {
             {/*this baseline provides grey background used in all screens */}
             <CssBaseline />
             <Routes>
+              <Route path={'/test'} element={<LanguageSelect />} />
               <Route
                 path="/availablestock"
                 element={

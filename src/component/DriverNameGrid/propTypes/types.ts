@@ -12,10 +12,10 @@ export interface DriverNameGridProps {
 
 // Props for Driver Name Grid Header
 export interface DriverNameGridHeaderProps {
-  driverType: 'vanSeller' | 'delivery' | 'hybrid';
+  driverType: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID';
   handleDriverTypeChange: (
     _: MouseEvent<HTMLElement>,
-    value: 'vanSeller' | 'delivery' | 'hybrid',
+    value: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID',
   ) => void;
   searchDriver: (searchText: string) => void;
 }
