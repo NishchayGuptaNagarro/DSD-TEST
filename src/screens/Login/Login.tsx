@@ -1,32 +1,31 @@
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import './Login.scss';
-import logo from '../../assets/Logo.svg';
 import {Typography} from '@mui/material';
 import Button from '@mui/material/Button';
+
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import {Link, useNavigate} from 'react-router-dom';
-import {api} from '../../axios/api';
 import {jwtDecode} from 'jwt-decode';
-import {useEffect, useState} from 'react';
 import {AxiosResponse} from 'axios';
-import {LoginApiResponse} from './propTypes/types.ts';
+import {useEffect, useState} from 'react';
+
 import LanguageSelect from '../../component/LanguageSelect/LanguageSelect.tsx';
+import {api} from '../../axios/api';
+import {LoginApiResponse} from './propTypes/types.ts';
+import './Login.scss';
+import logo from '../../assets/Logo.svg';
 
 function Login() {
-  // TODO improve transparent text box if it is decided to be included
+  // TODO add api call at finish
+  // TODO not able to move to next step unless a driver is selected
+  // TODO add signout
+  // TODO add create loading order link in sidebar
 
-  // Using formik and yup to handle form states, validation and submission
-  // we can add more validations in validation schema as per requirement
-  const navigator = useNavigate();
-  useEffect(() => {
-    if (localStorage.getItem('access_token')) {
-      navigator('/availablestock');
-    }
-  }, []);
   const [apiError, setApiError] = useState('');
+  const navigator = useNavigate();
+
   async function authenticateUser(values: {
     userId: string;
     password: string;
@@ -58,8 +57,15 @@ function Login() {
       }
     }
   }
-  // TODO add api call at finish
-  // TODO add signout
+
+  useEffect(() => {
+    if (localStorage.getItem('access_token')) {
+      navigator('/availablestock');
+    }
+  }, []);
+
+  // Using formik and yup to handle form states, validation and submission
+  // we can add more validations in validation schema as per requirement
   const formik = useFormik({
     initialValues: {
       userId: '',
@@ -220,10 +226,9 @@ function Login() {
                 <LanguageSelect />
               </span>
               <img className={'truck-image'} src="/truck.jpg" alt={'truck'} />
-              {/*This textbox can be further improved if it is decided to be kept in final code*/}
               <div className={'transparent-textbox'}>
-                &#34; Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Atque, quis?&#34;
+                &#34;Opportunity is missed by most people because it is dressed
+                in overalls and looks like work.&#34;
                 <br />
                 <br />
                 Thomas Edison

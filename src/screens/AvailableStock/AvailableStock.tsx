@@ -3,24 +3,26 @@ import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import {GridColDef} from '@mui/x-data-grid';
+
+import {format} from 'date-fns';
+import {useEffect, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+
 import ProductIcon from '../../component/ProductIcon/ProductIcon.tsx';
 import Table from '../../component/Table/Table.tsx';
 import PageHeading from '../../component/PageHeading/PageHeading.tsx';
-import './AvailableStock.scss';
+import Sidebar from '../../component/Sidebar/Sidebar.tsx';
 import DetailsCard from '../../component/DetailsCard/DetailsCard.tsx';
+import LanguageSelect from '../../component/LanguageSelect/LanguageSelect.tsx';
 import {Product} from './propTypes/types.ts';
 import {Row} from '../../component/Table/propTypes/types.ts';
-import {format} from 'date-fns';
+import {api} from '../../axios/api.ts';
+import './AvailableStock.scss';
 
 import dateIcon from '../../assets/Date.svg';
 import managerIcon from '../../assets/Manager.svg';
 import warehouseIcon from '../../assets/Warehouse.svg';
-import Sidebar from '../../component/Sidebar/Sidebar.tsx';
-import {useEffect, useState} from 'react';
-import {api} from '../../axios/api.ts';
 import productJSON from '../../axios/products 1.json';
-import {useNavigate} from 'react-router-dom';
-import LanguageSelect from '../../component/LanguageSelect/LanguageSelect.tsx';
 
 // This column definiton should not be redefined at every render so moved it outside
 // columns definition array passed to table component
@@ -103,13 +105,6 @@ function AvailableStock() {
     }
   }
 
-  useEffect(() => {
-    if (!localStorage.getItem('user')) {
-      navigator('/');
-    }
-    fetchRows();
-  }, []);
-
   // This function returns a row's unique ID
   function getRowId(row: Row) {
     if (typeof row.productId === 'number') {
@@ -118,6 +113,14 @@ function AvailableStock() {
       throw new Error('row id should be number');
     }
   }
+
+  useEffect(() => {
+    if (!localStorage.getItem('user')) {
+      navigator('/');
+    }
+    fetchRows();
+  }, []);
+
   if (localStorage.getItem('user')) {
     return (
       <Grid container>

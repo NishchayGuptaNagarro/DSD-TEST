@@ -12,6 +12,7 @@ import Sidebar from '../../component/Sidebar/Sidebar.tsx';
 import PageHeading from '../../component/PageHeading/PageHeading.tsx';
 import ProductIcon from '../../component/ProductIcon/ProductIcon.tsx';
 import Timeline from '../../component/Timeline/Timeline.tsx';
+import LanguageSelect from '../../component/LanguageSelect/LanguageSelect.tsx';
 import timelineContext from '../../context/timeline/timelineContext.ts';
 import {api} from '../../axios/api.ts';
 import {ApiDriverData, Driver, DriverOutletContext} from './propTypes/types.ts';
@@ -20,14 +21,25 @@ import {Row} from '../../component/Table/propTypes/types.ts';
 import './SelectDriver.scss';
 import driverJSON from '../../axios/driver.json';
 import productJSON from '../../axios/products 1.json';
-import LanguageSelect from '../../component/LanguageSelect/LanguageSelect.tsx';
 
 function SelectDriver() {
   const heading = 'Create Loading Order';
   const subHeading = 'To create a loading order, Please follow the steps';
   const [driverArray, setDriverArray] = useState<Driver[]>([]);
   const [rows, setRows] = useState<Row[]>([]);
+  const [selectedDriver, setSelectedDriver] = useState<string>(
+    localStorage.getItem('selected_driver') || '',
+  );
   const navigate = useNavigate();
+  const {
+    currentStep,
+    steps,
+    decreaseSteps,
+    increaseSteps,
+    stepsComplete,
+    orderRoutes,
+  } = useContext(timelineContext) || {};
+
   async function fetchRows() {
     let response;
     try {
@@ -72,37 +84,30 @@ function SelectDriver() {
       setDriverArray(driverData);
     }
   }
+  function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
+    setSelectedDriver(event.target.value);
+    localStorage.setItem('selected_driver', event.target.value);
+  }
+  function getRowId(row: Row) {
+    if (typeof row.productId === 'number') {
+      return row.productId;
+    } else {
+      throw new Error('row id should be number');
+    }
+  }
 
+  // API CALLS
   useEffect(() => {
     fetchDrivers();
     fetchRows();
   }, []);
 
-  const [selectedDriver, setSelectedDriver] = useState<string>(
-    localStorage.getItem('selected_driver') || '',
-  );
-
-  const {
-    currentStep,
-    steps,
-    decreaseSteps,
-    increaseSteps,
-    stepsComplete,
-    orderRoutes,
-  } = useContext(timelineContext) || {};
-
   useEffect(() => {
     navigate(`${orderRoutes[currentStep - 1]}`);
     if (!localStorage.getItem('user')) {
-      console.log('hello');
       navigate('/');
     }
   }, [currentStep]);
-
-  function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
-    setSelectedDriver(event.target.value);
-    localStorage.setItem('selected_driver', event.target.value);
-  }
 
   // Table Column Definition
   const columns: GridColDef[] = [
@@ -159,13 +164,6 @@ function SelectDriver() {
       sortable: false,
     },
   ];
-  function getRowId(row: Row) {
-    if (typeof row.productId === 'number') {
-      return row.productId;
-    } else {
-      throw new Error('row id should be number');
-    }
-  }
   if (localStorage.getItem('user')) {
     return (
       <Grid container className={'select-driver-screen'}>
@@ -190,7 +188,7 @@ function SelectDriver() {
               elevation={1}
               sx={{p: 1.5, minHeight: 400, position: 'relative'}}>
               <Timeline />
-              {/*This outlet will display child components all props are provided in context*/}
+              {/*This outlet will display child components , all props are provided in context*/}
               <Outlet
                 context={
                   {

@@ -1,10 +1,12 @@
 import {DataGrid, gridClasses} from '@mui/x-data-grid';
-import './Table.scss';
+
 import {TableProps} from './propTypes/types.ts';
+import './Table.scss';
 
 export default function Table({rows, columns, getRowId}: TableProps) {
   return (
     <DataGrid
+      loading={rows.length === 0}
       rows={rows}
       columns={columns}
       getRowId={getRowId}

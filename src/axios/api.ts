@@ -1,4 +1,8 @@
-import axios, {AxiosResponse} from 'axios';
+import axios, {
+  AxiosError,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from 'axios';
 
 export const URL = 'https://django-backend.cfapps.eu20-001.hana.ondemand.com/';
 
@@ -9,7 +13,7 @@ export const api = axios.create({
   headers: genericHeaders,
 });
 
-api.interceptors.request.use((request: any) => {
+api.interceptors.request.use((request: InternalAxiosRequestConfig) => {
   if (localStorage.getItem('access_token')) {
     request.headers.Authorization = `Bearer ${localStorage.getItem('access_token')}`;
   }
@@ -21,7 +25,7 @@ api.interceptors.response.use(
     // console.log('Response now :', JSON.stringify(response));
     return response;
   },
-  (error: any) => {
+  (error: AxiosError | Error) => {
     // console.log('error now :', JSON.stringify(error));
     return Promise.reject(error);
   },

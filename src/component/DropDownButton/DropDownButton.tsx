@@ -7,7 +7,9 @@ import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
+
 import {useRef, useState} from 'react';
+
 import {DropDownButtonProps} from './propTypes/types.ts';
 
 function DropDownButton({options, handleClick}: DropDownButtonProps) {
@@ -22,11 +24,9 @@ function DropDownButton({options, handleClick}: DropDownButtonProps) {
     setSelectedIndex(index);
     setOpen(false);
   };
-
   const handleToggle = () => {
     setOpen(prevOpen => !prevOpen);
   };
-
   const handleClose = (event: Event) => {
     if (
       anchorRef.current &&
@@ -34,7 +34,6 @@ function DropDownButton({options, handleClick}: DropDownButtonProps) {
     ) {
       return;
     }
-
     setOpen(false);
   };
 

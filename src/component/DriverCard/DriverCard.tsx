@@ -3,10 +3,12 @@ import {Typography} from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Paper from '@mui/material/Paper';
 import Radio from '@mui/material/Radio';
-import {DriverCardProps} from './propTypes/types.ts';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import './DriverCard.scss';
 import Box from '@mui/material/Box';
+
+import './DriverCard.scss';
+import {DriverCardProps} from './propTypes/types.ts';
+
 function DriverCard({driver, selectedDriverId}: DriverCardProps) {
   return (
     <Paper

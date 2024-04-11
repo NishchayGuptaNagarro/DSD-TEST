@@ -1,12 +1,13 @@
-import './App.scss';
 import {createTheme, CssBaseline, ThemeProvider} from '@mui/material';
-import Login from './screens/Login/Login.tsx';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
 import {lazy, Suspense} from 'react';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
+
+import Login from './screens/Login/Login.tsx';
 import Loading from './screens/Loading/Loading.tsx';
 import TimeLineState from './context/timeline/TimelineState.tsx';
 import LanguageSelect from './component/LanguageSelect/LanguageSelect.tsx';
+import './App.scss';
 
 const AvailableStock = lazy(
   () => import('./screens/AvailableStock/AvailableStock.tsx'),
@@ -17,15 +18,12 @@ const ForgotPassword = lazy(
 const DriverName = lazy(
   () => import('./component/DriverNameGrid/DriverNameGrid.tsx'),
 );
-
 const SelectDriverScreen = lazy(
   () => import('./screens/SelectDriver/SelectDriver.tsx'),
 );
-
 const DriverSignature = lazy(
   () => import('./component/DriverSignature/DriverSignature.tsx'),
 );
-
 const OrderTable = lazy(() => import('./component/OrderTable/OrderTable.tsx'));
 
 function App() {

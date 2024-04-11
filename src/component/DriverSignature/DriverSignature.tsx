@@ -1,10 +1,12 @@
-import './DriverSignature.scss';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import CachedIcon from '@mui/icons-material/Cached';
+
 import {useState} from 'react';
-import {imageUrl} from './Image';
+import {ClipLoader} from 'react-spinners';
+
 import DropDownButton from '../DropDownButton/DropDownButton.tsx';
+import './DriverSignature.scss';
+import {imageUrl} from './Image';
 function DriverSignature() {
   const [isSignatureLoaded, setIsSignatureLoaded] = useState(false);
   const [showLoading, setShowLoading] = useState(false);
@@ -14,7 +16,6 @@ function DriverSignature() {
   function handleAction(selectedIndex: number) {
     console.log(selectedIndex + ' i was clicked');
   }
-
   function fetchSignature() {
     setShowLoading(true);
     setTimeout(() => {
@@ -39,7 +40,9 @@ function DriverSignature() {
             </Button>
           )}
           {showLoading && (
-            <CachedIcon fontSize={'large'} className={'center'} />
+            <div className={'center'}>
+              <ClipLoader color="#344767" />
+            </div>
           )}
           {isSignatureLoaded && <img src={imageUrl} alt={'img'} />}
         </span>

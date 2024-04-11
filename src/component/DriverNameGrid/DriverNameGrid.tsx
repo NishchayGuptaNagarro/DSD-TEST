@@ -42,24 +42,22 @@ function DriverNameGrid() {
         .filter(driver => driver.driverName.includes(searchText)),
     );
   }
-
-  // Use effect will trigger array filter
-  useEffect(() => {
-    filterDriverArray(searchText);
-  }, [driverType, searchText, driverArray]);
-
   function handleDriverTypeChange(
     _: MouseEvent<HTMLElement>,
     value: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID',
   ) {
     setDriverType(value);
   }
-
   // This will set the search text, triggering the useEffect to filter the array
   // This function will be called after a delay, so its only called when user stops typing to avoid unnecessary re-renders
   function searchDriver(searchInput: string) {
     setSearchText(searchInput);
   }
+
+  // Use effect will trigger array filter
+  useEffect(() => {
+    filterDriverArray(searchText);
+  }, [driverType, searchText, driverArray]);
 
   return (
     <>

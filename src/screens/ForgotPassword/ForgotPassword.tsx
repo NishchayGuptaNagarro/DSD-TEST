@@ -1,25 +1,23 @@
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
-import logo from '../../assets/Logo.svg';
 import {Typography} from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
-import './ForgotPassword.scss';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {Link, useNavigate} from 'react-router-dom';
-import {api} from '../../axios/api.ts';
 import {useEffect, useState} from 'react';
+
 import LanguageSelect from '../../component/LanguageSelect/LanguageSelect.tsx';
+import {api} from '../../axios/api.ts';
+import './ForgotPassword.scss';
+import logo from '../../assets/Logo.svg';
+
 function ForgotPassword() {
-  const navigator = useNavigate();
-  useEffect(() => {
-    if (localStorage.getItem('access_token')) {
-      navigator('/availablestock');
-    }
-  }, []);
   const [apiResponse, setApiResponse] = useState('');
+  const navigator = useNavigate();
   async function submitEmail(email: string) {
     try {
       const response = await api.post('accounts/forgot-password', {
@@ -30,6 +28,13 @@ function ForgotPassword() {
       console.log(error);
     }
   }
+
+  useEffect(() => {
+    if (localStorage.getItem('access_token')) {
+      navigator('/availablestock');
+    }
+  }, []);
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -43,6 +48,7 @@ function ForgotPassword() {
   });
 
   const emailError = formik.touched.email && formik.errors.email;
+
   if (localStorage.getItem('access_token')) {
     return null;
   } else {
@@ -147,10 +153,9 @@ function ForgotPassword() {
               <LanguageSelect />
             </span>
             <img className={'truck-image'} src="/truck-2.jpg" alt={'truck'} />
-            {/*This textbox can be further improved if it is decided to be kept in final code*/}
             <div className={'transparent-textbox'}>
-              &#34; Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Atque, quis?&#34;
+              &#34;Opportunity is missed by most people because it is dressed in
+              overalls and looks like work.&#34;
               <br />
               <br />
               Thomas Edison
