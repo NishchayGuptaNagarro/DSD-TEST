@@ -6,6 +6,11 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {lazy, Suspense} from 'react';
 import Loading from './screens/Loading/Loading.tsx';
 import TimeLineState from './context/timeline/TimelineState.tsx';
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import enJSON from './resources/labels/en.json';
+import frJSON from './resources/labels/fr.json';
+
 
 const AvailableStock = lazy(
   () => import('./screens/AvailableStock/AvailableStock.tsx'),
@@ -26,6 +31,15 @@ const DriverSignature = lazy(
 );
 
 const OrderTable = lazy(() => import('./component/OrderTable/OrderTable.tsx'));
+
+
+i18n.use(initReactI18next).init({
+  resources: {
+    en: { ...enJSON },
+    fr: { ...frJSON },
+  },
+  lng: "en",
+});
 
 function App() {
   const theme = createTheme({
