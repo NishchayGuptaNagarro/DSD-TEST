@@ -8,6 +8,11 @@ import Loading from './screens/Loading/Loading.tsx';
 import TimeLineState from './context/timeline/TimelineState.tsx';
 import LanguageSelect from './component/LanguageSelect/LanguageSelect.tsx';
 import './App.scss';
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import enJSON from './resources/labels/en.json';
+import frJSON from './resources/labels/fr.json';
+
 
 const AvailableStock = lazy(
   () => import('./screens/AvailableStock/AvailableStock.tsx'),
@@ -25,6 +30,15 @@ const DriverSignature = lazy(
   () => import('./component/DriverSignature/DriverSignature.tsx'),
 );
 const OrderTable = lazy(() => import('./component/OrderTable/OrderTable.tsx'));
+
+
+i18n.use(initReactI18next).init({
+  resources: {
+    en: { ...enJSON },
+    fr: { ...frJSON },
+  },
+  lng: "en",
+});
 
 function App() {
   const theme = createTheme({
