@@ -11,8 +11,7 @@ export interface Driver {
 // Interface for screen outlet context provider
 export interface DriverOutletContext extends DriverNameGridProps, TableProps {}
 
-// Interface for api response
-
+// Interface for driver api response
 interface ApiDriverData {
   username: string;
   business_role_id: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID';
@@ -30,4 +29,33 @@ export interface DriverApiResponse {
   status_code: number;
   msg?: string;
   data: ApiDriverData[];
+}
+
+//Interfaces for product API response
+
+interface ApiProductData {
+  product_id: string;
+  product_name: string;
+  status: string;
+  creation_date: string;
+  unit_of_measure: string;
+  description: string;
+  external_id: string;
+  category_id: string;
+  updated_at: string;
+  quantity: string;
+  img: ApiProductImage;
+}
+
+interface ApiProductImage {
+  mime_type: string | null;
+  updated_at: string;
+  product_image: string;
+  product_id: string;
+  creation_date: string;
+}
+
+export interface ProductApiResponse {
+  status_code: number;
+  data: ApiProductData[];
 }

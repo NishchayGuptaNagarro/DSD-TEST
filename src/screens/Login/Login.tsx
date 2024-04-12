@@ -21,6 +21,7 @@ import {useTranslation} from 'react-i18next';
 function Login() {
   // TODO add api call at finish
   // TODO not able to move to next step unless a driver is selected
+  // TODO add table api call after driver is select and user clicks next
   // TODO add signout
   // TODO add create loading order link in sidebar
 

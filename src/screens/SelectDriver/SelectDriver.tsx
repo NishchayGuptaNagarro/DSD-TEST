@@ -19,12 +19,11 @@ import {
   Driver,
   DriverApiResponse,
   DriverOutletContext,
+  ProductApiResponse,
 } from './propTypes/types.ts';
 import {Row} from '../../component/Table/propTypes/types.ts';
 
 import './SelectDriver.scss';
-
-import productJSON from '../../axios/products 1.json';
 
 function SelectDriver() {
   const heading = 'Create Loading Order';
@@ -44,28 +43,6 @@ function SelectDriver() {
     orderRoutes,
   } = useContext(timelineContext) || {};
 
-  async function fetchRows() {
-    let response;
-    try {
-      response = await api.get('/accounts/initial-stock');
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-      response = productJSON.data.map(product => {
-        const parsedRes: Row = {
-          productId: Number(product.product_id),
-          name: product.description,
-          description: product.description,
-          imageSrc: 'data:image/png;base64,' + product.img.product_image,
-          initialStock: 100,
-          result: 20,
-        };
-
-        return parsedRes;
-      });
-      setRows(response);
-    }
-  }
   async function fetchDrivers() {
     let response: AxiosResponse<DriverApiResponse>;
     let driverData: Driver[];
@@ -86,9 +63,37 @@ function SelectDriver() {
       console.log(error);
     }
   }
+  async function fetchRows() {
+    let response: AxiosResponse<ProductApiResponse>;
+    let products: Row[];
+    try {
+      response = await api.get(
+        `/warehouse/vanseller-dashboard-for-warehouse?user_id=${localStorage.getItem('selected_driver')}`,
+      );
+
+      products = response.data.data.map(product => {
+        const parsedRes: Row = {
+          productId: Number(product.product_id),
+          name: product.description,
+          description: product.description,
+          imageSrc: 'data:image/png;base64,' + product.img.product_image,
+          initialStock: product.quantity,
+          result: 20,
+        };
+
+        return parsedRes;
+      });
+      setRows(products);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
     setSelectedDriver(event.target.value);
     localStorage.setItem('selected_driver', event.target.value);
+    fetchRows();
   }
   function getRowId(row: Row) {
     if (typeof row.productId === 'number') {
@@ -101,7 +106,6 @@ function SelectDriver() {
   // API CALLS
   useEffect(() => {
     fetchDrivers();
-    fetchRows();
   }, []);
 
   useEffect(() => {
