@@ -15,11 +15,15 @@ import Timeline from '../../component/Timeline/Timeline.tsx';
 import LanguageSelect from '../../component/LanguageSelect/LanguageSelect.tsx';
 import timelineContext from '../../context/timeline/timelineContext.ts';
 import {api} from '../../axios/api.ts';
-import {ApiDriverData, Driver, DriverOutletContext} from './propTypes/types.ts';
+import {
+  Driver,
+  DriverApiResponse,
+  DriverOutletContext,
+} from './propTypes/types.ts';
 import {Row} from '../../component/Table/propTypes/types.ts';
 
 import './SelectDriver.scss';
-import driverJSON from '../../axios/driver.json';
+
 import productJSON from '../../axios/products 1.json';
 
 function SelectDriver() {
@@ -43,7 +47,7 @@ function SelectDriver() {
   async function fetchRows() {
     let response;
     try {
-      response = await api.get('/account/initialstock');
+      response = await api.get('/accounts/initial-stock');
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -63,25 +67,23 @@ function SelectDriver() {
     }
   }
   async function fetchDrivers() {
-    let response: AxiosResponse<ApiDriverData>;
+    let response: AxiosResponse<DriverApiResponse>;
     let driverData: Driver[];
     try {
       response = await api.get('/warehouse/drivers');
       console.log(response);
-    } catch (error) {
-      console.log(error);
-      driverData = driverJSON.data.map(driver => {
+
+      driverData = response.data.data.map(driver => {
         const parsedRes: Driver = {
           driverName: driver.username,
           driverId: driver.user_id,
-          driverType: driver.business_role_id as
-            | 'VAN-SELLER'
-            | 'DELIVERY'
-            | 'HYBRID',
-        }; //Type assertion will be removed when real APIs are used
+          driverType: driver.business_role_id,
+        };
         return parsedRes;
       });
       setDriverArray(driverData);
+    } catch (error) {
+      console.log(error);
     }
   }
   function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {

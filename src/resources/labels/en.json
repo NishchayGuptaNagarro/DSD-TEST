@@ -1,6 +1,5 @@
 {
     "greeting": "Hello English",
-
     "login.title": "Login to Your Account",
     "login.subtitle": "Please enter your details",
     "login.userId.label": "User ID",
@@ -17,4 +16,5 @@
     "forgotPassword.button.label": "Reset password",
     "forgotPassword.link.label": "Back to login",
     "forgotPassword.quote": "Opportunity is missed by most people because it is dressed in overalls and looks like work."
+
 }

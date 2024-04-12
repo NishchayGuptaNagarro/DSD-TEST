@@ -85,7 +85,7 @@ function AvailableStock() {
   async function fetchRows() {
     let response;
     try {
-      response = await api.get('/account/initialstock');
+      response = await api.get('/accounts/initial-stock');
       console.log(response);
     } catch (error) {
       console.log(error);

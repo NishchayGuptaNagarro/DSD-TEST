@@ -38,7 +38,6 @@ function LanguageSelect() {
   } = useTranslation();
   const [open, setOpen] = useState(false); //state to toggle dropdown menu
   const [currentLanguage, setCurrentLanguage] = useState(language);
-  // TODO ask if translation function can be exported to whole app
 
   // Function to handle language change
   const handleClick = () => {

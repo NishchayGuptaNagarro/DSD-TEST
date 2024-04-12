@@ -12,7 +12,8 @@ export interface Driver {
 export interface DriverOutletContext extends DriverNameGridProps, TableProps {}
 
 // Interface for api response
-export interface ApiDriverData {
+
+interface ApiDriverData {
   username: string;
   business_role_id: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID';
   user_id: string;
@@ -24,4 +25,9 @@ export interface ApiDriverData {
   is_active: boolean;
   date_joined: string;
   updated_at: string;
+}
+export interface DriverApiResponse {
+  status_code: number;
+  msg?: string;
+  data: ApiDriverData[];
 }
