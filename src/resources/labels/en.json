@@ -1,3 +1,20 @@
 {
-    "greeting": "Hello English"
+    "greeting": "Hello English",
+    "login.title": "Login to Your Account",
+    "login.subtitle": "Please enter your details",
+    "login.userId.label": "User ID",
+    "login.password.label": "Password",
+    "login.checkbox.label": "Remember me",
+    "login.forgotPassword.label": "Forgot password",
+    "login.button.label": "Sign in",
+    "login.quote": "Opportunity is missed by most people because it is dressed in overalls and looks like work.",
+
+    "forgotPassword.title": "Forgot Password ?",
+    "forgotPassword.description": "No worries, we'll send you reset instructions.",
+    "forgotPassword.email.label": "Enter your email",
+    "forgotPassword.email.error": "Enter a valid email",
+    "forgotPassword.button.label": "Reset password",
+    "forgotPassword.link.label": "Back to login",
+    "forgotPassword.quote": "Opportunity is missed by most people because it is dressed in overalls and looks like work."
+
 }

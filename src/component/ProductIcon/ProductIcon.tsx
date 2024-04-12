@@ -1,6 +1,7 @@
 import Stack from '@mui/material/Stack';
 import {Typography} from '@mui/material';
 import Avatar from '@mui/material/Avatar';
+
 import {ProductIconProps} from './propTypes/types.ts';
 
 function ProductIcon({productName, productId, productImage}: ProductIconProps) {
@@ -16,7 +17,7 @@ function ProductIcon({productName, productId, productImage}: ProductIconProps) {
         }}
       />
       <Stack>
-        <Typography className={'font-md'} variant={'h5'} fontWeight={500}>
+        <Typography className={'font-sm'} variant={'h5'} fontWeight={500}>
           {productName}
         </Typography>
         <Typography className={'font-sm'} variant={'h6'} fontWeight={400}>

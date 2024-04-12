@@ -1,26 +1,41 @@
-import './DriverSignature.scss';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import CachedIcon from '@mui/icons-material/Cached';
+
 import {useState} from 'react';
-import {imageUrl} from './Image';
+import {ClipLoader} from 'react-spinners';
+
 import DropDownButton from '../DropDownButton/DropDownButton.tsx';
+import './DriverSignature.scss';
+import {AxiosResponse} from 'axios';
+import {SignatureApiResponse} from './propTypes/types.ts';
+import {api} from '../../axios/api.ts';
+
 function DriverSignature() {
   const [isSignatureLoaded, setIsSignatureLoaded] = useState(false);
   const [showLoading, setShowLoading] = useState(false);
   const actions = ['Activate', 'Reject']; //More actions can be added to this array in future
+  const [signatureURL, setSignatureURL] = useState('');
 
   // This function will be called when our action is clicked
   function handleAction(selectedIndex: number) {
     console.log(selectedIndex + ' i was clicked');
   }
-
-  function fetchSignature() {
+  async function fetchSignature() {
     setShowLoading(true);
-    setTimeout(() => {
+    let response: AxiosResponse<SignatureApiResponse>;
+    try {
+      response = await api.get(
+        `/warehouse/digital-signature?user_id=${localStorage.getItem('selected_driver')}`,
+      );
+      console.log(response);
       setShowLoading(false);
+      setSignatureURL(
+        'data:image/png;base64,' + response.data.data.signature_image,
+      );
       setIsSignatureLoaded(true);
-    }, 1000);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -39,9 +54,11 @@ function DriverSignature() {
             </Button>
           )}
           {showLoading && (
-            <CachedIcon fontSize={'large'} className={'center'} />
+            <div className={'center'}>
+              <ClipLoader color="#344767" />
+            </div>
           )}
-          {isSignatureLoaded && <img src={imageUrl} alt={'img'} />}
+          {isSignatureLoaded && <img src={signatureURL} alt={'img'} />}
         </span>
 
         <label className={'form-label label-2'}>Add notes:</label>

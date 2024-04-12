@@ -25,8 +25,8 @@ function DriverNameGrid() {
 
   // State containing driver type
   const [driverType, setDriverType] = useState<
-    'vanSeller' | 'delivery' | 'hybrid'
-  >('vanSeller');
+    'VAN-SELLER' | 'DELIVERY' | 'HYBRID'
+  >('VAN-SELLER');
 
   // State containing array filtered after driver type and search text
   const [filteredArray, setFilteredArray] = useState<Driver[]>([]);
@@ -42,24 +42,22 @@ function DriverNameGrid() {
         .filter(driver => driver.driverName.includes(searchText)),
     );
   }
-
-  // Use effect will trigger array filter
-  useEffect(() => {
-    filterDriverArray(searchText);
-  }, [driverType, searchText]);
-
   function handleDriverTypeChange(
     _: MouseEvent<HTMLElement>,
-    value: 'vanSeller' | 'delivery' | 'hybrid',
+    value: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID',
   ) {
     setDriverType(value);
   }
-
   // This will set the search text, triggering the useEffect to filter the array
   // This function will be called after a delay, so its only called when user stops typing to avoid unnecessary re-renders
   function searchDriver(searchInput: string) {
     setSearchText(searchInput);
   }
+
+  // Use effect will trigger array filter
+  useEffect(() => {
+    filterDriverArray(searchText);
+  }, [driverType, searchText, driverArray]);
 
   return (
     <>
@@ -130,7 +128,7 @@ function DriverNameGridHeader({
         <ToggleButton
           className={'font-xsm'}
           sx={{fontWeight: '600'}}
-          value="vanSeller">
+          value="VAN-SELLER">
           <img src={vanSellerIcon} alt={'icon'} />
           Van-Seller
         </ToggleButton>
@@ -138,14 +136,14 @@ function DriverNameGridHeader({
         <ToggleButton
           className={'font-xsm'}
           sx={{fontWeight: '600'}}
-          value="delivery">
+          value="DELIVERY">
           <img src={deliveryIcon} alt={'icon'} />
           Delivery
         </ToggleButton>
         <ToggleButton
           className={'font-xsm'}
           sx={{fontWeight: '600'}}
-          value="hybrid">
+          value="HYBRID">
           <img src={hybridIcon} alt={'icon'} />
           Hybrid
         </ToggleButton>

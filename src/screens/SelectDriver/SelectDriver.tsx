@@ -1,115 +1,38 @@
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import {GridColDef} from '@mui/x-data-grid';
+
+import {ChangeEvent, useContext, useEffect, useState} from 'react';
+import {Outlet, useNavigate} from 'react-router';
+import {AxiosResponse} from 'axios';
+
 import Sidebar from '../../component/Sidebar/Sidebar.tsx';
 import PageHeading from '../../component/PageHeading/PageHeading.tsx';
-import Paper from '@mui/material/Paper';
-
-import {Driver, DriverOutletContext} from './propTypes/types.ts';
-import {ChangeEvent, useContext, useEffect, useState} from 'react';
-
-import {Row} from '../../component/Table/propTypes/types.ts';
-import {GridColDef} from '@mui/x-data-grid';
 import ProductIcon from '../../component/ProductIcon/ProductIcon.tsx';
+import Timeline from '../../component/Timeline/Timeline.tsx';
+import LanguageSelect from '../../component/LanguageSelect/LanguageSelect.tsx';
+import timelineContext from '../../context/timeline/timelineContext.ts';
+import {api} from '../../axios/api.ts';
+import {
+  Driver,
+  DriverApiResponse,
+  DriverOutletContext,
+  ProductApiResponse,
+} from './propTypes/types.ts';
+import {Row} from '../../component/Table/propTypes/types.ts';
 
 import './SelectDriver.scss';
-import Timeline from '../../component/Timeline/Timeline.tsx';
-import timelineContext from '../../context/timeline/timelineContext.ts';
-
-import {Outlet, useNavigate} from 'react-router';
 
 function SelectDriver() {
   const heading = 'Create Loading Order';
   const subHeading = 'To create a loading order, Please follow the steps';
-
-  //---------------------------------------------------------------------MOCK DATA--------------------------------------------------------------------
-  const driverArray: Driver[] = [
-    {driverName: 'Max Verstappen', driverId: 'DRV002', driverType: 'vanSeller'},
-    {driverName: 'Sergio Perez', driverId: 'DRV005', driverType: 'vanSeller'},
-    {
-      driverName: 'Daniel Ricciardo',
-      driverId: 'DRV008',
-      driverType: 'vanSeller',
-    },
-    {driverName: 'Pierre Gasly', driverId: 'DRV011', driverType: 'vanSeller'},
-    {
-      driverName: 'Alexander Albon',
-      driverId: 'DRV014',
-      driverType: 'vanSeller',
-    },
-    {
-      driverName: 'Sebastian Vettel',
-      driverId: 'DRV006',
-      driverType: 'delivery',
-    },
-    {driverName: 'Valtteri Bottas', driverId: 'DRV009', driverType: 'delivery'},
-    {
-      driverName: 'Carlos Sainz Jr.',
-      driverId: 'DRV012',
-      driverType: 'delivery',
-    },
-    {driverName: 'Yuki Tsunoda', driverId: 'DRV015', driverType: 'delivery'},
-    {driverName: 'Lewis Hamilton', driverId: 'DRV001', driverType: 'hybrid'},
-    {driverName: 'Charles Leclerc', driverId: 'DRV004', driverType: 'hybrid'},
-    {driverName: 'Lando Norris', driverId: 'DRV007', driverType: 'hybrid'},
-    {driverName: 'Esteban Ocon', driverId: 'DRV010', driverType: 'hybrid'},
-    {driverName: 'Lance Stroll', driverId: 'DRV013', driverType: 'hybrid'},
-    {driverName: 'Fernando Alonso', driverId: 'DRV003', driverType: 'delivery'},
-  ];
-  const rows: Row[] = [
-    {
-      productId: 145642,
-      name: 'Coco-cola',
-      imageSrc: '/Coco.jpg',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipi',
-      quantity: 3000,
-      initialStock: 300,
-      result: 20,
-    },
-    {
-      productId: 27888,
-      name: 'Pepsi',
-      imageSrc: '/Sprite.png',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis earum enim iusto',
-      quantity: 2500,
-      initialStock: 200,
-      result: 10,
-    },
-    {
-      productId: 36545,
-      name: 'Fanta',
-      imageSrc: '/Coco.jpg',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis earum enim iusto',
-      quantity: 2000,
-      initialStock: 280,
-      result: 40,
-    },
-    {
-      productId: 44512,
-      name: 'Sprite',
-      imageSrc: '/Sprite.png',
-      description:
-        'Lorem ipsum dolor sit amet,ont tempora. Aperiam at autem disti',
-      quantity: 1500,
-      initialStock: 100,
-      result: 0,
-    },
-    {
-      productId: 58712,
-      name: 'Mountain Dew',
-      imageSrc: '/Coco.jpg',
-      description:
-        'Lorem ipsum dolor sit amet, consecteturgni mpora. Aperiam at autem disti',
-      quantity: 1800,
-      initialStock: 800,
-      result: 90,
-    },
-  ];
-
-  // -----------------------------------------END OF MOCK DATA-------------------------------------------------------------------
-  const [selectedDriver, setSelectedDriver] = useState<string>('');
+  const [driverArray, setDriverArray] = useState<Driver[]>([]);
+  const [rows, setRows] = useState<Row[]>([]);
+  const [selectedDriver, setSelectedDriver] = useState<string>(
+    localStorage.getItem('selected_driver') || '',
+  );
   const navigate = useNavigate();
   const {
     currentStep,
@@ -120,21 +43,83 @@ function SelectDriver() {
     orderRoutes,
   } = useContext(timelineContext) || {};
 
-  useEffect(() => {
-    navigate(`${orderRoutes[currentStep - 1]}`);
-  }, [currentStep]);
+  async function fetchDrivers() {
+    let response: AxiosResponse<DriverApiResponse>;
+    let driverData: Driver[];
+    try {
+      response = await api.get('/warehouse/drivers');
+      console.log(response);
+
+      driverData = response.data.data.map(driver => {
+        const parsedRes: Driver = {
+          driverName: driver.username,
+          driverId: driver.user_id,
+          driverType: driver.business_role_id,
+        };
+        return parsedRes;
+      });
+      setDriverArray(driverData);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async function fetchRows() {
+    let response: AxiosResponse<ProductApiResponse>;
+    let products: Row[];
+    try {
+      response = await api.get(
+        `/warehouse/vanseller-dashboard-for-warehouse?user_id=${localStorage.getItem('selected_driver')}`,
+      );
+
+      products = response.data.data.map(product => {
+        const parsedRes: Row = {
+          productId: Number(product.product_id),
+          name: product.description,
+          description: product.description,
+          imageSrc: 'data:image/png;base64,' + product.img.product_image,
+          initialStock: product.quantity,
+        };
+
+        return parsedRes;
+      });
+      setRows(products);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
     setSelectedDriver(event.target.value);
-    console.log(event.target.value);
+    localStorage.setItem('selected_driver', event.target.value);
+    fetchRows();
   }
+  function getRowId(row: Row) {
+    if (typeof row.productId === 'number') {
+      return row.productId;
+    } else {
+      throw new Error('row id should be number');
+    }
+  }
+
+  // API CALLS
+  useEffect(() => {
+    fetchDrivers();
+  }, []);
+
+  useEffect(() => {
+    navigate(`${orderRoutes[currentStep - 1]}`);
+    if (!localStorage.getItem('user')) {
+      navigate('/');
+    }
+  }, [currentStep]);
 
   // Table Column Definition
   const columns: GridColDef[] = [
     {
       field: 'name',
       headerName: 'Product',
-      flex: 0.6,
+      flex: 0.7,
       headerClassName: 'font-md',
       // passing 'Product Icon' element to render cell function, so it is rendered instead of product name
       renderCell: params => {
@@ -153,14 +138,14 @@ function SelectDriver() {
       headerClassName: 'font-md',
       headerName: 'Product Description',
       flex: 0.8,
-      cellClassName: 'productText font-sm',
+      cellClassName: 'productText font-xsm',
       sortable: false,
     },
     {
       field: 'initialStock',
       headerName: 'Initial Stock',
       headerClassName: 'font-md',
-      flex: 0.4,
+      flex: 0.5,
       cellClassName: 'stock font-sm',
       sortable: false,
     },
@@ -168,88 +153,80 @@ function SelectDriver() {
       field: 'uom',
       headerName: 'UOM',
       headerClassName: 'font-md',
-      flex: 0.3,
+      flex: 0.5,
       valueGetter: () => {
         return 'Unit';
       },
       cellClassName: 'productText font-sm',
       sortable: false,
     },
-    {
-      field: 'result',
-      headerName: 'Result',
-      headerClassName: 'font-md',
-      flex: 0.3,
-      cellClassName: 'stock font-sm',
-      sortable: false,
-    },
   ];
-  function getRowId(row: Row) {
-    if (typeof row.productId === 'number') {
-      return row.productId;
-    } else {
-      throw new Error('row id should be number');
-    }
-  }
-  return (
-    <Grid container className={'select-driver-screen'}>
-      <Grid item xs={2} sx={{padding: 1}}>
-        {' '}
-        {/* Moved padding to sx prop */}
-        <Sidebar />
-      </Grid>
-      <Grid item xs={10} sx={{height: '100vh', overflowY: 'scroll'}}>
-        <Stack>
-          <Box
-            padding={2}
-            paddingBottom={0}
-            marginBottom={5}
-            textAlign={'center'}>
-            <PageHeading heading={heading} subHeading={subHeading} />
-          </Box>
-          <Paper
-            elevation={1}
-            sx={{p: 1.5, minHeight: 430, position: 'relative'}}>
-            <Timeline />
-            {/*This outlet will display child components all props are provided in context*/}
-            <Outlet
-              context={
-                {
-                  driverArray: driverArray,
-                  selectedDriverId: selectedDriver,
-                  handleDriverSelection: handleDriverSelection,
-                  rows: rows,
-                  columns: columns,
-                  getRowId: getRowId,
-                } satisfies DriverOutletContext
-              }></Outlet>
+  if (localStorage.getItem('user')) {
+    return (
+      <Grid container className={'select-driver-screen'}>
+        <Grid item xs={2} sx={{padding: 1}}>
+          <Sidebar />
+        </Grid>
+        <Grid item xs={10} sx={{height: '100vh', overflowY: 'scroll'}}>
+          <Stack>
+            <span className={'language-select'}>
+              <LanguageSelect />
+            </span>
             <br />
             <br />
-            <div className="buttons-group">
-              <button
-                className="btn-item"
-                onClick={() => {
-                  currentStep > 1 ? decreaseSteps() : stepsComplete();
-                }}
-                disabled={currentStep === 1}>
-                Back
-              </button>
+            <Box
+              padding={2}
+              paddingBottom={0}
+              marginBottom={5}
+              textAlign={'center'}>
+              <PageHeading heading={heading} subHeading={subHeading} />
+            </Box>
+            <Paper
+              elevation={1}
+              sx={{p: 1.5, minHeight: 400, position: 'relative'}}>
+              <Timeline />
+              {/*This outlet will display child components , all props are provided in context*/}
+              <Outlet
+                context={
+                  {
+                    driverArray: driverArray,
+                    selectedDriverId: selectedDriver,
+                    handleDriverSelection: handleDriverSelection,
+                    rows: rows,
+                    columns: columns,
+                    getRowId: getRowId,
+                  } satisfies DriverOutletContext
+                }></Outlet>
+              <br />
+              <br />
+              <div className="buttons-group">
+                <button
+                  className="btn-item"
+                  onClick={() => {
+                    currentStep > 1 ? decreaseSteps() : stepsComplete();
+                  }}
+                  disabled={currentStep === 1}>
+                  Back
+                </button>
 
-              <button
-                className="btn-item"
-                onClick={() => {
-                  currentStep === steps.length
-                    ? stepsComplete()
-                    : increaseSteps();
-                }}>
-                {currentStep === steps.length ? 'Finish' : 'Next'}
-              </button>
-            </div>
-          </Paper>
-        </Stack>
+                <button
+                  className="btn-item"
+                  onClick={() => {
+                    currentStep === steps.length
+                      ? stepsComplete()
+                      : increaseSteps();
+                  }}>
+                  {currentStep === steps.length ? 'Finish' : 'Next'}
+                </button>
+              </div>
+            </Paper>
+          </Stack>
+        </Grid>
       </Grid>
-    </Grid>
-  );
+    );
+  } else {
+    return null;
+  }
 }
 
 export default SelectDriver;

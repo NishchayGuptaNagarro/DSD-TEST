@@ -1,16 +1,17 @@
-import './App.scss';
 import {createTheme, CssBaseline, ThemeProvider} from '@mui/material';
-import Login from './screens/Login/Login.tsx';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
 import {lazy, Suspense} from 'react';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
+
+import Login from './screens/Login/Login.tsx';
 import Loading from './screens/Loading/Loading.tsx';
 import TimeLineState from './context/timeline/TimelineState.tsx';
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
+
+import './App.scss';
+import i18n from 'i18next';
+import {initReactI18next} from 'react-i18next';
 import enJSON from './resources/labels/en.json';
 import frJSON from './resources/labels/fr.json';
-
 
 const AvailableStock = lazy(
   () => import('./screens/AvailableStock/AvailableStock.tsx'),
@@ -21,24 +22,21 @@ const ForgotPassword = lazy(
 const DriverName = lazy(
   () => import('./component/DriverNameGrid/DriverNameGrid.tsx'),
 );
-
 const SelectDriverScreen = lazy(
   () => import('./screens/SelectDriver/SelectDriver.tsx'),
 );
-
 const DriverSignature = lazy(
   () => import('./component/DriverSignature/DriverSignature.tsx'),
 );
-
 const OrderTable = lazy(() => import('./component/OrderTable/OrderTable.tsx'));
-
 
 i18n.use(initReactI18next).init({
   resources: {
-    en: { ...enJSON },
-    fr: { ...frJSON },
+    en: {translation: {...enJSON}},
+    fr: {translation: {...frJSON}},
   },
-  lng: "en",
+  lng: 'en',
+  fallbackLng: 'en',
 });
 
 function App() {
@@ -61,6 +59,7 @@ function App() {
             {/*this baseline provides grey background used in all screens */}
             <CssBaseline />
             <Routes>
+              {/*<Route path={'/test'} element={<Test />} />*/}
               <Route
                 path="/availablestock"
                 element={
