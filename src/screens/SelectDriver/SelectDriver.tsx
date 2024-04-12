@@ -78,7 +78,6 @@ function SelectDriver() {
           description: product.description,
           imageSrc: 'data:image/png;base64,' + product.img.product_image,
           initialStock: product.quantity,
-          result: 20,
         };
 
         return parsedRes;
@@ -120,7 +119,7 @@ function SelectDriver() {
     {
       field: 'name',
       headerName: 'Product',
-      flex: 0.6,
+      flex: 0.7,
       headerClassName: 'font-md',
       // passing 'Product Icon' element to render cell function, so it is rendered instead of product name
       renderCell: params => {
@@ -146,7 +145,7 @@ function SelectDriver() {
       field: 'initialStock',
       headerName: 'Initial Stock',
       headerClassName: 'font-md',
-      flex: 0.4,
+      flex: 0.5,
       cellClassName: 'stock font-sm',
       sortable: false,
     },
@@ -154,19 +153,11 @@ function SelectDriver() {
       field: 'uom',
       headerName: 'UOM',
       headerClassName: 'font-md',
-      flex: 0.3,
+      flex: 0.5,
       valueGetter: () => {
         return 'Unit';
       },
       cellClassName: 'productText font-sm',
-      sortable: false,
-    },
-    {
-      field: 'result',
-      headerName: 'Result',
-      headerClassName: 'font-md',
-      flex: 0.3,
-      cellClassName: 'stock font-sm',
       sortable: false,
     },
   ];
