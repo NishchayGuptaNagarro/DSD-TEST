@@ -16,6 +16,7 @@ import {api} from '../../axios/api';
 import {LoginApiResponse} from './propTypes/types.ts';
 import './Login.scss';
 import logo from '../../assets/Logo.svg';
+import {useTranslation} from 'react-i18next';
 
 function Login() {
   // TODO add api call at finish
@@ -25,6 +26,7 @@ function Login() {
 
   const [apiError, setApiError] = useState('');
   const navigator = useNavigate();
+  const {t} = useTranslation();
 
   async function authenticateUser(values: {
     userId: string;
@@ -73,7 +75,7 @@ function Login() {
       checkbox: false,
     },
     validationSchema: Yup.object({
-      userId: Yup.string().email('Enter a valid email').required('*Required'),
+      userId: Yup.string().required('*Required'),
       password: Yup.string().required('*Required'),
     }),
     onSubmit: async values => {
@@ -114,14 +116,14 @@ function Login() {
                   component={'h2'}
                   color={'rgb(43,56,84)'}
                   fontWeight={700}>
-                  Login to Your Account
+                  {t('login.title')}
                 </Typography>
                 <Typography
                   className={'font-lg'}
                   component={'h3'}
                   color={'rgb(146,155,173)'}
                   fontWeight={400}>
-                  Please enter your details
+                  {t('login.subtitle')}
                 </Typography>
               </Box>
               {/*----------------------------------------login form--------------------------------------------------*/}
@@ -129,7 +131,7 @@ function Login() {
                 <label
                   className={`form-label font-md  ${userIdError ? 'form-label-error' : ''}`}
                   htmlFor="login-form-email">
-                  User ID
+                  {t('login.userId.label')}
                 </label>
                 <input
                   id="login-form-email"
@@ -152,7 +154,7 @@ function Login() {
                 <label
                   className={`form-label font-md  ${passwordError ? 'form-label-error' : ''}`}
                   htmlFor="login-form-password">
-                  Password
+                  {t('login.password.label')}
                 </label>
 
                 <input
@@ -194,13 +196,13 @@ function Login() {
                     <label
                       className={'font-md form-checkbox-label'}
                       htmlFor="login-form-checkbox">
-                      Remember me
+                      {t('login.checkbox.label')}
                     </label>
                   </span>
                   <Link
                     className={'form-label font-md form-link'}
                     to={'/forgotpassword'}>
-                    Forgot password
+                    {t('login.forgotPassword.label')}
                   </Link>
                 </Stack>
                 <Button
@@ -209,7 +211,7 @@ function Login() {
                   variant="contained"
                   sx={{mt: 2, py: 1}}
                   disableElevation>
-                  Sign in
+                  {t('login.button.label')}
                 </Button>
               </form>
             </Stack>
@@ -227,8 +229,7 @@ function Login() {
               </span>
               <img className={'truck-image'} src="/truck.jpg" alt={'truck'} />
               <div className={'transparent-textbox'}>
-                &#34;Opportunity is missed by most people because it is dressed
-                in overalls and looks like work.&#34;
+                &#34;{t('login.quote')}&#34;
                 <br />
                 <br />
                 Thomas Edison

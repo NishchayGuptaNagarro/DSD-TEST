@@ -6,13 +6,12 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import Login from './screens/Login/Login.tsx';
 import Loading from './screens/Loading/Loading.tsx';
 import TimeLineState from './context/timeline/TimelineState.tsx';
-import LanguageSelect from './component/LanguageSelect/LanguageSelect.tsx';
+
 import './App.scss';
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
+import i18n from 'i18next';
+import {initReactI18next} from 'react-i18next';
 import enJSON from './resources/labels/en.json';
 import frJSON from './resources/labels/fr.json';
-
 
 const AvailableStock = lazy(
   () => import('./screens/AvailableStock/AvailableStock.tsx'),
@@ -31,13 +30,13 @@ const DriverSignature = lazy(
 );
 const OrderTable = lazy(() => import('./component/OrderTable/OrderTable.tsx'));
 
-
 i18n.use(initReactI18next).init({
   resources: {
-    en: { ...enJSON },
-    fr: { ...frJSON },
+    en: {translation: {...enJSON}},
+    fr: {translation: {...frJSON}},
   },
-  lng: "en",
+  lng: 'en',
+  fallbackLng: 'en',
 });
 
 function App() {
@@ -60,7 +59,7 @@ function App() {
             {/*this baseline provides grey background used in all screens */}
             <CssBaseline />
             <Routes>
-              <Route path={'/test'} element={<LanguageSelect />} />
+              {/*<Route path={'/test'} element={<Test />} />*/}
               <Route
                 path="/availablestock"
                 element={

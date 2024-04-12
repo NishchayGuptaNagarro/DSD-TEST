@@ -13,6 +13,7 @@ import EnglishIcon from '../../assets/SVG/English.svg';
 import './LanguageSelect.scss';
 
 import {useState, MouseEvent} from 'react';
+import {useTranslation} from 'react-i18next';
 
 function LanguageSelect() {
   //   Styles for list
@@ -32,15 +33,18 @@ function LanguageSelect() {
       },
     },
   };
+  const {
+    i18n: {changeLanguage, language},
+  } = useTranslation();
   const [open, setOpen] = useState(false); //state to toggle dropdown menu
-  const [selectedLanguage, setSelectedLanguage] = useState('ENGLISH');
+  const [currentLanguage, setCurrentLanguage] = useState(language);
+  // TODO ask if translation function can be exported to whole app
 
   // Function to handle language change
   const handleClick = () => {
-    setSelectedLanguage(language => {
-      return language === 'ENGLISH' ? 'FRENCH' : 'ENGLISH';
-    });
-    //ADD LANGUAGE CHANGE LOGIC HERE OR WE CAN ADD IT IN USE EFFECT
+    const newLanguage = currentLanguage === 'en' ? 'fr' : 'en';
+    setCurrentLanguage(newLanguage);
+    changeLanguage(newLanguage);
   };
 
   // Function to hide and show dropdown
@@ -55,11 +59,7 @@ function LanguageSelect() {
     <>
       <List className={'language-select'} sx={sxProp}>
         <ListItemButton className={'language-select-btn'} onClick={handleClick}>
-          {selectedLanguage === 'ENGLISH' ? (
-            <EnglishButton />
-          ) : (
-            <FrenchButton />
-          )}
+          {currentLanguage === 'en' ? <EnglishButton /> : <FrenchButton />}
 
           <Button
             disableFocusRipple
@@ -84,11 +84,7 @@ function LanguageSelect() {
             <ListItemButton
               className={'language-select-btn'}
               onClick={handleClick}>
-              {selectedLanguage !== 'ENGLISH' ? (
-                <EnglishButton />
-              ) : (
-                <FrenchButton />
-              )}
+              {currentLanguage !== 'en' ? <EnglishButton /> : <FrenchButton />}
             </ListItemButton>
           </List>
         </Collapse>

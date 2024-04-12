@@ -14,10 +14,12 @@ import LanguageSelect from '../../component/LanguageSelect/LanguageSelect.tsx';
 import {api} from '../../axios/api.ts';
 import './ForgotPassword.scss';
 import logo from '../../assets/Logo.svg';
+import {useTranslation} from 'react-i18next';
 
 function ForgotPassword() {
   const [apiResponse, setApiResponse] = useState('');
   const navigator = useNavigate();
+  const {t} = useTranslation();
   async function submitEmail(email: string) {
     try {
       const response = await api.post('accounts/forgot-password', {
@@ -40,7 +42,9 @@ function ForgotPassword() {
       email: '',
     },
     validationSchema: Yup.object({
-      email: Yup.string().email('Enter a valid email').required('*Required'),
+      email: Yup.string()
+        .email(t('forgotPassword.email.error'))
+        .required('*Required'),
     }),
     onSubmit: async values => {
       await submitEmail(values.email);
@@ -80,14 +84,14 @@ function ForgotPassword() {
                 component={'h2'}
                 color={'rgb(43,56,84)'}
                 fontWeight={700}>
-                Forgot Password ?
+                {t('forgotPassword.title')}
               </Typography>
               <Typography
                 className={'font-lg'}
                 component={'h3'}
                 color={'rgb(146,155,173)'}
                 fontWeight={400}>
-                No worries, we&apos;ll send you reset instructions.
+                {t('forgotPassword.description')}
               </Typography>
             </Box>
             {/*----------------------------------------forgot password form--------------------------------------------------*/}
@@ -97,7 +101,7 @@ function ForgotPassword() {
               <label
                 className={`form-label font-md  ${emailError ? 'form-label-error' : ''}`}
                 htmlFor="forgot-password-form-email">
-                Enter your email
+                {t('forgotPassword.email.label')}
               </label>
               <input
                 id="forgot-password-form-email"
@@ -132,11 +136,11 @@ function ForgotPassword() {
                 variant="contained"
                 sx={{mt: 2, py: 1}}
                 disableElevation>
-                Reset password
+                {t('forgotPassword.button.label')}
               </Button>
               <Link className={'form-label font-md form-link'} to={'/'}>
                 <ArrowBackIcon fontSize={'small'} sx={{marginRight: 2}} />
-                Back to login
+                {t('forgotPassword.link.label')}
               </Link>
             </form>
           </Stack>
@@ -154,8 +158,7 @@ function ForgotPassword() {
             </span>
             <img className={'truck-image'} src="/truck-2.jpg" alt={'truck'} />
             <div className={'transparent-textbox'}>
-              &#34;Opportunity is missed by most people because it is dressed in
-              overalls and looks like work.&#34;
+              &#34;{t('forgotPassword.quote')}&#34;
               <br />
               <br />
               Thomas Edison
