@@ -24,6 +24,7 @@ import {Row} from '../../component/Table/propTypes/types.ts';
 
 import './SelectDriver.scss';
 import {useTranslation} from 'react-i18next';
+import AlertDialog from '../../component/AlertDialog/AlertDialog.tsx';
 
 function SelectDriver() {
   const {t} = useTranslation();
@@ -34,6 +35,13 @@ function SelectDriver() {
   const [selectedDriver, setSelectedDriver] = useState<string>(
     localStorage.getItem('selected_driver') || '',
   );
+  const [alertText, setAlertText] = useState('');
+  const [alertOpen, setAlertOpen] = useState(false);
+  function handleAlertClose() {
+    setAlertOpen(false);
+    navigate('/availablestock');
+  }
+
   const navigate = useNavigate();
 
   const {
@@ -61,6 +69,22 @@ function SelectDriver() {
         return parsedRes;
       });
       setDriverArray(driverData);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function assignInitialStock() {
+    try {
+      const response: AxiosResponse = await api.post(
+        '/warehouse/assign-initial-stock',
+        {
+          user_id: localStorage.getItem('selected_driver'),
+        },
+      );
+      console.log(response);
+      setAlertText(response.data.msg);
+      setAlertOpen(true);
     } catch (error) {
       console.log(error);
     }
@@ -137,6 +161,11 @@ function SelectDriver() {
 
   return (
     <Grid container className={'select-driver-screen'}>
+      <AlertDialog
+        text={alertText}
+        open={alertOpen}
+        handleOkay={handleAlertClose}
+      />
       <Grid item xs={2} sx={{padding: 1}}>
         <Sidebar />
       </Grid>
@@ -184,9 +213,15 @@ function SelectDriver() {
               <button
                 className="btn-item"
                 onClick={() => {
-                  currentStep === steps.length
-                    ? stepsComplete()
-                    : increaseSteps();
+                  if (currentStep === steps.length) {
+                    stepsComplete();
+                    assignInitialStock().then(() => {
+                      localStorage.removeItem('selected_driver');
+                      localStorage.removeItem('currentStep');
+                    });
+                  } else {
+                    increaseSteps();
+                  }
                 }}>
                 {currentStep === steps.length
                   ? t('createLoadingOrder.finish')
