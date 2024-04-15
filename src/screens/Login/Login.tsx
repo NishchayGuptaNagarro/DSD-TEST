@@ -17,18 +17,13 @@ import {LoginApiResponse} from './propTypes/types.ts';
 import './Login.scss';
 import logo from '../../assets/Logo.svg';
 import {useTranslation} from 'react-i18next';
+import {isTokenValid} from '../../functions/isTokenValid.ts';
 
 function Login() {
-  // TODO add api call at finish
-  // TODO not able to move to next step unless a driver is selected
-  // TODO add table api call after driver is select and user clicks next
-  // TODO add signout
-  // TODO add create loading order link in sidebar
-
   const [apiError, setApiError] = useState('');
   const navigator = useNavigate();
   const {t} = useTranslation();
-
+  const user = localStorage.getItem('user');
   async function authenticateUser(values: {
     userId: string;
     password: string;
@@ -62,7 +57,7 @@ function Login() {
   }
 
   useEffect(() => {
-    if (localStorage.getItem('access_token')) {
+    if (user && isTokenValid(user)) {
       navigator('/availablestock');
     }
   }, []);
@@ -87,7 +82,7 @@ function Login() {
   const userIdError = formik.touched.userId && formik.errors.userId;
   const passwordError = formik.touched.password && formik.errors.password;
 
-  if (localStorage.getItem('access_token')) {
+  if (user && isTokenValid(user)) {
     return null;
   } else {
     return (

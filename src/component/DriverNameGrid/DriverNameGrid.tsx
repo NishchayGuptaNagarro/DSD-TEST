@@ -17,6 +17,7 @@ import hybridIcon from '../../assets/Hybrid.svg';
 
 import {useState, MouseEvent, ChangeEvent, useRef, useEffect} from 'react';
 import {useOutletContext} from 'react-router-dom';
+import {useTranslation} from 'react-i18next';
 
 function DriverNameGrid() {
   // Getting required props from outlet context
@@ -99,6 +100,7 @@ function DriverNameGridHeader({
   searchDriver,
   handleDriverTypeChange,
 }: DriverNameGridHeaderProps) {
+  const {t} = useTranslation();
   // States for search input field
   const [searchInput, setSearchInput] = useState('');
   // This will hold timeout id
@@ -118,7 +120,9 @@ function DriverNameGridHeader({
   }
   return (
     <Box className={'driver-grid-header font-sm'}>
-      <span className={'select-text'}>Select Driver Type:</span>
+      <span className={'select-text'}>
+        {t('createLoadingOrder.driverTypeText')}:
+      </span>
       <ToggleButtonGroup
         color="primary"
         value={driverType}
@@ -130,7 +134,7 @@ function DriverNameGridHeader({
           sx={{fontWeight: '600'}}
           value="VAN-SELLER">
           <img src={vanSellerIcon} alt={'icon'} />
-          Van-Seller
+          {t('createLoadingOrder.vanSeller')}
         </ToggleButton>
 
         <ToggleButton
@@ -138,20 +142,20 @@ function DriverNameGridHeader({
           sx={{fontWeight: '600'}}
           value="DELIVERY">
           <img src={deliveryIcon} alt={'icon'} />
-          Delivery
+          {t('createLoadingOrder.delivery')}
         </ToggleButton>
         <ToggleButton
           className={'font-xsm'}
           sx={{fontWeight: '600'}}
           value="HYBRID">
           <img src={hybridIcon} alt={'icon'} />
-          Hybrid
+          {t('createLoadingOrder.hybrid')}
         </ToggleButton>
       </ToggleButtonGroup>
       <input
         value={searchInput}
         onChange={handleSearchInput}
-        placeholder={'Search Driver'}
+        placeholder={t('createLoadingOrder.searchInput')}
         className={'search-box'}
       />
     </Box>

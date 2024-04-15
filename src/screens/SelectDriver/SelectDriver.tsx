@@ -19,21 +19,31 @@ import {
   Driver,
   DriverApiResponse,
   DriverOutletContext,
-  ProductApiResponse,
 } from './propTypes/types.ts';
 import {Row} from '../../component/Table/propTypes/types.ts';
 
 import './SelectDriver.scss';
+import {useTranslation} from 'react-i18next';
+import AlertDialog from '../../component/AlertDialog/AlertDialog.tsx';
 
 function SelectDriver() {
-  const heading = 'Create Loading Order';
-  const subHeading = 'To create a loading order, Please follow the steps';
+  const {t} = useTranslation();
+  const heading = t('createLoadingOrder.title');
+  const subHeading = t('createLoadingOrder.subtitle');
   const [driverArray, setDriverArray] = useState<Driver[]>([]);
-  const [rows, setRows] = useState<Row[]>([]);
+
   const [selectedDriver, setSelectedDriver] = useState<string>(
     localStorage.getItem('selected_driver') || '',
   );
+  const [alertText, setAlertText] = useState('');
+  const [alertOpen, setAlertOpen] = useState(false);
+  function handleAlertClose() {
+    setAlertOpen(false);
+    navigate('/availablestock');
+  }
+
   const navigate = useNavigate();
+
   const {
     currentStep,
     steps,
@@ -63,27 +73,18 @@ function SelectDriver() {
       console.log(error);
     }
   }
-  async function fetchRows() {
-    let response: AxiosResponse<ProductApiResponse>;
-    let products: Row[];
+
+  async function assignInitialStock() {
     try {
-      response = await api.get(
-        `/warehouse/vanseller-dashboard-for-warehouse?user_id=${localStorage.getItem('selected_driver')}`,
+      const response: AxiosResponse = await api.post(
+        '/warehouse/assign-initial-stock',
+        {
+          user_id: localStorage.getItem('selected_driver'),
+        },
       );
-
-      products = response.data.data.map(product => {
-        const parsedRes: Row = {
-          productId: Number(product.product_id),
-          name: product.description,
-          description: product.description,
-          imageSrc: 'data:image/png;base64,' + product.img.product_image,
-          initialStock: product.quantity,
-        };
-
-        return parsedRes;
-      });
-      setRows(products);
       console.log(response);
+      setAlertText(response.data.msg);
+      setAlertOpen(true);
     } catch (error) {
       console.log(error);
     }
@@ -92,7 +93,6 @@ function SelectDriver() {
   function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
     setSelectedDriver(event.target.value);
     localStorage.setItem('selected_driver', event.target.value);
-    fetchRows();
   }
   function getRowId(row: Row) {
     if (typeof row.productId === 'number') {
@@ -109,16 +109,13 @@ function SelectDriver() {
 
   useEffect(() => {
     navigate(`${orderRoutes[currentStep - 1]}`);
-    if (!localStorage.getItem('user')) {
-      navigate('/');
-    }
   }, [currentStep]);
 
   // Table Column Definition
   const columns: GridColDef[] = [
     {
       field: 'name',
-      headerName: 'Product',
+      headerName: t('table.product'),
       flex: 0.7,
       headerClassName: 'font-md',
       // passing 'Product Icon' element to render cell function, so it is rendered instead of product name
@@ -136,14 +133,14 @@ function SelectDriver() {
     {
       field: 'description',
       headerClassName: 'font-md',
-      headerName: 'Product Description',
+      headerName: t('table.description'),
       flex: 0.8,
       cellClassName: 'productText font-xsm',
       sortable: false,
     },
     {
       field: 'initialStock',
-      headerName: 'Initial Stock',
+      headerName: t('table.initialStock'),
       headerClassName: 'font-md',
       flex: 0.5,
       cellClassName: 'stock font-sm',
@@ -151,7 +148,7 @@ function SelectDriver() {
     },
     {
       field: 'uom',
-      headerName: 'UOM',
+      headerName: t('table.uom'),
       headerClassName: 'font-md',
       flex: 0.5,
       valueGetter: () => {
@@ -161,72 +158,81 @@ function SelectDriver() {
       sortable: false,
     },
   ];
-  if (localStorage.getItem('user')) {
-    return (
-      <Grid container className={'select-driver-screen'}>
-        <Grid item xs={2} sx={{padding: 1}}>
-          <Sidebar />
-        </Grid>
-        <Grid item xs={10} sx={{height: '100vh', overflowY: 'scroll'}}>
-          <Stack>
-            <span className={'language-select'}>
-              <LanguageSelect />
-            </span>
-            <br />
-            <br />
-            <Box
-              padding={2}
-              paddingBottom={0}
-              marginBottom={5}
-              textAlign={'center'}>
-              <PageHeading heading={heading} subHeading={subHeading} />
-            </Box>
-            <Paper
-              elevation={1}
-              sx={{p: 1.5, minHeight: 400, position: 'relative'}}>
-              <Timeline />
-              {/*This outlet will display child components , all props are provided in context*/}
-              <Outlet
-                context={
-                  {
-                    driverArray: driverArray,
-                    selectedDriverId: selectedDriver,
-                    handleDriverSelection: handleDriverSelection,
-                    rows: rows,
-                    columns: columns,
-                    getRowId: getRowId,
-                  } satisfies DriverOutletContext
-                }></Outlet>
-              <br />
-              <br />
-              <div className="buttons-group">
-                <button
-                  className="btn-item"
-                  onClick={() => {
-                    currentStep > 1 ? decreaseSteps() : stepsComplete();
-                  }}
-                  disabled={currentStep === 1}>
-                  Back
-                </button>
 
-                <button
-                  className="btn-item"
-                  onClick={() => {
-                    currentStep === steps.length
-                      ? stepsComplete()
-                      : increaseSteps();
-                  }}>
-                  {currentStep === steps.length ? 'Finish' : 'Next'}
-                </button>
-              </div>
-            </Paper>
-          </Stack>
-        </Grid>
+  return (
+    <Grid container className={'select-driver-screen'}>
+      <AlertDialog
+        text={alertText}
+        open={alertOpen}
+        handleOkay={handleAlertClose}
+      />
+      <Grid item xs={2} sx={{padding: 1}}>
+        <Sidebar />
       </Grid>
-    );
-  } else {
-    return null;
-  }
+      <Grid item xs={10} sx={{height: '100vh', overflowY: 'scroll'}}>
+        <Stack>
+          <span className={'language-select'}>
+            <LanguageSelect />
+          </span>
+          <br />
+          <br />
+          <Box
+            padding={2}
+            paddingBottom={0}
+            marginBottom={5}
+            textAlign={'center'}>
+            <PageHeading heading={heading} subHeading={subHeading} />
+          </Box>
+          <Paper
+            elevation={1}
+            sx={{p: 1.5, minHeight: 400, position: 'relative'}}>
+            <Timeline />
+            {/*This outlet will display child components , all props are provided in context*/}
+            <Outlet
+              context={
+                {
+                  driverArray: driverArray,
+                  selectedDriverId: selectedDriver,
+                  handleDriverSelection: handleDriverSelection,
+                  columns: columns,
+                  getRowId: getRowId,
+                } satisfies DriverOutletContext
+              }></Outlet>
+            <br />
+            <br />
+            <div className="buttons-group">
+              <button
+                className="btn-item"
+                onClick={() => {
+                  currentStep > 1 ? decreaseSteps() : stepsComplete();
+                }}
+                disabled={currentStep === 1}>
+                {t('createLoadingOrder.back')}
+              </button>
+
+              <button
+                className="btn-item"
+                onClick={() => {
+                  if (currentStep === steps.length) {
+                    stepsComplete();
+                    assignInitialStock().then(() => {
+                      localStorage.removeItem('selected_driver');
+                      localStorage.removeItem('currentStep');
+                    });
+                  } else {
+                    increaseSteps();
+                  }
+                }}>
+                {currentStep === steps.length
+                  ? t('createLoadingOrder.finish')
+                  : t('createLoadingOrder.next')}
+              </button>
+            </div>
+          </Paper>
+        </Stack>
+      </Grid>
+    </Grid>
+  );
 }
 
 export default SelectDriver;

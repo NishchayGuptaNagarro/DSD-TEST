@@ -12,6 +12,7 @@ import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
 import enJSON from './resources/labels/en.json';
 import frJSON from './resources/labels/fr.json';
+import ProtectedRoute from './component/ProtectedRoute/ProtectedRoute.tsx';
 
 const AvailableStock = lazy(
   () => import('./screens/AvailableStock/AvailableStock.tsx'),
@@ -59,12 +60,13 @@ function App() {
             {/*this baseline provides grey background used in all screens */}
             <CssBaseline />
             <Routes>
-              {/*<Route path={'/test'} element={<Test />} />*/}
               <Route
                 path="/availablestock"
                 element={
                   <Suspense fallback={<Loading />}>
-                    <AvailableStock />
+                    <ProtectedRoute>
+                      <AvailableStock />
+                    </ProtectedRoute>
                   </Suspense>
                 }
               />
@@ -81,7 +83,9 @@ function App() {
                 path="/createloadingorder"
                 element={
                   <Suspense fallback={<Loading />}>
-                    <SelectDriverScreen />
+                    <ProtectedRoute>
+                      <SelectDriverScreen />
+                    </ProtectedRoute>
                   </Suspense>
                 }>
                 <Route

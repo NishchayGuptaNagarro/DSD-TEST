@@ -1,22 +1,24 @@
 import React, {ReactNode, useState} from 'react';
 import TimelineContext from './timelineContext';
+import {useTranslation} from 'react-i18next';
 
 type UserProvidedProps = {
   children: ReactNode;
 };
 
 const TimeLineState: React.FC<UserProvidedProps> = ({children}) => {
+  const {t} = useTranslation();
+
   const steps: string[] = [
-    'Select Driver',
-    'Verification/Validation',
-    'Activation',
+    t('timeline.option1'),
+    t('timeline.option2'),
+    t('timeline.option3'),
   ];
   const orderRoutes: string[] = ['driver', 'order', 'signature'];
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [complete, setComplete] = useState<boolean>(false);
 
   const stepsComplete = () => {
-    console.log('reaching');
     setComplete(!complete);
   };
 
@@ -37,7 +39,9 @@ const TimeLineState: React.FC<UserProvidedProps> = ({children}) => {
 
   //to increase the steps//
   const increaseSteps = () => {
-    updateSteps(1);
+    if (localStorage.getItem('selected_driver')) {
+      updateSteps(1);
+    }
   };
 
   //to decrease the steps//
