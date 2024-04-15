@@ -1,5 +1,10 @@
 import React, {ReactNode, useState} from 'react';
 import TimelineContext from './timelineContext';
+import {AxiosResponse} from 'axios';
+import {api} from '../../axios/api.ts';
+import {Simulate} from 'react-dom/test-utils';
+import error = Simulate.error;
+import {useNavigate} from 'react-router-dom';
 
 type UserProvidedProps = {
   children: ReactNode;
@@ -14,10 +19,26 @@ const TimeLineState: React.FC<UserProvidedProps> = ({children}) => {
   const orderRoutes: string[] = ['driver', 'order', 'signature'];
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [complete, setComplete] = useState<boolean>(false);
+  async function assignInitialStock() {
+    try {
+      const response: AxiosResponse = await api.post(
+        '/warehouse/assign-initial-stock',
+        {
+          user_id: localStorage.getItem('selected_driver'),
+        },
+      );
+      alert(response.data.msg);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const stepsComplete = () => {
-    console.log('reaching');
     setComplete(!complete);
+    assignInitialStock().then(() => {
+      localStorage.removeItem('selected_driver');
+      localStorage.removeItem('currentStep');
+    });
   };
 
   //updateSteps will take the value and update the currentStep
@@ -37,7 +58,9 @@ const TimeLineState: React.FC<UserProvidedProps> = ({children}) => {
 
   //to increase the steps//
   const increaseSteps = () => {
-    updateSteps(1);
+    if (localStorage.getItem('selected_driver')) {
+      updateSteps(1);
+    }
   };
 
   //to decrease the steps//

@@ -6,7 +6,6 @@ import {GridColDef} from '@mui/x-data-grid';
 
 import {format} from 'date-fns';
 import {useEffect, useState} from 'react';
-import {useNavigate} from 'react-router-dom';
 
 import ProductIcon from '../../component/ProductIcon/ProductIcon.tsx';
 import Table from '../../component/Table/Table.tsx';
@@ -81,11 +80,10 @@ function AvailableStock() {
 
   // Product rows passed to table component
   const [rows, setRows] = useState<Product[]>([]);
-  const navigator = useNavigate();
   async function fetchRows() {
     let response;
     try {
-      response = await api.get('/accounts/initial-stock');
+      response = await api.get('/not-deployed-yet');
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -115,40 +113,33 @@ function AvailableStock() {
   }
 
   useEffect(() => {
-    if (!localStorage.getItem('user')) {
-      navigator('/');
-    }
     fetchRows();
   }, []);
 
-  if (localStorage.getItem('user')) {
-    return (
-      <Grid container>
-        <Grid item xs={2} padding={1}>
-          <Sidebar />
-        </Grid>
-        <Grid item xs={10} sx={{height: '100vh', overflowY: 'scroll'}}>
-          <Stack>
-            <Box padding={2} paddingBottom={0} position={'relative'}>
-              <span className={'avl-language-select'}>
-                <LanguageSelect />
-              </span>
-              {/*THESE br will be removed when language selection is added to separate component*/}
-              <br />
-              <br />
-              <PageHeading heading={heading} subHeading={subHeading} />
-              <CardStack />
-            </Box>
-            <Box padding={2}>
-              <Table rows={rows} columns={columns} getRowId={getRowId} />
-            </Box>
-          </Stack>
-        </Grid>
+  return (
+    <Grid container>
+      <Grid item xs={2} padding={1}>
+        <Sidebar />
       </Grid>
-    );
-  } else {
-    return null;
-  }
+      <Grid item xs={10} sx={{height: '100vh', overflowY: 'scroll'}}>
+        <Stack>
+          <Box padding={2} paddingBottom={0} position={'relative'}>
+            <span className={'avl-language-select'}>
+              <LanguageSelect />
+            </span>
+            {/*THESE br will be removed when language selection is added to separate component*/}
+            <br />
+            <br />
+            <PageHeading heading={heading} subHeading={subHeading} />
+            <CardStack />
+          </Box>
+          <Box padding={2}>
+            <Table rows={rows} columns={columns} getRowId={getRowId} />
+          </Box>
+        </Stack>
+      </Grid>
+    </Grid>
+  );
 }
 
 export default AvailableStock;

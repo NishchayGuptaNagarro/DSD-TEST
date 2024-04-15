@@ -15,11 +15,13 @@ import {api} from '../../axios/api.ts';
 import './ForgotPassword.scss';
 import logo from '../../assets/Logo.svg';
 import {useTranslation} from 'react-i18next';
+import {isTokenValid} from '../../functions/isTokenValid.ts';
 
 function ForgotPassword() {
   const [apiResponse, setApiResponse] = useState('');
   const navigator = useNavigate();
   const {t} = useTranslation();
+  const user = localStorage.getItem('user');
   async function submitEmail(email: string) {
     try {
       const response = await api.post('accounts/forgot-password', {
@@ -32,7 +34,7 @@ function ForgotPassword() {
   }
 
   useEffect(() => {
-    if (localStorage.getItem('access_token')) {
+    if (user && isTokenValid(user)) {
       navigator('/availablestock');
     }
   }, []);
@@ -53,7 +55,7 @@ function ForgotPassword() {
 
   const emailError = formik.touched.email && formik.errors.email;
 
-  if (localStorage.getItem('access_token')) {
+  if (user && isTokenValid(user)) {
     return null;
   } else {
     return (

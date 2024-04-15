@@ -15,6 +15,29 @@
     "forgotPassword.email.error": "Enter a valid email",
     "forgotPassword.button.label": "Reset password",
     "forgotPassword.link.label": "Back to login",
-    "forgotPassword.quote": "Opportunity is missed by most people because it is dressed in overalls and looks like work."
+    "forgotPassword.quote": "Opportunity is missed by most people because it is dressed in overalls and looks like work.",
+
+    "createLoadingOrder.title": "Create Loading Order",
+    "createLoadingOrder.subtitle": "To create a loading order, Please follow the steps",
+    "createLoadingOrder.back":"Back",
+    "createLoadingOrder.next":"Next",
+    "createLoadingOrder.finish":"Finish",
+    "createLoadingOrder.driverTypeText": "Select Driver Type",
+    "createLoadingOrder.vanSeller": "Van-Seller",
+    "createLoadingOrder.delivery": "Delivery",
+    "createLoadingOrder.hybrid": "Hybrid",
+    "createLoadingOrder.searchInput": "Search Driver",
+    "createLoadingOrder.signature.label": "Driver Signature",
+    "createLoadingOrder.button.label": " GET THE SIGNATURE",
+    "createLoadingOrder.note.label": "Add notes",
+    "createLoadingOrder.note.placeholder": "Please enter the notes..",
+    "createLoadingOrder.action.label":"Action",
+
+
+    "table.product": "Product",
+    "table.description": "Product Description",
+    "table.initialStock": "Initial Stock",
+    "table.uom": "UOM"
+
 
 }

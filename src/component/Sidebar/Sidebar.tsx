@@ -12,6 +12,7 @@ import {SideBarOption} from './propTypes/SidebarRoutes';
 
 import {MdOutlineKeyboardArrowUp} from 'react-icons/md';
 import {useNavigate} from 'react-router-dom';
+import Button from '@mui/material/Button';
 
 function Sidebar() {
   const [showbar, setShowbBar] = useState<boolean>(true);
@@ -72,6 +73,10 @@ function Sidebar() {
     navigate(path);
     console.log(path);
   };
+  function handleSignOut() {
+    localStorage.clear();
+    navigate('/');
+  }
 
   return (
     <>
@@ -170,7 +175,15 @@ function Sidebar() {
                 alt="alternate-image"
                 style={{height: '4vh'}}
               />
-              <p className="bottom-text">Sign out</p>
+              <p className="bottom-text">
+                <Button
+                  size="small"
+                  variant={'text'}
+                  sx={{color: 'white', textTransform: 'none'}}
+                  onClick={handleSignOut}>
+                  Sign out
+                </Button>
+              </p>
             </div>
 
             <div className="bottom-icons-container">

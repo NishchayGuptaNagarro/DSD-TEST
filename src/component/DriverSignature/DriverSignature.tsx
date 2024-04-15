@@ -9,13 +9,14 @@ import './DriverSignature.scss';
 import {AxiosResponse} from 'axios';
 import {SignatureApiResponse} from './propTypes/types.ts';
 import {api} from '../../axios/api.ts';
+import {useTranslation} from 'react-i18next';
 
 function DriverSignature() {
   const [isSignatureLoaded, setIsSignatureLoaded] = useState(false);
   const [showLoading, setShowLoading] = useState(false);
   const actions = ['Activate', 'Reject']; //More actions can be added to this array in future
   const [signatureURL, setSignatureURL] = useState('');
-
+  const {t} = useTranslation();
   // This function will be called when our action is clicked
   function handleAction(selectedIndex: number) {
     console.log(selectedIndex + ' i was clicked');
@@ -23,16 +24,32 @@ function DriverSignature() {
   async function fetchSignature() {
     setShowLoading(true);
     let response: AxiosResponse<SignatureApiResponse>;
+    let status = 0;
     try {
-      response = await api.get(
-        `/warehouse/digital-signature?user_id=${localStorage.getItem('selected_driver')}`,
-      );
-      console.log(response);
-      setShowLoading(false);
-      setSignatureURL(
-        'data:image/png;base64,' + response.data.data.signature_image,
-      );
-      setIsSignatureLoaded(true);
+      while (status !== 200) {
+        response = await api.get(
+          `/warehouse/digital-signature?user_id=${localStorage.getItem('selected_driver')}`,
+        );
+        console.log(response);
+        status = response.data.status_code;
+        switch (status) {
+          case 200: {
+            setShowLoading(false);
+            setSignatureURL(
+              'data:image/png;base64,' + response.data.data.signature_image,
+            );
+            setIsSignatureLoaded(true);
+            break;
+          }
+          case 404: {
+            break;
+          }
+          default: {
+            setShowLoading(false);
+            throw new Error('an error occured while fetching signature');
+          }
+        }
+      }
     } catch (error) {
       console.log(error);
     }
@@ -41,7 +58,9 @@ function DriverSignature() {
   return (
     <>
       <form className={'driver-signature-form'}>
-        <label className={'form-label label-1'}>Driver Signature:</label>
+        <label className={'form-label label-1'}>
+          {t('createLoadingOrder.signature.label')}:
+        </label>
         <span className={'signature-container'}>
           {/*This center class is defined in app.scss we can use it to center anything*/}
 
@@ -50,7 +69,7 @@ function DriverSignature() {
               variant="contained"
               className={'center'}
               onClick={fetchSignature}>
-              GET THE SIGNATURE
+              {t('createLoadingOrder.button.label')}
             </Button>
           )}
           {showLoading && (
@@ -61,9 +80,11 @@ function DriverSignature() {
           {isSignatureLoaded && <img src={signatureURL} alt={'img'} />}
         </span>
 
-        <label className={'form-label label-2'}>Add notes:</label>
+        <label className={'form-label label-2'}>
+          {t('createLoadingOrder.note.label')}:
+        </label>
         <textarea
-          placeholder={'Please enter the notes..'}
+          placeholder={t('createLoadingOrder.note.placeholder')}
           className={'text-box font-sm'}></textarea>
         <Box
           className={'form-action'}
@@ -71,7 +92,9 @@ function DriverSignature() {
           flexDirection={'column'}
           alignItems={'center'}
           gap={4}>
-          <label className={'form-label'}>Action:</label>
+          <label className={'form-label'}>
+            {t('createLoadingOrder.action.label')}:
+          </label>
           {/*This button will display list of all actions*/}
           <DropDownButton options={actions} handleClick={handleAction} />
         </Box>
