@@ -1,15 +1,18 @@
 import React, {ReactNode, useState} from 'react';
 import TimelineContext from './timelineContext';
+import {useTranslation} from 'react-i18next';
 
 type UserProvidedProps = {
   children: ReactNode;
 };
 
 const TimeLineState: React.FC<UserProvidedProps> = ({children}) => {
+  const {t} = useTranslation();
+
   const steps: string[] = [
-    'Select Driver',
-    'Verification/Validation',
-    'Activation',
+    t('timeline.option1'),
+    t('timeline.option2'),
+    t('timeline.option3'),
   ];
   const orderRoutes: string[] = ['driver', 'order', 'signature'];
   const [currentStep, setCurrentStep] = useState<number>(1);

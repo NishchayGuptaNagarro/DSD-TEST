@@ -44,7 +44,15 @@
     "table.description": "Product Description",
     "table.quantity": "Quantity",
     "table.initialStock": "Initial Stock",
-    "table.uom": "UOM"
+    "table.uom": "UOM",
 
+    "sidebar.dashboard": "Dashboard",
+    "sidebar.stock": "Stock",
+    "sidebar.orders": "Orders",
+    "sidebar.signout": "Sign Out",
+    "sidebar.settings": "Settings",
 
+    "timeline.option1": "Select Drivers",
+    "timeline.option2": "Verification/Validation",
+    "timeline.option3": "Activation"
 }

@@ -13,13 +13,15 @@ import {SideBarOption} from './propTypes/SidebarRoutes';
 import {MdOutlineKeyboardArrowUp} from 'react-icons/md';
 import {useNavigate} from 'react-router-dom';
 import Button from '@mui/material/Button';
+import {useTranslation} from 'react-i18next';
 
 function Sidebar() {
+  const {t} = useTranslation();
   const [showbar, setShowbBar] = useState<boolean>(true);
   const [navData, setNavData] = useState<SideBarOption[]>([
     {
       id: 1,
-      Option: 'DashBoard',
+      Option: t('sidebar.dashboard'),
       subOptionLeft: '',
       subOptionRight: '',
       icon: DashBoard,
@@ -28,7 +30,7 @@ function Sidebar() {
     },
     {
       id: 2,
-      Option: 'Stocks',
+      Option: t('sidebar.stock'),
       subOptionLeft: 'S',
       subOptionRight: 'My warehouse avalable stock',
       icon: Stocks,
@@ -37,7 +39,7 @@ function Sidebar() {
     },
     {
       id: 3,
-      Option: 'Orders',
+      Option: t('sidebar.orders'),
       subOptionLeft: 'M',
       subOptionRight: 'My warehouse assign orders',
       icon: Orders,
@@ -80,6 +82,8 @@ function Sidebar() {
 
   return (
     <>
+      {t('')}
+      {/*REMOVE THIS CALL IN FUTURE*/}
       <div className={!!showbar ? 'nav-menu-active' : 'nav-menu-closed'}>
         {!!showbar ? (
           <>
@@ -181,7 +185,7 @@ function Sidebar() {
                   variant={'text'}
                   sx={{color: 'white', textTransform: 'none'}}
                   onClick={handleSignOut}>
-                  Sign out
+                  {t('sidebar.signout')}
                 </Button>
               </p>
             </div>
@@ -192,7 +196,7 @@ function Sidebar() {
                 alt="alternate-image"
                 style={{height: '4vh'}}
               />
-              <p className="bottom-text">Settings</p>
+              <p className="bottom-text">{t('sidebar.settings')}</p>
             </div>
           </div>
         ) : (
