@@ -33,9 +33,16 @@
     "createLoadingOrder.note.placeholder": "Please enter the notes..",
     "createLoadingOrder.action.label":"Action",
 
+    "availablestock.pageHeading": "My Warehouse Available Stock",
+    "availablestock.subHeading": "Goods ready for immediate shipment in a warehouse",
+    "availablestock.card1Heading": "Warehouse Name & ID",
+    "availablestock.card1MainInfo": "Supply Chain Solutions",
+    "availablestock.card2Heading": "Manager Name & ID",
+    "availablestock.card3Heading": "Date",
 
     "table.product": "Product",
     "table.description": "Product Description",
+    "table.quantity": "Quantity",
     "table.initialStock": "Initial Stock",
     "table.uom": "UOM"
 

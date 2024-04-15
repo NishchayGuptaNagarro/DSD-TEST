@@ -22,61 +22,16 @@ import dateIcon from '../../assets/Date.svg';
 import managerIcon from '../../assets/Manager.svg';
 import warehouseIcon from '../../assets/Warehouse.svg';
 import productJSON from '../../axios/products 1.json';
+import {useTranslation} from 'react-i18next';
 
 // This column definiton should not be redefined at every render so moved it outside
 // columns definition array passed to table component
-const columns: GridColDef[] = [
-  {
-    field: 'name',
-    headerName: 'Product',
-    flex: 0.8,
-    headerClassName: 'font-md',
-    // passing 'Product Icon' element to render cell function, so it is rendered instead of product name
-    renderCell: params => {
-      return (
-        <ProductIcon
-          productId={params.row.productId}
-          productName={params.value}
-          productImage={params.row.imageSrc}
-        />
-      );
-    },
-    sortable: false,
-  },
-  {
-    field: 'description',
-    headerClassName: 'font-md',
-    headerName: 'Product Description',
-    flex: 1,
-    cellClassName: 'productText font-sm',
-    sortable: false,
-  },
-  {
-    field: 'quantity',
-    headerName: 'Quantity',
-    headerClassName: 'font-md',
-    flex: 0.5,
-    cellClassName: 'quantity font-sm',
-    sortable: false,
-  },
-  {
-    field: 'uom',
-    headerName: 'UOM',
-    headerClassName: 'font-md',
-    flex: 0.4,
-    valueGetter: () => {
-      return 'Unit';
-    },
-    cellClassName: 'productText font-sm',
-    sortable: false,
-  },
-];
 
 function AvailableStock() {
+  const {t} = useTranslation();
   // Heading and subheading passed to 'Page Heading' component
-  const heading = 'My Warehouse Available Stock';
-  const subHeading =
-    'Goods ready for immediate shipment in a warehouse.(sample text)';
+  const heading = t('availablestock.pageHeading');
+  const subHeading = t('availablestock.subHeading');
 
   // Product rows passed to table component
   const [rows, setRows] = useState<Product[]>([]);
@@ -102,6 +57,53 @@ function AvailableStock() {
       setRows(response);
     }
   }
+
+  const columns: GridColDef[] = [
+    {
+      field: 'name',
+      headerName: t('table.product'),
+      flex: 0.8,
+      headerClassName: 'font-md',
+      // passing 'Product Icon' element to render cell function, so it is rendered instead of product name
+      renderCell: params => {
+        return (
+          <ProductIcon
+            productId={params.row.productId}
+            productName={params.value}
+            productImage={params.row.imageSrc}
+          />
+        );
+      },
+      sortable: false,
+    },
+    {
+      field: 'description',
+      headerClassName: 'font-md',
+      headerName: t('table.description'),
+      flex: 1,
+      cellClassName: 'productText font-sm',
+      sortable: false,
+    },
+    {
+      field: 'quantity',
+      headerName: t('table.quantity'),
+      headerClassName: 'font-md',
+      flex: 0.5,
+      cellClassName: 'quantity font-sm',
+      sortable: false,
+    },
+    {
+      field: 'uom',
+      headerName: t('table.uom'),
+      headerClassName: 'font-md',
+      flex: 0.4,
+      valueGetter: () => {
+        return 'Unit';
+      },
+      cellClassName: 'productText font-sm',
+      sortable: false,
+    },
+  ];
 
   // This function returns a row's unique ID
   function getRowId(row: Row) {
@@ -146,6 +148,7 @@ export default AvailableStock;
 
 // Component containing all cards
 function CardStack() {
+  const {t} = useTranslation();
   const date = format(new Date(), 'dd-MMM-yyyy');
   const day = format(date, 'EEEE');
   const user = JSON.parse(
@@ -154,19 +157,19 @@ function CardStack() {
   return (
     <Stack direction="row" spacing={3}>
       <DetailsCard
-        heading={'Warehouse Name & ID'}
+        heading={t('availablestock.card1Heading')}
         icon={warehouseIcon}
-        mainInfo={'Supply Chain Solutions'}
+        mainInfo={t('availablestock.card1MainInfo')}
         secondaryInfo={'1545-8895-448R'}
       />
       <DetailsCard
-        heading={'Manager Name & ID'}
+        heading={t('availablestock.card2Heading')}
         icon={managerIcon}
         mainInfo={user.username}
         secondaryInfo={user.employee_id}
       />
       <DetailsCard
-        heading={'Date'}
+        heading={t('availablestock.card3Heading')}
         icon={dateIcon}
         mainInfo={date}
         secondaryInfo={day}
