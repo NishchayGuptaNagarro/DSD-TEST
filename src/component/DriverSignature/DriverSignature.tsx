@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {ClipLoader} from 'react-spinners';
 
 import DropDownButton from '../DropDownButton/DropDownButton.tsx';
@@ -10,9 +10,12 @@ import {AxiosResponse} from 'axios';
 import {SignatureApiResponse} from './propTypes/types.ts';
 import {api} from '../../axios/api.ts';
 import {useTranslation} from 'react-i18next';
+import {useOutletContext} from 'react-router-dom';
+import {DriverOutletContext} from '../../screens/SelectDriver/propTypes/types.ts';
 
 function DriverSignature() {
-  const [isSignatureLoaded, setIsSignatureLoaded] = useState(false);
+  const {isSignatureLoaded, setIsSignatureLoaded} =
+    useOutletContext<DriverOutletContext>();
   const [showLoading, setShowLoading] = useState(false);
   const actions = ['Activate', 'Reject']; //More actions can be added to this array in future
   const [signatureURL, setSignatureURL] = useState('');
@@ -42,6 +45,8 @@ function DriverSignature() {
             break;
           }
           case 404: {
+            //waiting before making new calls
+            await new Promise(resolve => setTimeout(resolve, 2000));
             break;
           }
           default: {
@@ -54,7 +59,11 @@ function DriverSignature() {
       console.log(error);
     }
   }
-
+  useEffect(() => {
+    if (signatureURL == '') {
+      setIsSignatureLoaded(false);
+    }
+  });
   return (
     <>
       <form className={'driver-signature-form'}>

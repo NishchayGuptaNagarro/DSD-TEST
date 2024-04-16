@@ -25,9 +25,19 @@ import {Row} from '../../component/Table/propTypes/types.ts';
 import './SelectDriver.scss';
 import {useTranslation} from 'react-i18next';
 import AlertDialog from '../../component/AlertDialog/AlertDialog.tsx';
+import Button from '@mui/material/Button';
+import {styled} from '@mui/material';
 
 function SelectDriver() {
   const {t} = useTranslation();
+  const BlackButton = styled(Button)({
+    minWidth: 80,
+    backgroundColor: 'black',
+    '&:hover': {
+      backgroundColor: 'black',
+    },
+  });
+
   const heading = t('createLoadingOrder.title');
   const subHeading = t('createLoadingOrder.subtitle');
   const [driverArray, setDriverArray] = useState<Driver[]>([]);
@@ -35,9 +45,12 @@ function SelectDriver() {
   const [selectedDriver, setSelectedDriver] = useState<string>(
     localStorage.getItem('selected_driver') || '',
   );
+  const [isSignatureLoaded, setIsSignatureLoaded] = useState(false);
   const [alertText, setAlertText] = useState('');
   const [alertOpen, setAlertOpen] = useState(false);
   function handleAlertClose() {
+    localStorage.removeItem('selected_driver');
+    localStorage.removeItem('currentStep');
     setAlertOpen(false);
     navigate('/availablestock');
   }
@@ -196,37 +209,43 @@ function SelectDriver() {
                   handleDriverSelection: handleDriverSelection,
                   columns: columns,
                   getRowId: getRowId,
+                  isSignatureLoaded: isSignatureLoaded,
+                  setIsSignatureLoaded: setIsSignatureLoaded,
                 } satisfies DriverOutletContext
               }></Outlet>
             <br />
             <br />
             <div className="buttons-group">
-              <button
-                className="btn-item"
+              <BlackButton
+                size={'small'}
+                variant={'contained'}
                 onClick={() => {
                   currentStep > 1 ? decreaseSteps() : stepsComplete();
                 }}
                 disabled={currentStep === 1}>
                 {t('createLoadingOrder.back')}
-              </button>
+              </BlackButton>
 
-              <button
-                className="btn-item"
-                onClick={() => {
-                  if (currentStep === steps.length) {
+              {currentStep === steps.length ? (
+                <BlackButton
+                  size={'small'}
+                  variant={'contained'}
+                  disabled={!isSignatureLoaded}
+                  onClick={() => {
                     stepsComplete();
-                    assignInitialStock().then(() => {
-                      localStorage.removeItem('selected_driver');
-                      localStorage.removeItem('currentStep');
-                    });
-                  } else {
-                    increaseSteps();
-                  }
-                }}>
-                {currentStep === steps.length
-                  ? t('createLoadingOrder.finish')
-                  : t('createLoadingOrder.next')}
-              </button>
+                    assignInitialStock();
+                  }}>
+                  {t('createLoadingOrder.finish')}
+                </BlackButton>
+              ) : (
+                <BlackButton
+                  size={'small'}
+                  variant={'contained'}
+                  disabled={!localStorage.getItem('selected_driver')}
+                  onClick={increaseSteps}>
+                  {t('createLoadingOrder.next')}
+                </BlackButton>
+              )}
             </div>
           </Paper>
         </Stack>
