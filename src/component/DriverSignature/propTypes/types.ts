@@ -1,4 +1,6 @@
 //Interfaces for API response
+import {Dispatch, SetStateAction} from 'react';
+
 interface ApiSignature {
   signature_image: string;
   signature_id: number;
@@ -12,4 +14,9 @@ interface ApiSignature {
 export interface SignatureApiResponse {
   status_code: number;
   data: ApiSignature;
+}
+
+export interface DriverSignatureProps {
+  isSignatureLoaded: boolean;
+  setIsSignatureLoaded: Dispatch<SetStateAction<boolean>>;
 }

@@ -35,9 +35,12 @@ function SelectDriver() {
   const [selectedDriver, setSelectedDriver] = useState<string>(
     localStorage.getItem('selected_driver') || '',
   );
+  const [isSignatureLoaded, setIsSignatureLoaded] = useState(false);
   const [alertText, setAlertText] = useState('');
   const [alertOpen, setAlertOpen] = useState(false);
   function handleAlertClose() {
+    localStorage.removeItem('selected_driver');
+    localStorage.removeItem('currentStep');
     setAlertOpen(false);
     navigate('/availablestock');
   }
@@ -196,6 +199,8 @@ function SelectDriver() {
                   handleDriverSelection: handleDriverSelection,
                   columns: columns,
                   getRowId: getRowId,
+                  isSignatureLoaded: isSignatureLoaded,
+                  setIsSignatureLoaded: setIsSignatureLoaded,
                 } satisfies DriverOutletContext
               }></Outlet>
             <br />
@@ -214,11 +219,10 @@ function SelectDriver() {
                 className="btn-item"
                 onClick={() => {
                   if (currentStep === steps.length) {
-                    stepsComplete();
-                    assignInitialStock().then(() => {
-                      localStorage.removeItem('selected_driver');
-                      localStorage.removeItem('currentStep');
-                    });
+                    if (isSignatureLoaded) {
+                      stepsComplete();
+                      assignInitialStock();
+                    }
                   } else {
                     increaseSteps();
                   }

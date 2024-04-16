@@ -1,6 +1,7 @@
 // Generic driver interface
 import {DriverNameGridProps} from '../../../component/DriverNameGrid/propTypes/types.ts';
 import {OrderTableProps} from '../../../component/OrderTable/propTypes/types.ts';
+import {DriverSignatureProps} from '../../../component/DriverSignature/propTypes/types.ts';
 
 export interface Driver {
   driverName: string;
@@ -11,7 +12,8 @@ export interface Driver {
 // Interface for screen outlet context provider
 export interface DriverOutletContext
   extends DriverNameGridProps,
-    OrderTableProps {}
+    OrderTableProps,
+    DriverSignatureProps {}
 
 // Interface for driver api response
 interface ApiDriverData {

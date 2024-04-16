@@ -10,9 +10,12 @@ import {AxiosResponse} from 'axios';
 import {SignatureApiResponse} from './propTypes/types.ts';
 import {api} from '../../axios/api.ts';
 import {useTranslation} from 'react-i18next';
+import {useOutletContext} from 'react-router-dom';
+import {DriverOutletContext} from '../../screens/SelectDriver/propTypes/types.ts';
 
 function DriverSignature() {
-  const [isSignatureLoaded, setIsSignatureLoaded] = useState(false);
+  const {isSignatureLoaded, setIsSignatureLoaded} =
+    useOutletContext<DriverOutletContext>();
   const [showLoading, setShowLoading] = useState(false);
   const actions = ['Activate', 'Reject']; //More actions can be added to this array in future
   const [signatureURL, setSignatureURL] = useState('');
@@ -42,6 +45,8 @@ function DriverSignature() {
             break;
           }
           case 404: {
+            //waiting before making new calls
+            await new Promise(resolve => setTimeout(resolve, 2000));
             break;
           }
           default: {
