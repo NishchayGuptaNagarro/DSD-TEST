@@ -21,7 +21,7 @@ function Sidebar() {
   const [navData, setNavData] = useState<SideBarOption[]>([
     {
       id: 1,
-      Option: t('sidebar.dashboard'),
+      Option: 'sidebar.dashboard',
       subOptionLeft: '',
       subOptionRight: '',
       icon: DashBoard,
@@ -30,7 +30,7 @@ function Sidebar() {
     },
     {
       id: 2,
-      Option: t('sidebar.stock'),
+      Option: 'sidebar.stock',
       subOptionLeft: 'S',
       subOptionRight: 'My warehouse avalable stock',
       icon: Stocks,
@@ -39,7 +39,7 @@ function Sidebar() {
     },
     {
       id: 3,
-      Option: t('sidebar.orders'),
+      Option: 'sidebar.orders',
       subOptionLeft: 'M',
       subOptionRight: 'My warehouse assign orders',
       icon: Orders,
@@ -82,8 +82,6 @@ function Sidebar() {
 
   return (
     <>
-      {t('')}
-      {/*REMOVE THIS CALL IN FUTURE*/}
       <div className={!!showbar ? 'nav-menu-active' : 'nav-menu-closed'}>
         {!!showbar ? (
           <>
@@ -109,7 +107,9 @@ function Sidebar() {
                     </div>
                     <div className="options-right">
                       <div>
-                        <p className="options-text">{item.Option}</p>
+                        <p className="options-text cursor-pointer">
+                          {t(item.Option)}
+                        </p>
                       </div>
                       <div>
                         {!!item.isOpen ? (
@@ -179,14 +179,11 @@ function Sidebar() {
                 alt="alternate-image"
                 style={{height: '4vh'}}
               />
-              <p className="bottom-text">
-                <Button
-                  size="small"
-                  variant={'text'}
-                  sx={{color: 'white', textTransform: 'none'}}
-                  onClick={handleSignOut}>
-                  {t('sidebar.signout')}
-                </Button>
+              <p
+                className="bottom-text cursor-pointer"
+                role="button"
+                onClick={handleSignOut}>
+                {t('sidebar.signout')}
               </p>
             </div>
 
@@ -196,7 +193,9 @@ function Sidebar() {
                 alt="alternate-image"
                 style={{height: '4vh'}}
               />
-              <p className="bottom-text">{t('sidebar.settings')}</p>
+              <p className="bottom-text cursor-pointer">
+                {t('sidebar.settings')}
+              </p>
             </div>
           </div>
         ) : (
