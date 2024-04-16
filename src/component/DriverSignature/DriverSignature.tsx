@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {ClipLoader} from 'react-spinners';
 
 import DropDownButton from '../DropDownButton/DropDownButton.tsx';
@@ -59,7 +59,11 @@ function DriverSignature() {
       console.log(error);
     }
   }
-
+  useEffect(() => {
+    if (signatureURL == '') {
+      setIsSignatureLoaded(false);
+    }
+  });
   return (
     <>
       <form className={'driver-signature-form'}>
