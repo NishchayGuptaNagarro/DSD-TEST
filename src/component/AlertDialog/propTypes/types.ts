@@ -1,6 +1,7 @@
 // Props for alert dialog box
 export interface AlertDialogProps {
-  text: string;
+  messageText: string;
+  closeBtnText: string;
   open: boolean;
-  handleOkay: (open: boolean) => void;
+  handleDismiss: (open: boolean) => void;
 }

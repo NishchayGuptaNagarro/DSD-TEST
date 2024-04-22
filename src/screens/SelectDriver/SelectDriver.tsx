@@ -175,9 +175,10 @@ function SelectDriver() {
   return (
     <Grid container className={'select-driver-screen'}>
       <AlertDialog
-        text={alertText}
+        messageText={alertText}
         open={alertOpen}
-        handleOkay={handleAlertClose}
+        closeBtnText={'Okay'}
+        handleDismiss={handleAlertClose}
       />
       <Grid item xs={2} sx={{padding: 1}}>
         <Sidebar />

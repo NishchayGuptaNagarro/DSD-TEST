@@ -81,12 +81,13 @@ function DriverSignature() {
               {t('createLoadingOrder.button.label')}
             </Button>
           )}
-          {showLoading && (
-            <div className={'center'}>
-              <ClipLoader color="#344767" />
-            </div>
-          )}
-          {isSignatureLoaded && <img src={signatureURL} alt={'img'} />}
+          {showLoading ||
+            (true && (
+              <div className={'loading-spinner center'}>
+                <ClipLoader color="#344767" />
+              </div>
+            ))}
+          {isSignatureLoaded && false && <img src={signatureURL} alt={'img'} />}
         </span>
 
         <label className={'form-label label-2'}>

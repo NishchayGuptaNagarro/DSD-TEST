@@ -17,10 +17,10 @@ function ProductIcon({productName, productId, productImage}: ProductIconProps) {
         }}
       />
       <Stack>
-        <Typography className={'font-sm'} variant={'h5'} fontWeight={500}>
+        <Typography fontSize={14} variant={'h5'} fontWeight={500}>
           {productName}
         </Typography>
-        <Typography className={'font-sm'} variant={'h6'} fontWeight={400}>
+        <Typography fontSize={14} variant={'h6'} fontWeight={400}>
           {productId}
         </Typography>
       </Stack>

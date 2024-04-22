@@ -1,0 +1,113 @@
+//-primary -base -colors
+$amway-black: #2c2c2c;
+$amway-white: #ffffff;
+$dark-purple: #38539a;
+$light-purple: #f1f2ff;
+
+//Secondary Accent -colors
+$dark-blue: #396e75;
+$light-blue: #e5fdff;
+$dark-green: #546223;
+$light-green: #f0fae5;
+$dark-orange: #a65523;
+$light-orange: #fff1e8;
+$dark-red: #7f3e3e;
+$light-red: #ffe2e2;
+$dark-yellow: #62625a;
+$light-yellow: #f8f8e7;
+
+//Notification -colors
+$success-green: #107f47;
+$success-green-outline: #7fbc96;
+$success-green-background: #f0fae5;
+$alert-orange: #a66400;
+$alert-orange-outline: #d1b278;
+$alert-orange-background: #fff9f0;
+$error-red: #d91734;
+$error-red-outline: #eb8593;
+$error-red-background: #fdf4f4;
+$action-purple: #38539a;
+$action-purple-outline: #94a3cd;
+$action-purple-background: #f1f2ff;
+
+//IllUSTRATION -cO-lORS
+$illustration-contessa: #ca7f7f;
+$illustration-cavern-pink: #d69e9e;
+$illustration-cavern-light-pink: #e4bcba;
+$illustration-tan: #cfaa74;
+$illustration-peach-yellow: #fbd9a7;
+$illustration-linen: #f8e5d1;
+$illustration-husk: #b7aa6a;
+$illustration-pine-glade: #c8cd97;
+$illustration-beryl-green: #e7ead0;
+$illustration-gumbo: #6d8e95;
+$illustration-jungle-mist: #b6d1d6;
+$illustration-black-squeeze: #eaf6f7;
+$illustration-salt-box: #574f5f;
+$illustration-pale-sky: #7b7d80;
+$illustration-gray-suit: #c1c0cc;
+
+//DATA VI-sUA-lIZATION
+$data-viz-color-1: #c8f8d1;
+$data-viz-color-2: #87c9c8;
+$data-viz-color-3: #5291b1;
+$data-viz-color-3-backgorund: #5291b11a;
+$data-viz-color-4: #445685;
+$data-viz-color-5: #181d61;
+$data-viz-color-5-backgorund: #181d611a;
+$data-viz-color-10: #1e247f;
+$data-viz-color-10-backgorund: #1e247f1a;
+$data-viz-color-6: #5969d6;
+$data-viz-color-7: #ea999d;
+$data-viz-color-8: #b6577e;
+$data-viz-color-8-background: #b6577e1a;
+$data-viz-color-9: #7e3e80;
+$data-viz-alert-orange: #da7600;
+$data-viz-success-green: #107f47;
+$data-viz-warning-red: #d91734;
+
+// TODO: Move all gray colors together as per figma
+//Gray Colors
+$off-white-large-background: #fafafa;
+$light-gray-small-backgrounds: #f4f4f4;
+$light-gray-creators-background: #f0f0f0;
+$light-gray-rule-lines: #e4e4e4;
+$dark-gray-on-white: #707070;
+$dark-gray-on-29-gray: #5e5e5e;
+$disabled-gray-button-background: #d9d9d9;
+$effect-style-background: #c4c4c4;
+$mid-gray-on-black: #949494;
+$light-gray-rule-lines-2: #d6d6d6;
+
+//Social Media icon
+$social-instragram: #e14ec1;
+$social-instagram-bg: #e2358b;
+$social-facebook: #38539a;
+$social-facebook-bg: #3b5998;
+$social-line: #6fe065;
+$social-line-bg: #4cc764;
+$social-tiktok-bg: $amway-black;
+$social-whatsapp-bg: #65d358;
+$social-twitter-bg: #479be9;
+
+//hover color
+$hover-purple: #1b3067;
+$hover-dark-blue: #1c464b;
+$hover-dark-green: #323d0b;
+$hover-dark-orange: #6d320d;
+$hover-dark-red: #401313;
+$hover-dark-yellow: #303020;
+$hover-amway-black: #000000;
+$hover-success-green: #0d6639;
+$hover-alert-orange: #7e4c00;
+$hover-error-red: #a9142a;
+
+//Gradients
+$light-gray-gradient: linear-gradient(
+  90deg,
+  $light-gray-rule-lines 0.19%,
+  rgba(228, 228, 228, 0.83) 21.92%,
+  rgba(228, 228, 228, 0) 100.19%
+);
+
+$box-shadow-black: rgba(0, 0, 0, 0.26);

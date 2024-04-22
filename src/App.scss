@@ -1,24 +1,23 @@
 //IMPORTANT! Only these classes should be used for defining font size of each element so we can use media queries in future to add responsiveness
-
 .font-xl{
-    font-size: 1.563rem !important;
+    font-size: 1.563rem ; //25px
 }
 .font-lg{
-    font-size: 1.125rem !important;
+    font-size: 1.125rem ; //18px
 }
 .font-md{
-    font-size: 1rem !important;
+    font-size: 1rem ; //16px
 }
 .font-sm{
-    font-size: 0.875rem !important;
+    font-size: 0.875rem ; //14px
+}
+.font-xsm{
+    font-size: 0.75rem ; //12px
 }
 
-.font-xsm{
-    font-size: 0.75rem !important;
-}
 //Can be used to center anything
 .center {
-    position: absolute;
+    position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

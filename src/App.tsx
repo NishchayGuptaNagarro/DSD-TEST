@@ -53,8 +53,8 @@ function App() {
   });
   return (
     <>
-      {/*Make sure all components using material ui goes inside this*/}
       <TimeLineState>
+        {/*Make sure all components using material ui goes inside this*/}
         <ThemeProvider theme={theme}>
           <BrowserRouter>
             {/*this baseline provides grey background used in all screens */}

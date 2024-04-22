@@ -56,7 +56,7 @@ function Sidebar() {
 
   const openSubmenu = (id: number): void => {
     console.log('reaching here');
-    const result = navData.map((item: SideBarOption, index: number) => {
+    const result = navData.map((item: SideBarOption) => {
       if (item.id === id) {
         return {
           ...item,

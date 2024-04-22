@@ -1,0 +1,50 @@
+// display precomposed values
+$display-flex: flex;
+$display-grid: grid;
+$display-none: none;
+$display-grid: grid;
+$display-block: block;
+$display-inline: inline;
+$display-inline-block: inline-block;
+$display-inline-flex: inline-flex;
+$display-inline-grid: inline-grid;
+
+@mixin display-behaviour($display-value) {
+  display: $display-value;
+}
+
+@mixin flexbox-positional-style(
+  $flex: $display-flex,
+  $justify-content: center,
+  $align-items: center,
+  $align-content: unset,
+  $text-align: none
+) {
+  @include display-behaviour($flex);
+  justify-content: $justify-content;
+  align-items: $align-items;
+  @if align-content !=unset {
+    align-content: $align-content;
+  }
+  @if $text-align !=none {
+    text-align: $text-align;
+  }
+}
+
+.no-visible {
+  @include display-behaviour($display-none);
+}
+
+@mixin grid-template($grid-template-columns, $grid-template-rows, $row-gap, $column-gap) {
+  @include display-behaviour($display-grid);
+  grid-template-columns: $grid-template-columns;
+  grid-template-rows: $grid-template-rows;
+  grid-gap: $row-gap $column-gap;
+}
+
+@mixin grid-position($selector, $startRow, $endRow, $startCol, $endCol) {
+  #{$selector} {
+    grid-row: #{$startRow} / #{$endRow};
+    grid-column: #{$startCol} / #{$endCol};
+  }
+}
