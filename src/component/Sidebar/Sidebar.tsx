@@ -12,7 +12,6 @@ import {SideBarOption} from './propTypes/SidebarRoutes';
 
 import {MdOutlineKeyboardArrowUp} from 'react-icons/md';
 import {useNavigate} from 'react-router-dom';
-import Button from '@mui/material/Button';
 import {useTranslation} from 'react-i18next';
 
 function Sidebar() {
@@ -95,7 +94,7 @@ function Sidebar() {
 
             <nav className="option-navigate">
               {navData.map((item: SideBarOption, index: number) => (
-                <>
+                <div key={index}>
                   <div
                     className="options-container"
                     onClick={() => navigateTo(item.path)}>
@@ -141,7 +140,7 @@ function Sidebar() {
                       </div>
                     </div>
                   )}
-                </>
+                </div>
               ))}
             </nav>
           </>

@@ -1,8 +1,6 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import timelineContext from '../../context/timeline/timelineContext';
 import './Timeline.scss';
-import {Outlet, useNavigate} from 'react-router';
-
 interface TimeLineProp {
   stepsTimeline?: string[];
 }
@@ -35,7 +33,7 @@ const Timeline: React.FC<TimeLineProp> = () => {
               className={`step-item ${currentStep === i + 1 && 'active'} ${
                 (i + 1 < currentStep || complete) && 'complete'
               } `}>
-              {/* if currentStep is greater or equal to key+1 it means they are completed and we have to show them as dark blue// */}
+              {/* if currentStep is greater or equal to key+1 it means they are completed, and we have to show them as dark blue// */}
               <div className="step">
                 {i + 1 <= currentStep || complete ? (
                   <div className="steps-done"></div>

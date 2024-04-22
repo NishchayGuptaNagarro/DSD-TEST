@@ -57,7 +57,6 @@ const TimeLineState: React.FC<UserProvidedProps> = ({children}) => {
     const currentSteps = JSON.parse(localStorage.getItem('currentStep') || '1');
     if (currentSteps) {
       setCurrentStep(currentSteps);
-      console.log(currentStep);
     }
   };
 

@@ -1,6 +1,5 @@
 import {useContext} from 'react';
 import timelineContext from '../../context/timeline/timelineContext';
-import {useNavigate} from 'react-router';
 
 const SelectDriver = () => {
   const {currentStep, decreaseSteps, stepsComplete, steps, increaseSteps} =
