@@ -81,8 +81,8 @@ function Sidebar() {
 
   return (
     <>
-      <div className={!!showbar ? 'nav-menu-active' : 'nav-menu-closed'}>
-        {!!showbar ? (
+      <div className={showbar ? 'nav-menu-active' : 'nav-menu-closed'}>
+        {showbar ? (
           <>
             <div className="logo-open-container">
               <img
@@ -111,7 +111,7 @@ function Sidebar() {
                         </p>
                       </div>
                       <div>
-                        {!!item.isOpen ? (
+                        {item.isOpen ? (
                           <MdOutlineKeyboardArrowUp
                             className="arrow-nav"
                             onClick={() => openSubmenu(item.id)}
@@ -126,7 +126,7 @@ function Sidebar() {
                     </div>
                   </div>
 
-                  {!!item.isOpen && item.id !== 1 && (
+                  {item.isOpen && item.id !== 1 && (
                     <div className="dropdown-menu">
                       <div className="submenu-left">
                         <p className="submenu-left-text">
@@ -170,7 +170,7 @@ function Sidebar() {
           </>
         )}
 
-        {!!showbar ? (
+        {showbar ? (
           <div className="bottom-icons-open">
             <div className="bottom-icons-container">
               <img

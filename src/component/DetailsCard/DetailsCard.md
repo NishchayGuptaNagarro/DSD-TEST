@@ -1,8 +1,26 @@
-# DetailsCard Component:
+# Overview
 
-This component is a UI component that generates a card.
+A UI component that generates a card.
 
-# Required Props :
+### Inclusion
+
+```
+import DetailsCard from '/component/DetailsCard/DetailsCard.tsx';
+ 
+   <DetailsCard
+        heading={}
+        icon={}
+        mainInfo={}
+        secondaryInfo={}
+      />
+```
+
+### Use Case Description
+1. Can be used to display a card component in UI.
+
+### Component Designs
+
+#### Input Props
 
 1. heading: string -> Heading we want to give our card
 2. icon: string -> Path to icon we want in our card heading
