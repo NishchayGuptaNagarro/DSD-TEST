@@ -3,12 +3,6 @@ import {DriverNameGridProps} from '../../../component/DriverNameGrid/propTypes/t
 import {OrderTableProps} from '../../../component/OrderTable/propTypes/types.ts';
 import {DriverSignatureProps} from '../../../component/DriverSignature/propTypes/types.ts';
 
-export interface Driver {
-  driverName: string;
-  driverId: string;
-  driverType: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID';
-}
-
 // Interface for screen outlet context provider
 export interface DriverOutletContext
   extends DriverNameGridProps,
@@ -36,7 +30,6 @@ export interface DriverApiResponse {
 }
 
 //Interfaces for product API response
-
 interface ApiProductData {
   product_id: string;
   product_name: string;

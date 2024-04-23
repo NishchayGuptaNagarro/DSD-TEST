@@ -1,5 +1,5 @@
-import {Driver} from '../../../screens/SelectDriver/propTypes/types.ts';
 import {ChangeEvent, MouseEvent} from 'react';
+import {Driver} from '../../../models/driver.ts';
 
 // Prop types of DriverNameGrid component
 export interface DriverNameGridProps {

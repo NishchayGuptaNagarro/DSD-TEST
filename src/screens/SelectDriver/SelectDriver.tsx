@@ -15,11 +15,7 @@ import Timeline from '../../component/Timeline/Timeline.tsx';
 import LanguageSelect from '../../component/LanguageSelect/LanguageSelect.tsx';
 import timelineContext from '../../context/timeline/timelineContext.ts';
 import {api} from '../../axios/api.ts';
-import {
-  Driver,
-  DriverApiResponse,
-  DriverOutletContext,
-} from './propTypes/types.ts';
+import {DriverApiResponse, DriverOutletContext} from './propTypes/types.ts';
 import {Row} from '../../component/Table/propTypes/types.ts';
 
 import './SelectDriver.scss';
@@ -27,6 +23,7 @@ import {useTranslation} from 'react-i18next';
 import AlertDialog from '../../component/AlertDialog/AlertDialog.tsx';
 import Button from '@mui/material/Button';
 import {styled} from '@mui/material';
+import {Driver} from '../../models/driver.ts';
 
 function SelectDriver() {
   const {t} = useTranslation();

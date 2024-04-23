@@ -182,7 +182,7 @@ function Sidebar() {
                 className="bottom-text cursor-pointer"
                 role="button"
                 onClick={handleSignOut}>
-                {t('sidebar.ignout')}
+                {t('sidebar.signout')}
               </p>
             </div>
 
