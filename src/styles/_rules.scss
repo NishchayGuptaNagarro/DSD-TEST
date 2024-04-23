@@ -1,0 +1,27 @@
+.language-select-btn{
+  position: absolute;
+  right:10px ;
+  top:2px;
+}
+
+//IMPORTANT! Only these classes should be used for defining font size of each element so we can use media queries in future to add responsiveness
+.font-xl{
+  font-size: $font-xl;
+}
+.font-lg{
+  font-size: $font-lg; //18px
+}
+.font-md{
+  font-size: $font-md; //16px
+}
+.font-sm{
+  font-size: $font-sm ; //14px
+}
+.font-xsm{
+  font-size: $font-xsm ; //12px
+}
+
+//Can be used to center anything
+.center-element {
+  @include center-element;
+}
