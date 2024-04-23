@@ -18,6 +18,6 @@ import /component/DriverNameGrid/DriverNameGrid.tsx;
 
 #### Input Props
 
-1. driverArray: Array of Driver[] objects which will we used to render each driver card.
-2. selectedDriverId: State containing id of selected driver , required to control radio buttons.
-3. handleDriverSelection: function that will be called when a driver is selected.
+1. driverArray:Driver[] -> Array of Driver[] objects which will we used to render each driver card.
+2. selectedDriverId: string -> State containing id of selected driver , required to control radio buttons.
+3. handleDriverSelection:((event: ChangeEvent<HTMLInputElement>) => void)| (() => void) -> function that will be called when a driver is selected.

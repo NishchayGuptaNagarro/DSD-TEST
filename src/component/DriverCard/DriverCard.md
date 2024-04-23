@@ -24,6 +24,6 @@ import DriverCard from '/component/DriverCard/DriverCard.tsx';
 
 #### Input Props
 
-1. driver: An object containing properties driverName and driverId, this is required for displaying in card and also to provide a value to radio button.
-2. selectedDriverId: Id of the selected driver, this is required to display selected driver css conditionally.
+1. driver:Driver -> An object containing properties driverName and driverId, this is required for displaying in card and also to provide a value to radio button.
+2. selectedDriverId:string -> Id of the selected driver, this is required to display selected driver css conditionally.
 

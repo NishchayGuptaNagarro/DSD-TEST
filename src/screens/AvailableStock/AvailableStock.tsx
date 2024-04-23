@@ -18,9 +18,9 @@ import {Row} from '../../component/Table/propTypes/types.ts';
 import {api} from '../../axios/api.ts';
 import './AvailableStock.scss';
 
-import dateIcon from '../../assets/Date.svg';
-import managerIcon from '../../assets/Manager.svg';
-import warehouseIcon from '../../assets/Warehouse.svg';
+import dateIcon from '../../assets/SVG/Date.svg';
+import managerIcon from '../../assets/SVG/Manager.svg';
+import warehouseIcon from '../../assets/SVG/Warehouse.svg';
 import productJSON from '../../axios/products 1.json';
 import {useTranslation} from 'react-i18next';
 

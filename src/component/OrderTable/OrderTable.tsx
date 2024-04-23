@@ -1,6 +1,6 @@
 import {useOutletContext} from 'react-router-dom';
 
-import Table from '../Table/Table';
+import Table from '../Table/Table.tsx';
 import {
   DriverOutletContext,
   ProductApiResponse,

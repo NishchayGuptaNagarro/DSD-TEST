@@ -1,13 +1,13 @@
 import {useState} from 'react';
 import './Sidebar.scss';
-import closed from '../../assets/Sample logox2_Closed.png';
-import openImg from '../../assets/Sample logox2_Open.png';
+import closed from '../../assets/PNG/Sample logox2_Closed.png';
+import openImg from '../../assets/PNG/Sample logox2_Open.png';
 import {MdOutlineKeyboardArrowDown} from 'react-icons/md';
-import DashBoard from '../../assets/2x/Dashboard.png';
-import Stocks from '../../assets/2x/Stocks.png';
-import Orders from '../../assets/2x/Orders.png';
-import Signout from '../../assets/2x/Sign Out.png';
-import Settings from '../../assets/2x/Settings.png';
+import DashBoard from '../../assets/PNG/Dashboard.png';
+import Stocks from '../../assets/PNG/Stocks.png';
+import Orders from '../../assets/PNG/Orders.png';
+import Signout from '../../assets/PNG/Sign Out.png';
+import Settings from '../../assets/PNG/Settings.png';
 import {SideBarOption} from './propTypes/SidebarRoutes';
 
 import {MdOutlineKeyboardArrowUp} from 'react-icons/md';
@@ -182,7 +182,7 @@ function Sidebar() {
                 className="bottom-text cursor-pointer"
                 role="button"
                 onClick={handleSignOut}>
-                {t('sidebar.signout')}
+                {t('sidebar.ignout')}
               </p>
             </div>
 

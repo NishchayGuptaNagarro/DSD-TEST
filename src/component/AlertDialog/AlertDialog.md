@@ -24,8 +24,8 @@ import AlertDialog from '/component/AlertDialog/AlertDialog.tsx';
 
 #### Input Props
 
-1. messageText: Text to be display.
-2. open: state representing dialog is open or close,
-3. handleDismiss: function to be called when we click on okay here we can close the dialog and write other logic.
-4. closeBtnText: string written on dialog dismiss button.
+1. messageText:string -> Text to be display.
+2. open:boolean -> state representing dialog is open or close,
+3. handleDismiss:(open: boolean) => void -> function to be called when we click on okay here we can close the dialog and write other logic.
+4. closeBtnText:string -> string written on dialog dismiss button.
 

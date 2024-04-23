@@ -16,6 +16,6 @@ import DropDownButton from '/components/DropDownButton/DropDownButton.tsx';
 
 #### Input Props
 
-1. options: String array of different options that we display.
-2. handleClick: function to be called when an option is clicked, we will get selected index argument in this, which we can use to map our action to particular option.
+1. options:string[]-> String array of different options that we display.
+2. handleClick:(selectedIndex: number) => void -> function to be called when an option is clicked, we will get selected index argument in this, which we can use to map our action to particular option.
 

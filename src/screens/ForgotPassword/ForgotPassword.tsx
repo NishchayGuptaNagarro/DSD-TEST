@@ -13,9 +13,10 @@ import {useEffect, useState} from 'react';
 import LanguageSelect from '../../component/LanguageSelect/LanguageSelect.tsx';
 import {api} from '../../axios/api.ts';
 import './ForgotPassword.scss';
-import logo from '../../assets/Logo.svg';
+import logo from '../../assets/SVG/Logo.svg';
+import banner from '../../assets/WEBP/ForgotPassword-Banner.webp';
 import {useTranslation} from 'react-i18next';
-import {isTokenValid} from '../../functions/isTokenValid.ts';
+import {isTokenValid} from '../../utilities/isTokenValid.ts';
 
 function ForgotPassword() {
   const [apiResponse, setApiResponse] = useState('');
@@ -73,7 +74,7 @@ function ForgotPassword() {
             <Stack direction="row" alignItems="center" spacing={2}>
               <img src={logo} width={'40px'} height={'40px'} alt={logo} />
               <Typography
-                className={'font-xl'}
+                fontSize={25}
                 component={'h1'}
                 color={'rgb(52,52,57)'}
                 fontWeight={700}>
@@ -82,14 +83,14 @@ function ForgotPassword() {
             </Stack>
             <Box paddingTop={{xl: 4}}>
               <Typography
-                className={'font-xl'}
+                fontSize={25}
                 component={'h2'}
                 color={'rgb(43,56,84)'}
                 fontWeight={700}>
                 {t('forgotPassword.title')}
               </Typography>
               <Typography
-                className={'font-lg'}
+                fontSize={18}
                 component={'h3'}
                 color={'rgb(146,155,173)'}
                 fontWeight={400}>
@@ -116,16 +117,13 @@ function ForgotPassword() {
               />
               {/*Error message -> To be displayed in case inputs are touched and there is error*/}
               {emailError && (
-                <Typography
-                  color={'error'}
-                  marginTop={-2}
-                  className={'font-xsm'}>
+                <Typography color={'error'} marginTop={-2} fontSize={12}>
                   {formik.errors.email}
                 </Typography>
               )}
               {apiResponse !== '' && (
                 <Typography
-                  className={'font-xsm'}
+                  fontSize={12}
                   color={'rgb(43,56,84)'}
                   fontWeight={600}>
                   {apiResponse}
@@ -133,14 +131,13 @@ function ForgotPassword() {
               )}
 
               <Button
-                className={'font-md'}
                 type={'submit'}
                 variant="contained"
                 sx={{mt: 2, py: 1}}
                 disableElevation>
                 {t('forgotPassword.button.label')}
               </Button>
-              <Link className={'form-label font-md form-link'} to={'/'}>
+              <Link className={'form-label form-link'} to={'/'}>
                 <ArrowBackIcon fontSize={'small'} sx={{marginRight: 2}} />
                 {t('forgotPassword.link.label')}
               </Link>
@@ -158,7 +155,7 @@ function ForgotPassword() {
             <span className={'login-language-select'}>
               <LanguageSelect />
             </span>
-            <img className={'truck-image'} src="/truck-2.jpg" alt={'truck'} />
+            <img className={'truck-image'} src={banner} alt={'truck'} />
             <div className={'transparent-textbox'}>
               &#34;{t('forgotPassword.quote')}&#34;
               <br />

@@ -11,9 +11,9 @@ import {
 import DriverCard from '../DriverCard/DriverCard.tsx';
 import './DriverNameGrid.scss';
 
-import vanSellerIcon from '../../assets/VanSeller.svg';
-import deliveryIcon from '../../assets/Delivery.svg';
-import hybridIcon from '../../assets/Hybrid.svg';
+import vanSellerIcon from '../../assets/SVG/VanSeller.svg';
+import deliveryIcon from '../../assets/SVG/Delivery.svg';
+import hybridIcon from '../../assets/SVG/Hybrid.svg';
 
 import {useState, MouseEvent, ChangeEvent, useRef, useEffect} from 'react';
 import {useOutletContext} from 'react-router-dom';

@@ -15,9 +15,10 @@ import LanguageSelect from '../../component/LanguageSelect/LanguageSelect.tsx';
 import {api} from '../../axios/api';
 import {LoginApiResponse} from './propTypes/types.ts';
 import './Login.scss';
-import logo from '../../assets/Logo.svg';
+import banner from '../../assets/WEBP/Login-Page-Banner.webp';
+import logo from '../../assets/SVG/Logo.svg';
 import {useTranslation} from 'react-i18next';
-import {isTokenValid} from '../../functions/isTokenValid.ts';
+import {isTokenValid} from '../../utilities/isTokenValid.ts';
 
 function Login() {
   const [apiError, setApiError] = useState('');
@@ -99,7 +100,7 @@ function Login() {
                 spacing={2}>
                 <img src={logo} width={'40px'} height={'40px'} alt={logo} />
                 <Typography
-                  className={'font-xl'}
+                  fontSize={25}
                   component={'h1'}
                   color={'rgb(52,52,57)'}
                   fontWeight={700}>
@@ -108,14 +109,14 @@ function Login() {
               </Stack>
               <Box textAlign={'center'} paddingTop={{xl: 8}}>
                 <Typography
-                  className={'font-xl'}
+                  fontSize={25}
                   component={'h2'}
                   color={'rgb(43,56,84)'}
                   fontWeight={700}>
                   {t('login.title')}
                 </Typography>
                 <Typography
-                  className={'font-lg'}
+                  fontSize={18}
                   component={'h3'}
                   color={'rgb(146,155,173)'}
                   fontWeight={400}>
@@ -140,10 +141,7 @@ function Login() {
                 />
                 {/*Error message -> To be displayed in case inputs are touched and there is error*/}
                 {userIdError && (
-                  <Typography
-                    color={'error'}
-                    marginTop={-2}
-                    className={'font-xsm'}>
+                  <Typography color={'error'} marginTop={-2} fontSize={12}>
                     {formik.errors.userId}
                   </Typography>
                 )}
@@ -163,18 +161,12 @@ function Login() {
                   onBlur={formik.handleBlur}
                 />
                 {passwordError && (
-                  <Typography
-                    marginTop={-2}
-                    color={'error'}
-                    className={'font-xsm'}>
+                  <Typography marginTop={-2} color={'error'} fontSize={12}>
                     {formik.errors.password}
                   </Typography>
                 )}
                 {apiError !== '' && (
-                  <Typography
-                    color={'error'}
-                    marginTop={-2}
-                    className={'font-xsm'}>
+                  <Typography color={'error'} marginTop={-2} fontSize={12}>
                     {apiError}
                   </Typography>
                 )}
@@ -223,7 +215,7 @@ function Login() {
               <span className={'login-language-select'}>
                 <LanguageSelect />
               </span>
-              <img className={'truck-image'} src="/truck.jpg" alt={'truck'} />
+              <img className={'truck-image'} src={banner} alt={'truck'} />
               <div className={'transparent-textbox'}>
                 &#34;{t('login.quote')}&#34;
                 <br />
