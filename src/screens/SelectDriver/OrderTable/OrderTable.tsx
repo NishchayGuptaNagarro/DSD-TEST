@@ -1,14 +1,11 @@
 import {useOutletContext} from 'react-router-dom';
 
-import Table from '../Table/Table.tsx';
-import {
-  DriverOutletContext,
-  ProductApiResponse,
-} from '../../screens/SelectDriver/propTypes/types.ts';
+import Table from '../../../component/Table/Table.tsx';
+import {DriverOutletContext, ProductApiResponse} from '../propTypes/types.ts';
 import {useEffect, useState} from 'react';
-import {Row} from '../Table/propTypes/types.ts';
+import {Row} from '../../../component/Table/propTypes/types.ts';
 import {AxiosResponse} from 'axios';
-import {api} from '../../axios/api.ts';
+import {api} from '../../../axios/api.ts';
 
 const OrderTable = () => {
   const {columns, getRowId} = useOutletContext<DriverOutletContext>();

@@ -20,16 +20,18 @@ const AvailableStock = lazy(
 const ForgotPassword = lazy(
   () => import('./screens/ForgotPassword/ForgotPassword.tsx'),
 );
-const DriverName = lazy(
-  () => import('./component/DriverNameGrid/DriverNameGrid.tsx'),
+const DriverNameGrid = lazy(
+  () => import('./screens/SelectDriver/DriverNameGrid/DriverNameGrid.tsx'),
 );
 const SelectDriverScreen = lazy(
   () => import('./screens/SelectDriver/SelectDriver.tsx'),
 );
-const DriverSignature = lazy(
-  () => import('./component/DriverSignature/DriverSignature.tsx'),
+const DriverSignatureForm = lazy(
+  () => import('./screens/SelectDriver/DriverSignature/DriverSignature.tsx'),
 );
-const OrderTable = lazy(() => import('./component/OrderTable/OrderTable.tsx'));
+const OrderTable = lazy(
+  () => import('./screens/SelectDriver/OrderTable/OrderTable.tsx'),
+);
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -92,7 +94,7 @@ function App() {
                   path="driver"
                   element={
                     <Suspense fallback={<Loading />}>
-                      <DriverName />
+                      <DriverNameGrid />
                     </Suspense>
                   }
                 />
@@ -109,7 +111,7 @@ function App() {
                   path="signature"
                   element={
                     <Suspense fallback={<Loading />}>
-                      <DriverSignature />
+                      <DriverSignatureForm />
                     </Suspense>
                   }></Route>
               </Route>

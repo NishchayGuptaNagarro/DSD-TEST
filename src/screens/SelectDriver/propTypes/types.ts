@@ -1,7 +1,7 @@
 // Generic driver interface
-import {DriverNameGridProps} from '../../../component/DriverNameGrid/propTypes/types.ts';
-import {OrderTableProps} from '../../../component/OrderTable/propTypes/types.ts';
-import {DriverSignatureProps} from '../../../component/DriverSignature/propTypes/types.ts';
+import {DriverNameGridProps} from '../DriverNameGrid/propTypes/types.ts';
+import {OrderTableProps} from '../OrderTable/propTypes/types.ts';
+import {DriverSignatureProps} from '../DriverSignature/propTypes/types.ts';
 
 // Interface for screen outlet context provider
 export interface DriverOutletContext
