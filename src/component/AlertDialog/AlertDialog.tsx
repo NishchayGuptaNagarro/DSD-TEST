@@ -4,6 +4,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import {AlertDialogProps} from './propTypes/types.ts';
+import styles from '../../styles/design-systems.module.scss';
+
 function AlertDialog({
   messageText,
   open,
@@ -19,7 +21,11 @@ function AlertDialog({
       <Dialog open={open}>
         <DialogContent dividers={true} sx={{minWidth: 250}}>
           <DialogContentText
-            sx={{fontWeight: 500, textAlign: 'center', color: 'black'}}>
+            sx={{
+              fontWeight: styles.fontWeightNormal,
+              textAlign: 'center',
+              color: styles.black,
+            }}>
             {messageText}
           </DialogContentText>
         </DialogContent>

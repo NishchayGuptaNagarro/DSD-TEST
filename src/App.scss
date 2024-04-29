@@ -1,21 +1,5 @@
+@import "styles/design-systems.module";
 
-
-//IMPORTANT! Only these classes should be used for defining font size of each element so we can use media queries in future to add responsiveness
-.font-xl{
-    font-size: 1.563rem ; //25px
-}
-.font-lg{
-    font-size: 1.125rem ; //18px
-}
-.font-md{
-    font-size: 1rem ; //16px
-}
-.font-sm{
-    font-size: 0.875rem ; //14px
-}
-.font-xsm{
-    font-size: 0.75rem ; //12px
-}
 
 //Can be used to center anything
 .center {

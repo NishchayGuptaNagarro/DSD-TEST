@@ -1,5 +1,6 @@
 import {HashLoader} from 'react-spinners';
 import './Loading.scss';
+
 function Loading() {
   return (
     <>

@@ -23,9 +23,7 @@ import managerIcon from '../../assets/SVG/Manager.svg';
 import warehouseIcon from '../../assets/SVG/Warehouse.svg';
 import productJSON from '../../axios/products 1.json';
 import {useTranslation} from 'react-i18next';
-
-// This column definiton should not be redefined at every render so moved it outside
-// columns definition array passed to table component
+import styles from '../../styles/design-systems.module.scss';
 
 function AvailableStock() {
   const {t} = useTranslation();
@@ -123,7 +121,11 @@ function AvailableStock() {
       <Grid item xs={2} padding={1}>
         <Sidebar />
       </Grid>
-      <Grid item xs={10} sx={{height: '100vh', overflowY: 'scroll'}}>
+      <Grid
+        className={'avl-stock-screen'}
+        item
+        xs={10}
+        sx={{height: '100vh', overflowY: 'scroll'}}>
         <Stack>
           <Box padding={2} paddingBottom={0} position={'relative'}>
             <span className={'avl-language-select'}>
@@ -136,7 +138,12 @@ function AvailableStock() {
             <CardStack />
           </Box>
           <Box padding={2}>
-            <Table rows={rows} columns={columns} getRowId={getRowId} />
+            <Table
+              showLoading={false}
+              rows={rows}
+              columns={columns}
+              getRowId={getRowId}
+            />
           </Box>
         </Stack>
       </Grid>

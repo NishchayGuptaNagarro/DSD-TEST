@@ -23,7 +23,7 @@ const Timeline: React.FC<TimeLineProp> = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="container-timeline-outer">
         <div className="container-timeline">
           {steps?.map((step, i) => (
             //when the value of currentStep is equal to key+1 which is i+1 then it is our active div

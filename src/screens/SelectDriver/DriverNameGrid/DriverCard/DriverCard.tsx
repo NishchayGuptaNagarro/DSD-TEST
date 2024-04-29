@@ -29,7 +29,7 @@ function DriverCard({driver, selectedDriverId}: DriverCardProps) {
           {driver.driverName.charAt(0)}
         </Avatar>
         <Box sx={{color: 'rgba(52, 71, 103, 1)'}}>
-          <Typography fontSize={14} fontWeight={500}>
+          <Typography fontSize={12} fontWeight={500}>
             {driver.driverName}
           </Typography>
           <Typography fontSize={12} fontWeight={400}>

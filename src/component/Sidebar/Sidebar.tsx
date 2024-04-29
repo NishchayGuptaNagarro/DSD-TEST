@@ -176,7 +176,7 @@ function Sidebar() {
               <img
                 src={Signout}
                 alt="alternate-image"
-                style={{height: '4vh'}}
+                style={{height: '25px'}}
               />
               <p
                 className="bottom-text cursor-pointer"
@@ -190,7 +190,7 @@ function Sidebar() {
               <img
                 src={Settings}
                 alt="alternate-image"
-                style={{height: '4vh'}}
+                style={{height: '25px'}}
               />
               <p className="bottom-text cursor-pointer">
                 {t('sidebar.settings')}

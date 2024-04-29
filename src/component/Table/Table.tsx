@@ -1,15 +1,29 @@
-import {DataGrid, gridClasses, GridLoadingOverlay} from '@mui/x-data-grid';
+import {
+  DataGrid,
+  gridClasses,
+  GridLoadingOverlay,
+  GridNoRowsOverlay,
+} from '@mui/x-data-grid';
 
 import {TableProps} from './propTypes/types.ts';
 import './Table.scss';
+import styles from '../../styles/design-systems.module.scss';
 
-export default function Table({rows, columns, getRowId}: TableProps) {
+export default function Table({
+  rows,
+  columns,
+  getRowId,
+  showLoading,
+}: TableProps) {
   return (
     <DataGrid
-      loading={rows.length === 0}
+      loading={showLoading}
       slots={{
         loadingOverlay: () => {
           return <GridLoadingOverlay sx={{backgroundColor: 'inherit'}} />;
+        },
+        noRowsOverlay: () => {
+          return <GridNoRowsOverlay sx={{backgroundColor: 'inherit'}} />;
         },
       }}
       rows={rows}
@@ -31,8 +45,8 @@ export default function Table({rows, columns, getRowId}: TableProps) {
       disableRowSelectionOnClick
       sx={{
         minHeight: 270,
-        color: '#344767',
-        backgroundColor: '#FFFFFF',
+        color: styles.blueSteel,
+        backgroundColor: styles.whitePure,
         borderRadius: 3,
         '& .MuiDataGrid-row:last-child': {
           borderBottom: '1px solid lightgray',
@@ -48,8 +62,8 @@ export default function Table({rows, columns, getRowId}: TableProps) {
           },
         [`& .${gridClasses.columnHeader}`]: {
           paddingLeft: 3,
-          fontWeight: 700,
-          color: '#C1C2CD',
+          fontWeight: styles.fontWeightBold,
+          color: styles.greyDarker,
         },
         ['.MuiDataGrid-footerContainer']: {
           p: 0,

@@ -2,14 +2,16 @@ import {useOutletContext} from 'react-router-dom';
 
 import Table from '../../../component/Table/Table.tsx';
 import {DriverOutletContext, ProductApiResponse} from '../propTypes/types.ts';
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {Row} from '../../../component/Table/propTypes/types.ts';
 import {AxiosResponse} from 'axios';
 import {api} from '../../../axios/api.ts';
+import {checkApiError} from '../../../utilities/checkApiError.ts';
 
 const OrderTable = () => {
-  const {columns, getRowId} = useOutletContext<DriverOutletContext>();
-  const [rows, setRows] = useState<Row[]>([]);
+  const {columns, getRowId, isTableLoaded, handleTableLoaded, setRows, rows} =
+    useOutletContext<DriverOutletContext>();
+
   async function fetchRows() {
     let response: AxiosResponse<ProductApiResponse>;
     let products: Row[];
@@ -17,7 +19,8 @@ const OrderTable = () => {
       response = await api.get(
         `/warehouse/vanseller-dashboard-for-warehouse?user_id=${localStorage.getItem('selected_driver')}`,
       );
-
+      console.log(response);
+      checkApiError(response);
       products = response.data.data.map(product => {
         const parsedRes: Row = {
           productId: Number(product.product_id),
@@ -30,17 +33,29 @@ const OrderTable = () => {
         return parsedRes;
       });
       setRows(products);
-      console.log(response);
+      handleTableLoaded(true);
     } catch (error) {
       console.log(error);
+      setRows([]);
+      handleTableLoaded(true);
     }
   }
   useEffect(() => {
     fetchRows();
+    return () => {
+      setRows([]);
+      handleTableLoaded(false);
+    };
   }, []);
+
   return (
     <>
-      <Table rows={rows} columns={columns} getRowId={getRowId} />
+      <Table
+        showLoading={!isTableLoaded}
+        rows={rows}
+        columns={columns}
+        getRowId={getRowId}
+      />
     </>
   );
 };

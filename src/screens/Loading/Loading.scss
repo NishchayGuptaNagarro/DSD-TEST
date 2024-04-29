@@ -1,6 +1,6 @@
+@import "src/styles/design-systems.module";
+
 .loading-container{
+  @include center-element;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }

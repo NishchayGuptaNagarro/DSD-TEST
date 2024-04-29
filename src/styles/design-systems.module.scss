@@ -23,6 +23,7 @@
     bgColorBlackTranslucent: $bg-black-translucent;
     bgColorSkyBlue: $bg-sky-blue;
     bgColorBlueVivid: $bg-blue-vivid;
+    bgCerulean:$bg-cerulean;
 
     // Border Colors
     borderGreyLight: $border-grey-light;
@@ -36,17 +37,17 @@
     gradientBlue: $gradient-blue;
 
     // Font Sizes
-    fontSizeXl: $font-xl;
-    fontSizeLg: $font-lg;
-    fontSizeMd: $font-md;
-    fontSizeSm: $font-sm;
-    fontSizeXsm: $font-xsm;
+    fontSizeXl: $font-xl; //25px
+    fontSizeLg: $font-lg; //18px
+    fontSizeMd: $font-md; //16px
+    fontSizeSm: $font-sm; //14px
+    fontSizeXsm: $font-xsm; //12px
 
     // Font Weights
-    fontWeightBoldest: $font-boldest;
-    fontWeightBold: $font-bold;
-    fontWeightBolder: $font-bolder;
-    fontWeightNormal: $font-normal;
-    fontWeightLight: $font-light;
-    fontWeightLighter: $font-lighter;
+    fontWeightBoldest: $font-boldest; //800
+    fontWeightBold: $font-bold; //700
+    fontWeightBolder: $font-bolder; //600
+    fontWeightNormal: $font-normal; //500
+    fontWeightLight: $font-light; //400
+    fontWeightLighter: $font-lighter; //300
 }

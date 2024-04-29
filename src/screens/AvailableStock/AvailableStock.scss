@@ -1,12 +1,14 @@
-.productText {
-  font-weight: 500;
-}
-.quantity {
-  font-weight: 700;
-  color: rgba(98, 183, 102, 1);
-}
-.avl-language-select{
-  position: absolute;
-  right:10px ;
-  top:2px;
+@import "src/styles/design-systems.module";
+
+.avl-stock-screen{
+  .productText {
+    font-weight: $font-normal;
+  }
+  .quantity {
+    font-weight: $font-bold;
+    color: $green-mint;
+  }
+  .avl-language-select{
+    @extend .language-selection-dropdown;
+  }
 }

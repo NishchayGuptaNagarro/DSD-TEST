@@ -24,6 +24,7 @@ import AlertDialog from '../../component/AlertDialog/AlertDialog.tsx';
 import Button from '@mui/material/Button';
 import {styled} from '@mui/material';
 import {Driver} from '../../models/driver.ts';
+import {checkApiError} from '../../utilities/checkApiError.ts';
 
 function SelectDriver() {
   const {t} = useTranslation();
@@ -38,13 +39,18 @@ function SelectDriver() {
   const heading = t('createLoadingOrder.title');
   const subHeading = t('createLoadingOrder.subtitle');
   const [driverArray, setDriverArray] = useState<Driver[]>([]);
-
+  const [rows, setRows] = useState<Row[]>([]);
   const [selectedDriver, setSelectedDriver] = useState<string>(
     localStorage.getItem('selected_driver') || '',
   );
+
+  const [isDriverGridLoading, setIsDriverGridLoading] = useState(true);
+  const [isTableLoaded, setIsTableLoaded] = useState(false);
   const [isSignatureLoaded, setIsSignatureLoaded] = useState(false);
   const [alertText, setAlertText] = useState('');
   const [alertOpen, setAlertOpen] = useState(false);
+  const [nextDisabled, setNextDisabled] = useState(true);
+
   function handleAlertClose() {
     localStorage.removeItem('selected_driver');
     localStorage.removeItem('currentStep');
@@ -69,7 +75,7 @@ function SelectDriver() {
     try {
       response = await api.get('/warehouse/drivers');
       console.log(response);
-
+      checkApiError(response);
       driverData = response.data.data.map(driver => {
         const parsedRes: Driver = {
           driverName: driver.username,
@@ -79,8 +85,10 @@ function SelectDriver() {
         return parsedRes;
       });
       setDriverArray(driverData);
+      setIsDriverGridLoading(false);
     } catch (error) {
       console.log(error);
+      setIsDriverGridLoading(false);
     }
   }
 
@@ -93,11 +101,16 @@ function SelectDriver() {
         },
       );
       console.log(response);
+      checkApiError(response);
       setAlertText(response.data.msg);
       setAlertOpen(true);
     } catch (error) {
       console.log(error);
     }
+  }
+
+  function handleTableLoaded(value: boolean) {
+    setIsTableLoaded(value);
   }
 
   function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
@@ -111,6 +124,24 @@ function SelectDriver() {
       throw new Error('row id should be number');
     }
   }
+
+  function buttonDisabled() {
+    if (isTableLoaded) {
+      setNextDisabled(rows.length === 0);
+    } else if (!localStorage.getItem('selected_driver')) {
+      setNextDisabled(true);
+    } else {
+      setNextDisabled(false);
+    }
+  }
+
+  useEffect(() => {
+    buttonDisabled();
+
+    return () => {
+      setNextDisabled(true);
+    };
+  });
 
   // API CALLS
   useEffect(() => {
@@ -202,13 +233,18 @@ function SelectDriver() {
             <Outlet
               context={
                 {
-                  driverArray: driverArray,
+                  driverArray,
                   selectedDriverId: selectedDriver,
-                  handleDriverSelection: handleDriverSelection,
-                  columns: columns,
-                  getRowId: getRowId,
-                  isSignatureLoaded: isSignatureLoaded,
-                  setIsSignatureLoaded: setIsSignatureLoaded,
+                  handleDriverSelection,
+                  columns,
+                  getRowId,
+                  isSignatureLoaded,
+                  setIsSignatureLoaded,
+                  isDriverGridLoading,
+                  isTableLoaded,
+                  handleTableLoaded,
+                  rows,
+                  setRows,
                 } satisfies DriverOutletContext
               }></Outlet>
             <br />
@@ -239,7 +275,7 @@ function SelectDriver() {
                 <BlackButton
                   size={'small'}
                   variant={'contained'}
-                  disabled={!localStorage.getItem('selected_driver')}
+                  disabled={nextDisabled}
                   onClick={increaseSteps}>
                   {t('createLoadingOrder.next')}
                 </BlackButton>

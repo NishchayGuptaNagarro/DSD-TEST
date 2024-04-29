@@ -17,6 +17,8 @@ import logo from '../../assets/SVG/Logo.svg';
 import banner from '../../assets/WEBP/ForgotPassword-Banner.webp';
 import {useTranslation} from 'react-i18next';
 import {isTokenValid} from '../../utilities/isTokenValid.ts';
+import {checkApiError} from '../../utilities/checkApiError.ts';
+import styles from '../../styles/design-systems.module.scss';
 
 function ForgotPassword() {
   const [apiResponse, setApiResponse] = useState('');
@@ -28,6 +30,7 @@ function ForgotPassword() {
       const response = await api.post('accounts/forgot-password', {
         identifier: email,
       });
+      checkApiError(response);
       setApiResponse(response.data.msg);
     } catch (error) {
       console.log(error);
@@ -63,7 +66,7 @@ function ForgotPassword() {
       <Grid
         container
         justifyContent="space-between"
-        sx={{backgroundColor: 'white'}}>
+        sx={{backgroundColor: styles.whitePure}}>
         <Grid item xs={6}>
           {/*Parent Stack containing Heading + Form heading + form */}
           <Stack
@@ -74,26 +77,26 @@ function ForgotPassword() {
             <Stack direction="row" alignItems="center" spacing={2}>
               <img src={logo} width={'40px'} height={'40px'} alt={logo} />
               <Typography
-                fontSize={25}
+                fontSize={styles.fontSizeXl}
                 component={'h1'}
-                color={'rgb(52,52,57)'}
-                fontWeight={700}>
+                color={styles.charcoal}
+                fontWeight={styles.fontWeightBold}>
                 NotionEdge
               </Typography>
             </Stack>
             <Box paddingTop={{xl: 4}}>
               <Typography
-                fontSize={25}
+                fontSize={styles.fontSizeXl}
                 component={'h2'}
-                color={'rgb(43,56,84)'}
-                fontWeight={700}>
+                color={styles.indigoDeep}
+                fontWeight={styles.fontWeightBold}>
                 {t('forgotPassword.title')}
               </Typography>
               <Typography
-                fontSize={18}
+                fontSize={styles.fontSizeLg}
                 component={'h3'}
-                color={'rgb(146,155,173)'}
-                fontWeight={400}>
+                color={styles.greySoft}
+                fontWeight={styles.fontWeightLight}>
                 {t('forgotPassword.description')}
               </Typography>
             </Box>
@@ -117,15 +120,18 @@ function ForgotPassword() {
               />
               {/*Error message -> To be displayed in case inputs are touched and there is error*/}
               {emailError && (
-                <Typography color={'error'} marginTop={-2} fontSize={12}>
+                <Typography
+                  color={styles.redError}
+                  marginTop={-2}
+                  fontSize={styles.fontSizeXsm}>
                   {formik.errors.email}
                 </Typography>
               )}
               {apiResponse !== '' && (
                 <Typography
-                  fontSize={12}
-                  color={'rgb(43,56,84)'}
-                  fontWeight={600}>
+                  fontSize={styles.fontSizeXsm}
+                  color={styles.indigoDeep}
+                  fontWeight={styles.fontWeightBolder}>
                   {apiResponse}
                 </Typography>
               )}
@@ -155,7 +161,7 @@ function ForgotPassword() {
             <span className={'login-language-select'}>
               <LanguageSelect />
             </span>
-            <img className={'truck-image'} src={banner} alt={'truck'} />
+            <img className={'responsive-image'} src={banner} alt={'truck'} />
             <div className={'transparent-textbox'}>
               &#34;{t('forgotPassword.quote')}&#34;
               <br />

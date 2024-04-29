@@ -16,11 +16,16 @@ import {useState, MouseEvent, ChangeEvent, useRef, useEffect} from 'react';
 import {useOutletContext} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {Driver} from '../../../models/driver.ts';
+import Loading from '../../Loading/Loading.tsx';
 
 function DriverNameGrid() {
   // Getting required props from outlet context
-  const {driverArray, selectedDriverId, handleDriverSelection} =
-    useOutletContext<DriverOutletContext>();
+  const {
+    isDriverGridLoading,
+    driverArray,
+    selectedDriverId,
+    handleDriverSelection,
+  } = useOutletContext<DriverOutletContext>();
 
   // State containing driver type
   const [driverType, setDriverType] = useState<
@@ -58,36 +63,40 @@ function DriverNameGrid() {
     filterDriverArray(searchText);
   }, [driverType, searchText, driverArray]);
 
-  return (
-    <>
-      <DriverNameGridHeader
-        driverType={driverType}
-        handleDriverTypeChange={handleDriverTypeChange}
-        searchDriver={searchDriver}
-      />
-      {/* Radio Group will control which radio button is selected based on value attribute, its onChange event is triggered when we click on a radio button*/}
-      <RadioGroup
-        name="controlled-radio-buttons-group"
-        value={selectedDriverId}
-        onChange={handleDriverSelection}
-        sx={{
-          display: 'grid',
-          gap: 2,
-          gridTemplateColumns: 'repeat(4,1fr)',
-        }}>
-        {/*  Iterating through driver data and rendering it as driver card*/}
-        {filteredArray.map(driver => {
-          return (
-            <DriverCard
-              key={driver.driverId}
-              driver={driver}
-              selectedDriverId={selectedDriverId}
-            />
-          );
-        })}
-      </RadioGroup>
-    </>
-  );
+  if (isDriverGridLoading) {
+    return <Loading />;
+  } else {
+    return (
+      <>
+        <DriverNameGridHeader
+          driverType={driverType}
+          handleDriverTypeChange={handleDriverTypeChange}
+          searchDriver={searchDriver}
+        />
+        {/* Radio Group will control which radio button is selected based on value attribute, its onChange event is triggered when we click on a radio button*/}
+        <RadioGroup
+          name="controlled-radio-buttons-group"
+          value={selectedDriverId}
+          onChange={handleDriverSelection}
+          sx={{
+            display: 'grid',
+            gap: 1,
+            gridTemplateColumns: 'repeat(4,1fr)',
+          }}>
+          {/*  Iterating through driver data and rendering it as driver card*/}
+          {filteredArray.map(driver => {
+            return (
+              <DriverCard
+                key={driver.driverId}
+                driver={driver}
+                selectedDriverId={selectedDriverId}
+              />
+            );
+          })}
+        </RadioGroup>
+      </>
+    );
+  }
 }
 
 export default DriverNameGrid;

@@ -3,6 +3,7 @@ import {Typography} from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 
 import {ProductIconProps} from './propTypes/types.ts';
+import styles from '../../styles/design-systems.module.scss';
 
 function ProductIcon({productName, productId, productImage}: ProductIconProps) {
   return (
@@ -17,10 +18,16 @@ function ProductIcon({productName, productId, productImage}: ProductIconProps) {
         }}
       />
       <Stack>
-        <Typography fontSize={14} variant={'h5'} fontWeight={500}>
+        <Typography
+          fontSize={styles.fontSizeSm}
+          variant={'h5'}
+          fontWeight={styles.fontWeightNormal}>
           {productName}
         </Typography>
-        <Typography fontSize={14} variant={'h6'} fontWeight={400}>
+        <Typography
+          fontSize={styles.fontSizeXsm}
+          variant={'h6'}
+          fontWeight={styles.fontWeightLight}>
           {productId}
         </Typography>
       </Stack>

@@ -19,6 +19,8 @@ import banner from '../../assets/WEBP/Login-Page-Banner.webp';
 import logo from '../../assets/SVG/Logo.svg';
 import {useTranslation} from 'react-i18next';
 import {isTokenValid} from '../../utilities/isTokenValid.ts';
+import {checkApiError} from '../../utilities/checkApiError.ts';
+import styles from '../../styles/design-systems.module.scss';
 
 function Login() {
   const [apiError, setApiError] = useState('');
@@ -39,16 +41,14 @@ function Login() {
           password: values.password,
         },
       );
+      checkApiError(res);
       const responseData = res.data;
-      if (responseData.status_code == 200 && responseData.data) {
-        localStorage.setItem('access_token', responseData.data.access_token);
-        const user = jwtDecode(responseData.data.access_token);
 
-        localStorage.setItem('user', JSON.stringify(user));
-        navigator('/availablestock');
-      } else {
-        throw new Error(responseData.msg);
-      }
+      localStorage.setItem('access_token', responseData.data.access_token);
+      const user = jwtDecode(responseData.data.access_token);
+
+      localStorage.setItem('user', JSON.stringify(user));
+      navigator('/availablestock');
     } catch (error) {
       console.log(error);
       if (error instanceof Error) {
@@ -88,7 +88,7 @@ function Login() {
   } else {
     return (
       <>
-        <Grid container sx={{backgroundColor: 'white'}}>
+        <Grid container sx={{backgroundColor: styles.whitePure}}>
           <Grid item xs={6}>
             {/*Parent Stack containing Heading + Form heading + form */}
             <Stack padding={6.4} spacing={3}>
@@ -100,26 +100,26 @@ function Login() {
                 spacing={2}>
                 <img src={logo} width={'40px'} height={'40px'} alt={logo} />
                 <Typography
-                  fontSize={25}
+                  fontSize={styles.fontSizeXl}
                   component={'h1'}
-                  color={'rgb(52,52,57)'}
-                  fontWeight={700}>
+                  color={styles.charcoal}
+                  fontWeight={styles.fontWeightBold}>
                   NotionEdge
                 </Typography>
               </Stack>
               <Box textAlign={'center'} paddingTop={{xl: 8}}>
                 <Typography
-                  fontSize={25}
+                  fontSize={styles.fontSizeXl}
                   component={'h2'}
-                  color={'rgb(43,56,84)'}
-                  fontWeight={700}>
+                  color={styles.indigoDeep}
+                  fontWeight={styles.fontWeightBold}>
                   {t('login.title')}
                 </Typography>
                 <Typography
-                  fontSize={18}
+                  fontSize={styles.fontSizeLg}
                   component={'h3'}
-                  color={'rgb(146,155,173)'}
-                  fontWeight={400}>
+                  color={styles.greySoft}
+                  fontWeight={styles.fontWeightLight}>
                   {t('login.subtitle')}
                 </Typography>
               </Box>
@@ -141,7 +141,10 @@ function Login() {
                 />
                 {/*Error message -> To be displayed in case inputs are touched and there is error*/}
                 {userIdError && (
-                  <Typography color={'error'} marginTop={-2} fontSize={12}>
+                  <Typography
+                    color={styles.redError}
+                    marginTop={-2}
+                    fontSize={styles.fontSizeXsm}>
                     {formik.errors.userId}
                   </Typography>
                 )}
@@ -161,12 +164,18 @@ function Login() {
                   onBlur={formik.handleBlur}
                 />
                 {passwordError && (
-                  <Typography marginTop={-2} color={'error'} fontSize={12}>
+                  <Typography
+                    marginTop={-2}
+                    color={styles.redError}
+                    fontSize={styles.fontSizeXsm}>
                     {formik.errors.password}
                   </Typography>
                 )}
                 {apiError !== '' && (
-                  <Typography color={'error'} marginTop={-2} fontSize={12}>
+                  <Typography
+                    color={styles.redError}
+                    marginTop={-2}
+                    fontSize={styles.fontSizeXsm}>
                     {apiError}
                   </Typography>
                 )}
@@ -215,7 +224,7 @@ function Login() {
               <span className={'login-language-select'}>
                 <LanguageSelect />
               </span>
-              <img className={'truck-image'} src={banner} alt={'truck'} />
+              <img className={'responsive-image'} src={banner} alt={'truck'} />
               <div className={'transparent-textbox'}>
                 &#34;{t('login.quote')}&#34;
                 <br />

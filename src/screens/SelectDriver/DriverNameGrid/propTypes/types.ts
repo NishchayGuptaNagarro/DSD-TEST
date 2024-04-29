@@ -3,6 +3,7 @@ import {Driver} from '../../../../models/driver.ts';
 
 // Prop types of DriverNameGrid component
 export interface DriverNameGridProps {
+  isDriverGridLoading: boolean;
   driverArray: Driver[];
   selectedDriverId: string;
   handleDriverSelection:

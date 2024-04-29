@@ -1,4 +1,4 @@
-.language-select-btn{
+.language-selection-dropdown{
   position: absolute;
   right:10px ;
   top:2px;
@@ -25,3 +25,62 @@
 .center-element {
   @include center-element;
 }
+
+.responsive-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.transparent-textbox{
+  background-color: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 1);
+  font-weight: 300;
+  position: absolute;
+  z-index: 1;
+  bottom: 5%;
+  left:10px;
+  right: 10px;
+  padding: 10px 15px 20px 15px;
+  border-radius: 4px;
+}
+
+%common-form-rules{
+  .form-label{
+    font-weight: $font-bolder;
+    color: $blue-steel;
+    &.form-label-error{
+      color:$red-error;
+    }
+  }
+  .form-input {
+    color: $blue-steel;
+    background-color: $bg-white-smoke;
+    border: none;
+    height: 40px;
+    border-radius: 4px;
+    font-weight: $font-light;
+    padding: 0 10px;
+    margin-bottom: 5px;
+    &[type='password'] {
+      font-weight: $font-boldest;
+    }
+    &:focus-visible {
+      outline-color: $blue-steel;
+    }
+  }
+  &.form-input-error{
+    outline: 1px solid $red-error !important;
+    //  Reason for adding 'important' to this property was that outline was being override on focus visible
+    //  but it should stay red until error is resolved
+  }
+  .form-checkbox {
+    margin-right: 5px;
+    cursor: pointer;
+    transform: scale(1.2);
+  }
+  .form-checkbox-label {
+    color: $blue-steel;
+  }
+}
+
+

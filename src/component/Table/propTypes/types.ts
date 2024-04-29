@@ -10,4 +10,5 @@ export interface TableProps {
   rows: Row[];
   columns: GridColDef[];
   getRowId: (row: Row) => number;
+  showLoading: boolean;
 }

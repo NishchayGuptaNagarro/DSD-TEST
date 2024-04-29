@@ -1,12 +1,12 @@
-
+@import "src/styles/design-systems.module";
 //All driver name grid header related css must go inside this
 .driver-grid-header{
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
   .select-text{
-    color:rgba(146, 155, 173, 1);
-    font-weight: 500;
+    color:$grey-soft;
+    font-weight: $font-normal;
     margin-right: 8px;
   }
   img{
@@ -15,12 +15,12 @@
     margin-right: 5px;
   }
   .search-box{
-    border: 1px solid rgba(219, 219, 219, 1);
+    border: 1px solid $border-grey-light;
     height: 35px;
-    color: rgba(134, 138, 152, 1);
+    color: $border-grey-dark;
     padding: 5px;
     border-radius: 8px;
-    outline-color: rgba(134, 138, 152, 1);
+    outline-color: $border-grey-dark;
     margin-left: auto;
     flex-basis: 200px;
   }
