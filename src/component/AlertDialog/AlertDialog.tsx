@@ -8,7 +8,7 @@ import styles from '../../styles/design-systems.module.scss';
 
 function AlertDialog({
   messageText,
-  open,
+  isOpen,
   handleDismiss,
   closeBtnText,
 }: AlertDialogProps) {
@@ -18,7 +18,7 @@ function AlertDialog({
 
   return (
     <>
-      <Dialog open={open}>
+      <Dialog open={isOpen}>
         <DialogContent dividers={true} sx={{minWidth: 250}}>
           <DialogContentText
             sx={{

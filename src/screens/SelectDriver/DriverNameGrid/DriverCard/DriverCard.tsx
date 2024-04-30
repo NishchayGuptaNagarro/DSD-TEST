@@ -7,6 +7,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Box from '@mui/material/Box';
 
 import './DriverCard.scss';
+import styles from '../../../../styles/design-systems.module.scss';
 import {DriverCardProps} from './propTypes/types.ts';
 
 function DriverCard({driver, selectedDriverId}: DriverCardProps) {
@@ -24,15 +25,19 @@ function DriverCard({driver, selectedDriverId}: DriverCardProps) {
           sx={{
             width: 45,
             height: 45,
-            bgcolor: 'rgba(162, 193, 244, 1)',
+            bgcolor: styles.bgCerulean,
           }}>
           {driver.driverName.charAt(0)}
         </Avatar>
-        <Box sx={{color: 'rgba(52, 71, 103, 1)'}}>
-          <Typography fontSize={12} fontWeight={500}>
+        <Box sx={{color: styles.blueSteel}}>
+          <Typography
+            fontSize={styles.fontSizeXsm}
+            fontWeight={styles.fontWeightNormal}>
             {driver.driverName}
           </Typography>
-          <Typography fontSize={12} fontWeight={400}>
+          <Typography
+            fontSize={styles.fontSizeXsm}
+            fontWeight={styles.fontWeightLight}>
             {driver.driverId}
           </Typography>
         </Box>

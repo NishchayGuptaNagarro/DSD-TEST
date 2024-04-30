@@ -86,7 +86,7 @@ function DriverSignature() {
               <ClipLoader color="#344767" />
             </div>
           )}
-          {isSignatureLoaded && false && <img src={signatureURL} alt={'img'} />}
+          {isSignatureLoaded && <img src={signatureURL} alt={'img'} />}
         </span>
 
         <label className={'form-label label-2'}>

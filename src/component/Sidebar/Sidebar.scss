@@ -35,18 +35,18 @@
     .options-container {
       @include flex-row;
       margin-top: 22%;
-
+      gap: 8px;
       .options-left {
-        width: 30%;
+        width: 20%;
         display: flex;
-        justify-content: center;
+        @include flex-center;
         color: $white-pure;
         .icon-img {
-          height: 30px;
+          height: 25px;
         }
       }
       .options-right {
-        width: 75%;
+        flex-basis: 100%;
         @include flex-row;
         justify-content: space-between;
         align-items: center;

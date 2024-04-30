@@ -7,7 +7,7 @@ function Loading() {
       <div className={'loading-container'}>
         {/*  This spinner is from react-spinner library , we can adjust its speed, size ,color*/}
         <span className={'center'}>
-          <HashLoader color="#344767" size={80} />
+          <HashLoader color="#344767" size={60} />
         </span>
       </div>
     </>

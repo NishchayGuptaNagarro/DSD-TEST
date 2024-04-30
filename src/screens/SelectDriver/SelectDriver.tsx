@@ -55,7 +55,7 @@ function SelectDriver() {
     localStorage.removeItem('selected_driver');
     localStorage.removeItem('currentStep');
     setAlertOpen(false);
-    navigate('/availablestock');
+    navigate('/home');
   }
 
   const navigate = useNavigate();
@@ -163,7 +163,7 @@ function SelectDriver() {
       renderCell: params => {
         return (
           <ProductIcon
-            productId={params.row.productId}
+            productId={params.row.externalId}
             productName={params.value}
             productImage={params.row.imageSrc}
           />
@@ -192,9 +192,6 @@ function SelectDriver() {
       headerName: t('table.uom'),
       headerClassName: 'font-md',
       flex: 0.5,
-      valueGetter: () => {
-        return 'Unit';
-      },
       cellClassName: 'productText font-sm',
       sortable: false,
     },
@@ -204,7 +201,7 @@ function SelectDriver() {
     <Grid container className={'select-driver-screen'}>
       <AlertDialog
         messageText={alertText}
-        open={alertOpen}
+        isOpen={alertOpen}
         closeBtnText={'Okay'}
         handleDismiss={handleAlertClose}
       />

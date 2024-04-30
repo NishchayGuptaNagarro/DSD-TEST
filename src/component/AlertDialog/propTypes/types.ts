@@ -2,6 +2,6 @@
 export interface AlertDialogProps {
   messageText: string;
   closeBtnText: string;
-  open: boolean;
+  isOpen: boolean;
   handleDismiss: (open: boolean) => void;
 }

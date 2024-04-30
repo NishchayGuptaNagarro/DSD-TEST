@@ -24,10 +24,12 @@ const OrderTable = () => {
       products = response.data.data.map(product => {
         const parsedRes: Row = {
           productId: Number(product.product_id),
+          externalId: product.external_id,
           name: product.description,
           description: product.description,
           imageSrc: 'data:image/png;base64,' + product.img.product_image,
           initialStock: product.quantity,
+          uom: product.unit_of_measure,
         };
 
         return parsedRes;

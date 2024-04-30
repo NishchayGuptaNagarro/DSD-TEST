@@ -48,7 +48,7 @@ function Login() {
       const user = jwtDecode(responseData.data.access_token);
 
       localStorage.setItem('user', JSON.stringify(user));
-      navigator('/availablestock');
+      navigator('/home');
     } catch (error) {
       console.log(error);
       if (error instanceof Error) {
@@ -59,7 +59,7 @@ function Login() {
 
   useEffect(() => {
     if (user && isTokenValid(user)) {
-      navigator('/availablestock');
+      navigator('/home');
     }
   }, []);
 

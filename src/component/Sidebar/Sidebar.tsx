@@ -16,11 +16,11 @@ import {useTranslation} from 'react-i18next';
 
 function Sidebar() {
   const {t} = useTranslation();
-  const [showbar, setShowbBar] = useState<boolean>(true);
+  const [showbar] = useState<boolean>(true);
   const [navData, setNavData] = useState<SideBarOption[]>([
     {
       id: 1,
-      Option: 'sidebar.dashboard',
+      Option: 'sidebar.home',
       subOptionLeft: '',
       subOptionRight: '',
       icon: DashBoard,

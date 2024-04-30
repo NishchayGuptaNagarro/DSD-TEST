@@ -7,6 +7,7 @@ import {DriverNameGridHeaderProps} from './propTypes/types.ts';
 import {DriverOutletContext} from '../propTypes/types.ts';
 import DriverCard from './DriverCard/DriverCard.tsx';
 import './DriverNameGrid.scss';
+import styles from '../../../styles/design-systems.module.scss';
 
 import vanSellerIcon from '../../../assets/SVG/VanSeller.svg';
 import deliveryIcon from '../../../assets/SVG/Delivery.svg';
@@ -138,7 +139,7 @@ function DriverNameGridHeader({
         size={'small'}>
         <ToggleButton
           className={'font-xsm'}
-          sx={{fontWeight: '600'}}
+          sx={{fontWeight: styles.fontWeightBolder}}
           value="VAN-SELLER">
           <img src={vanSellerIcon} alt={'icon'} />
           {t('createLoadingOrder.vanSeller')}
@@ -146,14 +147,14 @@ function DriverNameGridHeader({
 
         <ToggleButton
           className={'font-xsm'}
-          sx={{fontWeight: '600'}}
+          sx={{fontWeight: styles.fontWeightBolder}}
           value="DELIVERY">
           <img src={deliveryIcon} alt={'icon'} />
           {t('createLoadingOrder.delivery')}
         </ToggleButton>
         <ToggleButton
           className={'font-xsm'}
-          sx={{fontWeight: '600'}}
+          sx={{fontWeight: styles.fontWeightBolder}}
           value="HYBRID">
           <img src={hybridIcon} alt={'icon'} />
           {t('createLoadingOrder.hybrid')}
