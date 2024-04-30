@@ -8,6 +8,7 @@ import Loading from './screens/Loading/Loading.tsx';
 import TimeLineState from './context/timeline/TimelineState.tsx';
 
 import './App.scss';
+import styles from '../src/styles/design-systems.module.scss';
 import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
 import enJSON from './resources/labels/en.json';
@@ -47,7 +48,7 @@ function App() {
     },
     palette: {
       background: {
-        default: '#F1F2F6',
+        default: styles.bgColorBeigeLight,
       },
     },
   });
