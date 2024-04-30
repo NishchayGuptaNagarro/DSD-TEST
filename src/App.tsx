@@ -14,7 +14,7 @@ import enJSON from './resources/labels/en.json';
 import frJSON from './resources/labels/fr.json';
 import ProtectedRoute from './component/ProtectedRoute/ProtectedRoute.tsx';
 
-const AvailableStock = lazy(() => import('./screens/AvailableStock/Home.tsx'));
+const AvailableStock = lazy(() => import('./screens/Home/Home.tsx'));
 const ForgotPassword = lazy(
   () => import('./screens/ForgotPassword/ForgotPassword.tsx'),
 );

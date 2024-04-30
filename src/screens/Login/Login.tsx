@@ -37,7 +37,7 @@ function Login() {
       const res: AxiosResponse<LoginApiResponse> = await api.post(
         'accounts/login',
         {
-          email: values.userId,
+          email_or_username: values.userId,
           password: values.password,
         },
       );
