@@ -224,7 +224,7 @@ function SelectDriver() {
           </Box>
           <Paper
             elevation={1}
-            sx={{p: 1.5, minHeight: 400, position: 'relative'}}>
+            sx={{p: 1.5, minHeight: '70vh', position: 'relative'}}>
             <Timeline />
             {/*This outlet will display child components , all props are provided in context*/}
             <Outlet
