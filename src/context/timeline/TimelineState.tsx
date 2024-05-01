@@ -1,4 +1,4 @@
-import React, {ReactNode, useState} from 'react';
+import {ReactNode, useState} from 'react';
 import TimelineContext from './timelineContext';
 import {useTranslation} from 'react-i18next';
 
@@ -6,7 +6,7 @@ type UserProvidedProps = {
   children: ReactNode;
 };
 
-const TimeLineState: React.FC<UserProvidedProps> = ({children}) => {
+function TimelineState({children}: UserProvidedProps) {
   const {t} = useTranslation();
 
   const steps: string[] = [
@@ -16,11 +16,6 @@ const TimeLineState: React.FC<UserProvidedProps> = ({children}) => {
   ];
   const orderRoutes: string[] = ['driver', 'order', 'signature'];
   const [currentStep, setCurrentStep] = useState<number>(1);
-  const [complete, setComplete] = useState<boolean>(false);
-
-  const stepsComplete = () => {
-    setComplete(!complete);
-  };
 
   //updateSteps will take the value and update the currentStep
   const updateSteps = (stepVal: number) => {
@@ -39,9 +34,7 @@ const TimeLineState: React.FC<UserProvidedProps> = ({children}) => {
 
   //to increase the steps//
   const increaseSteps = () => {
-    if (localStorage.getItem('selected_driver')) {
-      updateSteps(1);
-    }
+    updateSteps(1);
   };
 
   //to decrease the steps//
@@ -66,9 +59,6 @@ const TimeLineState: React.FC<UserProvidedProps> = ({children}) => {
         steps,
         currentStep,
         setCurrentStep,
-        complete,
-        setComplete,
-        stepsComplete,
         increaseSteps,
         decreaseSteps,
         rememberSteps,
@@ -77,6 +67,6 @@ const TimeLineState: React.FC<UserProvidedProps> = ({children}) => {
       {children}
     </TimelineContext.Provider>
   );
-};
+}
 
-export default TimeLineState;
+export default TimelineState;

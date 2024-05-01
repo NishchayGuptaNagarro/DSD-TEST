@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {ClipLoader} from 'react-spinners';
 
 import DropDownButton from '../../../component/DropDownButton/DropDownButton.tsx';
@@ -24,12 +24,17 @@ function DriverSignature() {
   function handleAction(selectedIndex: number) {
     console.log(selectedIndex + ' i was clicked');
   }
+
+  const isFocused = useRef(true); //using this to dismiss api call when component is umounted else call continues
+
   async function fetchSignature() {
+    let executeLoop = true;
     setShowLoading(true);
+
     let response: AxiosResponse<SignatureApiResponse>;
     let status = 0;
     try {
-      while (status !== 200) {
+      while (executeLoop) {
         response = await api.get(
           `/warehouse/digital-signature?user_id=${localStorage.getItem('selected_driver')}`,
         );
@@ -42,11 +47,15 @@ function DriverSignature() {
               'data:image/png;base64,' + response.data.data.signature_image,
             );
             setIsSignatureLoaded(true);
+            executeLoop = false;
             break;
           }
           case 404: {
             //waiting before making new calls
             await new Promise(resolve => setTimeout(resolve, 2000));
+            if (!isFocused.current) {
+              return;
+            }
             break;
           }
           default: {
@@ -63,6 +72,10 @@ function DriverSignature() {
     if (signatureURL == '') {
       setIsSignatureLoaded(false);
     }
+    isFocused.current = true;
+    return () => {
+      isFocused.current = false;
+    };
   });
   return (
     <>

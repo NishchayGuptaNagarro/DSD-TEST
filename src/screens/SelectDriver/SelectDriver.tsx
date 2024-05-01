@@ -25,6 +25,7 @@ import Button from '@mui/material/Button';
 import {styled} from '@mui/material';
 import {Driver} from '../../models/driver.ts';
 import {checkApiError} from '../../utilities/checkApiError.ts';
+import {useLocation} from 'react-router-dom';
 
 function SelectDriver() {
   const {t} = useTranslation();
@@ -50,6 +51,7 @@ function SelectDriver() {
   const [alertText, setAlertText] = useState('');
   const [alertOpen, setAlertOpen] = useState(false);
   const [nextDisabled, setNextDisabled] = useState(true);
+  const location = useLocation();
 
   function handleAlertClose() {
     localStorage.removeItem('selected_driver');
@@ -60,14 +62,8 @@ function SelectDriver() {
 
   const navigate = useNavigate();
 
-  const {
-    currentStep,
-    steps,
-    decreaseSteps,
-    increaseSteps,
-    stepsComplete,
-    orderRoutes,
-  } = useContext(timelineContext) || {};
+  const {currentStep, steps, decreaseSteps, increaseSteps, orderRoutes} =
+    useContext(timelineContext) || {};
 
   async function fetchDrivers() {
     let response: AxiosResponse<DriverApiResponse>;
@@ -126,7 +122,7 @@ function SelectDriver() {
   }
 
   function buttonDisabled() {
-    if (isTableLoaded) {
+    if (currentStep == 2) {
       setNextDisabled(rows.length === 0);
     } else if (!localStorage.getItem('selected_driver')) {
       setNextDisabled(true);
@@ -136,6 +132,9 @@ function SelectDriver() {
   }
 
   useEffect(() => {
+    if (location.pathname == '/createloadingorder') {
+      navigate(`${orderRoutes[currentStep - 1]}`);
+    }
     buttonDisabled();
 
     return () => {
@@ -250,9 +249,7 @@ function SelectDriver() {
               <BlackButton
                 size={'small'}
                 variant={'contained'}
-                onClick={() => {
-                  currentStep > 1 ? decreaseSteps() : stepsComplete();
-                }}
+                onClick={decreaseSteps}
                 disabled={currentStep === 1}>
                 {t('createLoadingOrder.back')}
               </BlackButton>
@@ -263,7 +260,6 @@ function SelectDriver() {
                   variant={'contained'}
                   disabled={!isSignatureLoaded}
                   onClick={() => {
-                    stepsComplete();
                     assignInitialStock();
                   }}>
                   {t('createLoadingOrder.finish')}

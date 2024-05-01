@@ -2,24 +2,37 @@ import {useOutletContext} from 'react-router-dom';
 
 import Table from '../../../component/Table/Table.tsx';
 import {DriverOutletContext, ProductApiResponse} from '../propTypes/types.ts';
-import {useEffect} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {Row} from '../../../component/Table/propTypes/types.ts';
 import {AxiosResponse} from 'axios';
 import {api} from '../../../axios/api.ts';
 import {checkApiError} from '../../../utilities/checkApiError.ts';
+import timelineContext from '../../../context/timeline/timelineContext.ts';
+import AlertDialog from '../../../component/AlertDialog/AlertDialog.tsx';
 
 const OrderTable = () => {
   const {columns, getRowId, isTableLoaded, handleTableLoaded, setRows, rows} =
     useOutletContext<DriverOutletContext>();
+  const {decreaseSteps} = useContext(timelineContext);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
+  function handleDialogDismiss() {
+    decreaseSteps();
+  }
   async function fetchRows() {
     let response: AxiosResponse<ProductApiResponse>;
     let products: Row[];
     try {
       response = await api.get(
-        `/warehouse/vanseller-dashboard-for-warehouse?user_id=${localStorage.getItem('selected_driver')}`,
+        `/warehouse/driver-dashboard-for-warehouse?user_id=${localStorage.getItem('selected_driver')}`,
       );
       console.log(response);
+      if (response.data.status_code == 400) {
+        setIsDialogOpen(true);
+        handleTableLoaded(true);
+        return;
+      }
+
       checkApiError(response);
       products = response.data.data.map(product => {
         const parsedRes: Row = {
@@ -31,7 +44,6 @@ const OrderTable = () => {
           initialStock: product.quantity,
           uom: product.unit_of_measure,
         };
-
         return parsedRes;
       });
       setRows(products);
@@ -52,6 +64,11 @@ const OrderTable = () => {
 
   return (
     <>
+      <AlertDialog
+        messageText={'Initial Stock already assigned to driver'}
+        closeBtnText={'Dismiss'}
+        isOpen={isDialogOpen}
+        handleDismiss={handleDialogDismiss}></AlertDialog>
       <Table
         showLoading={!isTableLoaded}
         rows={rows}

@@ -5,7 +5,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
 import Login from './screens/Login/Login.tsx';
 import Loading from './screens/Loading/Loading.tsx';
-import TimeLineState from './context/timeline/TimelineState.tsx';
+import TimelineState from './context/timeline/TimelineState.tsx';
 
 import './App.scss';
 import styles from '../src/styles/design-systems.module.scss';
@@ -54,9 +54,10 @@ function App() {
   });
   return (
     <>
-      <TimeLineState>
-        {/*Make sure all components using material ui goes inside this*/}
-        <ThemeProvider theme={theme}>
+      {/*Make sure all components using material ui goes inside this*/}
+
+      <ThemeProvider theme={theme}>
+        <TimelineState>
           <BrowserRouter>
             {/*this baseline provides grey background used in all screens */}
             <CssBaseline />
@@ -116,8 +117,8 @@ function App() {
               </Route>
             </Routes>
           </BrowserRouter>
-        </ThemeProvider>
-      </TimeLineState>
+        </TimelineState>
+      </ThemeProvider>
     </>
   );
 }
