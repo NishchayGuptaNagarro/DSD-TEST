@@ -158,10 +158,7 @@ function Sidebar() {
                 <ul className="nav-menu-items">
                   {navData.map((item: SideBarOption, index: number) => (
                     <li className="nav-menu-list" key={index}>
-                      <img
-                        src={item.icon}
-                        alt="no-image"
-                        style={{height: '5vh', width: '2.5vw'}}></img>
+                      <img src={item.icon} alt="no-image"></img>
                     </li>
                   ))}
                 </ul>
@@ -199,17 +196,9 @@ function Sidebar() {
           </div>
         ) : (
           <div className="bottom-icons">
-            <img
-              src={Signout}
-              alt="alternate-image"
-              style={{height: '5vh', width: '2vw', marginTop: '20%'}}
-            />
+            <img src={Signout} alt="alternate-image" />
 
-            <img
-              src={Settings}
-              alt="alternate-image"
-              style={{height: '5vh', width: '2vw', marginTop: '40%'}}
-            />
+            <img src={Settings} alt="alternate-image" />
           </div>
         )}
       </div>

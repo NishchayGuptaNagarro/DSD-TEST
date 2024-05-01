@@ -98,7 +98,6 @@ function App() {
                     </Suspense>
                   }
                 />
-
                 <Route
                   path="order"
                   element={

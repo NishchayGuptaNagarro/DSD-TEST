@@ -9,6 +9,7 @@
 
 .nav-menu-active {
   height: 100%;
+  min-height: 400px;
   background: $gradient-black;
   @include flex-column;
   align-items: center;
@@ -52,7 +53,7 @@
         align-items: center;
 
         .options-text {
-          font-weight: $font-bold;
+          font-weight: $font-bolder;
           color: $white-pure;
           font-size:$font-xsm;
         }
@@ -77,7 +78,7 @@
         @include flex-center;
 
         .submenu-left-text {
-          font-weight: $font-bold;
+          font-weight: $font-bolder;
           font-size: $font-lg;
           color: $white-pure;
         }
@@ -111,7 +112,7 @@
     margin-top: 15%;
 
     .bottom-text {
-      font-weight: $font-bold;
+      font-weight: $font-bolder;
       font-size: $font-xsm;
       color: $white-pure;
       align-self: center;

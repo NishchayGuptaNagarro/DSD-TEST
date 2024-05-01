@@ -204,12 +204,13 @@ function SelectDriver() {
         closeBtnText={'Okay'}
         handleDismiss={handleAlertClose}
       />
-      <Grid item xs={2} overflow={'hidden'} height={'100vh'} sx={{padding: 1}}>
+      <Grid item xs={2} height={'100vh'} sx={{padding: 1}}>
         <Sidebar />
       </Grid>
       <Grid
         item
         className={'hide-scrollbar'}
+        minHeight={400}
         xs={10}
         sx={{maxHeight: '100vh', overflowY: 'scroll'}}>
         <Stack>
