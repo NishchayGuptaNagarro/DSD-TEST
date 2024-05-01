@@ -117,14 +117,14 @@ function Home() {
 
   return (
     <Grid container>
-      <Grid item xs={2} padding={1}>
+      <Grid overflow={'hidden'} height={'100vh'} item xs={2} padding={1}>
         <Sidebar />
       </Grid>
       <Grid
-        className={'avl-stock-screen'}
+        className={'avl-stock-screen hide-scrollbar'}
         item
         xs={10}
-        sx={{height: '100vh', overflowY: 'scroll'}}>
+        sx={{maxHeight: '100vh', overflowY: 'scroll'}}>
         <Stack>
           <Box padding={2} paddingBottom={0} position={'relative'}>
             <span className={'avl-language-select'}>

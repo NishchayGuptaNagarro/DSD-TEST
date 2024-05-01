@@ -204,10 +204,14 @@ function SelectDriver() {
         closeBtnText={'Okay'}
         handleDismiss={handleAlertClose}
       />
-      <Grid item xs={2} sx={{padding: 1}}>
+      <Grid item xs={2} overflow={'hidden'} height={'100vh'} sx={{padding: 1}}>
         <Sidebar />
       </Grid>
-      <Grid item xs={10} sx={{height: '100vh', overflowY: 'scroll'}}>
+      <Grid
+        item
+        className={'hide-scrollbar'}
+        xs={10}
+        sx={{maxHeight: '100vh', overflowY: 'scroll'}}>
         <Stack>
           <span className={'language-select'}>
             <LanguageSelect />
