@@ -12,6 +12,15 @@
   .form-link {
     text-decoration: underline;
   }
+  .eye-icon{
+    position: absolute;
+    top:8%;
+    right:1%;
+    z-index: 1;
+  }
+  .password-input-container{
+    position: relative;
+  }
 }
 
 .login-language-select{

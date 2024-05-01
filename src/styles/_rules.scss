@@ -61,6 +61,7 @@
     font-weight: $font-light;
     padding: 0 10px;
     margin-bottom: 5px;
+    width: 100%;
     &[type='password'] {
       font-weight: $font-boldest;
     }
@@ -68,7 +69,7 @@
       outline-color: $blue-steel;
     }
   }
-  &.form-input-error{
+  .form-input-error{
     outline: 1px solid $red-error !important;
     //  Reason for adding 'important' to this property was that outline was being override on focus visible
     //  but it should stay red until error is resolved

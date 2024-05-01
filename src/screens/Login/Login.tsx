@@ -3,6 +3,9 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import {Typography} from '@mui/material';
 import Button from '@mui/material/Button';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import IconButton from '@mui/material/IconButton';
 
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
@@ -24,6 +27,7 @@ import styles from '../../styles/design-systems.module.scss';
 
 function Login() {
   const [apiError, setApiError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const navigator = useNavigate();
   const {t} = useTranslation();
   const user = localStorage.getItem('user');
@@ -153,16 +157,36 @@ function Login() {
                   htmlFor="login-form-password">
                   {t('login.password.label')}
                 </label>
+                <div className={'password-input-container'}>
+                  <input
+                    id="login-form-password"
+                    className={`form-input font-sm  ${passwordError ? 'form-input-error' : ''}`}
+                    type={showPassword ? 'text' : 'password'}
+                    name="password"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  {showPassword ? (
+                    <IconButton
+                      onClick={() => {
+                        setShowPassword(false);
+                      }}
+                      className={'eye-icon'}>
+                      <VisibilityOff fontSize={'small'} />
+                    </IconButton>
+                  ) : (
+                    <IconButton
+                      onClick={() => {
+                        setShowPassword(true);
+                      }}
+                      className={'eye-icon'}>
+                      <Visibility fontSize={'small'} />
+                    </IconButton>
+                  )}
+                </div>
 
-                <input
-                  id="login-form-password"
-                  className={`form-input font-sm  ${passwordError ? 'form-input-error' : ''}`}
-                  type="password"
-                  name="password"
-                  value={formik.values.password}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                />
+                {/*<VisibilityOff fontSize={'small'} />*/}
                 {passwordError && (
                   <Typography
                     marginTop={-2}
