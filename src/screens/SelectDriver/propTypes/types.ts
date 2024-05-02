@@ -80,4 +80,6 @@ export interface SelectDriverStates {
   setAlertOpen: Dispatch<SetStateAction<boolean>>;
   nextDisabled: boolean;
   setNextDisabled: Dispatch<SetStateAction<boolean>>;
+  driverType: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID';
+  setDriverType: Dispatch<SetStateAction<'VAN-SELLER' | 'DELIVERY' | 'HYBRID'>>;
 }
