@@ -1,8 +1,10 @@
 import {useContext, useEffect} from 'react';
 import timelineContext from '../../context/timeline/timelineContext';
 import './Timeline.scss';
+import {useTranslation} from 'react-i18next';
 
 function Timeline() {
+  const {t} = useTranslation();
   const {currentStep, steps, rememberSteps} = useContext(timelineContext);
 
   //When someone refresh the page this method will get called//
@@ -28,7 +30,7 @@ function Timeline() {
               <p
                 className={`${i + 1 <= currentStep ? 'active' : 'disable'}`}
                 style={{textTransform: 'capitalize'}}>
-                {` ${i + 1}.  ${step}`}
+                {` ${i + 1}.  ${t(step)}`}
               </p>
             </div>
           ))}

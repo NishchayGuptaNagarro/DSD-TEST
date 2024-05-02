@@ -10,6 +10,8 @@ const timelineContext = createContext<TimeLineContextProps>({
   decreaseSteps: () => {},
   rememberSteps: () => {},
   orderRoutes: [],
+  updateOrderRoutes: () => {},
+  updateStepsArray: () => {},
 });
 
 export default timelineContext;

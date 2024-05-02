@@ -2,6 +2,9 @@
 import {DriverNameGridProps} from '../DriverNameGrid/propTypes/types.ts';
 import {OrderTableProps} from '../OrderTable/propTypes/types.ts';
 import {DriverSignatureProps} from '../DriverSignature/propTypes/types.ts';
+import {Driver} from '../../../models/driver.ts';
+import {Dispatch, SetStateAction} from 'react';
+import {Row} from '../../../component/Table/propTypes/types.ts';
 
 // Interface for screen outlet context provider
 export interface DriverOutletContext
@@ -55,4 +58,26 @@ interface ApiProductImage {
 export interface ProductApiResponse {
   status_code: number;
   data: ApiProductData[];
+}
+
+export interface SelectDriverStates {
+  driverArray: Driver[];
+  setDriverArray: Dispatch<SetStateAction<Driver[]>>;
+  loadInitialType: () => 'VAN-SELLER' | 'DELIVERY' | 'HYBRID';
+  rows: Row[];
+  setRows: Dispatch<SetStateAction<Row[]>>;
+  selectedDriver: string;
+  setSelectedDriver: Dispatch<SetStateAction<string>>;
+  isDriverGridLoading: boolean;
+  setIsDriverGridLoading: Dispatch<SetStateAction<boolean>>;
+  isTableLoaded: boolean;
+  setIsTableLoaded: Dispatch<SetStateAction<boolean>>;
+  isSignatureLoaded: boolean;
+  setIsSignatureLoaded: Dispatch<SetStateAction<boolean>>;
+  alertText: string;
+  setAlertText: Dispatch<SetStateAction<string>>;
+  alertOpen: boolean;
+  setAlertOpen: Dispatch<SetStateAction<boolean>>;
+  nextDisabled: boolean;
+  setNextDisabled: Dispatch<SetStateAction<boolean>>;
 }

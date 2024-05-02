@@ -26,6 +26,16 @@ import {styled} from '@mui/material';
 import {Driver} from '../../models/driver.ts';
 import {checkApiError} from '../../utilities/checkApiError.ts';
 import {useLocation} from 'react-router-dom';
+import {
+  deliverySteps,
+  hybridSteps,
+  vanSellerSteps,
+} from '../../utilities/timelineSteps.ts';
+import {
+  deliveryRoutes,
+  hybridRoutes,
+  vanSellerRoutes,
+} from '../../utilities/timelineRoutes.ts';
 
 function SelectDriver() {
   const {t} = useTranslation();
@@ -36,15 +46,30 @@ function SelectDriver() {
       backgroundColor: 'black',
     },
   });
-
   const heading = t('createLoadingOrder.title');
   const subHeading = t('createLoadingOrder.subtitle');
   const [driverArray, setDriverArray] = useState<Driver[]>([]);
+
+  function loadInitialType() {
+    const initialType = localStorage.getItem('selected_type');
+    if (
+      initialType == 'VAN-SELLER' ||
+      initialType == 'DELIVERY' ||
+      initialType == 'HYBRID'
+    ) {
+      return initialType;
+    } else {
+      return 'VAN-SELLER';
+    }
+  }
+
+  const [driverType, setDriverType] = useState<
+    'VAN-SELLER' | 'DELIVERY' | 'HYBRID'
+  >(loadInitialType());
   const [rows, setRows] = useState<Row[]>([]);
   const [selectedDriver, setSelectedDriver] = useState<string>(
     localStorage.getItem('selected_driver') || '',
   );
-
   const [isDriverGridLoading, setIsDriverGridLoading] = useState(true);
   const [isTableLoaded, setIsTableLoaded] = useState(false);
   const [isSignatureLoaded, setIsSignatureLoaded] = useState(false);
@@ -52,18 +77,53 @@ function SelectDriver() {
   const [alertOpen, setAlertOpen] = useState(false);
   const [nextDisabled, setNextDisabled] = useState(true);
   const location = useLocation();
-
+  const navigate = useNavigate();
+  const {
+    currentStep,
+    steps,
+    decreaseSteps,
+    increaseSteps,
+    orderRoutes,
+    updateOrderRoutes,
+    updateStepsArray,
+  } = useContext(timelineContext);
+  function handleTableLoaded(value: boolean) {
+    setIsTableLoaded(value);
+  }
+  function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
+    setSelectedDriver(event.target.value);
+    localStorage.setItem('selected_driver', event.target.value);
+  }
   function handleAlertClose() {
     localStorage.removeItem('selected_driver');
     localStorage.removeItem('currentStep');
+    localStorage.removeItem('selected_type');
     setAlertOpen(false);
     navigate('/home');
   }
-
-  const navigate = useNavigate();
-
-  const {currentStep, steps, decreaseSteps, increaseSteps, orderRoutes} =
-    useContext(timelineContext) || {};
+  function handleTypeChange(type: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID') {
+    setDriverType(type);
+    localStorage.setItem('selected_type', type);
+    switch (type) {
+      case 'VAN-SELLER': {
+        updateStepsArray(vanSellerSteps);
+        updateOrderRoutes(vanSellerRoutes);
+        break;
+      }
+      case 'DELIVERY': {
+        updateStepsArray(deliverySteps);
+        updateOrderRoutes(deliveryRoutes);
+        break;
+      }
+      case 'HYBRID': {
+        updateStepsArray(hybridSteps);
+        updateOrderRoutes(hybridRoutes);
+        break;
+      }
+      default:
+        return;
+    }
+  }
 
   async function fetchDrivers() {
     let response: AxiosResponse<DriverApiResponse>;
@@ -104,15 +164,6 @@ function SelectDriver() {
       console.log(error);
     }
   }
-
-  function handleTableLoaded(value: boolean) {
-    setIsTableLoaded(value);
-  }
-
-  function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
-    setSelectedDriver(event.target.value);
-    localStorage.setItem('selected_driver', event.target.value);
-  }
   function getRowId(row: Row) {
     if (typeof row.productId === 'number') {
       return row.productId;
@@ -136,7 +187,6 @@ function SelectDriver() {
       navigate(`${orderRoutes[currentStep - 1]}`);
     }
     buttonDisabled();
-
     return () => {
       setNextDisabled(true);
     };
@@ -145,10 +195,11 @@ function SelectDriver() {
   // API CALLS
   useEffect(() => {
     fetchDrivers();
+    handleTypeChange(driverType);
   }, []);
 
   useEffect(() => {
-    navigate(`${orderRoutes[currentStep - 1]}`);
+    navigate(orderRoutes[currentStep - 1]);
   }, [currentStep]);
 
   // Table Column Definition
@@ -246,6 +297,8 @@ function SelectDriver() {
                   handleTableLoaded,
                   rows,
                   setRows,
+                  driverType,
+                  handleTypeChange,
                 } satisfies DriverOutletContext
               }></Outlet>
             <br />

@@ -54,6 +54,11 @@
     "sidebar.settings": "Settings",
 
     "timeline.option1": "Select Drivers",
-    "timeline.option2": "Verification/Validation",
-    "timeline.option3": "Activation"
+    "timeline.option2": "Assigned Stock",
+    "timeline.option3": "Activation",
+    "timeline.option4": "Select Deliveries / Orders",
+    "timeline.option5": "Add Quantities",
+
+    "driversignature.action1": "Activate",
+    "driversignature.action2": "Reject"
 }

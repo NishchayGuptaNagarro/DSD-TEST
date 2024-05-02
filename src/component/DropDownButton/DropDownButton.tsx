@@ -11,8 +11,10 @@ import MenuList from '@mui/material/MenuList';
 import {useRef, useState} from 'react';
 
 import {DropDownButtonProps} from './propTypes/types.ts';
+import {useTranslation} from 'react-i18next';
 
 function DropDownButton({options, handleClick}: DropDownButtonProps) {
+  const {t} = useTranslation();
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLDivElement>(null);
   const [selectedIndex, setSelectedIndex] = useState(0); //this state will represent selected option
@@ -48,7 +50,7 @@ function DropDownButton({options, handleClick}: DropDownButtonProps) {
           onClick={() => {
             handleClick(selectedIndex);
           }}>
-          {options[selectedIndex]}
+          {t(options[selectedIndex])}
         </Button>
         <Button size="small" onClick={handleToggle}>
           <ArrowDropDownIcon />
@@ -78,7 +80,7 @@ function DropDownButton({options, handleClick}: DropDownButtonProps) {
                       key={option}
                       selected={index === selectedIndex}
                       onClick={event => handleMenuItemClick(event, index)}>
-                      {option}
+                      {t(option)}
                     </MenuItem>
                   ))}
                 </MenuList>

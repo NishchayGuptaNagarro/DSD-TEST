@@ -26,12 +26,9 @@ function DriverNameGrid() {
     driverArray,
     selectedDriverId,
     handleDriverSelection,
+    driverType,
+    handleTypeChange,
   } = useOutletContext<DriverOutletContext>();
-
-  // State containing driver type
-  const [driverType, setDriverType] = useState<
-    'VAN-SELLER' | 'DELIVERY' | 'HYBRID'
-  >('VAN-SELLER');
 
   // State containing array filtered after driver type and search text
   const [filteredArray, setFilteredArray] = useState<Driver[]>([]);
@@ -51,7 +48,7 @@ function DriverNameGrid() {
     _: MouseEvent<HTMLElement>,
     value: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID',
   ) {
-    setDriverType(value);
+    handleTypeChange(value);
   }
   // This will set the search text, triggering the useEffect to filter the array
   // This function will be called after a delay, so its only called when user stops typing to avoid unnecessary re-renders

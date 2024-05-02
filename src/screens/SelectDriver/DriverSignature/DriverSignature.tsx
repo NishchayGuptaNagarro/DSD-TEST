@@ -17,7 +17,7 @@ function DriverSignature() {
   const {isSignatureLoaded, setIsSignatureLoaded} =
     useOutletContext<DriverOutletContext>();
   const [showLoading, setShowLoading] = useState(false);
-  const actions = ['Activate', 'Reject']; //More actions can be added to this array in future
+  const actions = ['driversignature.action1', 'driversignature.action2']; //More actions can be added to this array in future
   const [signatureURL, setSignatureURL] = useState('');
   const {t} = useTranslation();
   // This function will be called when our action is clicked

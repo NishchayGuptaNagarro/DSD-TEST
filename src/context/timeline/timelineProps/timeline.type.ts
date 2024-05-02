@@ -8,6 +8,8 @@ interface TimeLineContextProps {
   increaseSteps: () => void;
   decreaseSteps: () => void;
   rememberSteps: () => void;
+  updateStepsArray: (value: string[]) => void;
+  updateOrderRoutes: (value: string[]) => void;
 }
 
 export default TimeLineContextProps;
