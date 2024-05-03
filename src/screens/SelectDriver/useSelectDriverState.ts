@@ -43,7 +43,6 @@ export function useSelectDriverState(): SelectDriverStates {
     isSignatureLoaded,
     isTableLoaded,
     setIsTableLoaded,
-    loadInitialType,
     setAlertOpen,
     setAlertText,
     setIsDriverGridLoading,

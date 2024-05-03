@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import {GridColDef} from '@mui/x-data-grid';
 
-import {ChangeEvent, useContext, useEffect, useState} from 'react';
+import {ChangeEvent, useContext, useEffect} from 'react';
 import {Outlet, useNavigate} from 'react-router';
 import {AxiosResponse} from 'axios';
 
@@ -36,6 +36,7 @@ import {
   hybridRoutes,
   vanSellerRoutes,
 } from '../../utilities/timelineRoutes.ts';
+import {useSelectDriverState} from './useSelectDriverState.ts';
 
 function SelectDriver() {
   const {t} = useTranslation();
@@ -48,36 +49,31 @@ function SelectDriver() {
   });
   const heading = t('createLoadingOrder.title');
   const subHeading = t('createLoadingOrder.subtitle');
-  const [driverArray, setDriverArray] = useState<Driver[]>([]);
-
-  function loadInitialType() {
-    const initialType = localStorage.getItem('selected_type');
-    if (
-      initialType == 'VAN-SELLER' ||
-      initialType == 'DELIVERY' ||
-      initialType == 'HYBRID'
-    ) {
-      return initialType;
-    } else {
-      return 'VAN-SELLER';
-    }
-  }
-
-  const [driverType, setDriverType] = useState<
-    'VAN-SELLER' | 'DELIVERY' | 'HYBRID'
-  >(loadInitialType());
-  const [rows, setRows] = useState<Row[]>([]);
-  const [selectedDriver, setSelectedDriver] = useState<string>(
-    localStorage.getItem('selected_driver') || '',
-  );
-  const [isDriverGridLoading, setIsDriverGridLoading] = useState(true);
-  const [isTableLoaded, setIsTableLoaded] = useState(false);
-  const [isSignatureLoaded, setIsSignatureLoaded] = useState(false);
-  const [alertText, setAlertText] = useState('');
-  const [alertOpen, setAlertOpen] = useState(false);
-  const [nextDisabled, setNextDisabled] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
+  const {
+    driverArray,
+    setDriverArray,
+    selectedDriver,
+    alertOpen,
+    alertText,
+    rows,
+    setRows,
+    setSelectedDriver,
+    isSignatureLoaded,
+    isTableLoaded,
+    setIsTableLoaded,
+    setAlertOpen,
+    setAlertText,
+    setIsDriverGridLoading,
+    setIsSignatureLoaded,
+    isDriverGridLoading,
+    nextDisabled,
+    setNextDisabled,
+    setDriverType,
+    driverType,
+  } = useSelectDriverState();
+
   const {
     currentStep,
     steps,

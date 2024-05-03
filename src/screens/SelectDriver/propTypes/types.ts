@@ -63,7 +63,6 @@ export interface ProductApiResponse {
 export interface SelectDriverStates {
   driverArray: Driver[];
   setDriverArray: Dispatch<SetStateAction<Driver[]>>;
-  loadInitialType: () => 'VAN-SELLER' | 'DELIVERY' | 'HYBRID';
   rows: Row[];
   setRows: Dispatch<SetStateAction<Row[]>>;
   selectedDriver: string;
