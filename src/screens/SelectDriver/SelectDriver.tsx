@@ -2,7 +2,6 @@ import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import {GridColDef} from '@mui/x-data-grid';
 
 import {ChangeEvent, useContext, useEffect} from 'react';
 import {Outlet, useNavigate} from 'react-router';
@@ -10,7 +9,7 @@ import {AxiosResponse} from 'axios';
 
 import Sidebar from '../../component/Sidebar/Sidebar.tsx';
 import PageHeading from '../../component/PageHeading/PageHeading.tsx';
-import ProductIcon from '../../component/ProductIcon/ProductIcon.tsx';
+
 import Timeline from '../../component/Timeline/Timeline.tsx';
 import LanguageSelect from '../../component/LanguageSelect/LanguageSelect.tsx';
 import timelineContext from '../../context/timeline/timelineContext.ts';
@@ -21,8 +20,6 @@ import {Row} from '../../component/Table/propTypes/types.ts';
 import './SelectDriver.scss';
 import {useTranslation} from 'react-i18next';
 import AlertDialog from '../../component/AlertDialog/AlertDialog.tsx';
-import Button from '@mui/material/Button';
-import {styled} from '@mui/material';
 import {Driver} from '../../models/driver.ts';
 import {checkApiError} from '../../utilities/checkApiError.ts';
 import {useLocation} from 'react-router-dom';
@@ -37,65 +34,16 @@ import {
   vanSellerRoutes,
 } from '../../utilities/timelineRoutes.ts';
 import {useSelectDriverState} from './useSelectDriverState.ts';
-
-// Table Column Definition
-const columns: GridColDef[] = [
-  {
-    field: 'name',
-    headerName: 'table.product',
-    flex: 0.7,
-    headerClassName: 'font-md',
-    // passing 'Product Icon' element to render cell function, so it is rendered instead of product name
-    renderCell: params => {
-      return (
-        <ProductIcon
-          productId={params.row.externalId}
-          productName={params.value}
-          productImage={params.row.imageSrc}
-        />
-      );
-    },
-    sortable: false,
-  },
-  {
-    field: 'description',
-    headerClassName: 'font-md',
-    headerName: 'table.description',
-    flex: 0.8,
-    cellClassName: 'productText font-xsm',
-    sortable: false,
-  },
-  {
-    field: 'initialStock',
-    headerName: 'table.initialStock',
-    headerClassName: 'font-md',
-    flex: 0.5,
-    cellClassName: 'stock font-sm',
-    sortable: false,
-  },
-  {
-    field: 'uom',
-    headerName: 'table.uom',
-    headerClassName: 'font-md',
-    flex: 0.5,
-    cellClassName: 'productText font-sm',
-    sortable: false,
-  },
-];
+import {driverColDef} from './DriverColDef/DriverColDef.tsx';
+import BlackButton from '../../component/BlackButton/BlackButton.tsx';
 
 function SelectDriver() {
   const {t} = useTranslation();
-  const BlackButton = styled(Button)({
-    minWidth: 80,
-    backgroundColor: 'black',
-    '&:hover': {
-      backgroundColor: 'black',
-    },
-  });
   const heading = t('createLoadingOrder.title');
   const subHeading = t('createLoadingOrder.subtitle');
   const location = useLocation();
   const navigate = useNavigate();
+  const columns = driverColDef;
   const {
     driverArray,
     setDriverArray,
@@ -118,7 +66,6 @@ function SelectDriver() {
     setDriverType,
     driverType,
   } = useSelectDriverState();
-
   const {
     currentStep,
     steps,
@@ -128,6 +75,12 @@ function SelectDriver() {
     updateOrderRoutes,
     updateStepsArray,
   } = useContext(timelineContext);
+
+  function clearLocalStorage() {
+    localStorage.removeItem('selected_driver');
+    localStorage.removeItem('currentStep');
+    localStorage.removeItem('selected_type');
+  }
   function handleTableLoaded(value: boolean) {
     setIsTableLoaded(value);
   }
@@ -136,9 +89,7 @@ function SelectDriver() {
     localStorage.setItem('selected_driver', event.target.value);
   }
   function handleAlertClose() {
-    localStorage.removeItem('selected_driver');
-    localStorage.removeItem('currentStep');
-    localStorage.removeItem('selected_type');
+    clearLocalStorage();
     setAlertOpen(false);
     navigate('/home');
   }
@@ -163,6 +114,24 @@ function SelectDriver() {
       }
       default:
         return;
+    }
+  }
+
+  function getRowId(row: Row) {
+    if (typeof row.productId === 'number') {
+      return row.productId;
+    } else {
+      throw new Error('row id should be number');
+    }
+  }
+
+  function buttonDisabled() {
+    if (currentStep == 2) {
+      setNextDisabled(rows.length === 0);
+    } else if (!localStorage.getItem('selected_driver')) {
+      setNextDisabled(true);
+    } else {
+      setNextDisabled(false);
     }
   }
 
@@ -203,23 +172,6 @@ function SelectDriver() {
       setAlertOpen(true);
     } catch (error) {
       console.log(error);
-    }
-  }
-  function getRowId(row: Row) {
-    if (typeof row.productId === 'number') {
-      return row.productId;
-    } else {
-      throw new Error('row id should be number');
-    }
-  }
-
-  function buttonDisabled() {
-    if (currentStep == 2) {
-      setNextDisabled(rows.length === 0);
-    } else if (!localStorage.getItem('selected_driver')) {
-      setNextDisabled(true);
-    } else {
-      setNextDisabled(false);
     }
   }
 
