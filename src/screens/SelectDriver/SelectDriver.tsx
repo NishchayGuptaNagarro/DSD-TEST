@@ -38,6 +38,51 @@ import {
 } from '../../utilities/timelineRoutes.ts';
 import {useSelectDriverState} from './useSelectDriverState.ts';
 
+// Table Column Definition
+const columns: GridColDef[] = [
+  {
+    field: 'name',
+    headerName: 'table.product',
+    flex: 0.7,
+    headerClassName: 'font-md',
+    // passing 'Product Icon' element to render cell function, so it is rendered instead of product name
+    renderCell: params => {
+      return (
+        <ProductIcon
+          productId={params.row.externalId}
+          productName={params.value}
+          productImage={params.row.imageSrc}
+        />
+      );
+    },
+    sortable: false,
+  },
+  {
+    field: 'description',
+    headerClassName: 'font-md',
+    headerName: 'table.description',
+    flex: 0.8,
+    cellClassName: 'productText font-xsm',
+    sortable: false,
+  },
+  {
+    field: 'initialStock',
+    headerName: 'table.initialStock',
+    headerClassName: 'font-md',
+    flex: 0.5,
+    cellClassName: 'stock font-sm',
+    sortable: false,
+  },
+  {
+    field: 'uom',
+    headerName: 'table.uom',
+    headerClassName: 'font-md',
+    flex: 0.5,
+    cellClassName: 'productText font-sm',
+    sortable: false,
+  },
+];
+
 function SelectDriver() {
   const {t} = useTranslation();
   const BlackButton = styled(Button)({
@@ -197,51 +242,6 @@ function SelectDriver() {
   useEffect(() => {
     navigate(orderRoutes[currentStep - 1]);
   }, [currentStep]);
-
-  // Table Column Definition
-  const columns: GridColDef[] = [
-    {
-      field: 'name',
-      headerName: t('table.product'),
-      flex: 0.7,
-      headerClassName: 'font-md',
-      // passing 'Product Icon' element to render cell function, so it is rendered instead of product name
-      renderCell: params => {
-        return (
-          <ProductIcon
-            productId={params.row.externalId}
-            productName={params.value}
-            productImage={params.row.imageSrc}
-          />
-        );
-      },
-      sortable: false,
-    },
-    {
-      field: 'description',
-      headerClassName: 'font-md',
-      headerName: t('table.description'),
-      flex: 0.8,
-      cellClassName: 'productText font-xsm',
-      sortable: false,
-    },
-    {
-      field: 'initialStock',
-      headerName: t('table.initialStock'),
-      headerClassName: 'font-md',
-      flex: 0.5,
-      cellClassName: 'stock font-sm',
-      sortable: false,
-    },
-    {
-      field: 'uom',
-      headerName: t('table.uom'),
-      headerClassName: 'font-md',
-      flex: 0.5,
-      cellClassName: 'productText font-sm',
-      sortable: false,
-    },
-  ];
 
   return (
     <Grid container className={'select-driver-screen'}>
