@@ -44,7 +44,8 @@ function DriverSignature() {
           case 200: {
             setShowLoading(false);
             setSignatureURL(
-              'data:image/png;base64,' + response.data.data.signature_image,
+              'data:image/png;base64,' +
+                response.data.data.driver_signature_image,
             );
             setIsSignatureLoaded(true);
             executeLoop = false;

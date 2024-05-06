@@ -2,13 +2,17 @@
 import {Dispatch, SetStateAction} from 'react';
 
 interface ApiSignature {
-  signature_image: string;
   signature_id: number;
-  creation_date: string;
+  manager_id: number | null;
+  checkout_time: string;
+  checking_status: string;
+  manager_signature_image: string | null;
   updated_at: string;
-  user_id: string;
-  order_loading_id: string | null;
-  signature_date: string;
+  order_loading_id: number | null;
+  driver_id: string;
+  checkin_time: string | null;
+  driver_signature_image: string;
+  creation_date: string;
 }
 
 export interface SignatureApiResponse {
