@@ -14,22 +14,23 @@ import './LanguageSelect.scss';
 
 import {useState, MouseEvent} from 'react';
 import {useTranslation} from 'react-i18next';
+import styles from '../../styles/design-systems.module.scss';
 
 function LanguageSelect() {
   //   Styles for list
   const sxProp = {
     bgcolor: 'background.paper',
-    width: 180,
+    width: 170,
     p: 0.5,
     borderRadius: 6,
     ['.language-select-btn.MuiListItemButton-root']: {
-      color: 'rgba(52, 71, 103, 1)',
+      color: styles.blueSteel,
       px: 0.5,
       py: 0.5,
       borderRadius: 10,
       ['.MuiListItemText-primary']: {
-        fontWeight: 500,
-        fontSize: 15,
+        fontWeight: styles.fontWeightNormal,
+        fontSize: styles.fontSizeSm,
       },
     },
   };
@@ -68,7 +69,7 @@ function LanguageSelect() {
             sx={{
               p: 0,
               minWidth: '10px',
-              color: 'rgba(52, 71, 103, 1)',
+              color: styles.blueSteel,
               ['&:hover']: {
                 background: 'transparent',
               },
@@ -108,7 +109,7 @@ function FrenchButton() {
           }}
         />
       </ListItemIcon>
-      <ListItemText className={'.language-select-text'} primary="French" />
+      <ListItemText className={'language-select-text'} primary="French" />
     </>
   );
 }

@@ -39,6 +39,7 @@
     "availablestock.card1MainInfo": "Supply Chain Solutions",
     "availablestock.card2Heading": "Manager Name & ID",
     "availablestock.card3Heading": "Date",
+    "availablestock.button": "Create a loading Order",
 
     "table.product": "Product",
     "table.description": "Product Description",
@@ -46,8 +47,8 @@
     "table.initialStock": "Initial Stock",
     "table.uom": "UOM",
 
-    "sidebar.dashboard": "Dashboard",
-    "sidebar.stock": "Stock",
+    "sidebar.home": "Home",
+    "sidebar.stock": "Stock Check-In / Check-Out",
     "sidebar.orders": "Orders",
     "sidebar.signout": "Sign Out",
     "sidebar.settings": "Settings",

@@ -4,23 +4,34 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import {AlertDialogProps} from './propTypes/types.ts';
-function AlertDialog({text, open, handleOkay}: AlertDialogProps) {
+import styles from '../../styles/design-systems.module.scss';
+
+function AlertDialog({
+  messageText,
+  isOpen,
+  handleDismiss,
+  closeBtnText,
+}: AlertDialogProps) {
   const handleClose = () => {
-    handleOkay(false);
+    handleDismiss(false);
   };
 
   return (
     <>
-      <Dialog open={open}>
+      <Dialog open={isOpen}>
         <DialogContent dividers={true} sx={{minWidth: 250}}>
           <DialogContentText
-            sx={{fontWeight: 500, textAlign: 'center', color: 'black'}}>
-            {text}
+            sx={{
+              fontWeight: styles.fontWeightNormal,
+              textAlign: 'center',
+              color: styles.black,
+            }}>
+            {messageText}
           </DialogContentText>
         </DialogContent>
         <DialogActions sx={{p: 0}}>
           <Button onClick={handleClose} autoFocus>
-            Okay
+            {closeBtnText}
           </Button>
         </DialogActions>
       </Dialog>

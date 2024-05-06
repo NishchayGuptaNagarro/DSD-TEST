@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 
 import './DetailsCard.scss';
+import styles from '../../styles/design-systems.module.scss';
 import {DetailsCardProps} from './propTypes/types.ts';
 
 function DetailsCard({
@@ -20,7 +21,7 @@ function DetailsCard({
       sx={{borderRadius: 3, flexBasis: 400}}>
       <CardContent
         sx={{
-          color: '#354766',
+          color: styles.blueSteel,
           padding: 1,
         }}>
         <Stack
@@ -29,17 +30,21 @@ function DetailsCard({
           alignItems="center"
           marginBottom={1}>
           <Typography
-            className={'font-xsm'}
-            fontWeight={500}
-            sx={{color: '#929BAD'}}>
+            fontSize={styles.fontSizeXsm}
+            fontWeight={styles.fontWeightNormal}
+            sx={{color: styles.greySoft}}>
             {heading}
           </Typography>
           <img src={icon} alt={'icon'} />
         </Stack>
-        <Typography className={'font-sm'} fontWeight={600}>
+        <Typography
+          fontSize={styles.fontSizeSm}
+          fontWeight={styles.fontWeightBolder}>
           {mainInfo}
         </Typography>
-        <Typography className={'font-sm'} fontWeight={400}>
+        <Typography
+          fontSize={styles.fontSizeSm}
+          fontWeight={styles.fontWeightLight}>
           {secondaryInfo}
         </Typography>
       </CardContent>

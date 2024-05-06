@@ -5,31 +5,32 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
 import Login from './screens/Login/Login.tsx';
 import Loading from './screens/Loading/Loading.tsx';
-import TimeLineState from './context/timeline/TimelineState.tsx';
+import TimelineState from './context/timeline/TimelineState.tsx';
 
 import './App.scss';
+import styles from '../src/styles/design-systems.module.scss';
 import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
 import enJSON from './resources/labels/en.json';
 import frJSON from './resources/labels/fr.json';
 import ProtectedRoute from './component/ProtectedRoute/ProtectedRoute.tsx';
 
-const AvailableStock = lazy(
-  () => import('./screens/AvailableStock/AvailableStock.tsx'),
-);
+const AvailableStock = lazy(() => import('./screens/Home/Home.tsx'));
 const ForgotPassword = lazy(
   () => import('./screens/ForgotPassword/ForgotPassword.tsx'),
 );
-const DriverName = lazy(
-  () => import('./component/DriverNameGrid/DriverNameGrid.tsx'),
+const DriverNameGrid = lazy(
+  () => import('./screens/SelectDriver/DriverNameGrid/DriverNameGrid.tsx'),
 );
 const SelectDriverScreen = lazy(
   () => import('./screens/SelectDriver/SelectDriver.tsx'),
 );
-const DriverSignature = lazy(
-  () => import('./component/DriverSignature/DriverSignature.tsx'),
+const DriverSignatureForm = lazy(
+  () => import('./screens/SelectDriver/DriverSignature/DriverSignature.tsx'),
 );
-const OrderTable = lazy(() => import('./component/OrderTable/OrderTable.tsx'));
+const OrderTable = lazy(
+  () => import('./screens/SelectDriver/OrderTable/OrderTable.tsx'),
+);
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -47,21 +48,22 @@ function App() {
     },
     palette: {
       background: {
-        default: '#F1F2F6',
+        default: styles.bgColorBeigeLight,
       },
     },
   });
   return (
     <>
       {/*Make sure all components using material ui goes inside this*/}
-      <TimeLineState>
-        <ThemeProvider theme={theme}>
+
+      <ThemeProvider theme={theme}>
+        <TimelineState>
           <BrowserRouter>
             {/*this baseline provides grey background used in all screens */}
             <CssBaseline />
             <Routes>
               <Route
-                path="/availablestock"
+                path="/home"
                 element={
                   <Suspense fallback={<Loading />}>
                     <ProtectedRoute>
@@ -92,11 +94,10 @@ function App() {
                   path="driver"
                   element={
                     <Suspense fallback={<Loading />}>
-                      <DriverName />
+                      <DriverNameGrid />
                     </Suspense>
                   }
                 />
-
                 <Route
                   path="order"
                   element={
@@ -109,14 +110,14 @@ function App() {
                   path="signature"
                   element={
                     <Suspense fallback={<Loading />}>
-                      <DriverSignature />
+                      <DriverSignatureForm />
                     </Suspense>
                   }></Route>
               </Route>
             </Routes>
           </BrowserRouter>
-        </ThemeProvider>
-      </TimeLineState>
+        </TimelineState>
+      </ThemeProvider>
     </>
   );
 }

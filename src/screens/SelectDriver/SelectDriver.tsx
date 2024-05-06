@@ -15,11 +15,7 @@ import Timeline from '../../component/Timeline/Timeline.tsx';
 import LanguageSelect from '../../component/LanguageSelect/LanguageSelect.tsx';
 import timelineContext from '../../context/timeline/timelineContext.ts';
 import {api} from '../../axios/api.ts';
-import {
-  Driver,
-  DriverApiResponse,
-  DriverOutletContext,
-} from './propTypes/types.ts';
+import {DriverApiResponse, DriverOutletContext} from './propTypes/types.ts';
 import {Row} from '../../component/Table/propTypes/types.ts';
 
 import './SelectDriver.scss';
@@ -27,6 +23,9 @@ import {useTranslation} from 'react-i18next';
 import AlertDialog from '../../component/AlertDialog/AlertDialog.tsx';
 import Button from '@mui/material/Button';
 import {styled} from '@mui/material';
+import {Driver} from '../../models/driver.ts';
+import {checkApiError} from '../../utilities/checkApiError.ts';
+import {useLocation} from 'react-router-dom';
 
 function SelectDriver() {
   const {t} = useTranslation();
@@ -41,30 +40,30 @@ function SelectDriver() {
   const heading = t('createLoadingOrder.title');
   const subHeading = t('createLoadingOrder.subtitle');
   const [driverArray, setDriverArray] = useState<Driver[]>([]);
-
+  const [rows, setRows] = useState<Row[]>([]);
   const [selectedDriver, setSelectedDriver] = useState<string>(
     localStorage.getItem('selected_driver') || '',
   );
+
+  const [isDriverGridLoading, setIsDriverGridLoading] = useState(true);
+  const [isTableLoaded, setIsTableLoaded] = useState(false);
   const [isSignatureLoaded, setIsSignatureLoaded] = useState(false);
   const [alertText, setAlertText] = useState('');
   const [alertOpen, setAlertOpen] = useState(false);
+  const [nextDisabled, setNextDisabled] = useState(true);
+  const location = useLocation();
+
   function handleAlertClose() {
     localStorage.removeItem('selected_driver');
     localStorage.removeItem('currentStep');
     setAlertOpen(false);
-    navigate('/availablestock');
+    navigate('/home');
   }
 
   const navigate = useNavigate();
 
-  const {
-    currentStep,
-    steps,
-    decreaseSteps,
-    increaseSteps,
-    stepsComplete,
-    orderRoutes,
-  } = useContext(timelineContext) || {};
+  const {currentStep, steps, decreaseSteps, increaseSteps, orderRoutes} =
+    useContext(timelineContext) || {};
 
   async function fetchDrivers() {
     let response: AxiosResponse<DriverApiResponse>;
@@ -72,7 +71,7 @@ function SelectDriver() {
     try {
       response = await api.get('/warehouse/drivers');
       console.log(response);
-
+      checkApiError(response);
       driverData = response.data.data.map(driver => {
         const parsedRes: Driver = {
           driverName: driver.username,
@@ -82,8 +81,10 @@ function SelectDriver() {
         return parsedRes;
       });
       setDriverArray(driverData);
+      setIsDriverGridLoading(false);
     } catch (error) {
       console.log(error);
+      setIsDriverGridLoading(false);
     }
   }
 
@@ -96,11 +97,16 @@ function SelectDriver() {
         },
       );
       console.log(response);
+      checkApiError(response);
       setAlertText(response.data.msg);
       setAlertOpen(true);
     } catch (error) {
       console.log(error);
     }
+  }
+
+  function handleTableLoaded(value: boolean) {
+    setIsTableLoaded(value);
   }
 
   function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
@@ -114,6 +120,27 @@ function SelectDriver() {
       throw new Error('row id should be number');
     }
   }
+
+  function buttonDisabled() {
+    if (currentStep == 2) {
+      setNextDisabled(rows.length === 0);
+    } else if (!localStorage.getItem('selected_driver')) {
+      setNextDisabled(true);
+    } else {
+      setNextDisabled(false);
+    }
+  }
+
+  useEffect(() => {
+    if (location.pathname == '/createloadingorder') {
+      navigate(`${orderRoutes[currentStep - 1]}`);
+    }
+    buttonDisabled();
+
+    return () => {
+      setNextDisabled(true);
+    };
+  });
 
   // API CALLS
   useEffect(() => {
@@ -135,7 +162,7 @@ function SelectDriver() {
       renderCell: params => {
         return (
           <ProductIcon
-            productId={params.row.productId}
+            productId={params.row.externalId}
             productName={params.value}
             productImage={params.row.imageSrc}
           />
@@ -164,9 +191,6 @@ function SelectDriver() {
       headerName: t('table.uom'),
       headerClassName: 'font-md',
       flex: 0.5,
-      valueGetter: () => {
-        return 'Unit';
-      },
       cellClassName: 'productText font-sm',
       sortable: false,
     },
@@ -175,14 +199,20 @@ function SelectDriver() {
   return (
     <Grid container className={'select-driver-screen'}>
       <AlertDialog
-        text={alertText}
-        open={alertOpen}
-        handleOkay={handleAlertClose}
+        messageText={alertText}
+        isOpen={alertOpen}
+        closeBtnText={'Okay'}
+        handleDismiss={handleAlertClose}
       />
-      <Grid item xs={2} sx={{padding: 1}}>
+      <Grid item xs={2} height={'100vh'} sx={{padding: 1}}>
         <Sidebar />
       </Grid>
-      <Grid item xs={10} sx={{height: '100vh', overflowY: 'scroll'}}>
+      <Grid
+        item
+        className={'hide-scrollbar'}
+        minHeight={400}
+        xs={10}
+        sx={{maxHeight: '100vh', overflowY: 'scroll'}}>
         <Stack>
           <span className={'language-select'}>
             <LanguageSelect />
@@ -198,19 +228,24 @@ function SelectDriver() {
           </Box>
           <Paper
             elevation={1}
-            sx={{p: 1.5, minHeight: 400, position: 'relative'}}>
+            sx={{p: 1.5, minHeight: '70vh', position: 'relative'}}>
             <Timeline />
             {/*This outlet will display child components , all props are provided in context*/}
             <Outlet
               context={
                 {
-                  driverArray: driverArray,
+                  driverArray,
                   selectedDriverId: selectedDriver,
-                  handleDriverSelection: handleDriverSelection,
-                  columns: columns,
-                  getRowId: getRowId,
-                  isSignatureLoaded: isSignatureLoaded,
-                  setIsSignatureLoaded: setIsSignatureLoaded,
+                  handleDriverSelection,
+                  columns,
+                  getRowId,
+                  isSignatureLoaded,
+                  setIsSignatureLoaded,
+                  isDriverGridLoading,
+                  isTableLoaded,
+                  handleTableLoaded,
+                  rows,
+                  setRows,
                 } satisfies DriverOutletContext
               }></Outlet>
             <br />
@@ -219,9 +254,7 @@ function SelectDriver() {
               <BlackButton
                 size={'small'}
                 variant={'contained'}
-                onClick={() => {
-                  currentStep > 1 ? decreaseSteps() : stepsComplete();
-                }}
+                onClick={decreaseSteps}
                 disabled={currentStep === 1}>
                 {t('createLoadingOrder.back')}
               </BlackButton>
@@ -232,7 +265,6 @@ function SelectDriver() {
                   variant={'contained'}
                   disabled={!isSignatureLoaded}
                   onClick={() => {
-                    stepsComplete();
                     assignInitialStock();
                   }}>
                   {t('createLoadingOrder.finish')}
@@ -241,7 +273,7 @@ function SelectDriver() {
                 <BlackButton
                   size={'small'}
                   variant={'contained'}
-                  disabled={!localStorage.getItem('selected_driver')}
+                  disabled={nextDisabled}
                   onClick={increaseSteps}>
                   {t('createLoadingOrder.next')}
                 </BlackButton>

@@ -1,0 +1,6 @@
+@import "src/styles/design-systems.module";
+
+.loading-container{
+  @include center-element;
+  position: absolute;
+}

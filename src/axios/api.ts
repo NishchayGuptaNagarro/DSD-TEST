@@ -3,8 +3,7 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from 'axios';
-
-export const URL = 'https://django-backend.cfapps.eu20-001.hana.ondemand.com/';
+import {URL} from './config.ts';
 
 const genericHeaders = {'Content-type': 'application/json'};
 

@@ -1,20 +1,25 @@
-
+@import "src/styles/design-systems.module";
 //All css related to this screen should go inside this
 .select-driver-screen{
   .productText {
-    font-weight: 500;
+    font-weight: $font-normal;
   }
   .quantity {
-    font-weight: 700;
-    color: #62b766;
+    font-weight: $font-bold;
+    color: $green-mint;
   }
   .stock{
-    font-weight: 700;
+    font-weight: $font-bold;
 
   }
   .language-select{
+    @extend .language-selection-dropdown
+  }
+  .buttons-group {
+    display: flex;
     position: absolute;
-    right:10px ;
-    top: 2px;
+    width: 98%;
+    bottom: 5px;
+    justify-content: space-between;
   }
 }
