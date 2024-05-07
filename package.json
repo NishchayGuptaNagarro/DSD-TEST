@@ -10,7 +10,8 @@
 		"preview": "vite preview",
 		"format": "npx prettier --check src/",
 		"format:fix": "npx prettier src/ --write",
-		"test": "jest"
+		"test": "jest",
+		"test:watch": "npm run test -- --watch"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.11.4",
