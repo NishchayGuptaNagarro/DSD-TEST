@@ -31,6 +31,9 @@ const DriverSignatureForm = lazy(
 const OrderTable = lazy(
   () => import('./screens/SelectDriver/OrderTable/OrderTable.tsx'),
 );
+const DeliveryTable = lazy(
+  () => import('./screens/SelectDriver/DeliveryTable/DeliveryTable.tsx'),
+);
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -103,6 +106,14 @@ function App() {
                   element={
                     <Suspense fallback={<Loading />}>
                       <OrderTable />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="delivery-table"
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <DeliveryTable />
                     </Suspense>
                   }
                 />

@@ -46,6 +46,11 @@
     "table.quantity": "Quantity",
     "table.initialStock": "Initial Stock",
     "table.uom": "UOM",
+    "table.orderId": "Order ID",
+    "table.orderDescription": "Order Description",
+    "table.customerDesc": "Customer ID: Name",
+    "table.products": "Products",
+    "table.button": "Show Products",
 
     "sidebar.home": "Home",
     "sidebar.stock": "Stock Check-In / Check-Out",

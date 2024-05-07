@@ -109,7 +109,7 @@ function DriverNameGridHeader({
   // States for search input field
   const [searchInput, setSearchInput] = useState('');
   // This will hold timeout id
-  const searchTimeout = useRef<number | null>(null);
+  const searchTimeout = useRef<NodeJS.Timeout | null>(null);
   function handleSearchInput(event: ChangeEvent<HTMLInputElement>) {
     // First this function will check if there is a timeout f and will clear it if there is one then it will set a new timeout
     // This is done so that search is only triggered when user finishes typing
@@ -118,10 +118,10 @@ function DriverNameGridHeader({
     }
     setSearchInput(event.target.value);
 
-    // Search timeout is set to 400ms can be changed to trigger search faster
+    // Search timeout is set to 300ms can be changed to trigger search faster
     searchTimeout.current = setTimeout(() => {
       searchDriver(event.target.value);
-    }, 400);
+    }, 300);
   }
   return (
     <Box className={'driver-grid-header font-sm'}>

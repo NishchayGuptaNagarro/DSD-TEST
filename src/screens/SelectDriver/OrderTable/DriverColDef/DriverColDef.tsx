@@ -1,7 +1,7 @@
 // Table Column Definition
 import {GridColDef, GridColumnHeaderParams} from '@mui/x-data-grid';
-import ProductIcon from '../../../component/ProductIcon/ProductIcon.tsx';
-import {ColumnHeader} from '../../../component/ColumnHeader/ColumnHeader.tsx';
+import ProductIcon from '../../../../component/ProductIcon/ProductIcon.tsx';
+import {ColumnHeader} from '../../../../component/ColumnHeader/ColumnHeader.tsx';
 
 export const driverColDef: GridColDef[] = [
   {
