@@ -76,6 +76,7 @@ function SelectDriver() {
 
   function clearLocalStorage() {
     localStorage.removeItem('selected_driver');
+    localStorage.removeItem('selected_driver_type');
     localStorage.removeItem('currentStep');
     localStorage.removeItem('selected_type');
   }
