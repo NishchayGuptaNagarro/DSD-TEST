@@ -9,6 +9,9 @@ export interface DriverNameGridProps {
   handleDriverSelection:
     | ((event: ChangeEvent<HTMLInputElement>) => void)
     | (() => void);
+
+  driverType: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID';
+  handleTypeChange: (type: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID') => void;
 }
 
 // Props for Driver Name Grid Header

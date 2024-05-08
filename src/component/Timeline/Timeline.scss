@@ -21,6 +21,7 @@
     @include flex-column;
     @include flex-center;
     width: 400px;
+    @extend .font-xsm
   }
 
   .step-item:not(:first-child)::before {

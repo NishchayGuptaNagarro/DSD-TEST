@@ -48,6 +48,11 @@
     "sidebar.settings": "Paramètres",
 
     "timeline.option1": "Sélectionner les conducteurs",
-    "timeline.option2": "Vérification/La validation",
-    "timeline.option3": "L'activation"
+    "timeline.option2": "Stock attribué",
+    "timeline.option3": "L'activation",
+    "timeline.option4": "Sélectionner les livraisons",
+    "timeline.option5": "Ajouter des quantités",
+
+    "driversignature.action1": "Activer",
+    "driversignature.action2": "Rejeter"
 }

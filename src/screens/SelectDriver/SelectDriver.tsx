@@ -2,15 +2,14 @@ import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import {GridColDef} from '@mui/x-data-grid';
 
-import {ChangeEvent, useContext, useEffect, useState} from 'react';
+import {ChangeEvent, useContext, useEffect} from 'react';
 import {Outlet, useNavigate} from 'react-router';
 import {AxiosResponse} from 'axios';
 
 import Sidebar from '../../component/Sidebar/Sidebar.tsx';
 import PageHeading from '../../component/PageHeading/PageHeading.tsx';
-import ProductIcon from '../../component/ProductIcon/ProductIcon.tsx';
+
 import Timeline from '../../component/Timeline/Timeline.tsx';
 import LanguageSelect from '../../component/LanguageSelect/LanguageSelect.tsx';
 import timelineContext from '../../context/timeline/timelineContext.ts';
@@ -21,49 +20,120 @@ import {Row} from '../../component/Table/propTypes/types.ts';
 import './SelectDriver.scss';
 import {useTranslation} from 'react-i18next';
 import AlertDialog from '../../component/AlertDialog/AlertDialog.tsx';
-import Button from '@mui/material/Button';
-import {styled} from '@mui/material';
 import {Driver} from '../../models/driver.ts';
 import {checkApiError} from '../../utilities/checkApiError.ts';
 import {useLocation} from 'react-router-dom';
+import {
+  deliverySteps,
+  hybridSteps,
+  vanSellerSteps,
+} from '../../utilities/timelineSteps.ts';
+import {
+  deliveryRoutes,
+  hybridRoutes,
+  vanSellerRoutes,
+} from '../../utilities/timelineRoutes.ts';
+import {useSelectDriverState} from './useSelectDriverState.ts';
+import {driverColDef} from './DriverColDef/DriverColDef.tsx';
+import BlackButton from '../../component/BlackButton/BlackButton.tsx';
 
 function SelectDriver() {
   const {t} = useTranslation();
-  const BlackButton = styled(Button)({
-    minWidth: 80,
-    backgroundColor: 'black',
-    '&:hover': {
-      backgroundColor: 'black',
-    },
-  });
-
   const heading = t('createLoadingOrder.title');
   const subHeading = t('createLoadingOrder.subtitle');
-  const [driverArray, setDriverArray] = useState<Driver[]>([]);
-  const [rows, setRows] = useState<Row[]>([]);
-  const [selectedDriver, setSelectedDriver] = useState<string>(
-    localStorage.getItem('selected_driver') || '',
-  );
-
-  const [isDriverGridLoading, setIsDriverGridLoading] = useState(true);
-  const [isTableLoaded, setIsTableLoaded] = useState(false);
-  const [isSignatureLoaded, setIsSignatureLoaded] = useState(false);
-  const [alertText, setAlertText] = useState('');
-  const [alertOpen, setAlertOpen] = useState(false);
-  const [nextDisabled, setNextDisabled] = useState(true);
   const location = useLocation();
+  const navigate = useNavigate();
+  const columns = driverColDef;
+  const {
+    driverArray,
+    setDriverArray,
+    selectedDriver,
+    alertOpen,
+    alertText,
+    rows,
+    setRows,
+    setSelectedDriver,
+    isSignatureLoaded,
+    isTableLoaded,
+    setIsTableLoaded,
+    setAlertOpen,
+    setAlertText,
+    setIsDriverGridLoading,
+    setIsSignatureLoaded,
+    isDriverGridLoading,
+    nextDisabled,
+    setNextDisabled,
+    setDriverType,
+    driverType,
+  } = useSelectDriverState();
+  const {
+    currentStep,
+    steps,
+    decreaseSteps,
+    increaseSteps,
+    orderRoutes,
+    updateOrderRoutes,
+    updateStepsArray,
+  } = useContext(timelineContext);
 
-  function handleAlertClose() {
+  function clearLocalStorage() {
     localStorage.removeItem('selected_driver');
     localStorage.removeItem('currentStep');
+    localStorage.removeItem('selected_type');
+  }
+  function handleTableLoaded(value: boolean) {
+    setIsTableLoaded(value);
+  }
+  function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
+    setSelectedDriver(event.target.value);
+    localStorage.setItem('selected_driver', event.target.value);
+  }
+  function handleAlertClose() {
+    clearLocalStorage();
     setAlertOpen(false);
     navigate('/home');
   }
+  function handleTypeChange(type: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID') {
+    setDriverType(type);
+    localStorage.setItem('selected_type', type);
+    switch (type) {
+      case 'VAN-SELLER': {
+        updateStepsArray(vanSellerSteps);
+        updateOrderRoutes(vanSellerRoutes);
+        break;
+      }
+      case 'DELIVERY': {
+        updateStepsArray(deliverySteps);
+        updateOrderRoutes(deliveryRoutes);
+        break;
+      }
+      case 'HYBRID': {
+        updateStepsArray(hybridSteps);
+        updateOrderRoutes(hybridRoutes);
+        break;
+      }
+      default:
+        return;
+    }
+  }
 
-  const navigate = useNavigate();
+  function getRowId(row: Row) {
+    if (typeof row.productId === 'number') {
+      return row.productId;
+    } else {
+      throw new Error('row id should be number');
+    }
+  }
 
-  const {currentStep, steps, decreaseSteps, increaseSteps, orderRoutes} =
-    useContext(timelineContext) || {};
+  function buttonDisabled() {
+    if (currentStep == 2) {
+      setNextDisabled(rows.length === 0);
+    } else if (!localStorage.getItem('selected_driver')) {
+      setNextDisabled(true);
+    } else {
+      setNextDisabled(false);
+    }
+  }
 
   async function fetchDrivers() {
     let response: AxiosResponse<DriverApiResponse>;
@@ -105,38 +175,11 @@ function SelectDriver() {
     }
   }
 
-  function handleTableLoaded(value: boolean) {
-    setIsTableLoaded(value);
-  }
-
-  function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
-    setSelectedDriver(event.target.value);
-    localStorage.setItem('selected_driver', event.target.value);
-  }
-  function getRowId(row: Row) {
-    if (typeof row.productId === 'number') {
-      return row.productId;
-    } else {
-      throw new Error('row id should be number');
-    }
-  }
-
-  function buttonDisabled() {
-    if (currentStep == 2) {
-      setNextDisabled(rows.length === 0);
-    } else if (!localStorage.getItem('selected_driver')) {
-      setNextDisabled(true);
-    } else {
-      setNextDisabled(false);
-    }
-  }
-
   useEffect(() => {
     if (location.pathname == '/createloadingorder') {
       navigate(`${orderRoutes[currentStep - 1]}`);
     }
     buttonDisabled();
-
     return () => {
       setNextDisabled(true);
     };
@@ -145,56 +188,12 @@ function SelectDriver() {
   // API CALLS
   useEffect(() => {
     fetchDrivers();
+    handleTypeChange(driverType);
   }, []);
 
   useEffect(() => {
-    navigate(`${orderRoutes[currentStep - 1]}`);
+    navigate(orderRoutes[currentStep - 1]);
   }, [currentStep]);
-
-  // Table Column Definition
-  const columns: GridColDef[] = [
-    {
-      field: 'name',
-      headerName: t('table.product'),
-      flex: 0.7,
-      headerClassName: 'font-md',
-      // passing 'Product Icon' element to render cell function, so it is rendered instead of product name
-      renderCell: params => {
-        return (
-          <ProductIcon
-            productId={params.row.externalId}
-            productName={params.value}
-            productImage={params.row.imageSrc}
-          />
-        );
-      },
-      sortable: false,
-    },
-    {
-      field: 'description',
-      headerClassName: 'font-md',
-      headerName: t('table.description'),
-      flex: 0.8,
-      cellClassName: 'productText font-xsm',
-      sortable: false,
-    },
-    {
-      field: 'initialStock',
-      headerName: t('table.initialStock'),
-      headerClassName: 'font-md',
-      flex: 0.5,
-      cellClassName: 'stock font-sm',
-      sortable: false,
-    },
-    {
-      field: 'uom',
-      headerName: t('table.uom'),
-      headerClassName: 'font-md',
-      flex: 0.5,
-      cellClassName: 'productText font-sm',
-      sortable: false,
-    },
-  ];
 
   return (
     <Grid container className={'select-driver-screen'}>
@@ -246,6 +245,8 @@ function SelectDriver() {
                   handleTableLoaded,
                   rows,
                   setRows,
+                  driverType,
+                  handleTypeChange,
                 } satisfies DriverOutletContext
               }></Outlet>
             <br />

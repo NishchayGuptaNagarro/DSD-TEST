@@ -133,7 +133,7 @@ export default function Table({
           },
         [`& .${gridClasses.columnHeader}`]: {
           paddingLeft: 3,
-          fontWeight: styles.fontWeightBold,
+          fontWeight: styles.fontWeightBolder,
           color: styles.greyDarker,
         },
         ['.MuiDataGrid-footerContainer']: {

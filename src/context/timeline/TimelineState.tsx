@@ -1,21 +1,25 @@
 import {ReactNode, useState} from 'react';
 import TimelineContext from './timelineContext';
-import {useTranslation} from 'react-i18next';
+import {vanSellerSteps} from '../../utilities/timelineSteps.ts';
+import {vanSellerRoutes} from '../../utilities/timelineRoutes.ts';
 
 type UserProvidedProps = {
   children: ReactNode;
 };
 
 function TimelineState({children}: UserProvidedProps) {
-  const {t} = useTranslation();
+  const [steps, setSteps] = useState<string[]>(vanSellerSteps);
 
-  const steps: string[] = [
-    t('timeline.option1'),
-    t('timeline.option2'),
-    t('timeline.option3'),
-  ];
-  const orderRoutes: string[] = ['driver', 'order', 'signature'];
+  const [orderRoutes, setOrderRoutes] = useState<string[]>(vanSellerRoutes);
+
   const [currentStep, setCurrentStep] = useState<number>(1);
+
+  function updateStepsArray(steps: string[]) {
+    setSteps(steps);
+  }
+  function updateOrderRoutes(routes: string[]) {
+    setOrderRoutes(routes);
+  }
 
   //updateSteps will take the value and update the currentStep
   const updateSteps = (stepVal: number) => {
@@ -63,6 +67,8 @@ function TimelineState({children}: UserProvidedProps) {
         decreaseSteps,
         rememberSteps,
         orderRoutes,
+        updateStepsArray,
+        updateOrderRoutes,
       }}>
       {children}
     </TimelineContext.Provider>
