@@ -51,6 +51,7 @@ const OrderTable = () => {
           imageSrc: product.img.product_image,
           initialStock: product.quantity,
           uom: product.unit_of_measure,
+          quantity: product.quantity,
         };
         return parsedRes;
       });

@@ -10,7 +10,7 @@ Frontend for warehouse admin.
 4. Then go to 'http://localhost:5173'.
 5. app is also deployed on vercel, so you can also check it at 'https://ne-warehouse-admin.vercel.app/'
 
-## scripts:
+## Scripts:
 
 1. dev: Starts the development server using Vite.
 2. build: Compiles TypeScript code &  Builds the application for production using Vite.
