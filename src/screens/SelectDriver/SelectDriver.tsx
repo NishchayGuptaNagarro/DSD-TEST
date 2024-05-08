@@ -7,7 +7,7 @@ import {ChangeEvent, useContext, useEffect} from 'react';
 import {Outlet, useNavigate} from 'react-router';
 import {AxiosResponse} from 'axios';
 
-import Sidebar from '../../component/Sidebar/Sidebar.tsx';
+import Sidebar from 'component/Sidebar/Sidebar.tsx';
 import PageHeading from '../../component/PageHeading/PageHeading.tsx';
 
 import Timeline from '../../component/Timeline/Timeline.tsx';
