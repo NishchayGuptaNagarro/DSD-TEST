@@ -5,7 +5,6 @@ export interface Product extends Row {
   name: string;
   description: string;
   imageSrc: string;
-  initialStock: number;
   uom: string;
   quantity: number;
 }

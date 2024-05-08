@@ -5,7 +5,7 @@ This is not a pure component and is only made for select driver screen.
 ### Inclusion
 
 ```
-import './screens/SelectDriver/DeliveryTable/DeliveryTable.tsx'
+import './screens/StockCheckOut/DeliveryTable/DeliveryTable.tsx'
  
  <DeliveryTable />
 ```

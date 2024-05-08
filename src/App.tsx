@@ -15,24 +15,24 @@ import enJSON from 'resources/labels/en.json';
 import frJSON from 'resources/labels/fr.json';
 import ProtectedRoute from 'component/ProtectedRoute/ProtectedRoute.tsx';
 
-const AvailableStock = lazy(() => import('screens/Home/Home.tsx'));
+const Home = lazy(() => import('screens/Home/Home.tsx'));
 const ForgotPassword = lazy(
   () => import('screens/ForgotPassword/ForgotPassword.tsx'),
 );
 const DriverNameGrid = lazy(
-  () => import('screens/SelectDriver/DriverNameGrid/DriverNameGrid.tsx'),
+  () => import('screens/StockCheckOut/DriverNameGrid/DriverNameGrid.tsx'),
 );
-const SelectDriverScreen = lazy(
-  () => import('screens/SelectDriver/SelectDriver.tsx'),
+const StockCheckoutScreen = lazy(
+  () => import('screens/StockCheckOut/StockCheckOut.tsx'),
 );
 const DriverSignatureForm = lazy(
-  () => import('screens/SelectDriver/DriverSignature/DriverSignature.tsx'),
+  () => import('screens/StockCheckOut/DriverSignature/DriverSignature.tsx'),
 );
 const OrderTable = lazy(
-  () => import('screens/SelectDriver/OrderTable/OrderTable.tsx'),
+  () => import('screens/StockCheckOut/OrderTable/OrderTable.tsx'),
 );
 const DeliveryTable = lazy(
-  () => import('screens/SelectDriver/DeliveryTable/DeliveryTable.tsx'),
+  () => import('screens/StockCheckOut/DeliveryTable/DeliveryTable.tsx'),
 );
 
 i18n.use(initReactI18next).init({
@@ -70,7 +70,7 @@ function App() {
                 element={
                   <Suspense fallback={<Loading />}>
                     <ProtectedRoute>
-                      <AvailableStock />
+                      <Home />
                     </ProtectedRoute>
                   </Suspense>
                 }
@@ -85,11 +85,11 @@ function App() {
                 }
               />
               <Route
-                path="/createloadingorder"
+                path="/stock-check-out"
                 element={
                   <Suspense fallback={<Loading />}>
                     <ProtectedRoute>
-                      <SelectDriverScreen />
+                      <StockCheckoutScreen />
                     </ProtectedRoute>
                   </Suspense>
                 }>

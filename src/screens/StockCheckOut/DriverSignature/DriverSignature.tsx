@@ -11,11 +11,11 @@ import {SignatureApiResponse} from './propTypes/types.ts';
 import {api} from 'axios/api.ts';
 import {useTranslation} from 'react-i18next';
 import {useOutletContext} from 'react-router-dom';
-import {DriverOutletContext} from '../propTypes/types.ts';
+import {StockCheckOutContext} from '../propTypes/types.ts';
 
 function DriverSignature() {
   const {isSignatureLoaded, setIsSignatureLoaded} =
-    useOutletContext<DriverOutletContext>();
+    useOutletContext<StockCheckOutContext>();
   const [showLoading, setShowLoading] = useState(false);
   const actions = ['driversignature.action1', 'driversignature.action2']; //More actions can be added to this array in future
   const [signatureURL, setSignatureURL] = useState('');

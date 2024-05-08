@@ -4,22 +4,22 @@ import Paper from '@mui/material/Paper';
 
 import {ChangeEvent, useContext, useEffect} from 'react';
 import {Outlet, useNavigate} from 'react-router';
+import {useLocation} from 'react-router-dom';
+
+import {useTranslation} from 'react-i18next';
 import {AxiosResponse} from 'axios';
 
 import PageHeading from 'component/PageHeading/PageHeading.tsx';
-
 import Timeline from 'component/Timeline/Timeline.tsx';
 import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
+import BlackButton from 'component/BlackButton/BlackButton.tsx';
+import ScreenLayout from 'component/ScreenLayout/ScreenLayout.tsx';
+import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
 import timelineContext from 'context/timeline/timelineContext.ts';
 import {api} from 'axios/api.ts';
-import {DriverApiResponse, DriverOutletContext} from './propTypes/types.ts';
-
-import './SelectDriver.scss';
-import {useTranslation} from 'react-i18next';
-import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
-import {Driver} from 'models/driver.ts';
 import {checkApiError} from 'utilities/checkApiError.ts';
-import {useLocation} from 'react-router-dom';
+import {Driver} from 'models/driver.ts';
+import {DriverApiResponse, StockCheckOutContext} from './propTypes/types.ts';
 import {
   deliverySteps,
   hybridSteps,
@@ -30,11 +30,10 @@ import {
   hybridRoutes,
   vanSellerRoutes,
 } from 'utilities/timelineRoutes.ts';
-import {useSelectDriverState} from './useSelectDriverState.ts';
-import BlackButton from 'component/BlackButton/BlackButton.tsx';
-import ScreenLayout from 'component/ScreenLayout/ScreenLayout.tsx';
+import {useStockCheckOutState} from './useStockCheckOutState.ts';
+import './StockCheckOut.scss';
 
-function SelectDriver() {
+function StockCheckOut() {
   const {t} = useTranslation();
   const heading = t('createLoadingOrder.title');
   const subHeading = t('createLoadingOrder.subtitle');
@@ -62,7 +61,7 @@ function SelectDriver() {
     setNextDisabled,
     setDriverType,
     driverType,
-  } = useSelectDriverState();
+  } = useStockCheckOutState();
   const {
     currentStep,
     steps,
@@ -209,7 +208,7 @@ function SelectDriver() {
   };
 
   useEffect(() => {
-    if (location.pathname == '/createloadingorder') {
+    if (location.pathname == '/stock-check-out') {
       navigate(`${orderRoutes[currentStep - 1]}`);
     }
     buttonDisabled();
@@ -258,7 +257,7 @@ function SelectDriver() {
             context={
               {
                 ...contextObj,
-              } satisfies DriverOutletContext
+              } satisfies StockCheckOutContext
             }></Outlet>
           <br />
           <br />
@@ -296,4 +295,4 @@ function SelectDriver() {
   );
 }
 
-export default SelectDriver;
+export default StockCheckOut;

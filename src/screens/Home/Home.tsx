@@ -139,7 +139,7 @@ function Home() {
             variant="contained"
             size="large"
             component={Link}
-            to="/createloadingorder">
+            to="/stock-check-out">
             {t('availablestock.button')}
           </Button>
         </Box>

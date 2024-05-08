@@ -3,7 +3,7 @@ import {useState} from 'react';
 import {Driver} from 'models/driver.ts';
 import {Row} from 'component/Table/propTypes/types.ts';
 
-export function useSelectDriverState(): SelectDriverStates {
+export function useStockCheckOutState(): SelectDriverStates {
   const [driverArray, setDriverArray] = useState<Driver[]>([]);
   function loadInitialType() {
     const initialType = localStorage.getItem('selected_type');

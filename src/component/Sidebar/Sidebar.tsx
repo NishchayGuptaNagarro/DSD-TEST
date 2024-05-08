@@ -43,7 +43,7 @@ function Sidebar() {
       subOptionRight: 'My warehouse assign orders',
       icon: Orders,
       isOpen: false,
-      path: '/createloadingorder',
+      path: '/stock-check-out',
     },
   ]);
 

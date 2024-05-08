@@ -5,11 +5,12 @@ import {useEffect, useState} from 'react';
 import {useOutletContext} from 'react-router-dom';
 
 import Table from 'component/Table/Table.tsx';
-import {DriverOutletContext} from '../propTypes/types.ts';
+import {deliveryColDef} from './DeliveryColDef/DeliveryColDef.tsx';
+import ProductsTable from 'screens/StockCheckOut/ProductsTable/ProductsTable.tsx';
+
+import {StockCheckOutContext} from '../propTypes/types.ts';
 import {DeliveryTableRow} from './propTypes/types.ts';
 import {Row} from 'component/Table/propTypes/types.ts';
-import {deliveryColDef} from './DeliveryColDef/DeliveryColDef.tsx';
-import ProductsTable from 'screens/SelectDriver/ProductsTable/ProductsTable.tsx';
 import {Product} from 'models/product.ts';
 import './DeliveryTable.scss';
 
@@ -28,7 +29,6 @@ function DeliveryTable() {
           name: 'Stapler',
           description: 'Heavy-duty stapler',
           imageSrc: 'data:image/png;base64,yourBase64EncodedImageHere',
-          initialStock: 20,
           uom: 'pcs',
           quantity: 1000,
         },
@@ -38,7 +38,6 @@ function DeliveryTable() {
           name: 'Staples',
           description: 'Box of 1000 staples',
           imageSrc: 'data:image/png;base64,anotherBase64EncodedImageHere',
-          initialStock: 50,
           uom: 'boxes',
           quantity: 1000,
         },
@@ -58,7 +57,6 @@ function DeliveryTable() {
           name: 'Mug',
           description: 'Ceramic mug',
           imageSrc: 'data:image/png;base64,yourMugImageHere',
-          initialStock: 1,
           uom: 'pcs',
           quantity: 1000,
         },
@@ -68,7 +66,6 @@ function DeliveryTable() {
           name: 'Mug',
           description: 'Ceramic mug',
           imageSrc: 'data:image/png;base64,yourMugImageHere',
-          initialStock: 1,
           uom: 'pcs',
           quantity: 1000,
         },
@@ -86,7 +83,6 @@ function DeliveryTable() {
           name: 'Coffee',
           description: 'Ground coffee beans',
           imageSrc: 'data:image/png;base64,yourCoffeeImageHere',
-          initialStock: 10,
           uom: 'bags',
           quantity: 100,
         },
@@ -96,7 +92,6 @@ function DeliveryTable() {
           name: 'Mug',
           description: 'Ceramic mug',
           imageSrc: 'data:image/png;base64,yourMugImageHere',
-          initialStock: 1,
           uom: 'pcs',
           quantity: 1000,
         },
@@ -105,7 +100,7 @@ function DeliveryTable() {
   ];
   //END OF DUMMY DATA ----------------
   const {isTableLoaded, handleTableLoaded, setRows, rows} =
-    useOutletContext<DriverOutletContext>();
+    useOutletContext<StockCheckOutContext>();
   const [productArray, setProductArray] = useState<Product[]>([]);
   const [showModal, setShowModal] = useState(false);
 

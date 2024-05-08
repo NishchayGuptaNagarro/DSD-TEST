@@ -1,10 +1,10 @@
 import {GridColDef} from '@mui/x-data-grid';
 import {useTranslation} from 'react-i18next';
 
-import {ProductTableProps} from './propTypes/types.ts';
 import ProductIcon from 'component/ProductIcon/ProductIcon.tsx';
 import Table from 'component/Table/Table.tsx';
-import {Row} from 'component/Table/propTypes/types.ts';
+import {ProductTableProps} from './propTypes/types.ts';
+import {getProductRowId} from 'utilities/getProductRowId.ts';
 
 function ProductsTable({products}: ProductTableProps) {
   const {t} = useTranslation();
@@ -55,18 +55,9 @@ function ProductsTable({products}: ProductTableProps) {
     },
   ];
 
-  // This function returns a row's unique ID
-  function getRowId(row: Row) {
-    if (typeof row.productId === 'number') {
-      return row.productId;
-    } else {
-      throw new Error('row id should be number');
-    }
-  }
-
   return (
     <Table
-      getRowId={getRowId}
+      getRowId={getProductRowId}
       columns={columns}
       rows={products}
       showLoading={false}

@@ -3,7 +3,7 @@ import {GridColDef, GridColumnHeaderParams} from '@mui/x-data-grid';
 import ProductIcon from '../../../../component/ProductIcon/ProductIcon.tsx';
 import ColumnHeader from '../../../../component/ColumnHeader/ColumnHeader.tsx';
 
-export const driverColDef: GridColDef[] = [
+export const orderColDef: GridColDef[] = [
   {
     field: 'name',
     headerName: 'table.product',
@@ -36,7 +36,7 @@ export const driverColDef: GridColDef[] = [
     sortable: false,
   },
   {
-    field: 'initialStock',
+    field: 'quantity',
     headerName: 'table.initialStock',
     renderHeader: (params: GridColumnHeaderParams) => {
       return <ColumnHeader headerName={params.colDef.headerName || ''} />;

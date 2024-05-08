@@ -2,16 +2,15 @@
 import {DriverNameGridProps} from '../DriverNameGrid/propTypes/types.ts';
 import {OrderTableProps} from '../OrderTable/propTypes/types.ts';
 import {DriverSignatureProps} from '../DriverSignature/propTypes/types.ts';
-import {Driver} from '../../../models/driver.ts';
+import {Driver} from 'models/driver.ts';
 import {Dispatch, SetStateAction} from 'react';
-import {Row} from '../../../component/Table/propTypes/types.ts';
+import {Row} from 'component/Table/propTypes/types.ts';
 
-// Interface for screen outlet context provider
-export interface DriverOutletContext
+// Interface for outlet context provider
+export interface StockCheckOutContext
   extends DriverNameGridProps,
     OrderTableProps,
     DriverSignatureProps {}
-
 // Interface for driver api response
 interface ApiDriverData {
   username: string;
