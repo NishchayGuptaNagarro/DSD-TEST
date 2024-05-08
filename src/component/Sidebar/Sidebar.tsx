@@ -72,7 +72,6 @@ function Sidebar() {
 
   const navigateTo = (path: string) => {
     navigate(path);
-    console.log(path);
   };
   function handleSignOut() {
     localStorage.clear();

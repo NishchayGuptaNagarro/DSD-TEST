@@ -17,3 +17,11 @@ export const deliverySteps = [
   'timeline.option2',
   'timeline.option3',
 ];
+
+export const checkInSteps = [
+  'timeline.option6',
+  'timeline.option7',
+  'timeline.option8',
+  'timeline.option9',
+  'timeline.option10',
+];

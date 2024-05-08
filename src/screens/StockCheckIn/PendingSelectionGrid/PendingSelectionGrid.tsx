@@ -1,18 +1,16 @@
-import {StockCheckOutContext} from '../propTypes/types.ts';
-
 import {useOutletContext} from 'react-router-dom';
+import {StockCheckInContext} from '../propTypes/types.ts';
 import DriverSelectionGrid from 'component/DriverSelectionGrid/DriverSelectionGrid.tsx';
 
-function DriverNameGrid() {
-  // Getting required props from outlet context
+function PendingSelectionGrid() {
   const {
     isDriverGridLoading,
-    driverArray,
     selectedDriverId,
     handleDriverSelection,
     driverType,
     handleTypeChange,
-  } = useOutletContext<StockCheckOutContext>();
+    driverArray,
+  } = useOutletContext<StockCheckInContext>();
 
   return (
     <DriverSelectionGrid
@@ -26,4 +24,4 @@ function DriverNameGrid() {
   );
 }
 
-export default DriverNameGrid;
+export default PendingSelectionGrid;

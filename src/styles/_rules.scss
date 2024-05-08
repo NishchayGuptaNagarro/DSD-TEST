@@ -93,3 +93,11 @@
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+.position-bottom{
+  display: flex;
+  position: absolute;
+  width: 98%;
+  bottom: 5px;
+  justify-content: space-between;
+}

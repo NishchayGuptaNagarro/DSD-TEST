@@ -1,8 +1,8 @@
-import {ChangeEvent, MouseEvent} from 'react';
 import {Driver} from 'models/driver.ts';
+import {ChangeEvent, MouseEvent} from 'react';
+import {driverTypes} from 'models/driverTypes.ts';
 
-// Prop types of DriverNameGrid component
-export interface DriverNameGridProps {
+export interface DriverSelectionGridProps {
   isDriverGridLoading: boolean;
   driverArray: Driver[];
   selectedDriverId: string;
@@ -10,16 +10,15 @@ export interface DriverNameGridProps {
     | ((event: ChangeEvent<HTMLInputElement>) => void)
     | (() => void);
 
-  driverType: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID';
-  handleTypeChange: (type: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID') => void;
+  driverType: driverTypes;
+  handleTypeChange: (type: driverTypes) => void;
 }
-
 // Props for Driver Name Grid Header
 export interface DriverNameGridHeaderProps {
-  driverType: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID';
+  driverType: driverTypes;
   handleDriverTypeChange: (
     _: MouseEvent<HTMLElement>,
-    value: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID',
+    value: driverTypes,
   ) => void;
   searchDriver: (searchText: string) => void;
 }

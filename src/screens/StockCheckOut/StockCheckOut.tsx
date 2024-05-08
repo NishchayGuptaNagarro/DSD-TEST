@@ -221,6 +221,9 @@ function StockCheckOut() {
   useEffect(() => {
     fetchDrivers();
     handleTypeChange(driverType);
+    return () => {
+      clearLocalStorage();
+    };
   }, []);
 
   useEffect(() => {

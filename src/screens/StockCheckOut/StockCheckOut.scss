@@ -16,10 +16,6 @@
     @extend .language-selection-dropdown
   }
   .buttons-group {
-    display: flex;
-    position: absolute;
-    width: 98%;
-    bottom: 5px;
-    justify-content: space-between;
+   @extend .position-bottom
   }
 }

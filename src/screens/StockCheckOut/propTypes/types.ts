@@ -1,20 +1,21 @@
 // Generic driver interface
-import {DriverNameGridProps} from '../DriverNameGrid/propTypes/types.ts';
 import {OrderTableProps} from '../OrderTable/propTypes/types.ts';
 import {DriverSignatureProps} from '../DriverSignature/propTypes/types.ts';
 import {Driver} from 'models/driver.ts';
 import {Dispatch, SetStateAction} from 'react';
 import {Row} from 'component/Table/propTypes/types.ts';
+import {DriverSelectionGridProps} from 'component/DriverSelectionGrid/propTypes/types.ts';
+import {driverTypes} from 'models/driverTypes.ts';
 
 // Interface for outlet context provider
 export interface StockCheckOutContext
-  extends DriverNameGridProps,
+  extends DriverSelectionGridProps,
     OrderTableProps,
     DriverSignatureProps {}
 // Interface for driver api response
 interface ApiDriverData {
   username: string;
-  business_role_id: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID';
+  business_role_id: driverTypes;
   user_id: string;
   business_partner_id: string;
   creation_date: string;
@@ -78,6 +79,6 @@ export interface SelectDriverStates {
   setAlertOpen: Dispatch<SetStateAction<boolean>>;
   nextDisabled: boolean;
   setNextDisabled: Dispatch<SetStateAction<boolean>>;
-  driverType: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID';
-  setDriverType: Dispatch<SetStateAction<'VAN-SELLER' | 'DELIVERY' | 'HYBRID'>>;
+  driverType: driverTypes;
+  setDriverType: Dispatch<SetStateAction<driverTypes>>;
 }

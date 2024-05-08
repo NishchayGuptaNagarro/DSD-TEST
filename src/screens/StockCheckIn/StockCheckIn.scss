@@ -1,0 +1,10 @@
+@import "src/styles/design-systems.module";
+
+.stock-check-in{
+  .language-select{
+    @extend .language-selection-dropdown;
+  }
+  .buttons-group{
+    @extend .position-bottom;
+  }
+}

@@ -34,6 +34,15 @@ const OrderTable = lazy(
 const DeliveryTable = lazy(
   () => import('screens/StockCheckOut/DeliveryTable/DeliveryTable.tsx'),
 );
+const StockCheckInScreen = lazy(
+  () => import('screens/StockCheckIn/StockCheckIn.tsx'),
+);
+const PendingCheckInSelection = lazy(
+  () =>
+    import(
+      'screens/StockCheckIn/PendingSelectionGrid/PendingSelectionGrid.tsx'
+    ),
+);
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -123,7 +132,26 @@ function App() {
                     <Suspense fallback={<Loading />}>
                       <DriverSignatureForm />
                     </Suspense>
-                  }></Route>
+                  }
+                />
+              </Route>
+              <Route
+                path="/stock-check-in"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <ProtectedRoute>
+                      <StockCheckInScreen />
+                    </ProtectedRoute>
+                  </Suspense>
+                }>
+                <Route
+                  path="driver"
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <PendingCheckInSelection />
+                    </Suspense>
+                  }
+                />
               </Route>
             </Routes>
           </BrowserRouter>
