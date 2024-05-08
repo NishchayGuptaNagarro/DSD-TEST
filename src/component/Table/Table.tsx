@@ -127,7 +127,7 @@ export default function Table({
           paddingBottom: 0.4,
           paddingLeft: 3,
         },
-        [`& .${gridClasses.cell}:focus, & .${gridClasses.columnHeader}:focus`]:
+        [`& .${gridClasses.cell}:focus, .${gridClasses.cell}:focus-within,  & .${gridClasses.columnHeader}:focus`]:
           {
             outline: 0,
           },

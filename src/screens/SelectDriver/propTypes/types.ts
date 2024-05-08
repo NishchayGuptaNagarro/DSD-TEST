@@ -43,7 +43,7 @@ interface ApiProductData {
   external_id: string;
   category_id: string;
   updated_at: string;
-  quantity: string;
+  quantity: number;
   img: ApiProductImage;
 }
 

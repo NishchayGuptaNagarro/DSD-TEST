@@ -5,11 +5,10 @@ This is not a pure component and is only made for select driver screen.
 ### Inclusion
 
 ```
-import /component/OrderTable/OrderTable.tsx';
+import './screens/SelectDriver/DeliveryTable/DeliveryTable.tsx'
  
- <OrderTable />
+ <DeliveryTable />
 ```
 
 ### Use Case Description
-1. Used to display assigned stock in van seller journey.
-
+1. Used to display orders in delivery journey.

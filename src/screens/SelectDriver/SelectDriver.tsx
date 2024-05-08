@@ -15,7 +15,6 @@ import LanguageSelect from '../../component/LanguageSelect/LanguageSelect.tsx';
 import timelineContext from '../../context/timeline/timelineContext.ts';
 import {api} from '../../axios/api.ts';
 import {DriverApiResponse, DriverOutletContext} from './propTypes/types.ts';
-import {Row} from '../../component/Table/propTypes/types.ts';
 
 import './SelectDriver.scss';
 import {useTranslation} from 'react-i18next';
@@ -34,7 +33,6 @@ import {
   vanSellerRoutes,
 } from '../../utilities/timelineRoutes.ts';
 import {useSelectDriverState} from './useSelectDriverState.ts';
-import {driverColDef} from './DriverColDef/DriverColDef.tsx';
 import BlackButton from '../../component/BlackButton/BlackButton.tsx';
 
 function SelectDriver() {
@@ -43,7 +41,7 @@ function SelectDriver() {
   const subHeading = t('createLoadingOrder.subtitle');
   const location = useLocation();
   const navigate = useNavigate();
-  const columns = driverColDef;
+
   const {
     driverArray,
     setDriverArray,
@@ -78,6 +76,7 @@ function SelectDriver() {
 
   function clearLocalStorage() {
     localStorage.removeItem('selected_driver');
+    localStorage.removeItem('selected_driver_type');
     localStorage.removeItem('currentStep');
     localStorage.removeItem('selected_type');
   }
@@ -87,6 +86,10 @@ function SelectDriver() {
   function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
     setSelectedDriver(event.target.value);
     localStorage.setItem('selected_driver', event.target.value);
+    localStorage.setItem(
+      'selected_driver_type',
+      localStorage.getItem('selected_type') || '',
+    );
   }
   function handleAlertClose() {
     clearLocalStorage();
@@ -117,21 +120,37 @@ function SelectDriver() {
     }
   }
 
-  function getRowId(row: Row) {
-    if (typeof row.productId === 'number') {
-      return row.productId;
-    } else {
-      throw new Error('row id should be number');
-    }
-  }
-
   function buttonDisabled() {
-    if (currentStep == 2) {
-      setNextDisabled(rows.length === 0);
-    } else if (!localStorage.getItem('selected_driver')) {
-      setNextDisabled(true);
-    } else {
-      setNextDisabled(false);
+    const selectedDriver = localStorage.getItem('selected_driver');
+    const selectedDriverType = localStorage.getItem('selected_driver_type');
+
+    switch (driverType) {
+      case 'VAN-SELLER': {
+        if (currentStep == 2) {
+          setNextDisabled(rows.length === 0);
+        } else if (!selectedDriver) {
+          setNextDisabled(true);
+        } else {
+          setNextDisabled(selectedDriverType !== 'VAN-SELLER');
+        }
+        break;
+      }
+      case 'DELIVERY': {
+        if (currentStep == 2) {
+          setNextDisabled(true);
+        } else if (!selectedDriver) {
+          setNextDisabled(true);
+        } else {
+          setNextDisabled(selectedDriverType !== 'DELIVERY');
+        }
+        break;
+      }
+      case 'HYBRID': {
+        setNextDisabled(true);
+        break;
+      }
+      default:
+        return;
     }
   }
 
@@ -174,6 +193,21 @@ function SelectDriver() {
       console.log(error);
     }
   }
+
+  const contextObj = {
+    driverArray,
+    selectedDriverId: selectedDriver,
+    handleDriverSelection,
+    isSignatureLoaded,
+    setIsSignatureLoaded,
+    isDriverGridLoading,
+    isTableLoaded,
+    handleTableLoaded,
+    rows,
+    setRows,
+    driverType,
+    handleTypeChange,
+  };
 
   useEffect(() => {
     if (location.pathname == '/createloadingorder') {
@@ -233,20 +267,7 @@ function SelectDriver() {
             <Outlet
               context={
                 {
-                  driverArray,
-                  selectedDriverId: selectedDriver,
-                  handleDriverSelection,
-                  columns,
-                  getRowId,
-                  isSignatureLoaded,
-                  setIsSignatureLoaded,
-                  isDriverGridLoading,
-                  isTableLoaded,
-                  handleTableLoaded,
-                  rows,
-                  setRows,
-                  driverType,
-                  handleTypeChange,
+                  ...contextObj,
                 } satisfies DriverOutletContext
               }></Outlet>
             <br />

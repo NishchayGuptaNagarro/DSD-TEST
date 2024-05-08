@@ -9,13 +9,21 @@ import {api} from '../../../axios/api.ts';
 import {checkApiError} from '../../../utilities/checkApiError.ts';
 import timelineContext from '../../../context/timeline/timelineContext.ts';
 import AlertDialog from '../../../component/AlertDialog/AlertDialog.tsx';
+import {driverColDef} from './DriverColDef/DriverColDef.tsx';
+import {Product} from '../../../models/product.ts';
 
 const OrderTable = () => {
-  const {columns, getRowId, isTableLoaded, handleTableLoaded, setRows, rows} =
+  const {isTableLoaded, handleTableLoaded, setRows, rows} =
     useOutletContext<DriverOutletContext>();
   const {decreaseSteps} = useContext(timelineContext);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-
+  function getRowId(row: Row) {
+    if (typeof row.productId === 'number') {
+      return row.productId;
+    } else {
+      throw new Error('row id should be number');
+    }
+  }
   function handleDialogDismiss() {
     decreaseSteps();
   }
@@ -35,12 +43,12 @@ const OrderTable = () => {
 
       checkApiError(response);
       products = response.data.data.map(product => {
-        const parsedRes: Row = {
+        const parsedRes: Product = {
           productId: Number(product.product_id),
           externalId: product.external_id,
           name: product.description,
           description: product.description,
-          imageSrc: 'data:image/png;base64,' + product.img.product_image,
+          imageSrc: product.img.product_image,
           initialStock: product.quantity,
           uom: product.unit_of_measure,
         };
@@ -72,7 +80,7 @@ const OrderTable = () => {
       <Table
         showLoading={!isTableLoaded}
         rows={rows}
-        columns={columns}
+        columns={driverColDef}
         getRowId={getRowId}
       />
     </>
