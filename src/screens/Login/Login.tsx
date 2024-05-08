@@ -3,6 +3,9 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import {Typography} from '@mui/material';
 import Button from '@mui/material/Button';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import IconButton from '@mui/material/IconButton';
 
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
@@ -15,12 +18,16 @@ import LanguageSelect from '../../component/LanguageSelect/LanguageSelect.tsx';
 import {api} from '../../axios/api';
 import {LoginApiResponse} from './propTypes/types.ts';
 import './Login.scss';
-import logo from '../../assets/Logo.svg';
+import banner from '../../assets/WEBP/Login-Page-Banner.webp';
+import logo from '../../assets/SVG/Logo.svg';
 import {useTranslation} from 'react-i18next';
-import {isTokenValid} from '../../functions/isTokenValid.ts';
+import {isTokenValid} from '../../utilities/isTokenValid.ts';
+import {checkApiError} from '../../utilities/checkApiError.ts';
+import styles from '../../styles/design-systems.module.scss';
 
 function Login() {
   const [apiError, setApiError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const navigator = useNavigate();
   const {t} = useTranslation();
   const user = localStorage.getItem('user');
@@ -34,20 +41,18 @@ function Login() {
       const res: AxiosResponse<LoginApiResponse> = await api.post(
         'accounts/login',
         {
-          email: values.userId,
+          email_or_username: values.userId,
           password: values.password,
         },
       );
+      checkApiError(res);
       const responseData = res.data;
-      if (responseData.status_code == 200 && responseData.data) {
-        localStorage.setItem('access_token', responseData.data.access_token);
-        const user = jwtDecode(responseData.data.access_token);
 
-        localStorage.setItem('user', JSON.stringify(user));
-        navigator('/availablestock');
-      } else {
-        throw new Error(responseData.msg);
-      }
+      localStorage.setItem('access_token', responseData.data.access_token);
+      const user = jwtDecode(responseData.data.access_token);
+
+      localStorage.setItem('user', JSON.stringify(user));
+      navigator('/home');
     } catch (error) {
       console.log(error);
       if (error instanceof Error) {
@@ -58,7 +63,7 @@ function Login() {
 
   useEffect(() => {
     if (user && isTokenValid(user)) {
-      navigator('/availablestock');
+      navigator('/home');
     }
   }, []);
 
@@ -87,7 +92,7 @@ function Login() {
   } else {
     return (
       <>
-        <Grid container sx={{backgroundColor: 'white'}}>
+        <Grid container sx={{backgroundColor: styles.whitePure}}>
           <Grid item xs={6}>
             {/*Parent Stack containing Heading + Form heading + form */}
             <Stack padding={6.4} spacing={3}>
@@ -99,26 +104,26 @@ function Login() {
                 spacing={2}>
                 <img src={logo} width={'40px'} height={'40px'} alt={logo} />
                 <Typography
-                  className={'font-xl'}
+                  fontSize={styles.fontSizeXl}
                   component={'h1'}
-                  color={'rgb(52,52,57)'}
-                  fontWeight={700}>
+                  color={styles.charcoal}
+                  fontWeight={styles.fontWeightBold}>
                   NotionEdge
                 </Typography>
               </Stack>
               <Box textAlign={'center'} paddingTop={{xl: 8}}>
                 <Typography
-                  className={'font-xl'}
+                  fontSize={styles.fontSizeXl}
                   component={'h2'}
-                  color={'rgb(43,56,84)'}
-                  fontWeight={700}>
+                  color={styles.indigoDeep}
+                  fontWeight={styles.fontWeightBold}>
                   {t('login.title')}
                 </Typography>
                 <Typography
-                  className={'font-lg'}
+                  fontSize={styles.fontSizeLg}
                   component={'h3'}
-                  color={'rgb(146,155,173)'}
-                  fontWeight={400}>
+                  color={styles.greySoft}
+                  fontWeight={styles.fontWeightLight}>
                   {t('login.subtitle')}
                 </Typography>
               </Box>
@@ -141,9 +146,9 @@ function Login() {
                 {/*Error message -> To be displayed in case inputs are touched and there is error*/}
                 {userIdError && (
                   <Typography
-                    color={'error'}
+                    color={styles.redError}
                     marginTop={-2}
-                    className={'font-xsm'}>
+                    fontSize={styles.fontSizeXsm}>
                     {formik.errors.userId}
                   </Typography>
                 )}
@@ -152,29 +157,49 @@ function Login() {
                   htmlFor="login-form-password">
                   {t('login.password.label')}
                 </label>
+                <div className={'password-input-container'}>
+                  <input
+                    id="login-form-password"
+                    className={`form-input font-sm  ${passwordError ? 'form-input-error' : ''}`}
+                    type={showPassword ? 'text' : 'password'}
+                    name="password"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  {showPassword ? (
+                    <IconButton
+                      onClick={() => {
+                        setShowPassword(false);
+                      }}
+                      className={'eye-icon'}>
+                      <VisibilityOff fontSize={'small'} />
+                    </IconButton>
+                  ) : (
+                    <IconButton
+                      onClick={() => {
+                        setShowPassword(true);
+                      }}
+                      className={'eye-icon'}>
+                      <Visibility fontSize={'small'} />
+                    </IconButton>
+                  )}
+                </div>
 
-                <input
-                  id="login-form-password"
-                  className={`form-input font-sm  ${passwordError ? 'form-input-error' : ''}`}
-                  type="password"
-                  name="password"
-                  value={formik.values.password}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                />
+                {/*<VisibilityOff fontSize={'small'} />*/}
                 {passwordError && (
                   <Typography
                     marginTop={-2}
-                    color={'error'}
-                    className={'font-xsm'}>
+                    color={styles.redError}
+                    fontSize={styles.fontSizeXsm}>
                     {formik.errors.password}
                   </Typography>
                 )}
                 {apiError !== '' && (
                   <Typography
-                    color={'error'}
+                    color={styles.redError}
                     marginTop={-2}
-                    className={'font-xsm'}>
+                    fontSize={styles.fontSizeXsm}>
                     {apiError}
                   </Typography>
                 )}
@@ -223,7 +248,7 @@ function Login() {
               <span className={'login-language-select'}>
                 <LanguageSelect />
               </span>
-              <img className={'truck-image'} src="/truck.jpg" alt={'truck'} />
+              <img className={'responsive-image'} src={banner} alt={'truck'} />
               <div className={'transparent-textbox'}>
                 &#34;{t('login.quote')}&#34;
                 <br />

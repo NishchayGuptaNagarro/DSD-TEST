@@ -1,13 +1,7 @@
 // Generic driver interface
-import {DriverNameGridProps} from '../../../component/DriverNameGrid/propTypes/types.ts';
-import {OrderTableProps} from '../../../component/OrderTable/propTypes/types.ts';
-import {DriverSignatureProps} from '../../../component/DriverSignature/propTypes/types.ts';
-
-export interface Driver {
-  driverName: string;
-  driverId: string;
-  driverType: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID';
-}
+import {DriverNameGridProps} from '../DriverNameGrid/propTypes/types.ts';
+import {OrderTableProps} from '../OrderTable/propTypes/types.ts';
+import {DriverSignatureProps} from '../DriverSignature/propTypes/types.ts';
 
 // Interface for screen outlet context provider
 export interface DriverOutletContext
@@ -36,7 +30,6 @@ export interface DriverApiResponse {
 }
 
 //Interfaces for product API response
-
 interface ApiProductData {
   product_id: string;
   product_name: string;

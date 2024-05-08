@@ -1,0 +1,27 @@
+@import "src/styles/design-systems.module";
+//All driver name grid header related css must go inside this
+.driver-grid-header{
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  .select-text{
+    color:$grey-soft;
+    font-weight: $font-normal;
+    margin-right: 8px;
+  }
+  img{
+    height: 20px;
+    width: 20px;
+    margin-right: 5px;
+  }
+  .search-box{
+    border: 1px solid $border-grey-light;
+    height: 35px;
+    color: $border-grey-dark;
+    padding: 5px;
+    border-radius: 8px;
+    outline-color: $border-grey-dark;
+    margin-left: auto;
+    flex-basis: 200px;
+  }
+}

@@ -3,15 +3,22 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 import {PageHeadingProps} from './propTypes/types.ts';
+import styles from '../../styles/design-systems.module.scss';
 
 function PageHeading({heading, subHeading}: PageHeadingProps) {
   return (
     <>
-      <Box sx={{color: '#344767'}} marginBottom={2}>
-        <Typography className={'font-lg'} variant="h2" fontWeight={700}>
+      <Box sx={{color: styles.blueSteel}} marginBottom={2}>
+        <Typography
+          variant="h2"
+          fontSize={styles.fontSizeLg}
+          fontWeight={styles.fontWeightBold}>
           {heading}
         </Typography>
-        <Typography className={'font-sm'} variant="h3" fontWeight={400}>
+        <Typography
+          fontSize={styles.fontSizeMd}
+          variant="h3"
+          fontWeight={styles.fontWeightLight}>
           {subHeading}
         </Typography>
       </Box>

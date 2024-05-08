@@ -1,0 +1,95 @@
+.language-selection-dropdown{
+  position: absolute;
+  right:10px ;
+  top:2px;
+}
+
+//IMPORTANT! Only these classes should be used for defining font size of each element so we can use media queries in future to add responsiveness
+.font-xl{
+  font-size: $font-xl;
+}
+.font-lg{
+  font-size: $font-lg; //18px
+}
+.font-md{
+  font-size: $font-md; //16px
+}
+.font-sm{
+  font-size: $font-sm ; //14px
+}
+.font-xsm{
+  font-size: $font-xsm ; //12px
+}
+
+//Can be used to center anything
+.center-element {
+  @include center-element;
+}
+
+.responsive-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.transparent-textbox{
+  background-color: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 1);
+  font-weight: 300;
+  position: absolute;
+  z-index: 1;
+  bottom: 5%;
+  left:10px;
+  right: 10px;
+  padding: 10px 15px 20px 15px;
+  border-radius: 4px;
+}
+
+%common-form-rules{
+  .form-label{
+    font-weight: $font-bolder;
+    color: $blue-steel;
+    &.form-label-error{
+      color:$red-error;
+    }
+  }
+  .form-input {
+    color: $blue-steel;
+    background-color: $bg-white-smoke;
+    border: none;
+    height: 40px;
+    border-radius: 4px;
+    font-weight: $font-light;
+    padding: 0 10px;
+    margin-bottom: 5px;
+    width: 100%;
+    &[type='password'] {
+      font-weight: $font-boldest;
+    }
+    &:focus-visible {
+      outline-color: $blue-steel;
+    }
+  }
+  .form-input-error{
+    outline: 1px solid $red-error !important;
+    //  Reason for adding 'important' to this property was that outline was being override on focus visible
+    //  but it should stay red until error is resolved
+  }
+  .form-checkbox {
+    margin-right: 5px;
+    cursor: pointer;
+    transform: scale(1.2);
+  }
+  .form-checkbox-label {
+    color: $blue-steel;
+  }
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
