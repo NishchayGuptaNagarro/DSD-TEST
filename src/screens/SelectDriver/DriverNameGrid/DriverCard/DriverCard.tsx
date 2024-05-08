@@ -7,7 +7,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Box from '@mui/material/Box';
 
 import './DriverCard.scss';
-import styles from '../../../../styles/design-systems.module.scss';
+import styles from 'styles/design-systems.module.scss';
 import {DriverCardProps} from './propTypes/types.ts';
 
 function DriverCard({driver, selectedDriverId}: DriverCardProps) {

@@ -1,4 +1,3 @@
-import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -7,33 +6,33 @@ import {ChangeEvent, useContext, useEffect} from 'react';
 import {Outlet, useNavigate} from 'react-router';
 import {AxiosResponse} from 'axios';
 
-import Sidebar from 'component/Sidebar/Sidebar.tsx';
-import PageHeading from '../../component/PageHeading/PageHeading.tsx';
+import PageHeading from 'component/PageHeading/PageHeading.tsx';
 
-import Timeline from '../../component/Timeline/Timeline.tsx';
-import LanguageSelect from '../../component/LanguageSelect/LanguageSelect.tsx';
-import timelineContext from '../../context/timeline/timelineContext.ts';
-import {api} from '../../axios/api.ts';
+import Timeline from 'component/Timeline/Timeline.tsx';
+import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
+import timelineContext from 'context/timeline/timelineContext.ts';
+import {api} from 'axios/api.ts';
 import {DriverApiResponse, DriverOutletContext} from './propTypes/types.ts';
 
 import './SelectDriver.scss';
 import {useTranslation} from 'react-i18next';
-import AlertDialog from '../../component/AlertDialog/AlertDialog.tsx';
-import {Driver} from '../../models/driver.ts';
-import {checkApiError} from '../../utilities/checkApiError.ts';
+import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
+import {Driver} from 'models/driver.ts';
+import {checkApiError} from 'utilities/checkApiError.ts';
 import {useLocation} from 'react-router-dom';
 import {
   deliverySteps,
   hybridSteps,
   vanSellerSteps,
-} from '../../utilities/timelineSteps.ts';
+} from 'utilities/timelineSteps.ts';
 import {
   deliveryRoutes,
   hybridRoutes,
   vanSellerRoutes,
-} from '../../utilities/timelineRoutes.ts';
+} from 'utilities/timelineRoutes.ts';
 import {useSelectDriverState} from './useSelectDriverState.ts';
-import BlackButton from '../../component/BlackButton/BlackButton.tsx';
+import BlackButton from 'component/BlackButton/BlackButton.tsx';
+import ScreenLayout from 'component/ScreenLayout/ScreenLayout.tsx';
 
 function SelectDriver() {
   const {t} = useTranslation();
@@ -230,81 +229,70 @@ function SelectDriver() {
   }, [currentStep]);
 
   return (
-    <Grid container className={'select-driver-screen'}>
+    <ScreenLayout>
       <AlertDialog
         messageText={alertText}
         isOpen={alertOpen}
         closeBtnText={'Okay'}
         handleDismiss={handleAlertClose}
       />
-      <Grid item xs={2} height={'100vh'} sx={{padding: 1}}>
-        <Sidebar />
-      </Grid>
-      <Grid
-        item
-        className={'hide-scrollbar'}
-        minHeight={400}
-        xs={10}
-        sx={{maxHeight: '100vh', overflowY: 'scroll'}}>
-        <Stack>
-          <span className={'language-select'}>
-            <LanguageSelect />
-          </span>
+      <Stack className={'select-driver-screen'}>
+        <span className={'language-select'}>
+          <LanguageSelect />
+        </span>
+        <br />
+        <br />
+        <Box
+          padding={2}
+          paddingBottom={0}
+          marginBottom={5}
+          textAlign={'center'}>
+          <PageHeading heading={heading} subHeading={subHeading} />
+        </Box>
+        <Paper
+          elevation={1}
+          sx={{p: 1.5, minHeight: '70vh', position: 'relative'}}>
+          <Timeline />
+          {/*This outlet will display child components , all props are provided in context*/}
+          <Outlet
+            context={
+              {
+                ...contextObj,
+              } satisfies DriverOutletContext
+            }></Outlet>
           <br />
           <br />
-          <Box
-            padding={2}
-            paddingBottom={0}
-            marginBottom={5}
-            textAlign={'center'}>
-            <PageHeading heading={heading} subHeading={subHeading} />
-          </Box>
-          <Paper
-            elevation={1}
-            sx={{p: 1.5, minHeight: '70vh', position: 'relative'}}>
-            <Timeline />
-            {/*This outlet will display child components , all props are provided in context*/}
-            <Outlet
-              context={
-                {
-                  ...contextObj,
-                } satisfies DriverOutletContext
-              }></Outlet>
-            <br />
-            <br />
-            <div className="buttons-group">
+          <div className="buttons-group">
+            <BlackButton
+              size={'small'}
+              variant={'contained'}
+              onClick={decreaseSteps}
+              disabled={currentStep === 1}>
+              {t('createLoadingOrder.back')}
+            </BlackButton>
+            {currentStep === steps.length ? (
               <BlackButton
                 size={'small'}
                 variant={'contained'}
-                onClick={decreaseSteps}
-                disabled={currentStep === 1}>
-                {t('createLoadingOrder.back')}
+                disabled={!isSignatureLoaded}
+                onClick={() => {
+                  assignInitialStock();
+                }}>
+                {t('createLoadingOrder.finish')}
               </BlackButton>
-
-              {currentStep === steps.length ? (
-                <BlackButton
-                  size={'small'}
-                  variant={'contained'}
-                  disabled={!isSignatureLoaded}
-                  onClick={() => {
-                    assignInitialStock();
-                  }}>
-                  {t('createLoadingOrder.finish')}
-                </BlackButton>
-              ) : (
-                <BlackButton
-                  size={'small'}
-                  variant={'contained'}
-                  disabled={nextDisabled}
-                  onClick={increaseSteps}>
-                  {t('createLoadingOrder.next')}
-                </BlackButton>
-              )}
-            </div>
-          </Paper>
-        </Stack>
-      </Grid>
-    </Grid>
+            ) : (
+              <BlackButton
+                size={'small'}
+                variant={'contained'}
+                disabled={nextDisabled}
+                onClick={increaseSteps}>
+                {t('createLoadingOrder.next')}
+              </BlackButton>
+            )}
+          </div>
+        </Paper>
+      </Stack>
+    </ScreenLayout>
   );
 }
 

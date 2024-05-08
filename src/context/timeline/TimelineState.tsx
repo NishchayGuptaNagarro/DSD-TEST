@@ -1,7 +1,7 @@
 import {ReactNode, useState} from 'react';
 import TimelineContext from './timelineContext';
-import {vanSellerSteps} from '../../utilities/timelineSteps.ts';
-import {vanSellerRoutes} from '../../utilities/timelineRoutes.ts';
+import {vanSellerSteps} from 'utilities/timelineSteps.ts';
+import {vanSellerRoutes} from 'utilities/timelineRoutes.ts';
 
 type UserProvidedProps = {
   children: ReactNode;

@@ -4,13 +4,13 @@ import DialogContent from '@mui/material/DialogContent';
 import {useEffect, useState} from 'react';
 import {useOutletContext} from 'react-router-dom';
 
-import Table from '../../../component/Table/Table.tsx';
+import Table from 'component/Table/Table.tsx';
 import {DriverOutletContext} from '../propTypes/types.ts';
 import {DeliveryTableRow} from './propTypes/types.ts';
-import {Row} from '../../../component/Table/propTypes/types.ts';
+import {Row} from 'component/Table/propTypes/types.ts';
 import {deliveryColDef} from './DeliveryColDef/DeliveryColDef.tsx';
-import ProductsTable from '../ProductsTable/ProductsTable.tsx';
-import {Product} from '../../../models/product.ts';
+import ProductsTable from 'screens/SelectDriver/ProductsTable/ProductsTable.tsx';
+import {Product} from 'models/product.ts';
 import './DeliveryTable.scss';
 
 function DeliveryTable() {

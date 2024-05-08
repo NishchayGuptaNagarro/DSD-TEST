@@ -2,9 +2,9 @@ import {GridColDef} from '@mui/x-data-grid';
 import {useTranslation} from 'react-i18next';
 
 import {ProductTableProps} from './propTypes/types.ts';
-import ProductIcon from '../../../component/ProductIcon/ProductIcon.tsx';
-import Table from '../../../component/Table/Table.tsx';
-import {Row} from '../../../component/Table/propTypes/types.ts';
+import ProductIcon from 'component/ProductIcon/ProductIcon.tsx';
+import Table from 'component/Table/Table.tsx';
+import {Row} from 'component/Table/propTypes/types.ts';
 
 function ProductsTable({products}: ProductTableProps) {
   const {t} = useTranslation();

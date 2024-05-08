@@ -4,11 +4,11 @@ import Box from '@mui/material/Box';
 import {useEffect, useRef, useState} from 'react';
 import {ClipLoader} from 'react-spinners';
 
-import DropDownButton from '../../../component/DropDownButton/DropDownButton.tsx';
+import DropDownButton from 'component/DropDownButton/DropDownButton.tsx';
 import './DriverSignature.scss';
 import {AxiosResponse} from 'axios';
 import {SignatureApiResponse} from './propTypes/types.ts';
-import {api} from '../../../axios/api.ts';
+import {api} from 'axios/api.ts';
 import {useTranslation} from 'react-i18next';
 import {useOutletContext} from 'react-router-dom';
 import {DriverOutletContext} from '../propTypes/types.ts';

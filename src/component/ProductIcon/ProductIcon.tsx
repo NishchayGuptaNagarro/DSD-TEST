@@ -3,7 +3,7 @@ import {Typography} from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 
 import {ProductIconProps} from './propTypes/types.ts';
-import styles from '../../styles/design-systems.module.scss';
+import styles from 'styles/design-systems.module.scss';
 
 function ProductIcon({productName, productId, productImage}: ProductIconProps) {
   return (

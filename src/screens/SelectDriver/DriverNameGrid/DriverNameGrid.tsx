@@ -7,17 +7,17 @@ import {DriverNameGridHeaderProps} from './propTypes/types.ts';
 import {DriverOutletContext} from '../propTypes/types.ts';
 import DriverCard from './DriverCard/DriverCard.tsx';
 import './DriverNameGrid.scss';
-import styles from '../../../styles/design-systems.module.scss';
+import styles from 'styles/design-systems.module.scss';
 
-import vanSellerIcon from '../../../assets/SVG/VanSeller.svg';
-import deliveryIcon from '../../../assets/SVG/Delivery.svg';
-import hybridIcon from '../../../assets/SVG/Hybrid.svg';
+import vanSellerIcon from 'assets/SVG/VanSeller.svg';
+import deliveryIcon from 'assets/SVG/Delivery.svg';
+import hybridIcon from 'assets/SVG/Hybrid.svg';
 
 import {useState, MouseEvent, ChangeEvent, useRef, useEffect} from 'react';
 import {useOutletContext} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
-import {Driver} from '../../../models/driver.ts';
-import Loading from '../../Loading/Loading.tsx';
+import {Driver} from 'models/driver.ts';
+import Loading from 'screens/Loading/Loading.tsx';
 
 function DriverNameGrid() {
   // Getting required props from outlet context

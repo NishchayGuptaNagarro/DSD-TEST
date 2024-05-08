@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 
 import './DetailsCard.scss';
-import styles from '../../styles/design-systems.module.scss';
+import styles from 'styles/design-systems.module.scss';
 import {DetailsCardProps} from './propTypes/types.ts';
 
 function DetailsCard({

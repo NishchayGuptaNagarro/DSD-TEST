@@ -1,7 +1,7 @@
 import {SelectDriverStates} from './propTypes/types.ts';
 import {useState} from 'react';
-import {Driver} from '../../models/driver.ts';
-import {Row} from '../../component/Table/propTypes/types.ts';
+import {Driver} from 'models/driver.ts';
+import {Row} from 'component/Table/propTypes/types.ts';
 
 export function useSelectDriverState(): SelectDriverStates {
   const [driverArray, setDriverArray] = useState<Driver[]>([]);

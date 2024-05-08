@@ -1,5 +1,5 @@
-import {Row} from '../../../../component/Table/propTypes/types.ts';
-import {Product} from '../../../../models/product.ts';
+import {Row} from 'component/Table/propTypes/types.ts';
+import {Product} from 'models/product.ts';
 
 export interface DeliveryTableRow extends Row {
   orderId: number;

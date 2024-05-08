@@ -1,16 +1,16 @@
 import {useOutletContext} from 'react-router-dom';
 
-import Table from '../../../component/Table/Table.tsx';
+import Table from 'component/Table/Table.tsx';
 import {DriverOutletContext, ProductApiResponse} from '../propTypes/types.ts';
 import {useContext, useEffect, useState} from 'react';
-import {Row} from '../../../component/Table/propTypes/types.ts';
+import {Row} from 'component/Table/propTypes/types.ts';
 import {AxiosResponse} from 'axios';
-import {api} from '../../../axios/api.ts';
-import {checkApiError} from '../../../utilities/checkApiError.ts';
-import timelineContext from '../../../context/timeline/timelineContext.ts';
-import AlertDialog from '../../../component/AlertDialog/AlertDialog.tsx';
+import {api} from 'axios/api.ts';
+import {checkApiError} from 'utilities/checkApiError.ts';
+import timelineContext from 'context/timeline/timelineContext.ts';
+import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
 import {driverColDef} from './DriverColDef/DriverColDef.tsx';
-import {Product} from '../../../models/product.ts';
+import {Product} from 'models/product.ts';
 
 const OrderTable = () => {
   const {isTableLoaded, handleTableLoaded, setRows, rows} =

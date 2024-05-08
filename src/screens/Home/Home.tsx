@@ -1,5 +1,4 @@
 // This screen will display available stock page, it contains sidebar, table and heading
-import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -9,20 +8,20 @@ import {format} from 'date-fns';
 // import {useEffect, useState} from 'react';
 
 import {Link} from 'react-router-dom';
-// import ProductIcon from '../../component/ProductIcon/ProductIcon.tsx';
-import PageHeading from '../../component/PageHeading/PageHeading.tsx';
-import Sidebar from '../../component/Sidebar/Sidebar.tsx';
-import DetailsCard from '../../component/DetailsCard/DetailsCard.tsx';
-import LanguageSelect from '../../component/LanguageSelect/LanguageSelect.tsx';
+// import ProductIcon from 'component/ProductIcon/ProductIcon.tsx';
+import PageHeading from 'component/PageHeading/PageHeading.tsx';
+import DetailsCard from 'component/DetailsCard/DetailsCard.tsx';
+import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
 // import {Product} from './propTypes/types.ts';
-// import {Row} from '../../component/Table/propTypes/types.ts';
-// import {api} from '../../axios/api.ts';
+// import {Row} from 'component/Table/propTypes/types.ts';
+// import {api} from 'axios/api.ts';
 
 import './Home.scss';
 import dateIcon from '../../assets/SVG/Date.svg';
 
 import managerIcon from '../../assets/SVG/Manager.svg';
 import {useTranslation} from 'react-i18next';
+import ScreenLayout from 'component/ScreenLayout/ScreenLayout.tsx';
 
 function Home() {
   const {t} = useTranslation();
@@ -116,46 +115,36 @@ function Home() {
   // }, []);
 
   return (
-    <Grid container>
-      <Grid height={'100vh'} item xs={2} padding={1}>
-        <Sidebar />
-      </Grid>
-      <Grid
-        className={'avl-stock-screen hide-scrollbar'}
-        item
-        xs={10}
-        minHeight={400}
-        sx={{maxHeight: '100vh', overflowY: 'scroll'}}>
-        <Stack>
-          <Box padding={2} paddingBottom={0} position={'relative'}>
-            <span className={'avl-language-select'}>
-              <LanguageSelect />
-            </span>
-            {/*THESE br will be removed when language selection is added to separate component*/}
-            <br />
-            <br />
-            <PageHeading heading={heading} subHeading={subHeading} />
-            <CardStack />
-          </Box>
-          <Box padding={2} sx={{textAlign: 'center'}}>
-            {/*<Table*/}
-            {/*  showLoading={false}*/}
-            {/*  rows={rows}*/}
-            {/*  columns={columns}*/}
-            {/*  getRowId={getRowId}*/}
-            {/*/>*/}
-            <Button
-              sx={{mt: 15}}
-              variant="contained"
-              size="large"
-              component={Link}
-              to="/createloadingorder">
-              {t('availablestock.button')}
-            </Button>
-          </Box>
-        </Stack>
-      </Grid>
-    </Grid>
+    <ScreenLayout>
+      <Stack>
+        <Box padding={2} paddingBottom={0} position={'relative'}>
+          <span className={'avl-language-select'}>
+            <LanguageSelect />
+          </span>
+          {/*THESE br will be removed when language selection is added to separate component*/}
+          <br />
+          <br />
+          <PageHeading heading={heading} subHeading={subHeading} />
+          <CardStack />
+        </Box>
+        <Box padding={2} sx={{textAlign: 'center'}}>
+          {/*<Table*/}
+          {/*  showLoading={false}*/}
+          {/*  rows={rows}*/}
+          {/*  columns={columns}*/}
+          {/*  getRowId={getRowId}*/}
+          {/*/>*/}
+          <Button
+            sx={{mt: 15}}
+            variant="contained"
+            size="large"
+            component={Link}
+            to="/createloadingorder">
+            {t('availablestock.button')}
+          </Button>
+        </Box>
+      </Stack>
+    </ScreenLayout>
   );
 }
 

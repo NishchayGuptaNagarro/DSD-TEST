@@ -8,8 +8,8 @@ import Avatar from '@mui/material/Avatar';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 
-import FrenchIcon from '../../assets/SVG/French.svg';
-import EnglishIcon from '../../assets/SVG/English.svg';
+import FrenchIcon from 'assets/SVG/French.svg';
+import EnglishIcon from 'assets/SVG/English.svg';
 import './LanguageSelect.scss';
 
 import {useState, MouseEvent} from 'react';

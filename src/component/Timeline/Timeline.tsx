@@ -1,5 +1,5 @@
 import {useContext, useEffect} from 'react';
-import timelineContext from '../../context/timeline/timelineContext';
+import timelineContext from 'context/timeline/timelineContext';
 import './Timeline.scss';
 import {useTranslation} from 'react-i18next';
 
