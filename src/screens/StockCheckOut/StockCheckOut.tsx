@@ -2,9 +2,8 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 
-import {ChangeEvent, useContext, useEffect} from 'react';
+import {ChangeEvent, useContext, useEffect, useRef} from 'react';
 import {Outlet, useNavigate} from 'react-router';
-import {useLocation} from 'react-router-dom';
 
 import {useTranslation} from 'react-i18next';
 import {AxiosResponse} from 'axios';
@@ -37,8 +36,8 @@ function StockCheckOut() {
   const {t} = useTranslation();
   const heading = t('createLoadingOrder.title');
   const subHeading = t('createLoadingOrder.subtitle');
-  const location = useLocation();
   const navigate = useNavigate();
+  const firstRender = useRef(true);
 
   const {
     driverArray,
@@ -50,8 +49,6 @@ function StockCheckOut() {
     setRows,
     setSelectedDriver,
     isSignatureLoaded,
-    isTableLoaded,
-    setIsTableLoaded,
     setAlertOpen,
     setAlertText,
     setIsDriverGridLoading,
@@ -76,18 +73,11 @@ function StockCheckOut() {
     localStorage.removeItem('selected_driver');
     localStorage.removeItem('selected_driver_type');
     localStorage.removeItem('currentStep');
-    localStorage.removeItem('selected_type');
-  }
-  function handleTableLoaded(value: boolean) {
-    setIsTableLoaded(value);
   }
   function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
     setSelectedDriver(event.target.value);
     localStorage.setItem('selected_driver', event.target.value);
-    localStorage.setItem(
-      'selected_driver_type',
-      localStorage.getItem('selected_type') || '',
-    );
+    localStorage.setItem('selected_driver_type', driverType);
   }
   function handleAlertClose() {
     clearLocalStorage();
@@ -96,7 +86,6 @@ function StockCheckOut() {
   }
   function handleTypeChange(type: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID') {
     setDriverType(type);
-    localStorage.setItem('selected_type', type);
     switch (type) {
       case 'VAN-SELLER': {
         updateStepsArray(vanSellerSteps);
@@ -199,8 +188,6 @@ function StockCheckOut() {
     isSignatureLoaded,
     setIsSignatureLoaded,
     isDriverGridLoading,
-    isTableLoaded,
-    handleTableLoaded,
     rows,
     setRows,
     driverType,
@@ -208,9 +195,6 @@ function StockCheckOut() {
   };
 
   useEffect(() => {
-    if (location.pathname == '/stock-check-out') {
-      navigate(`${orderRoutes[currentStep - 1]}`);
-    }
     buttonDisabled();
     return () => {
       setNextDisabled(true);
@@ -227,7 +211,11 @@ function StockCheckOut() {
   }, []);
 
   useEffect(() => {
-    navigate(orderRoutes[currentStep - 1]);
+    if (firstRender.current) {
+      firstRender.current = false;
+    } else {
+      navigate(orderRoutes[currentStep - 1]);
+    }
   }, [currentStep]);
 
   return (

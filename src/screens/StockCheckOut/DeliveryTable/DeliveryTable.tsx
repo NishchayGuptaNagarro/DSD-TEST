@@ -99,11 +99,10 @@ function DeliveryTable() {
     },
   ];
   //END OF DUMMY DATA ----------------
-  const {isTableLoaded, handleTableLoaded, setRows, rows} =
-    useOutletContext<StockCheckOutContext>();
+  const {setRows, rows} = useOutletContext<StockCheckOutContext>();
   const [productArray, setProductArray] = useState<Product[]>([]);
   const [showModal, setShowModal] = useState(false);
-
+  const [isTableLoaded, setIsTableLoaded] = useState(false);
   function handleShowProducts(products: Product[]) {
     setProductArray(products);
     setShowModal(true);
@@ -118,23 +117,21 @@ function DeliveryTable() {
   function fetchRows() {
     const parsedRows: DeliveryTableRow[] = deliveryTableData;
     setRows(parsedRows);
-    handleTableLoaded(true);
+    setIsTableLoaded(true);
   }
   useEffect(() => {
     fetchRows();
     return () => {
       setRows([]);
-      handleTableLoaded(false);
     };
   }, []);
   return (
     <>
       <Dialog
-        className={'products-table'}
+        className={'dialog-position-end'}
         fullWidth={true}
         maxWidth={'md'}
         open={showModal}
-        sx-={{justifyContent: 'flex-start'}}
         onClose={() => {
           setShowModal(false);
         }}>

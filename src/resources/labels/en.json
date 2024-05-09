@@ -63,16 +63,26 @@
     "timeline.option3": "Activation",
     "timeline.option4": "Select Deliveries / Orders",
     "timeline.option5": "Add Quantities",
-    "timeline.option6":"Select Pending Check-In",
-    "timeline.option7":"Transaction History",
-    "timeline.option8":"Stock",
-    "timeline.option9":"Attachments",
-    "timeline.option10":"Send Signature",
+
 
 
     "driversignature.action1": "Activate",
     "driversignature.action2": "Reject",
 
     "stockcheckin.heading": "Stock Check In",
-    "stockcheckin.subheading": "To check in stock, Please follow the steps"
+    "stockcheckin.subheading": "To check in stock, Please follow the steps",
+    "timeline.option6":"Select Pending Check-In",
+    "timeline.option7":"Transaction History",
+    "timeline.option8":"Stock",
+    "timeline.option9":"Attachments",
+    "timeline.option10":"Send Signature",
+    "table.items": "Items",
+    "table.amount": "Gross Amount",
+    "table.payment": "Payment Methods: Amount",
+    "table.itembtn": "Show Items",
+    "table.itemsDesc": "Items: ID",
+    "table.remaining": "Remaining",
+    "table.attachmentDesc": "Attachment Description",
+    "table.attachments":"Attachments",
+    "createLoadingOrder.signature.admin": "Admin Signature"
 }

@@ -43,7 +43,18 @@ const PendingCheckInSelection = lazy(
       'screens/StockCheckIn/PendingSelectionGrid/PendingSelectionGrid.tsx'
     ),
 );
-
+const HistoryTable = lazy(
+  () => import('screens/StockCheckIn/TransactionTable/TransactionTable.tsx'),
+);
+const StockTable = lazy(
+  () => import('screens/StockCheckIn/StockTable/StockTable.tsx'),
+);
+const AttachmentTable = lazy(
+  () => import('screens/StockCheckIn/AttachmentTable/AttachmentTable.tsx'),
+);
+const AdminSignature = lazy(
+  () => import('screens/StockCheckIn/AdminSignature/AdminSignature.tsx'),
+);
 i18n.use(initReactI18next).init({
   resources: {
     en: {translation: {...enJSON}},
@@ -149,6 +160,38 @@ function App() {
                   element={
                     <Suspense fallback={<Loading />}>
                       <PendingCheckInSelection />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="history"
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <HistoryTable />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="stock"
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <StockTable />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="attachment"
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <AttachmentTable />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="signature"
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <AdminSignature />
                     </Suspense>
                   }
                 />

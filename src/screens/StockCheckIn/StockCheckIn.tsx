@@ -4,7 +4,7 @@ import Paper from '@mui/material/Paper';
 
 import {useTranslation} from 'react-i18next';
 import {useNavigate} from 'react-router-dom';
-import {ChangeEvent, useContext, useEffect} from 'react';
+import {ChangeEvent, useContext, useEffect, useRef} from 'react';
 import {Outlet} from 'react-router';
 import {AxiosResponse} from 'axios';
 
@@ -24,12 +24,14 @@ import {api} from 'axios/api.ts';
 import {Driver} from 'models/driver.ts';
 import {checkApiError} from 'utilities/checkApiError.ts';
 import './StockCheckIn.scss';
+import {DriverApiResponse} from '../StockCheckOut/propTypes/types.ts';
 
 function StockCheckIn() {
   const {t} = useTranslation();
   const navigate = useNavigate();
   const heading = t('stockcheckin.heading');
   const subHeading = t('stockcheckin.subheading');
+  const firstRender = useRef(true);
   const {
     currentStep,
     steps,
@@ -51,27 +53,34 @@ function StockCheckIn() {
     setDriverType,
     nextDisabled,
     setNextDisabled,
+    setRows,
+    rows,
+    isSignatureDone,
+    setIsSignatureDone,
   } = useStockCheckInState();
 
   function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
     setSelectedDriver(event.target.value);
     localStorage.setItem('selected_driver', event.target.value);
-    localStorage.setItem(
-      'selected_driver_type',
-      localStorage.getItem('selected_type') || '',
-    );
+    localStorage.setItem('selected_driver_type', driverType);
   }
+  function buttonDisabled() {
+    if (localStorage.getItem('selected_driver')) {
+      setNextDisabled(false);
+    } else {
+      setNextDisabled(true);
+    }
+  }
+
   //Add logic for setting routes here
   function handleTypeChange(type: driverTypes) {
     setDriverType(type);
-    localStorage.setItem('selected_type', type);
     updateStepsArray(checkInSteps);
     updateOrderRoutes(checkInRoutes);
   }
   function clearLocalStorage() {
     localStorage.removeItem('selected_driver');
     localStorage.removeItem('selected_driver_type');
-    localStorage.removeItem('selected_type');
     localStorage.removeItem('currentStep');
   }
 
@@ -82,10 +91,14 @@ function StockCheckIn() {
     driverType,
     handleTypeChange,
     handleDriverSelection,
+    rows,
+    setRows,
+    isSignatureDone,
+    setIsSignatureDone,
   };
 
   async function fetchDrivers() {
-    let response: AxiosResponse;
+    let response: AxiosResponse<DriverApiResponse>;
     let driverData: Driver[];
     try {
       response = await api.get('/warehouse/drivers');
@@ -108,6 +121,13 @@ function StockCheckIn() {
   }
 
   useEffect(() => {
+    buttonDisabled();
+    return () => {
+      setNextDisabled(true);
+    };
+  });
+
+  useEffect(() => {
     fetchDrivers();
     handleTypeChange(driverType);
     return () => {
@@ -115,7 +135,11 @@ function StockCheckIn() {
     };
   }, []);
   useEffect(() => {
-    navigate(orderRoutes[currentStep - 1]);
+    if (firstRender.current) {
+      firstRender.current = false;
+    } else {
+      navigate(orderRoutes[currentStep - 1]);
+    }
   }, [currentStep]);
   return (
     <ScreenLayout>
@@ -149,7 +173,10 @@ function StockCheckIn() {
             <BlackButton
               size={'small'}
               variant={'contained'}
-              onClick={decreaseSteps}
+              onClick={() => {
+                decreaseSteps();
+                setRows([]);
+              }}
               disabled={currentStep === 1}>
               {t('createLoadingOrder.back')}
             </BlackButton>
@@ -157,8 +184,10 @@ function StockCheckIn() {
               <BlackButton
                 size={'small'}
                 variant={'contained'}
-                disabled={true}
-                onClick={() => {}}>
+                disabled={!isSignatureDone}
+                onClick={() => {
+                  navigate('/');
+                }}>
                 {t('createLoadingOrder.finish')}
               </BlackButton>
             ) : (
@@ -166,7 +195,10 @@ function StockCheckIn() {
                 size={'small'}
                 variant={'contained'}
                 disabled={nextDisabled}
-                onClick={increaseSteps}>
+                onClick={() => {
+                  increaseSteps();
+                  setRows([]);
+                }}>
                 {t('createLoadingOrder.next')}
               </BlackButton>
             )}

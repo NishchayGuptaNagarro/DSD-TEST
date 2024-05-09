@@ -14,14 +14,29 @@ import {Product} from 'models/product.ts';
 import {getProductRowId} from 'utilities/getProductRowId.ts';
 
 const OrderTable = () => {
-  const {isTableLoaded, handleTableLoaded, setRows, rows} =
-    useOutletContext<StockCheckOutContext>();
+  const {setRows, rows} = useOutletContext<StockCheckOutContext>();
   const {decreaseSteps} = useContext(timelineContext);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isTableLoaded, setIsTableLoaded] = useState(false);
 
   function handleDialogDismiss() {
     decreaseSteps();
   }
+  async function sendNotification() {
+    try {
+      const response: AxiosResponse = await api.post(
+        '/warehouse/send-notification-driver',
+        {
+          user_id: localStorage.getItem('selected_driver'),
+        },
+      );
+      console.log(response);
+      checkApiError(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function fetchRows() {
     let response: AxiosResponse<ProductApiResponse>;
     let products: Row[];
@@ -32,7 +47,7 @@ const OrderTable = () => {
       console.log(response);
       if (response.data.status_code == 400) {
         setIsDialogOpen(true);
-        handleTableLoaded(true);
+        setIsTableLoaded(true);
         return;
       }
 
@@ -50,18 +65,18 @@ const OrderTable = () => {
         return parsedRes;
       });
       setRows(products);
-      handleTableLoaded(true);
+      setIsTableLoaded(true);
+      sendNotification();
     } catch (error) {
       console.log(error);
       setRows([]);
-      handleTableLoaded(true);
+      setIsTableLoaded(true);
     }
   }
   useEffect(() => {
     fetchRows();
     return () => {
       setRows([]);
-      handleTableLoaded(false);
     };
   }, []);
 

@@ -120,6 +120,7 @@ function DriverNameGridHeader({
       searchDriver(event.target.value);
     }, 300);
   }
+
   return (
     <Box className={'driver-grid-header font-sm'}>
       <span className={'select-text'}>

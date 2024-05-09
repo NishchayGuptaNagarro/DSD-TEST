@@ -47,9 +47,6 @@ function ProductsTable({products}: ProductTableProps) {
       headerName: t('table.uom'),
       headerClassName: 'font-md',
       flex: 0.4,
-      valueGetter: () => {
-        return 'Unit';
-      },
       cellClassName: 'productText font-sm',
       sortable: false,
     },

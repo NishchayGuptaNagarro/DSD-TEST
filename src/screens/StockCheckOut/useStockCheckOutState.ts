@@ -6,7 +6,7 @@ import {Row} from 'component/Table/propTypes/types.ts';
 export function useStockCheckOutState(): SelectDriverStates {
   const [driverArray, setDriverArray] = useState<Driver[]>([]);
   function loadInitialType() {
-    const initialType = localStorage.getItem('selected_type');
+    const initialType = localStorage.getItem('selected_driver_type');
     if (
       initialType == 'VAN-SELLER' ||
       initialType == 'DELIVERY' ||
@@ -22,11 +22,8 @@ export function useStockCheckOutState(): SelectDriverStates {
   >(loadInitialType());
 
   const [rows, setRows] = useState<Row[]>([]);
-  const [selectedDriver, setSelectedDriver] = useState<string>(
-    localStorage.getItem('selected_driver') || '',
-  );
+  const [selectedDriver, setSelectedDriver] = useState<string>('');
   const [isDriverGridLoading, setIsDriverGridLoading] = useState(true);
-  const [isTableLoaded, setIsTableLoaded] = useState(false);
   const [isSignatureLoaded, setIsSignatureLoaded] = useState(false);
   const [alertText, setAlertText] = useState('');
   const [alertOpen, setAlertOpen] = useState(false);
@@ -41,8 +38,6 @@ export function useStockCheckOutState(): SelectDriverStates {
     setRows,
     setSelectedDriver,
     isSignatureLoaded,
-    isTableLoaded,
-    setIsTableLoaded,
     setAlertOpen,
     setAlertText,
     setIsDriverGridLoading,

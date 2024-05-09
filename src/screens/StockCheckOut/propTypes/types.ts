@@ -1,16 +1,17 @@
 // Generic driver interface
-import {OrderTableProps} from '../OrderTable/propTypes/types.ts';
+
 import {DriverSignatureProps} from '../DriverSignature/propTypes/types.ts';
 import {Driver} from 'models/driver.ts';
 import {Dispatch, SetStateAction} from 'react';
 import {Row} from 'component/Table/propTypes/types.ts';
 import {DriverSelectionGridProps} from 'component/DriverSelectionGrid/propTypes/types.ts';
 import {driverTypes} from 'models/driverTypes.ts';
+import {OutletTableProps} from 'models/outletTableProps.ts';
 
 // Interface for outlet context provider
 export interface StockCheckOutContext
   extends DriverSelectionGridProps,
-    OrderTableProps,
+    OutletTableProps,
     DriverSignatureProps {}
 // Interface for driver api response
 interface ApiDriverData {
@@ -69,8 +70,6 @@ export interface SelectDriverStates {
   setSelectedDriver: Dispatch<SetStateAction<string>>;
   isDriverGridLoading: boolean;
   setIsDriverGridLoading: Dispatch<SetStateAction<boolean>>;
-  isTableLoaded: boolean;
-  setIsTableLoaded: Dispatch<SetStateAction<boolean>>;
   isSignatureLoaded: boolean;
   setIsSignatureLoaded: Dispatch<SetStateAction<boolean>>;
   alertText: string;
