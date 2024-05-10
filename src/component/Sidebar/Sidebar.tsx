@@ -1,13 +1,13 @@
 import {useState} from 'react';
 import './Sidebar.scss';
-import closed from '../../assets/PNG/Sample logox2_Closed.png';
-import openImg from '../../assets/PNG/Sample logox2_Open.png';
+import closed from 'assets/PNG/Sample logox2_Closed.png';
+import openImg from 'assets/PNG/Sample logox2_Open.png';
 import {MdOutlineKeyboardArrowDown} from 'react-icons/md';
-import DashBoard from '../../assets/PNG/Dashboard.png';
-import Stocks from '../../assets/PNG/Stocks.png';
-import Orders from '../../assets/PNG/Orders.png';
-import Signout from '../../assets/PNG/Sign Out.png';
-import Settings from '../../assets/PNG/Settings.png';
+import DashBoard from 'assets/PNG/Dashboard.png';
+import Stocks from 'assets/PNG/Stocks.png';
+import Orders from 'assets/PNG/Orders.png';
+import Signout from 'assets/PNG/Sign Out.png';
+import Settings from 'assets/PNG/Settings.png';
 import {SideBarOption} from './propTypes/SidebarRoutes';
 
 import {MdOutlineKeyboardArrowUp} from 'react-icons/md';
@@ -34,7 +34,7 @@ function Sidebar() {
       subOptionRight: 'My warehouse avalable stock',
       icon: Stocks,
       isOpen: false,
-      path: '/breadcrump',
+      path: '/stock-check-in/driver',
     },
     {
       id: 3,
@@ -43,7 +43,7 @@ function Sidebar() {
       subOptionRight: 'My warehouse assign orders',
       icon: Orders,
       isOpen: false,
-      path: '/createloadingorder',
+      path: '/stock-check-out/driver',
     },
   ]);
 
@@ -72,7 +72,6 @@ function Sidebar() {
 
   const navigateTo = (path: string) => {
     navigate(path);
-    console.log(path);
   };
   function handleSignOut() {
     localStorage.clear();

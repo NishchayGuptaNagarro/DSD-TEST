@@ -3,38 +3,58 @@ import {createTheme, CssBaseline, ThemeProvider} from '@mui/material';
 import {lazy, Suspense} from 'react';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
-import Login from './screens/Login/Login.tsx';
-import Loading from './screens/Loading/Loading.tsx';
-import TimelineState from './context/timeline/TimelineState.tsx';
+import Login from 'screens/Login/Login.tsx';
+import Loading from 'screens/Loading/Loading.tsx';
+import TimelineState from 'context/timeline/TimelineState.tsx';
 
-import './App.scss';
-import styles from '../src/styles/design-systems.module.scss';
+import 'App.scss';
+import styles from 'styles/design-systems.module.scss';
 import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
-import enJSON from './resources/labels/en.json';
-import frJSON from './resources/labels/fr.json';
-import ProtectedRoute from './component/ProtectedRoute/ProtectedRoute.tsx';
+import enJSON from 'resources/labels/en.json';
+import frJSON from 'resources/labels/fr.json';
+import ProtectedRoute from 'component/ProtectedRoute/ProtectedRoute.tsx';
 
-const AvailableStock = lazy(() => import('./screens/Home/Home.tsx'));
+const Home = lazy(() => import('screens/Home/Home.tsx'));
 const ForgotPassword = lazy(
-  () => import('./screens/ForgotPassword/ForgotPassword.tsx'),
+  () => import('screens/ForgotPassword/ForgotPassword.tsx'),
 );
 const DriverNameGrid = lazy(
-  () => import('./screens/SelectDriver/DriverNameGrid/DriverNameGrid.tsx'),
+  () => import('screens/StockCheckOut/DriverNameGrid/DriverNameGrid.tsx'),
 );
-const SelectDriverScreen = lazy(
-  () => import('./screens/SelectDriver/SelectDriver.tsx'),
+const StockCheckoutScreen = lazy(
+  () => import('screens/StockCheckOut/StockCheckOut.tsx'),
 );
 const DriverSignatureForm = lazy(
-  () => import('./screens/SelectDriver/DriverSignature/DriverSignature.tsx'),
+  () => import('screens/StockCheckOut/DriverSignature/DriverSignature.tsx'),
 );
 const OrderTable = lazy(
-  () => import('./screens/SelectDriver/OrderTable/OrderTable.tsx'),
+  () => import('screens/StockCheckOut/OrderTable/OrderTable.tsx'),
 );
 const DeliveryTable = lazy(
-  () => import('./screens/SelectDriver/DeliveryTable/DeliveryTable.tsx'),
+  () => import('screens/StockCheckOut/DeliveryTable/DeliveryTable.tsx'),
 );
-
+const StockCheckInScreen = lazy(
+  () => import('screens/StockCheckIn/StockCheckIn.tsx'),
+);
+const PendingCheckInSelection = lazy(
+  () =>
+    import(
+      'screens/StockCheckIn/PendingSelectionGrid/PendingSelectionGrid.tsx'
+    ),
+);
+const HistoryTable = lazy(
+  () => import('screens/StockCheckIn/TransactionTable/TransactionTable.tsx'),
+);
+const StockTable = lazy(
+  () => import('screens/StockCheckIn/StockTable/StockTable.tsx'),
+);
+const AttachmentTable = lazy(
+  () => import('screens/StockCheckIn/AttachmentTable/AttachmentTable.tsx'),
+);
+const AdminSignature = lazy(
+  () => import('screens/StockCheckIn/AdminSignature/AdminSignature.tsx'),
+);
 i18n.use(initReactI18next).init({
   resources: {
     en: {translation: {...enJSON}},
@@ -70,7 +90,7 @@ function App() {
                 element={
                   <Suspense fallback={<Loading />}>
                     <ProtectedRoute>
-                      <AvailableStock />
+                      <Home />
                     </ProtectedRoute>
                   </Suspense>
                 }
@@ -85,11 +105,11 @@ function App() {
                 }
               />
               <Route
-                path="/createloadingorder"
+                path="/stock-check-out"
                 element={
                   <Suspense fallback={<Loading />}>
                     <ProtectedRoute>
-                      <SelectDriverScreen />
+                      <StockCheckoutScreen />
                     </ProtectedRoute>
                   </Suspense>
                 }>
@@ -123,7 +143,58 @@ function App() {
                     <Suspense fallback={<Loading />}>
                       <DriverSignatureForm />
                     </Suspense>
-                  }></Route>
+                  }
+                />
+              </Route>
+              <Route
+                path="/stock-check-in"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <ProtectedRoute>
+                      <StockCheckInScreen />
+                    </ProtectedRoute>
+                  </Suspense>
+                }>
+                <Route
+                  path="driver"
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <PendingCheckInSelection />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="history"
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <HistoryTable />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="stock"
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <StockTable />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="attachment"
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <AttachmentTable />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="signature"
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <AdminSignature />
+                    </Suspense>
+                  }
+                />
               </Route>
             </Routes>
           </BrowserRouter>

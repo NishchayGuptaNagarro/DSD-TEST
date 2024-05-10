@@ -5,7 +5,7 @@ import {styled} from '@mui/material/styles';
 import {TableProps} from './propTypes/types.ts';
 import './Table.scss';
 
-import styles from '../../styles/design-systems.module.scss';
+import styles from 'styles/design-systems.module.scss';
 
 const StyledGridOverlay = styled('div')(({theme}) => ({
   display: 'flex',

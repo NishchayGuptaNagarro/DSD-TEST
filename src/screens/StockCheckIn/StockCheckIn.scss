@@ -1,0 +1,17 @@
+@import "src/styles/design-systems.module";
+
+.stock-check-in{
+  .productText {
+    font-weight: $font-normal;
+  }
+  .quantity {
+    font-weight: $font-bold;
+    color: $green-mint;
+  }
+  .language-select{
+    @extend .language-selection-dropdown;
+  }
+  .buttons-group{
+    @extend .position-bottom;
+  }
+}

@@ -10,15 +10,15 @@ import * as Yup from 'yup';
 import {Link, useNavigate} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 
-import LanguageSelect from '../../component/LanguageSelect/LanguageSelect.tsx';
-import {api} from '../../axios/api.ts';
+import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
+import {api} from 'axios/api.ts';
 import './ForgotPassword.scss';
-import logo from '../../assets/SVG/Logo.svg';
-import banner from '../../assets/WEBP/ForgotPassword-Banner.webp';
+import logo from 'assets/SVG/Logo.svg';
+import banner from 'assets/WEBP/ForgotPassword-Banner.webp';
 import {useTranslation} from 'react-i18next';
-import {isTokenValid} from '../../utilities/isTokenValid.ts';
-import {checkApiError} from '../../utilities/checkApiError.ts';
-import styles from '../../styles/design-systems.module.scss';
+import {isTokenValid} from 'utilities/isTokenValid.ts';
+import {checkApiError} from 'utilities/checkApiError.ts';
+import styles from 'styles/design-systems.module.scss';
 
 function ForgotPassword() {
   const [apiResponse, setApiResponse] = useState('');

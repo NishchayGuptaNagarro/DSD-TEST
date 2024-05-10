@@ -1,7 +1,7 @@
 import {useNavigate} from 'react-router';
 import {useEffect} from 'react';
 import {ProtectedRouteProps} from './propTypes/types.ts';
-import {isTokenValid} from '../../utilities/isTokenValid.ts';
+import {isTokenValid} from 'utilities/isTokenValid.ts';
 
 function ProtectedRoute({children}: ProtectedRouteProps) {
   const navigate = useNavigate();
