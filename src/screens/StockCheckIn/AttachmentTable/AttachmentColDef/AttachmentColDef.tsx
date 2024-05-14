@@ -1,5 +1,6 @@
 import Stack from '@mui/material/Stack';
 import Link from '@mui/material/Link';
+import DownloadIcon from '@mui/icons-material/Download';
 import {
   GridColDef,
   GridColumnHeaderParams,
@@ -8,7 +9,9 @@ import {
 import ColumnHeader from 'component/ColumnHeader/ColumnHeader.tsx';
 import {Attachment, AttachmentStackProps} from '../propTypes/types.ts';
 
-export const attachmentColDef: GridColDef[] = [
+export const attachmentColDef: (
+  handleClick: (src: string) => void,
+) => GridColDef[] = handleClick => [
   {
     field: 'description',
     headerName: 'table.attachmentDesc',
@@ -21,15 +24,20 @@ export const attachmentColDef: GridColDef[] = [
     sortable: false,
   },
   {
-    field: 'attachments',
+    field: 'attachment',
     headerName: 'table.attachments',
     headerAlign: 'center',
     renderHeader: (params: GridColumnHeaderParams) => {
       return <ColumnHeader headerName={params.colDef.headerName || ''} />;
     },
     headerClassName: 'font-md',
-    renderCell: (params: GridRenderCellParams<Attachment, string[]>) => {
-      return <AttachmentStack attachments={params.value || []} />;
+    renderCell: (params: GridRenderCellParams<Attachment, string>) => {
+      return (
+        <AttachmentStack
+          handleClick={handleClick}
+          attachment={params.value || ''}
+        />
+      );
     },
     flex: 0.5,
     cellClassName: 'font-sm',
@@ -38,16 +46,26 @@ export const attachmentColDef: GridColDef[] = [
   },
 ];
 
-function AttachmentStack({attachments}: AttachmentStackProps) {
+function AttachmentStack({attachment, handleClick}: AttachmentStackProps) {
   return (
-    <Stack flexDirection={'row'} gap={1}>
-      {attachments.map((link, index) => {
-        return (
-          <Link key={index} download={'attachment.png'} href={link}>
-            Attachment No: {index + 1}
-          </Link>
-        );
-      })}
+    <Stack
+      flexDirection={'row'}
+      alignItems={'center'}
+      justifyContent={'center'}
+      gap={1}>
+      <Link
+        component="button"
+        onClick={() => {
+          handleClick(attachment);
+        }}>
+        View Attachment
+      </Link>
+      <Link
+        className={'attachment-download'}
+        download={'attachment.png'}
+        href={attachment}>
+        <DownloadIcon fontSize={'small'} sx={{mt: 1}} />
+      </Link>
     </Stack>
   );
 }

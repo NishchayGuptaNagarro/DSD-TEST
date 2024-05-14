@@ -139,7 +139,7 @@ function Home() {
             variant="contained"
             size="large"
             component={Link}
-            to="/stock-check-out">
+            to="/stock-check-out/driver">
             {t('availablestock.button')}
           </Button>
         </Box>

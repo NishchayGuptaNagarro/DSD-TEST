@@ -1,37 +1,17 @@
-import {useEffect, useState} from 'react';
 import {useOutletContext} from 'react-router-dom';
 import {StockCheckInContext} from '../propTypes/types.ts';
 import {Row} from 'component/Table/propTypes/types.ts';
 import Table from 'component/Table/Table.tsx';
-import {Attachment} from './propTypes/types.ts';
 import {attachmentColDef} from './AttachmentColDef/AttachmentColDef.tsx';
+import './AttachmentTable.scss';
+import DialogContent from '@mui/material/DialogContent';
+import Dialog from '@mui/material/Dialog';
+import {useState} from 'react';
 
 function AttachmentTable() {
-  //MOCK DATA
-  const mockData: Attachment[] = [
-    {
-      attachmentId: 1,
-      description: 'Invoice',
-      attachments: ['invoice1.pdf', 'invoice2.pdf'],
-      id: 1,
-    },
-    {
-      attachmentId: 2,
-      description: 'Receipt',
-      attachments: ['receipt1.pdf', 'receipt2.pdf'],
-      id: 2,
-    },
-  ];
-  //END OF MOCK
-
-  const {setRows, rows} = useOutletContext<StockCheckInContext>();
-  const [isTableLoaded, setIsTableLoaded] = useState(false);
-
-  function fetchRows() {
-    const parsedRows: Attachment[] = mockData;
-    setRows(parsedRows);
-    setIsTableLoaded(true);
-  }
+  const {attachmentArr} = useOutletContext<StockCheckInContext>();
+  const [showModal, setShowModal] = useState(false);
+  const [imageSrc, setImageSrc] = useState('');
   function getAttachmentRowId(row: Row) {
     if (typeof row.attachmentId === 'number') {
       return row.attachmentId;
@@ -39,16 +19,30 @@ function AttachmentTable() {
       throw new Error('row id should be number');
     }
   }
-  useEffect(() => {
-    fetchRows();
-  }, []);
+  function handleClick(src: string) {
+    setImageSrc(src);
+    setShowModal(true);
+  }
+
   return (
     <>
+      <Dialog
+        className={'dialog-position-end'}
+        fullWidth={true}
+        maxWidth={'md'}
+        open={showModal}
+        onClose={() => {
+          setShowModal(false);
+        }}>
+        <DialogContent>
+          <img src={imageSrc} className={' attachment'} alt={'attachment'} />
+        </DialogContent>
+      </Dialog>
       <Table
-        rows={rows}
+        rows={attachmentArr}
         getRowId={getAttachmentRowId}
-        showLoading={!isTableLoaded}
-        columns={attachmentColDef}
+        showLoading={false}
+        columns={attachmentColDef(handleClick)}
       />
     </>
   );

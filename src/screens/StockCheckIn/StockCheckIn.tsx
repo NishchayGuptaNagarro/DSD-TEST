@@ -4,7 +4,7 @@ import Paper from '@mui/material/Paper';
 
 import {useTranslation} from 'react-i18next';
 import {useNavigate} from 'react-router-dom';
-import {ChangeEvent, useContext, useEffect, useRef} from 'react';
+import {ChangeEvent, useContext, useEffect, useRef, useState} from 'react';
 import {Outlet} from 'react-router';
 import {AxiosResponse} from 'axios';
 
@@ -17,14 +17,22 @@ import BlackButton from 'component/BlackButton/BlackButton.tsx';
 import timelineContext from 'context/timeline/timelineContext.ts';
 import {checkInSteps} from 'utilities/timelineSteps.ts';
 import {checkInRoutes} from 'utilities/timelineRoutes.ts';
-import {StockCheckInContext} from './propTypes/types.ts';
+import {
+  DriverHistoryResponse,
+  PendingCheckInResponse,
+  StockCheckInContext,
+} from './propTypes/types.ts';
 import {useStockCheckInState} from './useStockCheckInState.ts';
 import {driverTypes} from 'models/driverTypes.ts';
 import {api} from 'axios/api.ts';
 import {Driver} from 'models/driver.ts';
 import {checkApiError} from 'utilities/checkApiError.ts';
 import './StockCheckIn.scss';
-import {DriverApiResponse} from '../StockCheckOut/propTypes/types.ts';
+import {TransactionHistory} from './TransactionTable/propTypes/types.ts';
+import {Stock} from './StockTable/propTypes/types.ts';
+import {Attachment} from './AttachmentTable/propTypes/types.ts';
+import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
+import {ClipLoader} from 'react-spinners';
 
 function StockCheckIn() {
   const {t} = useTranslation();
@@ -32,6 +40,12 @@ function StockCheckIn() {
   const heading = t('stockcheckin.heading');
   const subHeading = t('stockcheckin.subheading');
   const firstRender = useRef(true);
+  const [dataLoading, setDataLoading] = useState(false);
+  const [transactionArr, setTransactionArr] = useState<TransactionHistory[]>(
+    [],
+  );
+  const [stockArr, setStockArr] = useState<Stock[]>([]);
+  const [attachmentArr, setAttachmentArr] = useState<Attachment[]>([]);
   const {
     currentStep,
     steps,
@@ -53,10 +67,12 @@ function StockCheckIn() {
     setDriverType,
     nextDisabled,
     setNextDisabled,
-    setRows,
-    rows,
     isSignatureDone,
     setIsSignatureDone,
+    setSignatureURL,
+    signatureURL,
+    setAlertOpen,
+    alertOpen,
   } = useStockCheckInState();
 
   function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
@@ -65,7 +81,7 @@ function StockCheckIn() {
     localStorage.setItem('selected_driver_type', driverType);
   }
   function buttonDisabled() {
-    if (localStorage.getItem('selected_driver')) {
+    if (localStorage.getItem('selected_driver') && !dataLoading) {
       setNextDisabled(false);
     } else {
       setNextDisabled(true);
@@ -84,6 +100,12 @@ function StockCheckIn() {
     localStorage.removeItem('currentStep');
   }
 
+  function handleAlertClose() {
+    clearLocalStorage();
+    setAlertOpen(false);
+    navigate('/home');
+  }
+
   const contextObj = {
     isDriverGridLoading,
     driverArray,
@@ -91,17 +113,20 @@ function StockCheckIn() {
     driverType,
     handleTypeChange,
     handleDriverSelection,
-    rows,
-    setRows,
+    transactionArr,
+    stockArr,
     isSignatureDone,
     setIsSignatureDone,
+    attachmentArr,
+    setSignatureURL,
+    signatureURL,
   };
 
   async function fetchDrivers() {
-    let response: AxiosResponse<DriverApiResponse>;
+    let response: AxiosResponse<PendingCheckInResponse>;
     let driverData: Driver[];
     try {
-      response = await api.get('/warehouse/drivers');
+      response = await api.get('/warehouse/drivers/pending-checkin');
       console.log(response);
       checkApiError(response);
       driverData = response.data.data.map(driver => {
@@ -119,6 +144,77 @@ function StockCheckIn() {
       setIsDriverGridLoading(false);
     }
   }
+  async function fetchDriverHistory() {
+    setDataLoading(true);
+    let response: AxiosResponse<DriverHistoryResponse>;
+
+    try {
+      response = await api.get(
+        `/warehouse/driver/history?user_id=${localStorage.getItem('selected_driver')}`,
+      );
+      console.log(response);
+      checkApiError(response);
+      setTransactionArr(
+        response.data.data.orders.map(transaction => {
+          const parsedRes: TransactionHistory = {
+            customerId: Number(transaction.customer.external_id),
+            customerName: transaction.customer.customer_name,
+            grossAmount: transaction.gross_amount,
+            orderId: Number(transaction.order_number),
+            paymentMethods: {
+              cash: transaction.payment_method.cash,
+              card: transaction.payment_method.credit,
+              cheque: transaction.payment_method.cheque,
+            },
+          };
+          return parsedRes;
+        }),
+      );
+      setStockArr(
+        response.data.data.stocks.map(stock => {
+          const parsedRes: Stock = {
+            stockId: stock.id,
+            initial: Number(stock.initial_stock),
+            item: stock.product_id,
+            remaining: Number(stock.remaining_stock),
+          };
+          return parsedRes;
+        }),
+      );
+      setAttachmentArr(
+        response.data.data.attachments.map(attachment => {
+          const parsedRes: Attachment = {
+            attachmentId: attachment.id,
+            description: attachment.description,
+            attachment: attachment.attachment,
+          };
+          return parsedRes;
+        }),
+      );
+      setDataLoading(false);
+    } catch (error) {
+      console.log(error);
+      setDataLoading(false);
+    }
+  }
+
+  async function unAssignStock() {
+    console.log(signatureURL);
+    try {
+      const response: AxiosResponse = await api.post(
+        '/warehouse/unassign-stock',
+        {
+          user_id: localStorage.getItem('selected_driver'),
+          manager_signature_image: signatureURL,
+        },
+      );
+      console.log(response);
+      checkApiError(response);
+      setAlertOpen(true);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
     buttonDisabled();
@@ -134,6 +230,7 @@ function StockCheckIn() {
       clearLocalStorage();
     };
   }, []);
+
   useEffect(() => {
     if (firstRender.current) {
       firstRender.current = false;
@@ -143,6 +240,12 @@ function StockCheckIn() {
   }, [currentStep]);
   return (
     <ScreenLayout>
+      <AlertDialog
+        messageText={'Stock Unassigned From Driver'}
+        isOpen={alertOpen}
+        closeBtnText={'Okay'}
+        handleDismiss={handleAlertClose}
+      />
       <Stack className={'stock-check-in'}>
         <span className={'language-select'}>
           <LanguageSelect />
@@ -175,7 +278,6 @@ function StockCheckIn() {
               variant={'contained'}
               onClick={() => {
                 decreaseSteps();
-                setRows([]);
               }}
               disabled={currentStep === 1}>
               {t('createLoadingOrder.back')}
@@ -185,9 +287,7 @@ function StockCheckIn() {
                 size={'small'}
                 variant={'contained'}
                 disabled={!isSignatureDone}
-                onClick={() => {
-                  navigate('/');
-                }}>
+                onClick={unAssignStock}>
                 {t('createLoadingOrder.finish')}
               </BlackButton>
             ) : (
@@ -196,10 +296,19 @@ function StockCheckIn() {
                 variant={'contained'}
                 disabled={nextDisabled}
                 onClick={() => {
-                  increaseSteps();
-                  setRows([]);
+                  if (currentStep == 1) {
+                    fetchDriverHistory().then(() => {
+                      increaseSteps();
+                    });
+                  } else {
+                    increaseSteps();
+                  }
                 }}>
-                {t('createLoadingOrder.next')}
+                {dataLoading ? (
+                  <ClipLoader size={20} />
+                ) : (
+                  t('createLoadingOrder.next')
+                )}
               </BlackButton>
             )}
           </div>

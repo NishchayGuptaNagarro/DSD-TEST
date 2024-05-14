@@ -1,0 +1,11 @@
+@import "src/styles/design-systems.module";
+
+.attachment{
+  width: 100%;
+  object-fit: contain;
+}
+.attachment-download{
+  &:hover{
+    color: $indigo-deep
+  }
+}

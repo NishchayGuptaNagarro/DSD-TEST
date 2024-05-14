@@ -3,8 +3,9 @@ import {Row} from 'component/Table/propTypes/types.ts';
 export interface Attachment extends Row {
   attachmentId: number;
   description: string;
-  attachments: string[];
+  attachment: string;
 }
 export interface AttachmentStackProps {
-  attachments: string[];
+  attachment: string;
+  handleClick: (src: string) => void;
 }
