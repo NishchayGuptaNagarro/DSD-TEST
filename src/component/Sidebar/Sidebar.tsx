@@ -34,7 +34,7 @@ function Sidebar() {
       subOptionRight: 'My warehouse avalable stock',
       icon: Stocks,
       isOpen: false,
-      path: '/stock-check-in/driver',
+      path: '/stock-check-in',
     },
     {
       id: 3,
@@ -43,7 +43,7 @@ function Sidebar() {
       subOptionRight: 'My warehouse assign orders',
       icon: Orders,
       isOpen: false,
-      path: '/stock-check-out/driver',
+      path: '/stock-check-out',
     },
   ]);
 

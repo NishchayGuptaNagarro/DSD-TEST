@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 
 import {useTranslation} from 'react-i18next';
-import {useNavigate} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import {ChangeEvent, useContext, useEffect, useRef, useState} from 'react';
 import {Outlet} from 'react-router';
 import {AxiosResponse} from 'axios';
@@ -36,6 +36,7 @@ import {ClipLoader} from 'react-spinners';
 
 function StockCheckIn() {
   const {t} = useTranslation();
+  const location = useLocation();
   const navigate = useNavigate();
   const heading = t('stockcheckin.heading');
   const subHeading = t('stockcheckin.subheading');
@@ -54,6 +55,7 @@ function StockCheckIn() {
     orderRoutes,
     updateOrderRoutes,
     updateStepsArray,
+    setCurrentStep,
   } = useContext(timelineContext);
 
   const {
@@ -147,50 +149,42 @@ function StockCheckIn() {
   async function fetchDriverHistory() {
     setDataLoading(true);
     let response: AxiosResponse<DriverHistoryResponse>;
-
     try {
       response = await api.get(
         `/warehouse/driver/history?user_id=${localStorage.getItem('selected_driver')}`,
       );
-      console.log(response);
       checkApiError(response);
-      setTransactionArr(
-        response.data.data.orders.map(transaction => {
-          const parsedRes: TransactionHistory = {
-            customerId: Number(transaction.customer.external_id),
-            customerName: transaction.customer.customer_name,
-            grossAmount: transaction.gross_amount,
-            orderId: Number(transaction.order_number),
-            paymentMethods: {
-              cash: transaction.payment_method.cash,
-              card: transaction.payment_method.credit,
-              cheque: transaction.payment_method.cheque,
-            },
-          };
-          return parsedRes;
-        }),
-      );
-      setStockArr(
-        response.data.data.stocks.map(stock => {
-          const parsedRes: Stock = {
-            stockId: stock.id,
-            initial: Number(stock.initial_stock),
-            item: stock.product_id,
-            remaining: Number(stock.remaining_stock),
-          };
-          return parsedRes;
-        }),
-      );
-      setAttachmentArr(
-        response.data.data.attachments.map(attachment => {
-          const parsedRes: Attachment = {
-            attachmentId: attachment.id,
-            description: attachment.description,
-            attachment: attachment.attachment,
-          };
-          return parsedRes;
-        }),
-      );
+
+      const {orders, stocks, attachments} = response.data.data;
+
+      const parsedTransactions = orders.map(transaction => ({
+        customerId: Number(transaction.customer.external_id),
+        customerName: transaction.customer.customer_name,
+        grossAmount: transaction.gross_amount,
+        orderId: Number(transaction.order_number),
+        paymentMethods: {
+          cash: transaction.payment_method.cash,
+          card: transaction.payment_method.credit,
+          cheque: transaction.payment_method.cheque,
+        },
+      }));
+
+      const parsedStocks = stocks.map(stock => ({
+        stockId: stock.id,
+        initial: Number(stock.initial_stock),
+        item: stock.product_id,
+        remaining: Number(stock.remaining_stock),
+      }));
+
+      const parsedAttachments = attachments.map(attachment => ({
+        attachmentId: attachment.id,
+        description: attachment.description,
+        attachment: attachment.attachment,
+      }));
+
+      setTransactionArr(parsedTransactions);
+      setStockArr(parsedStocks);
+      setAttachmentArr(parsedAttachments);
       setDataLoading(false);
     } catch (error) {
       console.log(error);
@@ -217,6 +211,10 @@ function StockCheckIn() {
   }
 
   useEffect(() => {
+    if (location.pathname == '/stock-check-in') {
+      navigate('driver');
+      setCurrentStep(1);
+    }
     buttonDisabled();
     return () => {
       setNextDisabled(true);

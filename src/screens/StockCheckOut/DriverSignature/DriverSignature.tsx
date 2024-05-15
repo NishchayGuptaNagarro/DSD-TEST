@@ -64,6 +64,7 @@ function DriverSignature() {
       }
     } catch (error) {
       console.log(error);
+      setShowLoading(false);
     }
   }
   useEffect(() => {

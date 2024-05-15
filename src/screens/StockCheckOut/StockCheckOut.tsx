@@ -31,12 +31,14 @@ import {
 } from 'utilities/timelineRoutes.ts';
 import {useStockCheckOutState} from './useStockCheckOutState.ts';
 import './StockCheckOut.scss';
+import {useLocation} from 'react-router-dom';
 
 function StockCheckOut() {
   const {t} = useTranslation();
   const heading = t('createLoadingOrder.title');
   const subHeading = t('createLoadingOrder.subtitle');
   const navigate = useNavigate();
+  const location = useLocation();
   const firstRender = useRef(true);
 
   const {
@@ -67,6 +69,7 @@ function StockCheckOut() {
     orderRoutes,
     updateOrderRoutes,
     updateStepsArray,
+    setCurrentStep,
   } = useContext(timelineContext);
 
   function clearLocalStorage() {
@@ -195,6 +198,10 @@ function StockCheckOut() {
   };
 
   useEffect(() => {
+    if (location.pathname == '/stock-check-out') {
+      navigate('driver');
+      setCurrentStep(1);
+    }
     buttonDisabled();
     return () => {
       setNextDisabled(true);
@@ -212,6 +219,7 @@ function StockCheckOut() {
 
   useEffect(() => {
     if (firstRender.current) {
+      navigate('driver');
       firstRender.current = false;
     } else {
       navigate(orderRoutes[currentStep - 1]);
