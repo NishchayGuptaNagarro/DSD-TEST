@@ -16,6 +16,7 @@ import frJSON from 'resources/labels/fr.json';
 import ProtectedRoute from 'component/ProtectedRoute/ProtectedRoute.tsx';
 
 const Home = lazy(() => import('screens/Home/Home.tsx'));
+const History = lazy(() => import('screens/AllHistory/AllHistory.tsx'));
 const ForgotPassword = lazy(
   () => import('screens/ForgotPassword/ForgotPassword.tsx'),
 );
@@ -91,6 +92,16 @@ function App() {
                   <Suspense fallback={<Loading />}>
                     <ProtectedRoute>
                       <Home />
+                    </ProtectedRoute>
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/history"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <ProtectedRoute>
+                      <History />
                     </ProtectedRoute>
                   </Suspense>
                 }

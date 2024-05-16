@@ -33,6 +33,7 @@ function AttachmentTable() {
         </DialogContent>
       </Dialog>
       <Table
+        noOfRows={5}
         showMenu={false}
         rows={attachmentArr}
         getRowId={getAttachmentRowId}

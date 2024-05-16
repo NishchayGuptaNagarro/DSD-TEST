@@ -15,8 +15,6 @@ import dateIcon from 'assets/SVG/Date.svg';
 import managerIcon from 'assets/SVG/Manager.svg';
 import {useTranslation} from 'react-i18next';
 import ScreenLayout from 'component/ScreenLayout/ScreenLayout.tsx';
-import AllHistoryTable from './AllHistoryTable/AllHistoryTable.tsx';
-
 function Home() {
   const {t} = useTranslation();
   // Heading and subheading passed to 'Page Heading' component
@@ -37,9 +35,8 @@ function Home() {
           <CardStack />
         </Box>
         <Box padding={2} sx={{textAlign: 'center'}}>
-          <AllHistoryTable />
           <Button
-            sx={{mt: 2}}
+            sx={{mt: 15}}
             variant="contained"
             size="large"
             component={Link}

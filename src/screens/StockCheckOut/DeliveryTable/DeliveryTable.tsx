@@ -140,6 +140,7 @@ function DeliveryTable() {
         </DialogContent>
       </Dialog>
       <Table
+        noOfRows={5}
         showMenu={false}
         rows={rows}
         columns={deliveryColDef(handleShowProducts)}

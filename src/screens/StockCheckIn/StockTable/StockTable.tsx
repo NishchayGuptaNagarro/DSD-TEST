@@ -10,6 +10,7 @@ function StockTable() {
   return (
     <>
       <Table
+        noOfRows={5}
         showMenu={false}
         rows={stockArr}
         getRowId={getStockRowId}

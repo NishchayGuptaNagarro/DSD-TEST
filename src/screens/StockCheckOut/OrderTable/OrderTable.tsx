@@ -83,11 +83,12 @@ const OrderTable = () => {
   return (
     <>
       <AlertDialog
-        messageText={'Initial Stock already assigned to driver'}
-        closeBtnText={'Dismiss'}
+        messageText={'alert.text3'}
+        closeBtnText={'alert.btn2'}
         isOpen={isDialogOpen}
         handleDismiss={handleDialogDismiss}></AlertDialog>
       <Table
+        noOfRows={5}
         showMenu={false}
         showLoading={!isTableLoaded}
         rows={rows}

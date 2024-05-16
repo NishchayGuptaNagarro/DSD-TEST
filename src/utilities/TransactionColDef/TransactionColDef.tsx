@@ -32,7 +32,7 @@ export const transactionColDef: GridColDef[] = [
     valueGetter: ({value, row}) => {
       return `${value} : ${row.customerName}`;
     },
-    flex: 0.4,
+    flex: 0.3,
     cellClassName: 'font-sm',
     sortable: false,
   },
@@ -62,7 +62,7 @@ export const transactionColDef: GridColDef[] = [
     ) => {
       return <PaymentGrid paymentMethods={params.value || {}} />;
     },
-    flex: 0.3,
+    flex: 0.4,
     cellClassName: 'font-xsm',
     sortable: false,
     align: 'center',

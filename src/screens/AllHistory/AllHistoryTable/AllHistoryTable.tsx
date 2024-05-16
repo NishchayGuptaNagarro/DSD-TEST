@@ -177,6 +177,7 @@ function AllHistoryTable() {
         }}>
         <DialogContent>
           <Table
+            noOfRows={5}
             showMenu={false}
             rows={transactionArr}
             columns={transactionColDef}
@@ -195,6 +196,7 @@ function AllHistoryTable() {
         }}>
         <DialogContent>
           <Table
+            noOfRows={5}
             showMenu={false}
             rows={stockArr}
             columns={stockColDef}
@@ -213,6 +215,7 @@ function AllHistoryTable() {
         }}>
         <DialogContent>
           <Table
+            noOfRows={5}
             showMenu={false}
             rows={attachmentArr}
             columns={attachmentColDef(handleImageClick)}
@@ -234,6 +237,7 @@ function AllHistoryTable() {
         </DialogContent>
       </Dialog>
       <Table
+        noOfRows={10}
         showMenu={true}
         rows={driverHistoryArr}
         columns={allHistoryColDef(

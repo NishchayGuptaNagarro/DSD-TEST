@@ -46,13 +46,11 @@ function StockCheckOut() {
     setDriverArray,
     selectedDriver,
     alertOpen,
-    alertText,
     rows,
     setRows,
     setSelectedDriver,
     isSignatureLoaded,
     setAlertOpen,
-    setAlertText,
     setIsDriverGridLoading,
     setIsSignatureLoaded,
     isDriverGridLoading,
@@ -177,7 +175,6 @@ function StockCheckOut() {
       );
       console.log(response);
       checkApiError(response);
-      setAlertText(response.data.msg);
       setAlertOpen(true);
     } catch (error) {
       console.log(error);
@@ -229,9 +226,9 @@ function StockCheckOut() {
   return (
     <ScreenLayout>
       <AlertDialog
-        messageText={alertText}
+        messageText={'alert.text2'}
         isOpen={alertOpen}
-        closeBtnText={'Okay'}
+        closeBtnText={'alert.btn1'}
         handleDismiss={handleAlertClose}
       />
       <Stack className={'select-driver-screen'}>

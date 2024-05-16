@@ -12,4 +12,5 @@ export interface TableProps {
   getRowId: (row: Row) => number;
   showLoading: boolean;
   showMenu: boolean;
+  noOfRows: number;
 }

@@ -9,6 +9,7 @@ import {
 import ColumnHeader from 'component/ColumnHeader/ColumnHeader.tsx';
 import {AttachmentStackProps} from '../../screens/StockCheckIn/AttachmentTable/propTypes/types.ts';
 import {Attachment} from '../../models/Attachment.ts';
+import {useTranslation} from 'react-i18next';
 
 export const attachmentColDef: (
   handleClick: (src: string) => void,
@@ -48,6 +49,7 @@ export const attachmentColDef: (
 ];
 
 function AttachmentStack({attachment, handleClick}: AttachmentStackProps) {
+  const {t} = useTranslation();
   return (
     <Stack
       flexDirection={'row'}
@@ -59,7 +61,7 @@ function AttachmentStack({attachment, handleClick}: AttachmentStackProps) {
         onClick={() => {
           handleClick(attachment);
         }}>
-        View Attachment
+        {t('table.view.attachment')}
       </Link>
       <Link
         className={'attachment-download'}

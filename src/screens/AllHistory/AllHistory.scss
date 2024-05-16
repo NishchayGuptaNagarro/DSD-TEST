@@ -1,0 +1,8 @@
+@import "src/styles/design-systems.module";
+
+.all-history-screen{
+
+  .history-language-select{
+    @extend .language-selection-dropdown;
+  }
+}

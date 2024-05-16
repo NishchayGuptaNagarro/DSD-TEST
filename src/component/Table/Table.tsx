@@ -114,6 +114,7 @@ export default function Table({
   getRowId,
   showLoading,
   showMenu,
+  noOfRows,
 }: TableProps) {
   return (
     <DataGrid
@@ -136,12 +137,12 @@ export default function Table({
       initialState={{
         pagination: {
           paginationModel: {
-            pageSize: 5,
+            pageSize: noOfRows,
           },
         },
       }}
       columnHeaderHeight={35}
-      pageSizeOptions={[5]}
+      pageSizeOptions={[noOfRows]}
       disableColumnMenu={!showMenu}
       disableRowSelectionOnClick
       sx={{

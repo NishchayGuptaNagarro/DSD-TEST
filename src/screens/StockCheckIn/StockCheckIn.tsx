@@ -240,9 +240,9 @@ function StockCheckIn() {
   return (
     <ScreenLayout>
       <AlertDialog
-        messageText={'Stock Unassigned From Driver'}
+        messageText={'alert.text1'}
         isOpen={alertOpen}
-        closeBtnText={'Okay'}
+        closeBtnText={'alert.btn1'}
         handleDismiss={handleAlertClose}
       />
       <Stack className={'stock-check-in'}>

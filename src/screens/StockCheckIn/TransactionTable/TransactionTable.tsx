@@ -10,6 +10,7 @@ function TransactionTable() {
   return (
     <>
       <Table
+        noOfRows={5}
         showMenu={false}
         rows={transactionArr}
         columns={transactionColDef}

@@ -72,8 +72,6 @@ export interface SelectDriverStates {
   setIsDriverGridLoading: Dispatch<SetStateAction<boolean>>;
   isSignatureLoaded: boolean;
   setIsSignatureLoaded: Dispatch<SetStateAction<boolean>>;
-  alertText: string;
-  setAlertText: Dispatch<SetStateAction<string>>;
   alertOpen: boolean;
   setAlertOpen: Dispatch<SetStateAction<boolean>>;
   nextDisabled: boolean;
