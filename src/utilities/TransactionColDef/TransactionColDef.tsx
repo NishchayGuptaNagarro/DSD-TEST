@@ -9,7 +9,7 @@ import {
   PaymentGridProps,
   PaymentMethods,
   TransactionHistory,
-} from '../propTypes/types.ts';
+} from 'models/TransactionHistory.ts';
 
 export const transactionColDef: GridColDef[] = [
   {
@@ -32,14 +32,14 @@ export const transactionColDef: GridColDef[] = [
     valueGetter: ({value, row}) => {
       return `${value} : ${row.customerName}`;
     },
-    flex: 0.4,
+    flex: 0.3,
     cellClassName: 'font-sm',
     sortable: false,
   },
   {
     field: 'grossAmount',
     headerName: 'table.amount',
-    flex: 0.3,
+    flex: 0.2,
     headerClassName: 'font-md',
     renderHeader: (params: GridColumnHeaderParams) => {
       return <ColumnHeader headerName={params.colDef.headerName || ''} />;
@@ -62,18 +62,19 @@ export const transactionColDef: GridColDef[] = [
     ) => {
       return <PaymentGrid paymentMethods={params.value || {}} />;
     },
-    flex: 0.5,
-    cellClassName: 'font-sm',
+    flex: 0.4,
+    cellClassName: 'font-xsm',
     sortable: false,
+    align: 'center',
   },
 ];
 
 function PaymentGrid({paymentMethods}: PaymentGridProps) {
   return (
-    <Stack flexDirection={'row'} gap={1}>
-      {paymentMethods.cash && <div>Cash:{paymentMethods.cash}</div>}
-      {paymentMethods.card && <div>Card:{paymentMethods.card}</div>}
-      {paymentMethods.cheque && <div>Cheque:{paymentMethods.cheque}</div>}
+    <Stack flexDirection={'column'} gap={0.2}>
+      <div>Card:{paymentMethods.card}</div>
+      <div>Cash:{paymentMethods.cash}</div>
+      <div>Cheque:{paymentMethods.cheque}</div>
     </Stack>
   );
 }

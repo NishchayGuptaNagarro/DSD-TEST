@@ -36,7 +36,7 @@ function DriverSignature() {
     try {
       while (executeLoop) {
         response = await api.get(
-          `/warehouse/digital-signature?user_id=${localStorage.getItem('selected_driver')}`,
+          `/warehouse/digital-signature?user_id=${sessionStorage.getItem('selected_driver')}`,
         );
         console.log(response);
         status = response.data.status_code;
@@ -64,6 +64,7 @@ function DriverSignature() {
       }
     } catch (error) {
       console.log(error);
+      setShowLoading(false);
     }
   }
   useEffect(() => {

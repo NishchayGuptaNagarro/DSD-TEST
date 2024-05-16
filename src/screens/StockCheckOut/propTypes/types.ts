@@ -1,12 +1,12 @@
 // Generic driver interface
 
 import {DriverSignatureProps} from '../DriverSignature/propTypes/types.ts';
-import {Driver} from 'models/driver.ts';
+import {Driver} from 'models/Driver.ts';
 import {Dispatch, SetStateAction} from 'react';
 import {Row} from 'component/Table/propTypes/types.ts';
 import {DriverSelectionGridProps} from 'component/DriverSelectionGrid/propTypes/types.ts';
 import {driverTypes} from 'models/driverTypes.ts';
-import {OutletTableProps} from 'models/outletTableProps.ts';
+import {OutletTableProps} from 'models/OutletTableProps.ts';
 
 // Interface for outlet context provider
 export interface StockCheckOutContext
@@ -72,8 +72,6 @@ export interface SelectDriverStates {
   setIsDriverGridLoading: Dispatch<SetStateAction<boolean>>;
   isSignatureLoaded: boolean;
   setIsSignatureLoaded: Dispatch<SetStateAction<boolean>>;
-  alertText: string;
-  setAlertText: Dispatch<SetStateAction<string>>;
   alertOpen: boolean;
   setAlertOpen: Dispatch<SetStateAction<boolean>>;
   nextDisabled: boolean;

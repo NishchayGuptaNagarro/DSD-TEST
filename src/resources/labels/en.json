@@ -63,12 +63,8 @@
     "timeline.option3": "Activation",
     "timeline.option4": "Select Deliveries / Orders",
     "timeline.option5": "Add Quantities",
-
-
-
     "driversignature.action1": "Activate",
     "driversignature.action2": "Reject",
-
     "stockcheckin.heading": "Stock Check In",
     "stockcheckin.subheading": "To check in stock, Please follow the steps",
     "timeline.option6":"Select Pending Check-In",
@@ -83,6 +79,20 @@
     "table.itemsDesc": "Items: ID",
     "table.remaining": "Remaining",
     "table.attachmentDesc": "Attachment Description",
-    "table.attachments":"Attachments",
-    "createLoadingOrder.signature.admin": "Admin Signature"
+    "table.attachments":"Attachment",
+    "createLoadingOrder.signature.admin": "Admin Signature",
+    "table.driverId": "Driver ID",
+    "table.date": "Date",
+    "table.stocks": "Stocks",
+    "table.view.stocks": "View Stocks",
+    "table.view.orders": "View Orders",
+    "table.view.attachments": "View Attachments",
+    "table.view.attachment": "View Attachment",
+    "history.pageHeading": "All Orders History",
+    "alert.text1": "Stock Unassigned from Driver",
+    "alert.text2": "Stock Assigned to Driver",
+    "alert.text3": "Initial Stock already assigned to driver",
+    "alert.btn1": "Okay",
+    "alert.btn2": "Dismiss"
+
 }

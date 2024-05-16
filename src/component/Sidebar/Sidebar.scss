@@ -1,4 +1,4 @@
-@import "src/styles/design-systems.module";
+@import 'src/styles/design-systems.module';
 
 .nav-menu-active,
 .nav-menu-closed {
@@ -55,7 +55,7 @@
         .options-text {
           font-weight: $font-bolder;
           color: $white-pure;
-          font-size:$font-xsm;
+          font-size: $font-xsm;
         }
         .arrow-nav {
           color: $white-pure;
@@ -65,35 +65,40 @@
     }
     .dropdown-menu {
       width: 100%;
-      display: flex;
-      align-self: center;
+      flex-direction: column;
       margin-top: 5%;
       background-color: $bg-blue-vivid;
       border-radius: 10px;
-      height: 56px;
+      transition: opacity 1s ease;
 
-      .submenu-left {
-        width: 20%;
-        @include flex-row;
-        @include flex-center;
-
-        .submenu-left-text {
-          font-weight: $font-bolder;
-          font-size: $font-lg;
-          color: $white-pure;
+      .submenu {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        &:last-child {
+          margin-top: 0.4rem;
+        }
+        &:first-child {
+          margin-top: 0.2rem;
+        }
+        .submenu-right {
+          width: 100%;
+          margin-left: 0.6rem;
+          @include flex-row;
+          .submenu-right-text {
+            color: $white-pure;
+            font-weight: $font-bolder;
+            font-size: $font-xsm;
+          }
         }
       }
+    }
+    .dropdown-menu.open {
+      opacity: 1;
+    }
 
-      .submenu-right {
-        width: 80%;
-        @include flex-row;
-        @include flex-center;
-        .submenu-right-text {
-          color: $white-pure;
-          font-weight:$font-bolder;
-          font-size: $font-md;
-        }
-      }
+    .dropdown-menu.closed {
+      opacity: 0;
     }
   }
 }
@@ -128,7 +133,7 @@
   align-items: center;
   position: relative;
   border-radius: 16px;
-  background:$gradient-black;
+  background: $gradient-black;
 
   .sidebar-logo {
     width: 100%;
@@ -172,6 +177,6 @@
   height: 20%;
 }
 
-.cursor-pointer{
+.cursor-pointer {
   cursor: pointer;
 }

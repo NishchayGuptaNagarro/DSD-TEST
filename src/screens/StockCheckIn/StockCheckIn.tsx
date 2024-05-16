@@ -3,8 +3,8 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 
 import {useTranslation} from 'react-i18next';
-import {useNavigate} from 'react-router-dom';
-import {ChangeEvent, useContext, useEffect, useRef} from 'react';
+import {useLocation, useNavigate} from 'react-router-dom';
+import {ChangeEvent, useContext, useEffect, useRef, useState} from 'react';
 import {Outlet} from 'react-router';
 import {AxiosResponse} from 'axios';
 
@@ -17,21 +17,36 @@ import BlackButton from 'component/BlackButton/BlackButton.tsx';
 import timelineContext from 'context/timeline/timelineContext.ts';
 import {checkInSteps} from 'utilities/timelineSteps.ts';
 import {checkInRoutes} from 'utilities/timelineRoutes.ts';
-import {StockCheckInContext} from './propTypes/types.ts';
+import {
+  PendingCheckInResponse,
+  StockCheckInContext,
+} from './propTypes/types.ts';
 import {useStockCheckInState} from './useStockCheckInState.ts';
 import {driverTypes} from 'models/driverTypes.ts';
 import {api} from 'axios/api.ts';
-import {Driver} from 'models/driver.ts';
+import {Driver} from 'models/Driver.ts';
 import {checkApiError} from 'utilities/checkApiError.ts';
 import './StockCheckIn.scss';
-import {DriverApiResponse} from '../StockCheckOut/propTypes/types.ts';
+import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
+import {ClipLoader} from 'react-spinners';
+import {Attachment} from 'models/Attachment.ts';
+import {Stock} from 'models/Stock.ts';
+import {TransactionHistory} from 'models/TransactionHistory.ts';
+import {DriverHistoryResponse} from 'models/DriverHistoryResponse.ts';
 
 function StockCheckIn() {
   const {t} = useTranslation();
+  const location = useLocation();
   const navigate = useNavigate();
   const heading = t('stockcheckin.heading');
   const subHeading = t('stockcheckin.subheading');
   const firstRender = useRef(true);
+  const [dataLoading, setDataLoading] = useState(false);
+  const [transactionArr, setTransactionArr] = useState<TransactionHistory[]>(
+    [],
+  );
+  const [stockArr, setStockArr] = useState<Stock[]>([]);
+  const [attachmentArr, setAttachmentArr] = useState<Attachment[]>([]);
   const {
     currentStep,
     steps,
@@ -40,6 +55,7 @@ function StockCheckIn() {
     orderRoutes,
     updateOrderRoutes,
     updateStepsArray,
+    setCurrentStep,
   } = useContext(timelineContext);
 
   const {
@@ -53,19 +69,21 @@ function StockCheckIn() {
     setDriverType,
     nextDisabled,
     setNextDisabled,
-    setRows,
-    rows,
     isSignatureDone,
     setIsSignatureDone,
+    setSignatureURL,
+    signatureURL,
+    setAlertOpen,
+    alertOpen,
   } = useStockCheckInState();
 
   function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
     setSelectedDriver(event.target.value);
-    localStorage.setItem('selected_driver', event.target.value);
-    localStorage.setItem('selected_driver_type', driverType);
+    sessionStorage.setItem('selected_driver', event.target.value);
+    sessionStorage.setItem('selected_driver_type', driverType);
   }
   function buttonDisabled() {
-    if (localStorage.getItem('selected_driver')) {
+    if (sessionStorage.getItem('selected_driver') && !dataLoading) {
       setNextDisabled(false);
     } else {
       setNextDisabled(true);
@@ -79,9 +97,15 @@ function StockCheckIn() {
     updateOrderRoutes(checkInRoutes);
   }
   function clearLocalStorage() {
-    localStorage.removeItem('selected_driver');
-    localStorage.removeItem('selected_driver_type');
-    localStorage.removeItem('currentStep');
+    sessionStorage.removeItem('selected_driver');
+    sessionStorage.removeItem('selected_driver_type');
+    sessionStorage.removeItem('currentStep');
+  }
+
+  function handleAlertClose() {
+    clearLocalStorage();
+    setAlertOpen(false);
+    navigate('/home');
   }
 
   const contextObj = {
@@ -91,17 +115,20 @@ function StockCheckIn() {
     driverType,
     handleTypeChange,
     handleDriverSelection,
-    rows,
-    setRows,
+    transactionArr,
+    stockArr,
     isSignatureDone,
     setIsSignatureDone,
+    attachmentArr,
+    setSignatureURL,
+    signatureURL,
   };
 
   async function fetchDrivers() {
-    let response: AxiosResponse<DriverApiResponse>;
+    let response: AxiosResponse<PendingCheckInResponse>;
     let driverData: Driver[];
     try {
-      response = await api.get('/warehouse/drivers');
+      response = await api.get('/warehouse/drivers/pending-checkin');
       console.log(response);
       checkApiError(response);
       driverData = response.data.data.map(driver => {
@@ -119,8 +146,75 @@ function StockCheckIn() {
       setIsDriverGridLoading(false);
     }
   }
+  async function fetchDriverHistory() {
+    setDataLoading(true);
+    let response: AxiosResponse<DriverHistoryResponse>;
+    try {
+      response = await api.get(
+        `/warehouse/driver/history?user_id=${sessionStorage.getItem('selected_driver')}`,
+      );
+      checkApiError(response);
+
+      const {orders, stocks, attachments} = response.data.data;
+
+      const parsedTransactions = orders.map(transaction => ({
+        customerId: Number(transaction.customer.external_id),
+        customerName: transaction.customer.customer_name,
+        grossAmount: transaction.gross_amount,
+        orderId: Number(transaction.order_number),
+        paymentMethods: {
+          cash: transaction.payment_method.cash,
+          card: transaction.payment_method.credit,
+          cheque: transaction.payment_method.cheque,
+        },
+      }));
+
+      const parsedStocks = stocks.map(stock => ({
+        stockId: stock.id,
+        initial: Number(stock.initial_stock),
+        item: stock.product_id,
+        remaining: Number(stock.remaining_stock),
+      }));
+
+      const parsedAttachments = attachments.map(attachment => ({
+        attachmentId: attachment.id,
+        description: attachment.description,
+        attachment: attachment.attachment,
+      }));
+
+      setTransactionArr(parsedTransactions);
+      setStockArr(parsedStocks);
+      setAttachmentArr(parsedAttachments);
+      setDataLoading(false);
+    } catch (error) {
+      console.log(error);
+      setDataLoading(false);
+    }
+  }
+
+  async function unAssignStock() {
+    console.log(signatureURL);
+    try {
+      const response: AxiosResponse = await api.post(
+        '/warehouse/unassign-stock',
+        {
+          user_id: sessionStorage.getItem('selected_driver'),
+          manager_signature_image: signatureURL,
+        },
+      );
+      console.log(response);
+      checkApiError(response);
+      setAlertOpen(true);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
+    if (location.pathname == '/stock-check-in') {
+      navigate('driver');
+      setCurrentStep(1);
+    }
     buttonDisabled();
     return () => {
       setNextDisabled(true);
@@ -134,8 +228,10 @@ function StockCheckIn() {
       clearLocalStorage();
     };
   }, []);
+
   useEffect(() => {
     if (firstRender.current) {
+      navigate('driver');
       firstRender.current = false;
     } else {
       navigate(orderRoutes[currentStep - 1]);
@@ -143,6 +239,12 @@ function StockCheckIn() {
   }, [currentStep]);
   return (
     <ScreenLayout>
+      <AlertDialog
+        messageText={'alert.text1'}
+        isOpen={alertOpen}
+        closeBtnText={'alert.btn1'}
+        handleDismiss={handleAlertClose}
+      />
       <Stack className={'stock-check-in'}>
         <span className={'language-select'}>
           <LanguageSelect />
@@ -175,7 +277,6 @@ function StockCheckIn() {
               variant={'contained'}
               onClick={() => {
                 decreaseSteps();
-                setRows([]);
               }}
               disabled={currentStep === 1}>
               {t('createLoadingOrder.back')}
@@ -185,9 +286,7 @@ function StockCheckIn() {
                 size={'small'}
                 variant={'contained'}
                 disabled={!isSignatureDone}
-                onClick={() => {
-                  navigate('/');
-                }}>
+                onClick={unAssignStock}>
                 {t('createLoadingOrder.finish')}
               </BlackButton>
             ) : (
@@ -196,10 +295,19 @@ function StockCheckIn() {
                 variant={'contained'}
                 disabled={nextDisabled}
                 onClick={() => {
-                  increaseSteps();
-                  setRows([]);
+                  if (currentStep == 1) {
+                    fetchDriverHistory().then(() => {
+                      increaseSteps();
+                    });
+                  } else {
+                    increaseSteps();
+                  }
                 }}>
-                {t('createLoadingOrder.next')}
+                {dataLoading ? (
+                  <ClipLoader size={20} />
+                ) : (
+                  t('createLoadingOrder.next')
+                )}
               </BlackButton>
             )}
           </div>

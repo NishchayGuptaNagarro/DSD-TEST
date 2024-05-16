@@ -6,7 +6,7 @@ import {
 import Button from '@mui/material/Button';
 import ColumnHeader from 'component/ColumnHeader/ColumnHeader.tsx';
 import {DeliveryTableRow, ProductsButtonProps} from '../propTypes/types.ts';
-import {Product} from 'models/product.ts';
+import {Product} from 'models/Product.ts';
 import productSVG from 'assets/SVG/Products.svg';
 import {useTranslation} from 'react-i18next';
 export const deliveryColDef: (

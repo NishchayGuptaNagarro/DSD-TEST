@@ -17,7 +17,7 @@ import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
 import timelineContext from 'context/timeline/timelineContext.ts';
 import {api} from 'axios/api.ts';
 import {checkApiError} from 'utilities/checkApiError.ts';
-import {Driver} from 'models/driver.ts';
+import {Driver} from 'models/Driver.ts';
 import {DriverApiResponse, StockCheckOutContext} from './propTypes/types.ts';
 import {
   deliverySteps,
@@ -31,12 +31,14 @@ import {
 } from 'utilities/timelineRoutes.ts';
 import {useStockCheckOutState} from './useStockCheckOutState.ts';
 import './StockCheckOut.scss';
+import {useLocation} from 'react-router-dom';
 
 function StockCheckOut() {
   const {t} = useTranslation();
   const heading = t('createLoadingOrder.title');
   const subHeading = t('createLoadingOrder.subtitle');
   const navigate = useNavigate();
+  const location = useLocation();
   const firstRender = useRef(true);
 
   const {
@@ -44,13 +46,11 @@ function StockCheckOut() {
     setDriverArray,
     selectedDriver,
     alertOpen,
-    alertText,
     rows,
     setRows,
     setSelectedDriver,
     isSignatureLoaded,
     setAlertOpen,
-    setAlertText,
     setIsDriverGridLoading,
     setIsSignatureLoaded,
     isDriverGridLoading,
@@ -67,17 +67,18 @@ function StockCheckOut() {
     orderRoutes,
     updateOrderRoutes,
     updateStepsArray,
+    setCurrentStep,
   } = useContext(timelineContext);
 
   function clearLocalStorage() {
-    localStorage.removeItem('selected_driver');
-    localStorage.removeItem('selected_driver_type');
-    localStorage.removeItem('currentStep');
+    sessionStorage.removeItem('selected_driver');
+    sessionStorage.removeItem('selected_driver_type');
+    sessionStorage.removeItem('currentStep');
   }
   function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
     setSelectedDriver(event.target.value);
-    localStorage.setItem('selected_driver', event.target.value);
-    localStorage.setItem('selected_driver_type', driverType);
+    sessionStorage.setItem('selected_driver', event.target.value);
+    sessionStorage.setItem('selected_driver_type', driverType);
   }
   function handleAlertClose() {
     clearLocalStorage();
@@ -108,8 +109,8 @@ function StockCheckOut() {
   }
 
   function buttonDisabled() {
-    const selectedDriver = localStorage.getItem('selected_driver');
-    const selectedDriverType = localStorage.getItem('selected_driver_type');
+    const selectedDriver = sessionStorage.getItem('selected_driver');
+    const selectedDriverType = sessionStorage.getItem('selected_driver_type');
 
     switch (driverType) {
       case 'VAN-SELLER': {
@@ -169,12 +170,11 @@ function StockCheckOut() {
       const response: AxiosResponse = await api.post(
         '/warehouse/assign-initial-stock',
         {
-          user_id: localStorage.getItem('selected_driver'),
+          user_id: sessionStorage.getItem('selected_driver'),
         },
       );
       console.log(response);
       checkApiError(response);
-      setAlertText(response.data.msg);
       setAlertOpen(true);
     } catch (error) {
       console.log(error);
@@ -195,6 +195,10 @@ function StockCheckOut() {
   };
 
   useEffect(() => {
+    if (location.pathname == '/stock-check-out') {
+      navigate('driver');
+      setCurrentStep(1);
+    }
     buttonDisabled();
     return () => {
       setNextDisabled(true);
@@ -212,6 +216,7 @@ function StockCheckOut() {
 
   useEffect(() => {
     if (firstRender.current) {
+      navigate('driver');
       firstRender.current = false;
     } else {
       navigate(orderRoutes[currentStep - 1]);
@@ -221,9 +226,9 @@ function StockCheckOut() {
   return (
     <ScreenLayout>
       <AlertDialog
-        messageText={alertText}
+        messageText={'alert.text2'}
         isOpen={alertOpen}
-        closeBtnText={'Okay'}
+        closeBtnText={'alert.btn1'}
         handleDismiss={handleAlertClose}
       />
       <Stack className={'select-driver-screen'}>

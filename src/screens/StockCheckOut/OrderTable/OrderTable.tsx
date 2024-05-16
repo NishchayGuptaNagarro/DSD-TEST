@@ -10,7 +10,7 @@ import {checkApiError} from 'utilities/checkApiError.ts';
 import timelineContext from 'context/timeline/timelineContext.ts';
 import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
 import {orderColDef} from './OrderColDef/OrderColDef.tsx';
-import {Product} from 'models/product.ts';
+import {Product} from 'models/Product.ts';
 import {getProductRowId} from 'utilities/getProductRowId.ts';
 
 const OrderTable = () => {
@@ -27,7 +27,7 @@ const OrderTable = () => {
       const response: AxiosResponse = await api.post(
         '/warehouse/send-notification-driver',
         {
-          user_id: localStorage.getItem('selected_driver'),
+          user_id: sessionStorage.getItem('selected_driver'),
         },
       );
       console.log(response);
@@ -42,7 +42,7 @@ const OrderTable = () => {
     let products: Row[];
     try {
       response = await api.get(
-        `/warehouse/driver-dashboard-for-warehouse?user_id=${localStorage.getItem('selected_driver')}`,
+        `/warehouse/driver-dashboard-for-warehouse?user_id=${sessionStorage.getItem('selected_driver')}`,
       );
       console.log(response);
       if (response.data.status_code == 400) {
@@ -83,11 +83,13 @@ const OrderTable = () => {
   return (
     <>
       <AlertDialog
-        messageText={'Initial Stock already assigned to driver'}
-        closeBtnText={'Dismiss'}
+        messageText={'alert.text3'}
+        closeBtnText={'alert.btn2'}
         isOpen={isDialogOpen}
         handleDismiss={handleDialogDismiss}></AlertDialog>
       <Table
+        noOfRows={5}
+        showMenu={false}
         showLoading={!isTableLoaded}
         rows={rows}
         columns={orderColDef}

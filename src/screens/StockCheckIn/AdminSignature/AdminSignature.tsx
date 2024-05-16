@@ -1,5 +1,5 @@
 import {useOutletContext} from 'react-router-dom';
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useRef} from 'react';
 import {useTranslation} from 'react-i18next';
 import SignatureCanvas from 'react-signature-canvas';
 
@@ -10,12 +10,13 @@ import IconButton from '@mui/material/IconButton';
 
 function AdminSignature() {
   const {t} = useTranslation();
-  const {setIsSignatureDone} = useOutletContext<StockCheckInContext>();
-  const [signatureURL, setSignatureURL] = useState('');
+  const {setIsSignatureDone, setSignatureURL} =
+    useOutletContext<StockCheckInContext>();
+
   const signatureCanvas = useRef<SignatureCanvas>(null);
 
   function handleSignatureDone() {
-    setSignatureURL(signatureCanvas.current?.toDataURL('image/png') || '');
+    setSignatureURL(signatureCanvas.current?.toDataURL().substring(22) || '');
     setIsSignatureDone(true);
   }
   function clearSignature() {

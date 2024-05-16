@@ -5,6 +5,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import {AlertDialogProps} from './propTypes/types.ts';
 import styles from 'styles/design-systems.module.scss';
+import {useTranslation} from 'react-i18next';
 
 function AlertDialog({
   messageText,
@@ -16,6 +17,8 @@ function AlertDialog({
     handleDismiss(false);
   };
 
+  const {t} = useTranslation();
+
   return (
     <>
       <Dialog open={isOpen}>
@@ -26,12 +29,12 @@ function AlertDialog({
               textAlign: 'center',
               color: styles.black,
             }}>
-            {messageText}
+            {t(messageText)}
           </DialogContentText>
         </DialogContent>
         <DialogActions sx={{p: 0}}>
           <Button onClick={handleClose} autoFocus>
-            {closeBtnText}
+            {t(closeBtnText)}
           </Button>
         </DialogActions>
       </Dialog>
