@@ -31,7 +31,7 @@ function TimelineState({children}: UserProvidedProps) {
         updatedStep >= 1 && updatedStep <= steps.length
           ? updatedStep
           : prevStep;
-      localStorage.setItem('currentStep', JSON.stringify(step));
+      sessionStorage.setItem('currentStep', JSON.stringify(step));
       return step;
     });
   };
@@ -51,7 +51,9 @@ function TimelineState({children}: UserProvidedProps) {
   // If no value is found in local storage, it defaults to 1.
   const rememberSteps = () => {
     // Retrieve the current step value from local storage or default to 1
-    const currentSteps = JSON.parse(localStorage.getItem('currentStep') || '1');
+    const currentSteps = JSON.parse(
+      sessionStorage.getItem('currentStep') || '1',
+    );
     if (currentSteps) {
       setCurrentStep(currentSteps);
     }

@@ -1,23 +1,16 @@
 import Table from 'component/Table/Table.tsx';
 import {useOutletContext} from 'react-router-dom';
 import {StockCheckInContext} from '../propTypes/types.ts';
-import {Row} from 'component/Table/propTypes/types.ts';
-import {stockColDef} from './StockColDef/StockColDef.tsx';
+import {stockColDef} from 'utilities/StockColDef/StockColDef.tsx';
+import {getStockRowId} from 'utilities/getStockRowId.ts';
 
 function StockTable() {
   const {stockArr} = useOutletContext<StockCheckInContext>();
 
-  function getStockRowId(row: Row) {
-    if (typeof row.stockId === 'number') {
-      return row.stockId;
-    } else {
-      throw new Error('row id should be number');
-    }
-  }
-
   return (
     <>
       <Table
+        showMenu={false}
         rows={stockArr}
         getRowId={getStockRowId}
         showLoading={false}

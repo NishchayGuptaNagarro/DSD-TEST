@@ -1,4 +1,12 @@
-import {DataGrid, gridClasses, GridLoadingOverlay} from '@mui/x-data-grid';
+import {
+  DataGrid,
+  gridClasses,
+  GridColumnMenu,
+  GridColumnMenuFilterItem,
+  GridColumnMenuItemProps,
+  GridColumnMenuProps,
+  GridLoadingOverlay,
+} from '@mui/x-data-grid';
 import Box from '@mui/material/Box';
 import {styled} from '@mui/material/styles';
 
@@ -82,20 +90,42 @@ function CustomNoRowsOverlay() {
   );
 }
 
+function CustomFilterItem(props: GridColumnMenuItemProps) {
+  return <GridColumnMenuFilterItem className={'filter-btn'} {...props} />;
+}
+
+function CustomColumnMenu(props: GridColumnMenuProps) {
+  return (
+    <GridColumnMenu
+      className={'filter-item'}
+      {...props}
+      slots={{
+        // Hide `columnMenuColumnsItem`
+        columnMenuColumnsItem: null,
+        columnMenuFilterItem: CustomFilterItem,
+      }}
+    />
+  );
+}
+
 export default function Table({
   rows,
   columns,
   getRowId,
   showLoading,
+  showMenu,
 }: TableProps) {
   return (
     <DataGrid
+      className={'table'}
       loading={showLoading}
       slots={{
         loadingOverlay: () => {
           return <GridLoadingOverlay sx={{backgroundColor: 'inherit'}} />;
         },
         noRowsOverlay: CustomNoRowsOverlay,
+        columnMenu: CustomColumnMenu,
+        noResultsOverlay: CustomNoRowsOverlay,
       }}
       rows={rows}
       columns={columns}
@@ -112,7 +142,7 @@ export default function Table({
       }}
       columnHeaderHeight={35}
       pageSizeOptions={[5]}
-      disableColumnMenu
+      disableColumnMenu={!showMenu}
       disableRowSelectionOnClick
       sx={{
         minHeight: 270,
@@ -140,6 +170,18 @@ export default function Table({
           p: 0,
           height: 30,
           minHeight: 10,
+        },
+        [`& .${gridClasses.filterForm}`]: {
+          color: 'red',
+        },
+        [`& .${gridClasses.filterIcon}`]: {
+          border: 2,
+        },
+        [`& .${gridClasses.filterForm}`]: {
+          color: 'red',
+        },
+        [`& .${gridClasses.menuList}`]: {
+          color: 'red',
         },
       }}
     />

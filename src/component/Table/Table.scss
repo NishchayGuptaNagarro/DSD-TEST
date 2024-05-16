@@ -1,0 +1,43 @@
+@import "src/styles/design-systems.module";
+
+.filter-item {
+  &.MuiDataGrid-menuList {
+    padding: 0;
+    min-width: 10px;
+
+    & .css-1vz77qy-MuiTypography-root {
+      font-size: $font-xsm;
+    }
+
+    .MuiListItemIcon-root {
+      min-width: 22px;
+    }
+
+    .css-wgspmi-MuiButtonBase-root-MuiMenuItem-root {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+
+    .css-ptiqhd-MuiSvgIcon-root {
+      font-size: $font-md;
+    }
+  }
+}
+
+
+.MuiDataGrid-filterForm {
+  &.css-1t5wrdm-MuiDataGrid-filterForm {
+    padding: 5px;
+    width: 450px;
+  }
+  .css-1dmqq7i-MuiNativeSelect-select-MuiInputBase-input-MuiInput-input.css-1dmqq7i-MuiNativeSelect-select-MuiInputBase-input-MuiInput-input.css-1dmqq7i-MuiNativeSelect-select-MuiInputBase-input-MuiInput-input{
+    font-size: $font-sm;
+    padding: 4px;
+  }
+  .css-1x51dt5-MuiInputBase-input-MuiInput-input{
+    font-size: $font-sm;
+    padding: 4px;
+  }
+}
+
+

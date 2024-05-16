@@ -54,6 +54,7 @@ function ProductsTable({products}: ProductTableProps) {
 
   return (
     <Table
+      showMenu={false}
       getRowId={getProductRowId}
       columns={columns}
       rows={products}

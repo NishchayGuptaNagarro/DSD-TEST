@@ -17,7 +17,7 @@ import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
 import timelineContext from 'context/timeline/timelineContext.ts';
 import {api} from 'axios/api.ts';
 import {checkApiError} from 'utilities/checkApiError.ts';
-import {Driver} from 'models/driver.ts';
+import {Driver} from 'models/Driver.ts';
 import {DriverApiResponse, StockCheckOutContext} from './propTypes/types.ts';
 import {
   deliverySteps,
@@ -73,14 +73,14 @@ function StockCheckOut() {
   } = useContext(timelineContext);
 
   function clearLocalStorage() {
-    localStorage.removeItem('selected_driver');
-    localStorage.removeItem('selected_driver_type');
-    localStorage.removeItem('currentStep');
+    sessionStorage.removeItem('selected_driver');
+    sessionStorage.removeItem('selected_driver_type');
+    sessionStorage.removeItem('currentStep');
   }
   function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
     setSelectedDriver(event.target.value);
-    localStorage.setItem('selected_driver', event.target.value);
-    localStorage.setItem('selected_driver_type', driverType);
+    sessionStorage.setItem('selected_driver', event.target.value);
+    sessionStorage.setItem('selected_driver_type', driverType);
   }
   function handleAlertClose() {
     clearLocalStorage();
@@ -111,8 +111,8 @@ function StockCheckOut() {
   }
 
   function buttonDisabled() {
-    const selectedDriver = localStorage.getItem('selected_driver');
-    const selectedDriverType = localStorage.getItem('selected_driver_type');
+    const selectedDriver = sessionStorage.getItem('selected_driver');
+    const selectedDriverType = sessionStorage.getItem('selected_driver_type');
 
     switch (driverType) {
       case 'VAN-SELLER': {
@@ -172,7 +172,7 @@ function StockCheckOut() {
       const response: AxiosResponse = await api.post(
         '/warehouse/assign-initial-stock',
         {
-          user_id: localStorage.getItem('selected_driver'),
+          user_id: sessionStorage.getItem('selected_driver'),
         },
       );
       console.log(response);

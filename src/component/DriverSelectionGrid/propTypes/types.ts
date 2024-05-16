@@ -1,4 +1,4 @@
-import {Driver} from 'models/driver.ts';
+import {Driver} from 'models/Driver.ts';
 import {ChangeEvent, MouseEvent} from 'react';
 import {driverTypes} from 'models/driverTypes.ts';
 

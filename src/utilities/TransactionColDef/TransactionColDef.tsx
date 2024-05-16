@@ -9,7 +9,7 @@ import {
   PaymentGridProps,
   PaymentMethods,
   TransactionHistory,
-} from '../propTypes/types.ts';
+} from 'models/TransactionHistory.ts';
 
 export const transactionColDef: GridColDef[] = [
   {

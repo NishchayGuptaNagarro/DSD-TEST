@@ -7,7 +7,8 @@ import {
   GridRenderCellParams,
 } from '@mui/x-data-grid';
 import ColumnHeader from 'component/ColumnHeader/ColumnHeader.tsx';
-import {Attachment, AttachmentStackProps} from '../propTypes/types.ts';
+import {AttachmentStackProps} from '../../screens/StockCheckIn/AttachmentTable/propTypes/types.ts';
+import {Attachment} from '../../models/Attachment.ts';
 
 export const attachmentColDef: (
   handleClick: (src: string) => void,

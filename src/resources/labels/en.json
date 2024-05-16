@@ -81,6 +81,12 @@
     "table.itemsDesc": "Items: ID",
     "table.remaining": "Remaining",
     "table.attachmentDesc": "Attachment Description",
-    "table.attachments":"Attachments",
-    "createLoadingOrder.signature.admin": "Admin Signature"
+    "table.attachments":"Attachment",
+    "createLoadingOrder.signature.admin": "Admin Signature",
+    "table.driverId": "Driver ID",
+    "table.date": "Date",
+    "table.stocks": "Stocks",
+    "table.view.stocks": "View Stocks",
+    "table.view.orders": "View Orders",
+    "table.view.attachments": "View Attachments"
 }

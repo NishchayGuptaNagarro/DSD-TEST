@@ -2,117 +2,26 @@
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-// import {GridColDef} from '@mui/x-data-grid';
 
 import {format} from 'date-fns';
-// import {useEffect, useState} from 'react';
 
 import {Link} from 'react-router-dom';
-// import ProductIcon from 'component/ProductIcon/ProductIcon.tsx';
 import PageHeading from 'component/PageHeading/PageHeading.tsx';
 import DetailsCard from 'component/DetailsCard/DetailsCard.tsx';
 import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
-// import {Product} from './propTypes/types.ts';
-// import {Row} from 'component/Table/propTypes/types.ts';
-// import {api} from 'axios/api.ts';
 
 import './Home.scss';
-import dateIcon from '../../assets/SVG/Date.svg';
-
-import managerIcon from '../../assets/SVG/Manager.svg';
+import dateIcon from 'assets/SVG/Date.svg';
+import managerIcon from 'assets/SVG/Manager.svg';
 import {useTranslation} from 'react-i18next';
 import ScreenLayout from 'component/ScreenLayout/ScreenLayout.tsx';
+import AllHistoryTable from './AllHistoryTable/AllHistoryTable.tsx';
 
 function Home() {
   const {t} = useTranslation();
   // Heading and subheading passed to 'Page Heading' component
   const heading = t('availablestock.pageHeading');
   const subHeading = t('availablestock.subHeading');
-
-  // Product rows passed to table component
-  // const [rows, setRows] = useState<Product[]>([]);
-  // async function fetchRows() {
-  //   let response;
-  //   try {
-  //     response = await api.get('/not-deployed-yet');
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.log(error);
-  //     response = productJSON.data.map(product => {
-  //       const parsedRes: Product = {
-  //         productId: Number(product.product_id),
-  //         name: product.description,
-  //         description: product.description,
-  //         quantity: Number(product.quantity),
-  //         imageSrc: 'data:image/png;base64,' + product.img.product_image,
-  //       };
-  //
-  //       return parsedRes;
-  //     });
-  //
-  //     setRows(response);
-  //   }
-  // }
-  //
-  // const columns: GridColDef[] = [
-  //   {
-  //     field: 'name',
-  //     headerName: t('table.product'),
-  //     flex: 0.8,
-  //     headerClassName: 'font-md',
-  //     // passing 'Product Icon' element to render cell function, so it is rendered instead of product name
-  //     renderCell: params => {
-  //       return (
-  //         <ProductIcon
-  //           productId={params.row.productId}
-  //           productName={params.value}
-  //           productImage={params.row.imageSrc}
-  //         />
-  //       );
-  //     },
-  //     sortable: false,
-  //   },
-  //   {
-  //     field: 'description',
-  //     headerClassName: 'font-md',
-  //     headerName: t('table.description'),
-  //     flex: 1,
-  //     cellClassName: 'productText font-sm',
-  //     sortable: false,
-  //   },
-  //   {
-  //     field: 'quantity',
-  //     headerName: t('table.quantity'),
-  //     headerClassName: 'font-md',
-  //     flex: 0.5,
-  //     cellClassName: 'quantity font-sm',
-  //     sortable: false,
-  //   },
-  //   {
-  //     field: 'uom',
-  //     headerName: t('table.uom'),
-  //     headerClassName: 'font-md',
-  //     flex: 0.4,
-  //     valueGetter: () => {
-  //       return 'Unit';
-  //     },
-  //     cellClassName: 'productText font-sm',
-  //     sortable: false,
-  //   },
-  // ];
-  //
-  // // This function returns a row's unique ID
-  // function getRowId(row: Row) {
-  //   if (typeof row.productId === 'number') {
-  //     return row.productId;
-  //   } else {
-  //     throw new Error('row id should be number');
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   fetchRows();
-  // }, []);
 
   return (
     <ScreenLayout>
@@ -128,14 +37,9 @@ function Home() {
           <CardStack />
         </Box>
         <Box padding={2} sx={{textAlign: 'center'}}>
-          {/*<Table*/}
-          {/*  showLoading={false}*/}
-          {/*  rows={rows}*/}
-          {/*  columns={columns}*/}
-          {/*  getRowId={getRowId}*/}
-          {/*/>*/}
+          <AllHistoryTable />
           <Button
-            sx={{mt: 15}}
+            sx={{mt: 2}}
             variant="contained"
             size="large"
             component={Link}

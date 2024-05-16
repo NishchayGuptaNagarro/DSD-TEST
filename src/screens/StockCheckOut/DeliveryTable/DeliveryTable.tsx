@@ -11,7 +11,7 @@ import ProductsTable from 'screens/StockCheckOut/ProductsTable/ProductsTable.tsx
 import {StockCheckOutContext} from '../propTypes/types.ts';
 import {DeliveryTableRow} from './propTypes/types.ts';
 import {Row} from 'component/Table/propTypes/types.ts';
-import {Product} from 'models/product.ts';
+import {Product} from 'models/Product.ts';
 import './DeliveryTable.scss';
 
 function DeliveryTable() {
@@ -140,6 +140,7 @@ function DeliveryTable() {
         </DialogContent>
       </Dialog>
       <Table
+        showMenu={false}
         rows={rows}
         columns={deliveryColDef(handleShowProducts)}
         getRowId={getRowId}

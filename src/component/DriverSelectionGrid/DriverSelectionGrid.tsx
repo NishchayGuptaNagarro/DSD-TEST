@@ -18,7 +18,7 @@ import deliveryIcon from 'assets/SVG/Delivery.svg';
 import hybridIcon from 'assets/SVG/Hybrid.svg';
 import {useState, MouseEvent, ChangeEvent, useRef, useEffect} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Driver} from 'models/driver.ts';
+import {Driver} from 'models/Driver.ts';
 function DriverSelectionGrid({
   selectedDriverId,
   handleDriverSelection,

@@ -1,11 +1,11 @@
 import {StockCheckInStates} from './propTypes/types.ts';
 import {useState} from 'react';
-import {Driver} from 'models/driver.ts';
+import {Driver} from 'models/Driver.ts';
 
 export function useStockCheckInState(): StockCheckInStates {
   const [driverArray, setDriverArray] = useState<Driver[]>([]);
   function loadInitialType() {
-    const initialType = localStorage.getItem('selected_driver_type');
+    const initialType = sessionStorage.getItem('selected_driver_type');
     if (
       initialType == 'VAN-SELLER' ||
       initialType == 'DELIVERY' ||

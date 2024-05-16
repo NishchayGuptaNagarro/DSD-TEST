@@ -1,24 +1,18 @@
 import {useOutletContext} from 'react-router-dom';
 import {StockCheckInContext} from '../propTypes/types.ts';
-import {Row} from 'component/Table/propTypes/types.ts';
 import Table from 'component/Table/Table.tsx';
-import {attachmentColDef} from './AttachmentColDef/AttachmentColDef.tsx';
+import {attachmentColDef} from 'utilities/AttachmentColDef/AttachmentColDef.tsx';
 import './AttachmentTable.scss';
 import DialogContent from '@mui/material/DialogContent';
 import Dialog from '@mui/material/Dialog';
 import {useState} from 'react';
+import {getAttachmentRowId} from 'utilities/getAttachmentRowId.ts';
 
 function AttachmentTable() {
   const {attachmentArr} = useOutletContext<StockCheckInContext>();
   const [showModal, setShowModal] = useState(false);
   const [imageSrc, setImageSrc] = useState('');
-  function getAttachmentRowId(row: Row) {
-    if (typeof row.attachmentId === 'number') {
-      return row.attachmentId;
-    } else {
-      throw new Error('row id should be number');
-    }
-  }
+
   function handleClick(src: string) {
     setImageSrc(src);
     setShowModal(true);
@@ -39,6 +33,7 @@ function AttachmentTable() {
         </DialogContent>
       </Dialog>
       <Table
+        showMenu={false}
         rows={attachmentArr}
         getRowId={getAttachmentRowId}
         showLoading={false}

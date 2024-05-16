@@ -18,21 +18,21 @@ import timelineContext from 'context/timeline/timelineContext.ts';
 import {checkInSteps} from 'utilities/timelineSteps.ts';
 import {checkInRoutes} from 'utilities/timelineRoutes.ts';
 import {
-  DriverHistoryResponse,
   PendingCheckInResponse,
   StockCheckInContext,
 } from './propTypes/types.ts';
 import {useStockCheckInState} from './useStockCheckInState.ts';
 import {driverTypes} from 'models/driverTypes.ts';
 import {api} from 'axios/api.ts';
-import {Driver} from 'models/driver.ts';
+import {Driver} from 'models/Driver.ts';
 import {checkApiError} from 'utilities/checkApiError.ts';
 import './StockCheckIn.scss';
-import {TransactionHistory} from './TransactionTable/propTypes/types.ts';
-import {Stock} from './StockTable/propTypes/types.ts';
-import {Attachment} from './AttachmentTable/propTypes/types.ts';
 import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
 import {ClipLoader} from 'react-spinners';
+import {Attachment} from 'models/Attachment.ts';
+import {Stock} from 'models/Stock.ts';
+import {TransactionHistory} from 'models/TransactionHistory.ts';
+import {DriverHistoryResponse} from 'models/DriverHistoryResponse.ts';
 
 function StockCheckIn() {
   const {t} = useTranslation();
@@ -79,11 +79,11 @@ function StockCheckIn() {
 
   function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
     setSelectedDriver(event.target.value);
-    localStorage.setItem('selected_driver', event.target.value);
-    localStorage.setItem('selected_driver_type', driverType);
+    sessionStorage.setItem('selected_driver', event.target.value);
+    sessionStorage.setItem('selected_driver_type', driverType);
   }
   function buttonDisabled() {
-    if (localStorage.getItem('selected_driver') && !dataLoading) {
+    if (sessionStorage.getItem('selected_driver') && !dataLoading) {
       setNextDisabled(false);
     } else {
       setNextDisabled(true);
@@ -97,9 +97,9 @@ function StockCheckIn() {
     updateOrderRoutes(checkInRoutes);
   }
   function clearLocalStorage() {
-    localStorage.removeItem('selected_driver');
-    localStorage.removeItem('selected_driver_type');
-    localStorage.removeItem('currentStep');
+    sessionStorage.removeItem('selected_driver');
+    sessionStorage.removeItem('selected_driver_type');
+    sessionStorage.removeItem('currentStep');
   }
 
   function handleAlertClose() {
@@ -151,7 +151,7 @@ function StockCheckIn() {
     let response: AxiosResponse<DriverHistoryResponse>;
     try {
       response = await api.get(
-        `/warehouse/driver/history?user_id=${localStorage.getItem('selected_driver')}`,
+        `/warehouse/driver/history?user_id=${sessionStorage.getItem('selected_driver')}`,
       );
       checkApiError(response);
 
@@ -198,7 +198,7 @@ function StockCheckIn() {
       const response: AxiosResponse = await api.post(
         '/warehouse/unassign-stock',
         {
-          user_id: localStorage.getItem('selected_driver'),
+          user_id: sessionStorage.getItem('selected_driver'),
           manager_signature_image: signatureURL,
         },
       );
@@ -231,6 +231,7 @@ function StockCheckIn() {
 
   useEffect(() => {
     if (firstRender.current) {
+      navigate('driver');
       firstRender.current = false;
     } else {
       navigate(orderRoutes[currentStep - 1]);
