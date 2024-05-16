@@ -4,7 +4,7 @@ import {
   MdOutlineKeyboardArrowDown,
   MdOutlineKeyboardArrowUp,
 } from 'react-icons/md';
-import {useNavigate} from 'react-router-dom';
+import {NavigateFunction, useNavigate} from 'react-router-dom';
 import {navigateTo} from './SideBarUtils';
 
 interface SideBarOptionsProp {
@@ -17,7 +17,7 @@ interface SideBarOptionsProp {
   index: number;
   t: (key: string) => string;
   navData: SideBarOption[];
-  setNavData: any;
+  setNavData: React.Dispatch<React.SetStateAction<SideBarOption[]>>;
 }
 
 const SideBarOptions: React.FC<SideBarOptionsProp> = ({
@@ -28,8 +28,8 @@ const SideBarOptions: React.FC<SideBarOptionsProp> = ({
   navData,
   setNavData,
 }) => {
+  const navigate: NavigateFunction = useNavigate();
   const dropdownMenu = (submenu: submenuList[] | undefined) => {
-    const navigate = useNavigate();
     return (
       <div className="dropdown-menu">
         {submenu?.map((item: submenuList, index: number) => (
@@ -50,7 +50,10 @@ const SideBarOptions: React.FC<SideBarOptionsProp> = ({
   return (
     <>
       <div key={index}>
-        <div className="options-container">
+        <div
+          className="options-container"
+          role="button"
+          onClick={() => item.id !== 2 && navigateTo(item.path, navigate)}>
           <div className="options-left">
             <img src={item.icon} alt="No-icon" className="icon-img"></img>
           </div>
