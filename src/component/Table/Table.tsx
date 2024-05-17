@@ -175,18 +175,6 @@ export default function Table({
           height: 30,
           minHeight: 10,
         },
-        [`& .${gridClasses.filterForm}`]: {
-          color: 'red',
-        },
-        [`& .${gridClasses.filterIcon}`]: {
-          border: 2,
-        },
-        [`& .${gridClasses.filterForm}`]: {
-          color: 'red',
-        },
-        [`& .${gridClasses.menuList}`]: {
-          color: 'red',
-        },
       }}
     />
   );

@@ -5,39 +5,40 @@
     padding: 0;
     min-width: 10px;
 
-    & .css-1vz77qy-MuiTypography-root {
-      font-size: $font-xsm;
+    .MuiDivider-root.MuiDivider-fullWidth {
+      margin: 0;
     }
 
-    .MuiListItemIcon-root {
-      min-width: 22px;
-    }
+    & .MuiButtonBase-root.MuiMenuItem-root.MuiMenuItem-gutters.MuiMenuItem-root.MuiMenuItem-gutters[role="menuitem"] {
+      padding: 10px;
 
-    .css-wgspmi-MuiButtonBase-root-MuiMenuItem-root {
-      padding-top: 5px;
-      padding-bottom: 5px;
-    }
+      .MuiSvgIcon-root.MuiSvgIcon-fontSizeSmall {
+        font-size: $font-md;
+      }
 
-    .css-ptiqhd-MuiSvgIcon-root {
-      font-size: $font-md;
+      .MuiTypography-root {
+        font-size: $font-xsm;
+
+      }
+
+      .MuiListItemIcon-root {
+        min-width: 22px;
+      }
     }
   }
 }
 
 
 .MuiDataGrid-filterForm {
-  &.css-1t5wrdm-MuiDataGrid-filterForm {
-    padding: 5px;
-    width: 450px;
+
+  padding: 4px;
+
+  .MuiNativeSelect-select.MuiNativeSelect-standard.MuiInputBase-input.MuiInput-input {
+    font-size: $font-xsm;
   }
-  .css-1dmqq7i-MuiNativeSelect-select-MuiInputBase-input-MuiInput-input.css-1dmqq7i-MuiNativeSelect-select-MuiInputBase-input-MuiInput-input.css-1dmqq7i-MuiNativeSelect-select-MuiInputBase-input-MuiInput-input{
-    font-size: $font-sm;
-    padding: 4px;
-  }
-  .css-1x51dt5-MuiInputBase-input-MuiInput-input{
-    font-size: $font-sm;
-    padding: 4px;
+
+  .MuiInputBase-input.MuiInput-input {
+    font-size: $font-xsm;
   }
 }
-
 
