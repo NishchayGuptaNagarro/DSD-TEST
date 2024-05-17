@@ -5,3 +5,7 @@ export interface Attachment extends Row {
   description: string;
   attachment: string;
 }
+export interface AttachmentStackProps {
+  attachment: string;
+  handleClick: (src: string) => void;
+}

@@ -3,7 +3,6 @@ import {Driver} from 'models/Driver.ts';
 import {Dispatch, SetStateAction} from 'react';
 import {driverTypes} from 'models/driverTypes.ts';
 import {AdminSignatureProps} from '../AdminSignature/propTypes/types.ts';
-
 import {Attachment} from 'models/Attachment.ts';
 import {Stock} from 'models/Stock.ts';
 import {TransactionHistory} from 'models/TransactionHistory.ts';

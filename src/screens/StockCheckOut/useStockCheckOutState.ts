@@ -1,5 +1,5 @@
-import {SelectDriverStates} from './propTypes/types.ts';
 import {useState} from 'react';
+import {SelectDriverStates} from './propTypes/types.ts';
 import {Driver} from 'models/Driver.ts';
 import {Row} from 'component/Table/propTypes/types.ts';
 

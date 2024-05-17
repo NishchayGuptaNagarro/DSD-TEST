@@ -36,6 +36,7 @@ interface OrdersResponse {
     cheque_id: string;
     credit: number;
   };
+  complete_date: string;
 }
 
 interface StocksResponse {

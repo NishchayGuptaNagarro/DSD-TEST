@@ -1,7 +1,7 @@
-import Table from 'component/Table/Table.tsx';
 import {useOutletContext} from 'react-router-dom';
-import {StockCheckInContext} from '../propTypes/types.ts';
+import Table from 'component/Table/Table.tsx';
 import {stockColDef} from 'utilities/StockColDef/StockColDef.tsx';
+import {StockCheckInContext} from '../propTypes/types.ts';
 import {getStockRowId} from 'utilities/getStockRowId.ts';
 
 function StockTable() {

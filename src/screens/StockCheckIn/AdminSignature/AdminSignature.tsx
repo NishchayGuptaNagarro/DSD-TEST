@@ -1,12 +1,11 @@
+import IconButton from '@mui/material/IconButton';
+import DeleteSharpIcon from '@mui/icons-material/DeleteSharp';
 import {useOutletContext} from 'react-router-dom';
 import {useEffect, useRef} from 'react';
 import {useTranslation} from 'react-i18next';
 import SignatureCanvas from 'react-signature-canvas';
-
 import {StockCheckInContext} from '../propTypes/types.ts';
-import DeleteSharpIcon from '@mui/icons-material/DeleteSharp';
 import './AdminSignature.scss';
-import IconButton from '@mui/material/IconButton';
 
 function AdminSignature() {
   const {t} = useTranslation();

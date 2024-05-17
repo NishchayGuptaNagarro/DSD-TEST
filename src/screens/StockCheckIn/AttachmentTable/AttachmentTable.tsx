@@ -1,12 +1,12 @@
-import {useOutletContext} from 'react-router-dom';
-import {StockCheckInContext} from '../propTypes/types.ts';
-import Table from 'component/Table/Table.tsx';
-import {attachmentColDef} from 'utilities/AttachmentColDef/AttachmentColDef.tsx';
-import './AttachmentTable.scss';
 import DialogContent from '@mui/material/DialogContent';
 import Dialog from '@mui/material/Dialog';
+import {useOutletContext} from 'react-router-dom';
 import {useState} from 'react';
+import Table from 'component/Table/Table.tsx';
+import {attachmentColDef} from 'utilities/AttachmentColDef/AttachmentColDef.tsx';
 import {getAttachmentRowId} from 'utilities/getAttachmentRowId.ts';
+import {StockCheckInContext} from '../propTypes/types.ts';
+import './AttachmentTable.scss';
 
 function AttachmentTable() {
   const {attachmentArr} = useOutletContext<StockCheckInContext>();

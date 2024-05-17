@@ -2,9 +2,9 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 
+import {useLocation} from 'react-router-dom';
 import {ChangeEvent, useContext, useEffect, useRef} from 'react';
 import {Outlet, useNavigate} from 'react-router';
-
 import {useTranslation} from 'react-i18next';
 import {AxiosResponse} from 'axios';
 
@@ -13,6 +13,7 @@ import Timeline from 'component/Timeline/Timeline.tsx';
 import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
 import BlackButton from 'component/BlackButton/BlackButton.tsx';
 import ScreenLayout from 'component/ScreenLayout/ScreenLayout.tsx';
+
 import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
 import timelineContext from 'context/timeline/timelineContext.ts';
 import {api} from 'axios/api.ts';
@@ -31,7 +32,6 @@ import {
 } from 'utilities/timelineRoutes.ts';
 import {useStockCheckOutState} from './useStockCheckOutState.ts';
 import './StockCheckOut.scss';
-import {useLocation} from 'react-router-dom';
 
 function StockCheckOut() {
   const {t} = useTranslation();

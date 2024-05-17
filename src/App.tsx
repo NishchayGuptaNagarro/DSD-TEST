@@ -1,19 +1,19 @@
 import {createTheme, CssBaseline, ThemeProvider} from '@mui/material';
 
 import {lazy, Suspense} from 'react';
+import i18n from 'i18next';
+import {initReactI18next} from 'react-i18next';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
 import Login from 'screens/Login/Login.tsx';
 import Loading from 'screens/Loading/Loading.tsx';
+import ProtectedRoute from 'component/ProtectedRoute/ProtectedRoute.tsx';
 import TimelineState from 'context/timeline/TimelineState.tsx';
 
-import 'App.scss';
-import styles from 'styles/design-systems.module.scss';
-import i18n from 'i18next';
-import {initReactI18next} from 'react-i18next';
-import enJSON from 'resources/labels/en.json';
 import frJSON from 'resources/labels/fr.json';
-import ProtectedRoute from 'component/ProtectedRoute/ProtectedRoute.tsx';
+import enJSON from 'resources/labels/en.json';
+import styles from 'styles/design-systems.module.scss';
+import 'App.scss';
 
 const Home = lazy(() => import('screens/Home/Home.tsx'));
 const History = lazy(() => import('screens/AllHistory/AllHistory.tsx'));

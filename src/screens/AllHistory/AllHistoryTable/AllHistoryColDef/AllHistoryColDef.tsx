@@ -1,7 +1,7 @@
+import {format} from 'date-fns';
 import {TransactionHistory} from 'models/TransactionHistory.ts';
 import {Stock} from 'models/Stock.ts';
 import {Attachment} from 'models/Attachment.ts';
-import {format} from 'date-fns';
 import {
   getGridDateOperators,
   getGridStringOperators,
@@ -59,7 +59,7 @@ export const allHistoryColDef: (
       },
       flex: 0.4,
       cellClassName: 'font-sm',
-      sortable: false,
+      sortable: true,
     },
     {
       field: 'transaction',

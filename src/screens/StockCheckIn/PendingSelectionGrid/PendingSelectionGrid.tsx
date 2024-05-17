@@ -1,6 +1,6 @@
 import {useOutletContext} from 'react-router-dom';
-import {StockCheckInContext} from '../propTypes/types.ts';
 import DriverSelectionGrid from 'component/DriverSelectionGrid/DriverSelectionGrid.tsx';
+import {StockCheckInContext} from '../propTypes/types.ts';
 
 function PendingSelectionGrid() {
   const {

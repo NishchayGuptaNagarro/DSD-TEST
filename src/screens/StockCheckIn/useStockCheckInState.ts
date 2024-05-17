@@ -1,5 +1,5 @@
-import {StockCheckInStates} from './propTypes/types.ts';
 import {useState} from 'react';
+import {StockCheckInStates} from './propTypes/types.ts';
 import {Driver} from 'models/Driver.ts';
 
 export function useStockCheckInState(): StockCheckInStates {

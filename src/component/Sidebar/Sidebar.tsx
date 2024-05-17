@@ -1,5 +1,9 @@
 import {useState} from 'react';
-import './Sidebar.scss';
+import {useTranslation} from 'react-i18next';
+import SidebarBottom from './SidebarBottom';
+import {SideBarOption} from './propTypes/SidebarRoutes';
+import SideBarOptions from './SideBarOptions';
+import {openSubmenu} from './SideBarUtils';
 import closed from 'assets/PNG/Sample logox2_Closed.png';
 import openImg from 'assets/PNG/Sample logox2_Open.png';
 import DashBoard from 'assets/PNG/Dashboard.png';
@@ -7,11 +11,7 @@ import Stocks from 'assets/PNG/Stocks.png';
 import Orders from 'assets/PNG/Orders.png';
 import Signout from 'assets/PNG/Sign Out.png';
 import Settings from 'assets/PNG/Settings.png';
-import {SideBarOption} from './propTypes/SidebarRoutes';
-import {useTranslation} from 'react-i18next';
-import SideBarOptions from './SideBarOptions';
-import {openSubmenu} from './SideBarUtils';
-import SidebarBottom from './SidebarBottom';
+import './Sidebar.scss';
 
 function Sidebar() {
   const {t} = useTranslation();

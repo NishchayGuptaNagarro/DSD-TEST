@@ -1,4 +1,3 @@
-# Available Stock Screen:
+# Home Screen:
 
-This screen displays available stock in warehouse,
-It has a sidebar, heading and a table.
+Landing page of application.

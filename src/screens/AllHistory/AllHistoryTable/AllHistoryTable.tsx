@@ -1,21 +1,24 @@
-import Table from 'component/Table/Table.tsx';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
 import {useEffect, useState} from 'react';
-import {AllDriverHistory} from './propTypes/types.ts';
 import {AxiosResponse} from 'axios';
+import {format} from 'date-fns';
+
+import Table from 'component/Table/Table.tsx';
+import {transactionColDef} from 'utilities/TransactionColDef/TransactionColDef.tsx';
+import {stockColDef} from 'utilities/StockColDef/StockColDef.tsx';
+import {attachmentColDef} from 'utilities/AttachmentColDef/AttachmentColDef.tsx';
+import {allHistoryColDef} from './AllHistoryColDef/AllHistoryColDef.tsx';
+
+import {AllDriverHistory} from './propTypes/types.ts';
 import {DriverHistoryResponse} from 'models/DriverHistoryResponse.ts';
-import {api} from 'axios/api.ts';
 import {checkApiError} from 'utilities/checkApiError.ts';
+import {api} from 'axios/api.ts';
 import {TransactionHistory} from 'models/TransactionHistory.ts';
 import {Stock} from 'models/Stock.ts';
 import {Attachment} from 'models/Attachment.ts';
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import {transactionColDef} from 'utilities/TransactionColDef/TransactionColDef.tsx';
 import {getTransactionRowId} from 'utilities/getTransactionRowId.ts';
-import {stockColDef} from 'utilities/StockColDef/StockColDef.tsx';
 import {getStockRowId} from 'utilities/getStockRowId.ts';
-import {attachmentColDef} from 'utilities/AttachmentColDef/AttachmentColDef.tsx';
-import {allHistoryColDef} from './AllHistoryColDef/AllHistoryColDef.tsx';
 import {Row} from 'component/Table/propTypes/types.ts';
 import {getAttachmentRowId} from 'utilities/getAttachmentRowId.ts';
 
@@ -77,13 +80,17 @@ function AllHistoryTable() {
           },
         };
 
-        const index = parsedResponse.findIndex(
-          value => value.driverId === order.user_id,
-        );
+        const index = parsedResponse.findIndex(value => {
+          return (
+            value.driverId === order.user_id &&
+            format(value.date, 'dd-MM-yyyy') ===
+              format(order.complete_date, 'dd-MM-yyyy')
+          );
+        });
         if (index === -1) {
           parsedResponse.push({
             rowId: parsedResponse.length,
-            date: order.customer.creation_date,
+            date: order.complete_date,
             driverId: order.user_id,
             attachment: [],
             stock: [],
@@ -102,9 +109,13 @@ function AllHistoryTable() {
           remaining: Number(stock.remaining_stock),
         };
 
-        const index = parsedResponse.findIndex(
-          value => value.driverId === stock.user_id,
-        );
+        const index = parsedResponse.findIndex(value => {
+          return (
+            value.driverId === stock.user_id &&
+            format(value.date, 'dd-MM-yyyy') ===
+              format(stock.creation_date, 'dd-MM-yyyy')
+          );
+        });
         if (index === -1) {
           parsedResponse.push({
             rowId: parsedResponse.length,
@@ -126,9 +137,13 @@ function AllHistoryTable() {
           attachment: attachment.attachment,
         };
 
-        const index = parsedResponse.findIndex(
-          value => value.driverId === attachment.user_id,
-        );
+        const index = parsedResponse.findIndex(value => {
+          return (
+            value.driverId === attachment.user_id &&
+            format(value.date, 'dd-MM-yyyy') ===
+              format(attachment.creation_date, 'dd-MM-yyyy')
+          );
+        });
         if (index === -1) {
           parsedResponse.push({
             rowId: parsedResponse.length,

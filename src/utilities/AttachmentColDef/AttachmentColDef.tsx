@@ -6,10 +6,9 @@ import {
   GridColumnHeaderParams,
   GridRenderCellParams,
 } from '@mui/x-data-grid';
-import ColumnHeader from 'component/ColumnHeader/ColumnHeader.tsx';
-import {AttachmentStackProps} from '../../screens/StockCheckIn/AttachmentTable/propTypes/types.ts';
-import {Attachment} from '../../models/Attachment.ts';
 import {useTranslation} from 'react-i18next';
+import ColumnHeader from 'component/ColumnHeader/ColumnHeader.tsx';
+import {Attachment, AttachmentStackProps} from 'models/Attachment.ts';
 
 export const attachmentColDef: (
   handleClick: (src: string) => void,
