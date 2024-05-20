@@ -254,6 +254,7 @@ function AllHistoryTable() {
       <Table
         noOfRows={10}
         showMenu={true}
+        minHeight={400}
         rows={driverHistoryArr}
         columns={allHistoryColDef(
           handleOrdersClick,

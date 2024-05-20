@@ -115,6 +115,7 @@ export default function Table({
   showLoading,
   showMenu,
   noOfRows,
+  minHeight,
 }: TableProps) {
   return (
     <DataGrid
@@ -149,7 +150,7 @@ export default function Table({
       disableColumnMenu={!showMenu}
       disableRowSelectionOnClick
       sx={{
-        minHeight: 270,
+        minHeight: minHeight ? minHeight : 270,
         color: styles.blueSteel,
         backgroundColor: styles.whitePure,
         borderRadius: 3,
