@@ -1,11 +1,11 @@
 import Grid from '@mui/material/Grid';
-import Sidebar from 'component/Sidebar/Sidebar.tsx';
+import Sidebar from 'component/SidebarNew/Sidebar.tsx';
 import {ScreenLayoutProps} from './propTypes/types.ts';
 
 function ScreenLayout({children}: ScreenLayoutProps) {
   return (
     <Grid container>
-      <Grid height={'100vh'} item xs={2} padding={1}>
+      <Grid height={'100vh'} item xs={2} padding={0.3}>
         <Sidebar />
       </Grid>
       <Grid

@@ -76,6 +76,7 @@ function App() {
       },
     },
   });
+
   return (
     <>
       {/*Make sure all components using material ui goes inside this*/}
