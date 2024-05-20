@@ -13,4 +13,5 @@ export interface TableProps {
   showLoading: boolean;
   showMenu: boolean;
   noOfRows: number;
+  minHeight?: number;
 }

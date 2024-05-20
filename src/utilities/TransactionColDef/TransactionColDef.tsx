@@ -65,14 +65,13 @@ export const transactionColDef: GridColDef[] = [
     flex: 0.4,
     cellClassName: 'font-xsm',
     sortable: false,
-    align: 'center',
   },
 ];
 
 function PaymentGrid({paymentMethods}: PaymentGridProps) {
   return (
-    <Stack flexDirection={'column'} gap={0.2}>
-      <div>Card:{paymentMethods.card}</div>
+    <Stack sx={{ml: 9}} flexDirection={'column'} gap={0.2}>
+      <div>Credit:{paymentMethods.card}</div>
       <div>Cash:{paymentMethods.cash}</div>
       <div>Cheque:{paymentMethods.cheque}</div>
     </Stack>

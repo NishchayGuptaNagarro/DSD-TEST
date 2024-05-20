@@ -38,7 +38,11 @@ function DriverSelectionGrid({
     setFilteredArray(
       driverArray
         .filter(driver => driver.driverType === driverType)
-        .filter(driver => driver.driverName.includes(searchText)),
+        .filter(
+          driver =>
+            driver.driverName.toLowerCase().includes(searchText) ||
+            driver.driverId.toLowerCase().includes(searchText),
+        ),
     );
   }
   function handleDriverTypeChange(
@@ -113,7 +117,7 @@ function DriverNameGridHeader({
     if (searchTimeout.current) {
       clearTimeout(searchTimeout.current);
     }
-    setSearchInput(event.target.value);
+    setSearchInput(event.target.value.toLowerCase());
 
     // Search timeout is set to 300ms can be changed to trigger search faster
     searchTimeout.current = setTimeout(() => {
