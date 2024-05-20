@@ -197,6 +197,7 @@ function StockCheckIn() {
         '/warehouse/send-notification-driver',
         {
           user_id: sessionStorage.getItem('selected_driver'),
+          message: 'Stock check in successful',
         },
       );
       console.log(response);

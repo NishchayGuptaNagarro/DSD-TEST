@@ -28,6 +28,7 @@ const OrderTable = () => {
         '/warehouse/send-notification-driver',
         {
           user_id: sessionStorage.getItem('selected_driver'),
+          message: 'Please sign to confirm checkout',
         },
       );
       console.log(response);
