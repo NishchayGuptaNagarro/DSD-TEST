@@ -91,9 +91,9 @@
   "table.view.attachments": "View Attachments",
   "table.view.attachment": "View Attachment",
   "history.pageHeading": "All Orders History",
-  "alert.text1": "Stock Unassigned from Driver",
-  "alert.text2": "Stock Assigned to Driver",
-  "alert.text3": "Initial Stock already assigned to driver",
+  "alert.text1": "Stock Unassigned From Driver",
+  "alert.text2": "Stock Assigned To Driver",
+  "alert.text3": "Initial stock already assigned to driver",
   "alert.btn1": "Okay",
   "alert.btn2": "Dismiss"
 }
