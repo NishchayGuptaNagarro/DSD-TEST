@@ -42,9 +42,11 @@ export const orderColDef: GridColDef[] = [
       return <ColumnHeader headerName={params.colDef.headerName || ''} />;
     },
     headerClassName: 'font-md',
-    flex: 0.5,
+    flex: 0.4,
     cellClassName: 'stock font-sm',
     sortable: false,
+    headerAlign: 'center',
+    align: 'center',
   },
   {
     field: 'uom',
@@ -53,8 +55,10 @@ export const orderColDef: GridColDef[] = [
       return <ColumnHeader headerName={params.colDef.headerName || ''} />;
     },
     headerClassName: 'font-md',
-    flex: 0.5,
+    flex: 0.3,
     cellClassName: 'productText font-sm',
     sortable: false,
+    headerAlign: 'center',
+    align: 'center',
   },
 ];

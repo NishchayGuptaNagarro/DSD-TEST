@@ -4,7 +4,7 @@ import './Sidebar.scss';
 import {Link, useNavigate} from 'react-router-dom';
 import Signout from 'assets/PNG/Sign Out.png';
 import Settings from 'assets/PNG/Settings.png';
-import openImg from 'assets/PNG/Sample logox2_Open.png';
+import logo from 'assets/SVG/LogoName.svg';
 import {useTranslation} from 'react-i18next';
 
 const Sidebar = () => {
@@ -14,8 +14,9 @@ const Sidebar = () => {
     <>
       <nav className={'sidebar-nav'}>
         <div className={'logo-div'}>
-          <img src={openImg} className="logo-img" alt="no-image-present"></img>
+          <img src={logo} className="logo-img" alt="no-image-present"></img>
         </div>
+        <hr className={'sidebar-division'} />
         {SidebarData.map((item, index) => {
           return <SubMenu item={item} key={index} />;
         })}

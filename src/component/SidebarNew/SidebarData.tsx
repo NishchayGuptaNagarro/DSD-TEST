@@ -2,10 +2,10 @@ import DashBoard from 'assets/PNG/Dashboard.png';
 import Stocks from 'assets/PNG/Stocks.png';
 import Orders from 'assets/PNG/Orders.png';
 
-import {
-  MdOutlineKeyboardArrowDown,
-  MdOutlineKeyboardArrowUp,
-} from 'react-icons/md';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {SidebarOption} from './propTypes/types.ts';
 
 export const SidebarData: SidebarOption[] = [
@@ -18,20 +18,20 @@ export const SidebarData: SidebarOption[] = [
     title: 'sidebar.stock',
     path: '',
     icon: <img className={'nav-icon'} src={Stocks} alt="stocks" />,
-    iconClosed: <MdOutlineKeyboardArrowDown />,
-    iconOpened: <MdOutlineKeyboardArrowUp />,
+    iconClosed: <KeyboardArrowDownIcon fontSize={'small'} />,
+    iconOpened: <KeyboardArrowUpIcon fontSize={'small'} />,
 
     subNav: [
       {
-        title: 'Stock Check-In',
+        title: 'stockcheckin.heading',
         path: '/stock-check-in',
-        icon: <img className={'nav-icon'} src={Stocks} alt="stocks" />,
+        icon: <LocalShippingIcon className={'nav-icon'} />,
         cName: 'sub-nav',
       },
       {
-        title: 'Stock Check-out',
+        title: 'stockcheckout.heading',
         path: '/stock-check-out',
-        icon: <img className={'nav-icon'} src={Stocks} alt="stocks" />,
+        icon: <ShoppingCartIcon className={'nav-icon'} />,
         cName: 'sub-nav',
       },
     ],

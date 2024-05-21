@@ -80,6 +80,8 @@ export const allHistoryColDef: (
       sortable: false,
       filterable: false,
       disableColumnMenu: true,
+      headerAlign: 'center',
+      align: 'center',
     },
     {
       field: 'stock',
@@ -99,6 +101,8 @@ export const allHistoryColDef: (
       sortable: false,
       filterable: false,
       disableColumnMenu: true,
+      headerAlign: 'center',
+      align: 'center',
     },
     {
       field: 'attachment',
@@ -119,6 +123,8 @@ export const allHistoryColDef: (
       sortable: false,
       filterable: false,
       disableColumnMenu: true,
+      headerAlign: 'center',
+      align: 'center',
     },
   ];
 };

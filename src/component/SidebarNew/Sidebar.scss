@@ -23,7 +23,6 @@
 
     &:hover {
       background-color: $bg-black-translucent;
-      border-left: 4px solid $border-blue-dark;
       cursor: pointer;
     }
 
@@ -37,6 +36,7 @@
 
     .sidebar-arrow {
       flex-grow: 1;
+      padding-right: 10px;
     }
   }
   .sidebar-label {
@@ -66,24 +66,36 @@
     align-items: center;
   }
   .sidebar-bottom {
-
     flex-grow: 1;
     @include flex-column;
     justify-content: end;
-    padding-bottom: 40px;
+    padding-bottom: 15px;
     .sidebar-important {
       font-weight: $font-boldest;
     }
-
+    .sidebar-link{
+      height: 50px;
+    }
   }
-
   .logo-div {
-    padding: 10px;
+    padding: 20px 10px 10px;
+    text-align: center;
   }
+  .sidebar-division{
+    border-bottom: 1px solid;
+    border-image-slice: 1;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+    border-image-source: $gradient-grey;
 
+
+  }
   .logo-img {
     object-fit: contain;
     width: 100%;
+    max-width: 200px;
   }
 
 }

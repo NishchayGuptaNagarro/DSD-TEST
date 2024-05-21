@@ -142,6 +142,22 @@ function StockCheckOut() {
     }
   }
 
+  async function sendNotification() {
+    try {
+      const response: AxiosResponse = await api.post(
+        '/warehouse/send-notification-driver',
+        {
+          user_id: sessionStorage.getItem('selected_driver'),
+          message: 'Loading order created successfully',
+        },
+      );
+      console.log(response);
+      checkApiError(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function fetchDrivers() {
     let response: AxiosResponse<DriverApiResponse>;
     let driverData: Driver[];
@@ -175,6 +191,7 @@ function StockCheckOut() {
       );
       console.log(response);
       checkApiError(response);
+      sendNotification();
       setAlertOpen(true);
     } catch (error) {
       console.log(error);

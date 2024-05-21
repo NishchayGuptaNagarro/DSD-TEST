@@ -23,6 +23,8 @@ export const stockColDef: GridColDef[] = [
     },
     cellClassName: 'font-md',
     sortable: false,
+    headerAlign: 'center',
+    align: 'center',
   },
   {
     field: 'remaining',
@@ -34,5 +36,7 @@ export const stockColDef: GridColDef[] = [
     flex: 0.5,
     cellClassName: 'font-md',
     sortable: false,
+    headerAlign: 'center',
+    align: 'center',
   },
 ];
