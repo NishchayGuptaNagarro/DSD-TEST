@@ -1,7 +1,5 @@
 @import "src/styles/design-systems.module";
 
-
-
 .sidebar-nav {
   background: $gradient-black;
   border-radius: 20px;
@@ -31,7 +29,6 @@
       font-weight: $font-bolder;
       flex-grow: 1;
       align-items: center;
-
     }
 
     .sidebar-arrow {
@@ -39,6 +36,7 @@
       padding-right: 10px;
     }
   }
+
   .sidebar-label {
     margin-left: 16px;
   }
@@ -58,6 +56,7 @@
       cursor: pointer;
     }
   }
+
   .nav-icon {
     margin-left: 16px;
     height: 20px;
@@ -65,45 +64,44 @@
     justify-content: flex-start;
     align-items: center;
   }
+
   .sidebar-bottom {
     flex-grow: 1;
     @include flex-column;
     justify-content: end;
     padding-bottom: 15px;
+
     .sidebar-important {
       font-weight: $font-boldest;
     }
-    .sidebar-link{
+
+    .sidebar-link {
       height: 50px;
+
+      .sidebar-btn {
+        justify-content: center;
+
+        .nav-icon {
+          margin-left: -10%;
+        }
+      }
     }
   }
+
   .logo-div {
     padding: 20px 10px 10px;
     text-align: center;
   }
-  .sidebar-division{
-    border-bottom: 1px solid;
-    border-image-slice: 1;
+
+  .sidebar-division {
+    border-bottom: 1px solid $gradient-grey;
     width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 5px;
-    border-image-source: $gradient-grey;
-
-
+    margin: 0 auto 5px;
   }
+
   .logo-img {
     object-fit: contain;
-    width: 100%;
+    width: 70%;
     max-width: 200px;
   }
-
 }
-
-
-
-
-
-
-
-

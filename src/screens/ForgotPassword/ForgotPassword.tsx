@@ -13,7 +13,7 @@ import {useEffect, useState} from 'react';
 import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
 import {api} from 'axios/api.ts';
 import './ForgotPassword.scss';
-import logo from 'assets/SVG/Logo.svg';
+import logo from 'assets/SVG/NagarroLight.svg';
 import banner from 'assets/WEBP/ForgotPassword-Banner.webp';
 import {useTranslation} from 'react-i18next';
 import {isTokenValid} from 'utilities/isTokenValid.ts';
@@ -75,14 +75,7 @@ function ForgotPassword() {
             spacing={{xs: 3, xl: 3}}>
             {/*Stack Containing Heading + Logo*/}
             <Stack direction="row" alignItems="center" spacing={2}>
-              <img src={logo} width={'40px'} height={'40px'} alt={logo} />
-              <Typography
-                fontSize={styles.fontSizeXl}
-                component={'h1'}
-                color={styles.charcoal}
-                fontWeight={styles.fontWeightBold}>
-                NotionEdge
-              </Typography>
+              <img src={logo} height={'40px'} alt={logo} />
             </Stack>
             <Box paddingTop={{xl: 4}}>
               <Typography
