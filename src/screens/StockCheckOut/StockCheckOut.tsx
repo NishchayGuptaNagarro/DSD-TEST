@@ -31,7 +31,9 @@ import {
   vanSellerRoutes,
 } from 'utilities/timelineRoutes.ts';
 import {useStockCheckOutState} from './useStockCheckOutState.ts';
+import {sendNotification} from 'utilities/sendNotification.ts';
 import './StockCheckOut.scss';
+import {createBrowserHistory} from 'history';
 
 function StockCheckOut() {
   const {t} = useTranslation();
@@ -40,6 +42,7 @@ function StockCheckOut() {
   const navigate = useNavigate();
   const location = useLocation();
   const firstRender = useRef(true);
+  const history = createBrowserHistory();
 
   const {
     driverArray,
@@ -142,22 +145,6 @@ function StockCheckOut() {
     }
   }
 
-  async function sendNotification() {
-    try {
-      const response: AxiosResponse = await api.post(
-        '/warehouse/send-notification-driver',
-        {
-          user_id: sessionStorage.getItem('selected_driver'),
-          message: 'Loading order created successfully',
-        },
-      );
-      console.log(response);
-      checkApiError(response);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   async function fetchDrivers() {
     let response: AxiosResponse<DriverApiResponse>;
     let driverData: Driver[];
@@ -191,7 +178,7 @@ function StockCheckOut() {
       );
       console.log(response);
       checkApiError(response);
-      sendNotification();
+      sendNotification('Loading order created successfully');
       setAlertOpen(true);
     } catch (error) {
       console.log(error);
@@ -224,10 +211,16 @@ function StockCheckOut() {
 
   // API CALLS
   useEffect(() => {
+    const unlisten = history.listen(listener => {
+      if (listener.action == 'POP') {
+        navigate('/stock-check-out');
+      }
+    });
     fetchDrivers();
     handleTypeChange(driverType);
     return () => {
       clearLocalStorage();
+      unlisten();
     };
   }, []);
 

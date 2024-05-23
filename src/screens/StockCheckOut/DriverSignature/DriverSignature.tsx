@@ -6,13 +6,11 @@ import {AxiosResponse} from 'axios';
 import {useTranslation} from 'react-i18next';
 import {useOutletContext} from 'react-router-dom';
 import {ClipLoader} from 'react-spinners';
-
 // import DropDownButton from 'component/DropDownButton/DropDownButton.tsx';
-
 import {api} from 'axios/api.ts';
 import {SignatureApiResponse} from './propTypes/types.ts';
 import {StockCheckOutContext} from '../propTypes/types.ts';
-import {checkApiError} from 'utilities/checkApiError.ts';
+import {sendNotification} from 'utilities/sendNotification.ts';
 import './DriverSignature.scss';
 
 function DriverSignature() {
@@ -29,21 +27,6 @@ function DriverSignature() {
 
   const isFocused = useRef(true); //using this to dismiss api call when component is umounted else call continues
 
-  async function sendNotification() {
-    try {
-      const response: AxiosResponse = await api.post(
-        '/warehouse/send-notification-driver',
-        {
-          user_id: sessionStorage.getItem('selected_driver'),
-          message: 'Please sign to confirm checkout',
-        },
-      );
-      console.log(response);
-      checkApiError(response);
-    } catch (error) {
-      console.log(error);
-    }
-  }
   async function fetchSignature() {
     let executeLoop = true;
     setShowLoading(true);
@@ -107,7 +90,7 @@ function DriverSignature() {
               variant="contained"
               className={'center'}
               onClick={() => {
-                sendNotification();
+                sendNotification('Please sign to confirm checkout');
                 fetchSignature();
               }}>
               {t('createLoadingOrder.button.label')}

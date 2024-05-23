@@ -10,6 +10,7 @@ import {useTranslation} from 'react-i18next';
 const Sidebar = () => {
   const {t} = useTranslation();
   const navigate = useNavigate();
+
   return (
     <>
       <nav className={'sidebar-nav'}>

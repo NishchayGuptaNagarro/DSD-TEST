@@ -32,12 +32,15 @@ import {Attachment} from 'models/Attachment.ts';
 import {Stock} from 'models/Stock.ts';
 import {TransactionHistory} from 'models/TransactionHistory.ts';
 import {DriverHistoryResponse} from 'models/DriverHistoryResponse.ts';
+import {sendNotification} from 'utilities/sendNotification.ts';
 import './StockCheckIn.scss';
+import {createBrowserHistory} from 'history';
 
 function StockCheckIn() {
   const {t} = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
+  const history = createBrowserHistory();
   const heading = t('stockcheckin.heading');
   const subHeading = t('stockcheckin.subheading');
   const firstRender = useRef(true);
@@ -191,21 +194,7 @@ function StockCheckIn() {
       setDataLoading(false);
     }
   }
-  async function sendNotification() {
-    try {
-      const response: AxiosResponse = await api.post(
-        '/warehouse/send-notification-driver',
-        {
-          user_id: sessionStorage.getItem('selected_driver'),
-          message: 'Stock check in successful',
-        },
-      );
-      console.log(response);
-      checkApiError(response);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+
   async function unAssignStock() {
     console.log(signatureURL);
     try {
@@ -218,7 +207,7 @@ function StockCheckIn() {
       );
       console.log(response);
       checkApiError(response);
-      sendNotification();
+      sendNotification('Stock check in successful');
       setAlertOpen(true);
     } catch (error) {
       console.log(error);
@@ -237,10 +226,16 @@ function StockCheckIn() {
   });
 
   useEffect(() => {
+    const unlisten = history.listen(listener => {
+      if (listener.action == 'POP') {
+        navigate('/stock-check-in');
+      }
+    });
     fetchDrivers();
     handleTypeChange(driverType);
     return () => {
       clearLocalStorage();
+      unlisten();
     };
   }, []);
 
