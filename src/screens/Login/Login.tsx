@@ -14,16 +14,16 @@ import {jwtDecode} from 'jwt-decode';
 import {AxiosResponse} from 'axios';
 import {useEffect, useState} from 'react';
 
-import LanguageSelect from '../../component/LanguageSelect/LanguageSelect.tsx';
-import {api} from '../../axios/api';
+import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
+import {api} from 'axios/api';
 import {LoginApiResponse} from './propTypes/types.ts';
 import './Login.scss';
-import banner from '../../assets/WEBP/Login-Page-Banner.webp';
-import logo from '../../assets/SVG/Logo.svg';
+import banner from 'assets/WEBP/Login-Page-Banner.webp';
+import logo from 'assets/SVG/NagarroLight.svg';
 import {useTranslation} from 'react-i18next';
-import {isTokenValid} from '../../utilities/isTokenValid.ts';
-import {checkApiError} from '../../utilities/checkApiError.ts';
-import styles from '../../styles/design-systems.module.scss';
+import {isTokenValid} from 'utilities/isTokenValid.ts';
+import {checkApiError} from 'utilities/checkApiError.ts';
+import styles from 'styles/design-systems.module.scss';
 
 function Login() {
   const [apiError, setApiError] = useState('');
@@ -102,14 +102,7 @@ function Login() {
                 justifyContent="center"
                 alignItems="center"
                 spacing={2}>
-                <img src={logo} width={'40px'} height={'40px'} alt={logo} />
-                <Typography
-                  fontSize={styles.fontSizeXl}
-                  component={'h1'}
-                  color={styles.charcoal}
-                  fontWeight={styles.fontWeightBold}>
-                  NotionEdge
-                </Typography>
+                <img src={logo} height={'40px'} alt={logo} />
               </Stack>
               <Box textAlign={'center'} paddingTop={{xl: 8}}>
                 <Typography

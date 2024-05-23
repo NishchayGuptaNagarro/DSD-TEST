@@ -22,21 +22,6 @@ const OrderTable = () => {
   function handleDialogDismiss() {
     decreaseSteps();
   }
-  async function sendNotification() {
-    try {
-      const response: AxiosResponse = await api.post(
-        '/warehouse/send-notification-driver',
-        {
-          user_id: sessionStorage.getItem('selected_driver'),
-          message: 'Please sign to confirm checkout',
-        },
-      );
-      console.log(response);
-      checkApiError(response);
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   async function fetchRows() {
     let response: AxiosResponse<ProductApiResponse>;
@@ -67,7 +52,6 @@ const OrderTable = () => {
       });
       setRows(products);
       setIsTableLoaded(true);
-      sendNotification();
     } catch (error) {
       console.log(error);
       setRows([]);

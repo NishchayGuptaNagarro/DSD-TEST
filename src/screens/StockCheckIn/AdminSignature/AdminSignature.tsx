@@ -48,12 +48,12 @@ function AdminSignature() {
           </IconButton>
         </span>
 
-        <label className={'form-label label-2'}>
+        <label className={'form-label label-2 display-none'}>
           {t('createLoadingOrder.note.label')}:
         </label>
         <textarea
           placeholder={t('createLoadingOrder.note.placeholder')}
-          className={'text-box font-sm'}></textarea>
+          className={'text-box font-sm display-none'}></textarea>
       </form>
     </>
   );

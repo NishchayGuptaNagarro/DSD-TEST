@@ -90,5 +90,6 @@
   "alert.text2": "Stock attribué au chauffeur",
   "alert.text3": "Stock initial déjà attribué au chauffeur",
   "alert.btn1": "D'accord",
-  "alert.btn2": "Ignorer"
+  "alert.btn2": "Ignorer",
+  "stockcheckout.heading": "Sortie de stock"
 }

@@ -31,7 +31,9 @@ import {
   vanSellerRoutes,
 } from 'utilities/timelineRoutes.ts';
 import {useStockCheckOutState} from './useStockCheckOutState.ts';
+import {sendNotification} from 'utilities/sendNotification.ts';
 import './StockCheckOut.scss';
+import {createBrowserHistory} from 'history';
 
 function StockCheckOut() {
   const {t} = useTranslation();
@@ -40,6 +42,7 @@ function StockCheckOut() {
   const navigate = useNavigate();
   const location = useLocation();
   const firstRender = useRef(true);
+  const history = createBrowserHistory();
 
   const {
     driverArray,
@@ -175,6 +178,7 @@ function StockCheckOut() {
       );
       console.log(response);
       checkApiError(response);
+      sendNotification('Loading order created successfully');
       setAlertOpen(true);
     } catch (error) {
       console.log(error);
@@ -207,10 +211,16 @@ function StockCheckOut() {
 
   // API CALLS
   useEffect(() => {
+    const unlisten = history.listen(listener => {
+      if (listener.action == 'POP') {
+        navigate('/stock-check-out');
+      }
+    });
     fetchDrivers();
     handleTypeChange(driverType);
     return () => {
       clearLocalStorage();
+      unlisten();
     };
   }, []);
 
