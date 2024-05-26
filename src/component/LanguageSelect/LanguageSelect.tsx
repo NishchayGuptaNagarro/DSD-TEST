@@ -14,7 +14,7 @@ import './LanguageSelect.scss';
 
 import {useState, MouseEvent} from 'react';
 import {useTranslation} from 'react-i18next';
-import styles from '../../styles/design-systems.module.scss';
+import styles from 'styles/design-systems.module.scss';
 
 function LanguageSelect() {
   //   Styles for list
@@ -57,8 +57,14 @@ function LanguageSelect() {
 
   return (
     <>
-      <List className={'language-select'} sx={sxProp}>
-        <ListItemButton className={'language-select-btn'} onClick={handleClick}>
+      <List
+        data-testid={'language-select'}
+        className={'language-select'}
+        sx={sxProp}>
+        <ListItemButton
+          data-testid={'language-change-btn1'}
+          className={'language-select-btn'}
+          onClick={handleClick}>
           {currentLanguage === 'en' ? <EnglishButton /> : <FrenchButton />}
 
           <Button
@@ -82,6 +88,7 @@ function LanguageSelect() {
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItemButton
+              data-testid={'language-change-btn2'}
               className={'language-select-btn'}
               onClick={handleClick}>
               {currentLanguage !== 'en' ? <EnglishButton /> : <FrenchButton />}

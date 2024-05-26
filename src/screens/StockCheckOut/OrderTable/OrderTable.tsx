@@ -5,7 +5,7 @@ import {StockCheckOutContext, ProductApiResponse} from '../propTypes/types.ts';
 import {useContext, useEffect, useState} from 'react';
 import {Row} from 'component/Table/propTypes/types.ts';
 import {AxiosResponse} from 'axios';
-import {api} from 'axios/api.ts';
+import {api} from 'api/api.ts';
 import {checkApiError} from 'utilities/checkApiError.ts';
 import timelineContext from 'context/timeline/timelineContext.ts';
 import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';

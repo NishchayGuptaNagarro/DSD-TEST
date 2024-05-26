@@ -13,7 +13,7 @@ import {allHistoryColDef} from './AllHistoryColDef/AllHistoryColDef.tsx';
 import {AllDriverHistory} from './propTypes/types.ts';
 import {DriverHistoryResponse} from 'models/DriverHistoryResponse.ts';
 import {checkApiError} from 'utilities/checkApiError.ts';
-import {api} from 'axios/api.ts';
+import {api} from 'api/api.ts';
 import {TransactionHistory} from 'models/TransactionHistory.ts';
 import {Stock} from 'models/Stock.ts';
 import {Attachment} from 'models/Attachment.ts';

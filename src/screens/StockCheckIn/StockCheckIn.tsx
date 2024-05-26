@@ -25,7 +25,7 @@ import {
 } from './propTypes/types.ts';
 import {useStockCheckInState} from './useStockCheckInState.ts';
 import {driverTypes} from 'models/driverTypes.ts';
-import {api} from 'axios/api.ts';
+import {api} from 'api/api.ts';
 import {Driver} from 'models/Driver.ts';
 import {checkApiError} from 'utilities/checkApiError.ts';
 import {Attachment} from 'models/Attachment.ts';

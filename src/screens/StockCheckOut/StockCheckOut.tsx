@@ -16,7 +16,7 @@ import ScreenLayout from 'component/ScreenLayout/ScreenLayout.tsx';
 
 import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
 import timelineContext from 'context/timeline/timelineContext.ts';
-import {api} from 'axios/api.ts';
+import {api} from 'api/api.ts';
 import {checkApiError} from 'utilities/checkApiError.ts';
 import {Driver} from 'models/Driver.ts';
 import {DriverApiResponse, StockCheckOutContext} from './propTypes/types.ts';

@@ -7,7 +7,7 @@ import {useTranslation} from 'react-i18next';
 import {useOutletContext} from 'react-router-dom';
 import {ClipLoader} from 'react-spinners';
 // import DropDownButton from 'component/DropDownButton/DropDownButton.tsx';
-import {api} from 'axios/api.ts';
+import {api} from 'api/api.ts';
 import {SignatureApiResponse} from './propTypes/types.ts';
 import {StockCheckOutContext} from '../propTypes/types.ts';
 import {sendNotification} from 'utilities/sendNotification.ts';
