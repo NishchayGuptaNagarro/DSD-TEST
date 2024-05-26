@@ -4,7 +4,7 @@ import './Sidebar.scss';
 import {Link, useNavigate} from 'react-router-dom';
 import Signout from 'assets/PNG/Sign Out.png';
 import Settings from 'assets/PNG/Settings.png';
-import logo from 'assets/SVG/NagarroDark.svg';
+import logo from 'assets/SVG/NotionEdgeWhite.svg';
 import {useTranslation} from 'react-i18next';
 
 const Sidebar = () => {
