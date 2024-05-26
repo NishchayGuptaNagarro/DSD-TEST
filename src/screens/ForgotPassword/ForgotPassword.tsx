@@ -13,7 +13,7 @@ import {useEffect, useState} from 'react';
 import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
 import {api} from 'axios/api.ts';
 import './ForgotPassword.scss';
-import logo from 'assets/SVG/NagarroLight.svg';
+import logo from 'assets/SVG/NotionEdgeDark.svg';
 import banner from 'assets/WEBP/ForgotPassword-Banner.webp';
 import {useTranslation} from 'react-i18next';
 import {isTokenValid} from 'utilities/isTokenValid.ts';
