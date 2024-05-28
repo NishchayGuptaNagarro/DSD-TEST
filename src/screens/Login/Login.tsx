@@ -21,7 +21,7 @@ import {checkApiError} from 'utilities/checkApiError.ts';
 import {api} from 'api/api.ts';
 import './Login.scss';
 import banner from 'assets/WEBP/Login-Page-Banner.webp';
-import logo from 'assets/SVG/NagarroLight.svg';
+import logo from 'assets/SVG/NotionEdgeDark.svg';
 import {useTranslation} from 'react-i18next';
 import styles from 'styles/design-systems.module.scss';
 
