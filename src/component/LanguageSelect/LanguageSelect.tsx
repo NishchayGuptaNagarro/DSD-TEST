@@ -14,7 +14,7 @@ import './LanguageSelect.scss';
 
 import {useState, MouseEvent} from 'react';
 import {useTranslation} from 'react-i18next';
-import styles from '../../styles/design-systems.module.scss';
+import styles from 'styles/design-systems.module.scss';
 
 function LanguageSelect() {
   //   Styles for list
@@ -57,11 +57,18 @@ function LanguageSelect() {
 
   return (
     <>
-      <List className={'language-select'} sx={sxProp}>
-        <ListItemButton className={'language-select-btn'} onClick={handleClick}>
+      <List
+        data-testid={'language-select'}
+        className={'language-select'}
+        sx={sxProp}>
+        <ListItemButton
+          data-testid={'language-select-btn'}
+          className={'language-select-btn'}
+          onClick={handleClick}>
           {currentLanguage === 'en' ? <EnglishButton /> : <FrenchButton />}
 
           <Button
+            data-testid={'expand-btn'}
             disableFocusRipple
             disableTouchRipple
             disableRipple
@@ -75,12 +82,16 @@ function LanguageSelect() {
               },
             }}
             onClick={handleToggle}>
+            {open + 'aaa'}
             {open ? <ExpandLess sx={{zIndex: 1}} /> : <ExpandMore />}
           </Button>
         </ListItemButton>
 
         <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
+          <List
+            data-testid={'language-select-menu'}
+            component="div"
+            disablePadding>
             <ListItemButton
               className={'language-select-btn'}
               onClick={handleClick}>
@@ -99,7 +110,7 @@ export default LanguageSelect;
 function FrenchButton() {
   return (
     <>
-      <ListItemIcon>
+      <ListItemIcon data-testid={'fr-btn'}>
         <Avatar
           alt="french"
           src={FrenchIcon}
@@ -116,7 +127,7 @@ function FrenchButton() {
 function EnglishButton() {
   return (
     <>
-      <ListItemIcon>
+      <ListItemIcon data-testid={'en-btn'}>
         <Avatar
           src={EnglishIcon}
           sx={{

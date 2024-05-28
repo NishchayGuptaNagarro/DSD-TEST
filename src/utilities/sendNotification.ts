@@ -1,5 +1,5 @@
 import {AxiosResponse} from 'axios';
-import {api} from 'axios/api.ts';
+import {api} from 'api/api.ts';
 import {checkApiError} from './checkApiError.ts';
 
 export async function sendNotification(message: string) {

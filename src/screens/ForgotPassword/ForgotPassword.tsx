@@ -11,7 +11,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 
 import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
-import {api} from 'axios/api.ts';
+import {api} from 'api/api.ts';
 import './ForgotPassword.scss';
 import logo from 'assets/SVG/NotionEdgeDark.svg';
 import banner from 'assets/WEBP/ForgotPassword-Banner.webp';

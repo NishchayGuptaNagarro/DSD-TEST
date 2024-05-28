@@ -160,6 +160,7 @@ function DriverNameGridHeader({
         </ToggleButton>
       </ToggleButtonGroup>
       <input
+        data-testid={'search-box'}
         value={searchInput}
         onChange={handleSearchInput}
         placeholder={t('createLoadingOrder.searchInput')}

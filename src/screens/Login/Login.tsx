@@ -15,14 +15,14 @@ import {AxiosResponse} from 'axios';
 import {useEffect, useState} from 'react';
 
 import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
-import {api} from 'axios/api';
 import {LoginApiResponse} from './propTypes/types.ts';
+import {isTokenValid} from 'utilities/isTokenValid.ts';
+import {checkApiError} from 'utilities/checkApiError.ts';
+import {api} from 'api/api.ts';
 import './Login.scss';
 import banner from 'assets/WEBP/Login-Page-Banner.webp';
 import logo from 'assets/SVG/NotionEdgeDark.svg';
 import {useTranslation} from 'react-i18next';
-import {isTokenValid} from 'utilities/isTokenValid.ts';
-import {checkApiError} from 'utilities/checkApiError.ts';
 import styles from 'styles/design-systems.module.scss';
 
 function Login() {
