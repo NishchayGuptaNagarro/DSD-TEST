@@ -62,12 +62,13 @@ function LanguageSelect() {
         className={'language-select'}
         sx={sxProp}>
         <ListItemButton
-          data-testid={'language-change-btn1'}
+          data-testid={'language-select-btn'}
           className={'language-select-btn'}
           onClick={handleClick}>
           {currentLanguage === 'en' ? <EnglishButton /> : <FrenchButton />}
 
           <Button
+            data-testid={'expand-btn'}
             disableFocusRipple
             disableTouchRipple
             disableRipple
@@ -81,14 +82,17 @@ function LanguageSelect() {
               },
             }}
             onClick={handleToggle}>
+            {open + 'aaa'}
             {open ? <ExpandLess sx={{zIndex: 1}} /> : <ExpandMore />}
           </Button>
         </ListItemButton>
 
         <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
+          <List
+            data-testid={'language-select-menu'}
+            component="div"
+            disablePadding>
             <ListItemButton
-              data-testid={'language-change-btn2'}
               className={'language-select-btn'}
               onClick={handleClick}>
               {currentLanguage !== 'en' ? <EnglishButton /> : <FrenchButton />}
@@ -106,7 +110,7 @@ export default LanguageSelect;
 function FrenchButton() {
   return (
     <>
-      <ListItemIcon>
+      <ListItemIcon data-testid={'fr-btn'}>
         <Avatar
           alt="french"
           src={FrenchIcon}
@@ -123,7 +127,7 @@ function FrenchButton() {
 function EnglishButton() {
   return (
     <>
-      <ListItemIcon>
+      <ListItemIcon data-testid={'en-btn'}>
         <Avatar
           src={EnglishIcon}
           sx={{
