@@ -131,6 +131,7 @@ function DriverNameGridHeader({
         {t('createLoadingOrder.driverTypeText')}:
       </span>
       <ToggleButtonGroup
+        data-testid={'toggle-parent'}
         color="primary"
         value={driverType}
         exclusive
@@ -143,7 +144,6 @@ function DriverNameGridHeader({
           <img src={vanSellerIcon} alt={'icon'} />
           {t('createLoadingOrder.vanSeller')}
         </ToggleButton>
-
         <ToggleButton
           className={'font-xsm'}
           sx={{fontWeight: styles.fontWeightBolder}}

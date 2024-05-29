@@ -33,7 +33,7 @@ function AlertDialog({
           </DialogContentText>
         </DialogContent>
         <DialogActions sx={{p: 0}}>
-          <Button onClick={handleClose} autoFocus>
+          <Button data-testid={'dismiss-btn'} onClick={handleClose} autoFocus>
             {t(closeBtnText)}
           </Button>
         </DialogActions>
