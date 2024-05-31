@@ -1,13 +1,10 @@
-import {useState} from 'react';
 import {Link} from 'react-router-dom';
 import './Sidebar.scss';
 import {useTranslation} from 'react-i18next';
 import {SubMenuProps} from './propTypes/types.ts';
 import {ButtonBase} from '@mui/material';
 
-const SubMenu = ({item}: SubMenuProps) => {
-  const [subnav, setSubnav] = useState(false);
-  const showSubnav = () => setSubnav(!subnav);
+const SubMenu: React.FC<SubMenuProps> = ({item, subnav, showSubnav}) => {
   const {t} = useTranslation();
 
   return (
@@ -18,40 +15,38 @@ const SubMenu = ({item}: SubMenuProps) => {
             textAlign: 'unset',
           }}
           className={'sidebar-link'}
-          onClick={item.subNav && showSubnav}>
+          data-testid="subnav-present"
+          onClick={showSubnav}>
           <span className={'sidebar-btn'}>
             {item.icon}
             <span className={'sidebar-label'}>{t(item.title)}</span>
           </span>
           <span className={'sidebar-arrow'}>
-            {item.subNav && subnav
-              ? item.iconOpened
-              : item.subNav
-                ? item.iconClosed
-                : null}
+            {subnav ? item.iconOpened : item.iconClosed}
           </span>
         </ButtonBase>
       ) : (
         <Link
           className={'sidebar-link'}
           to={item.path}
-          onClick={item.subNav && showSubnav}>
+          data-testid="subnav-absent"
+          onClick={showSubnav}>
           <span className={'sidebar-btn'}>
             {item.icon}
             <span className={'sidebar-label'}>{t(item.title)}</span>
           </span>
         </Link>
       )}
-      {subnav &&
-        item.subNav &&
-        item.subNav.map((item, index) => {
-          return (
-            <Link className={'dropdown-link'} to={item.path} key={index}>
-              {item.icon}
-              <span className={'sidebar-label'}>{t(item.title)}</span>
+      {subnav && item.subNav && (
+        <div data-testid="sidebar-submenu-options">
+          {item.subNav.map((subItem, subIndex) => (
+            <Link className="dropdown-link" to={subItem.path} key={subIndex}>
+              {subItem.icon}
+              <span className="sidebar-label">{t(subItem.title)}</span>
             </Link>
-          );
-        })}
+          ))}
+        </div>
+      )}
     </>
   );
 };

@@ -16,4 +16,6 @@ interface SubOption {
 
 export interface SubMenuProps {
   item: SidebarOption;
+  subnav?: boolean;
+  showSubnav?: () => void;
 }
