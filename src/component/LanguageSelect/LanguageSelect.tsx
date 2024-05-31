@@ -82,7 +82,6 @@ function LanguageSelect() {
               },
             }}
             onClick={handleToggle}>
-            {open + 'aaa'}
             {open ? <ExpandLess sx={{zIndex: 1}} /> : <ExpandMore />}
           </Button>
         </ListItemButton>

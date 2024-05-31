@@ -21,7 +21,7 @@ function Timeline() {
             //when the value of currentStep is greater than key+1 then these are our completed div
             <div key={i} className={'step-item'}>
               {/* if currentStep is greater or equal to key+1 it means they are completed, and we have to show them as dark blue// */}
-              <div className="step">
+              <div data-testid="step" className="step">
                 {i + 1 <= currentStep ? (
                   <div className="steps-done"></div>
                 ) : null}

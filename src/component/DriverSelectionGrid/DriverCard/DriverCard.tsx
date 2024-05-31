@@ -13,6 +13,7 @@ import {DriverCardProps} from './propTypes/types.ts';
 function DriverCard({driver, selectedDriverId}: DriverCardProps) {
   return (
     <Paper
+      data-testid={'driver-btn'}
       className={`driver-card ${selectedDriverId == driver.driverId ? 'selected' : ''}`}
       variant="outlined"
       sx={{

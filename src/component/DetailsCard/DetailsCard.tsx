@@ -35,7 +35,7 @@ function DetailsCard({
             sx={{color: styles.greySoft}}>
             {heading}
           </Typography>
-          <img src={icon} alt={'icon'} />
+          <img data-testid={'icon'} src={icon} alt={'icon'} />
         </Stack>
         <Typography
           fontSize={styles.fontSizeSm}
