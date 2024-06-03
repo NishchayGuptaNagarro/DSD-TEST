@@ -9,6 +9,26 @@ import StockTable from './StockTable/StockTable.tsx';
 import AttachmentTable from './AttachmentTable/AttachmentTable.tsx';
 import AdminSignature from './AdminSignature/AdminSignature.tsx';
 import {localStorageMock} from '../../../jest.setup.ts';
+import {RefObject} from 'react';
+
+jest.mock('react-signature-canvas', () => {
+  const {forwardRef} = jest.requireActual('react');
+  return {
+    __esModule: true,
+    default: forwardRef(
+      (props: {onEnd: () => void}, ref: RefObject<unknown>) => {
+        console.log(ref);
+        return (
+          <button
+            type={'button'}
+            data-testid={'mock-btn'}
+            onClick={props.onEnd}
+          />
+        );
+      },
+    ),
+  };
+});
 
 describe('Stock Check In Screen Tests', () => {
   afterAll(sessionStorage.clear);
@@ -91,5 +111,18 @@ describe('Stock Check In Screen Tests', () => {
     const finishBtn = screen.getByText(/finish/);
     expect(finishBtn).toBeInTheDocument();
     expect(screen.getByTestId('admin-signature-form')).toBeInTheDocument();
+  });
+  test('should return to home after we send signature', async () => {
+    const nextBtn = screen.getByText(/next/);
+    await navigateSteps(nextBtn, 5);
+    const mockBtn = screen.getByTestId('mock-btn');
+
+    await userEvent.click(mockBtn);
+
+    const finishBtn = screen.getByText(/finish/);
+    await userEvent.click(finishBtn);
+    const dismissBtn = screen.getByTestId('dismiss-btn');
+    await userEvent.click(dismissBtn);
+    expect(screen.getByText('Mock Home')).toBeInTheDocument();
   });
 });
