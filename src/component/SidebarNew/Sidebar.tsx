@@ -13,7 +13,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <nav className={'sidebar-nav'}>
+      <nav data-testid={'sidebar'} className={'sidebar-nav'}>
         <div className={'logo-div'}>
           <img src={logo} className="logo-img" alt="no-image-present"></img>
         </div>

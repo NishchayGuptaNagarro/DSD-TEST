@@ -29,7 +29,6 @@ function DriverSelectionGrid({
 }: DriverSelectionGridProps) {
   // State containing array filtered after driver type and search text
   const [filteredArray, setFilteredArray] = useState<Driver[]>([]);
-
   // State containing search text from user
   const [searchText, setSearchText] = useState('');
 

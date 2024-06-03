@@ -12,7 +12,7 @@ Frontend for warehouse admin.
 
 ## Scripts:
 
-1. dev: Starts the development server using Vite.
+1. dev: Starts the development mockServer using Vite.
 2. build: Compiles TypeScript code &  Builds the application for production using Vite.
 3. lint: Runs ESLint for linting TypeScript and JavaScript files with additional options.
 4. preview: Runs production build.
