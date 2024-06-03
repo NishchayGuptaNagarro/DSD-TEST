@@ -6,10 +6,18 @@ import Signout from 'assets/PNG/Sign Out.png';
 import Settings from 'assets/PNG/Settings.png';
 import logo from 'assets/SVG/NotionEdgeWhite.svg';
 import {useTranslation} from 'react-i18next';
+import {useState} from 'react';
 
 const Sidebar = () => {
   const {t} = useTranslation();
   const navigate = useNavigate();
+  const [subnav, setSubnav] = useState(false);
+  const showSubnav = () => setSubnav(!subnav);
+
+  const clearStorage = () => {
+    localStorage.clear();
+    navigate('/');
+  };
 
   return (
     <>
@@ -18,17 +26,28 @@ const Sidebar = () => {
           <img src={logo} className="logo-img" alt="no-image-present"></img>
         </div>
         <hr className={'sidebar-division'} />
-        {SidebarData.map((item, index) => {
-          return <SubMenu item={item} key={index} />;
-        })}
+
+        <ul>
+          {SidebarData.map((item, index) => {
+            return (
+              <li key={index}>
+                <SubMenu
+                  item={item}
+                  key={index}
+                  subnav={subnav}
+                  showSubnav={showSubnav}
+                />
+              </li>
+            );
+          })}
+        </ul>
+
         <div className={'sidebar-bottom'}>
           <Link
             className={'sidebar-link '}
+            data-testid="signout-id"
             to=""
-            onClick={() => {
-              localStorage.clear();
-              navigate('/');
-            }}>
+            onClick={clearStorage}>
             <span className={'sidebar-btn '}>
               <img className={'nav-icon'} src={Signout} alt={'signout'} />
               <span className={'sidebar-label sidebar-important'}>
@@ -36,7 +55,10 @@ const Sidebar = () => {
               </span>
             </span>
           </Link>
-          <Link className={'sidebar-link '} to="/settings">
+          <Link
+            className={'sidebar-link'}
+            to="/settings"
+            data-testid="settings-id">
             <span className={'sidebar-btn '}>
               <img className={'nav-icon'} src={Settings} alt={'settings'} />
               <span className={'sidebar-label  sidebar-important '}>
