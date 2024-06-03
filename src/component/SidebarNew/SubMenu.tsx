@@ -4,7 +4,7 @@ import {useTranslation} from 'react-i18next';
 import {SubMenuProps} from './propTypes/types.ts';
 import {ButtonBase} from '@mui/material';
 
-const SubMenu: React.FC<SubMenuProps> = ({item, subnav, showSubnav}) => {
+function SubMenu({item, subnav, showSubnav}: SubMenuProps) {
   const {t} = useTranslation();
 
   return (
@@ -49,6 +49,6 @@ const SubMenu: React.FC<SubMenuProps> = ({item, subnav, showSubnav}) => {
       )}
     </>
   );
-};
+}
 
 export default SubMenu;
