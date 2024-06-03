@@ -30,11 +30,15 @@ function AdminSignature() {
 
   return (
     <>
-      <form className={'admin-signature-form'}>
+      <form
+        data-testid={'admin-signature-form'}
+        className={'admin-signature-form'}>
         <label className={'form-label label-1'}>
           {t('createLoadingOrder.signature.admin')}:
         </label>
-        <span className={'signature-container'}>
+        <span
+          data-testid={'signature-container'}
+          className={'signature-container'}>
           <SignatureCanvas
             canvasProps={{
               className: 'signature-canvas',

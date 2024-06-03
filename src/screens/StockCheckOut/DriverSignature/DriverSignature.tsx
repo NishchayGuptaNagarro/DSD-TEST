@@ -78,7 +78,9 @@ function DriverSignature() {
   });
   return (
     <>
-      <form className={'driver-signature-form'}>
+      <form
+        data-testid={'driver-signature-form'}
+        className={'driver-signature-form'}>
         <label className={'form-label label-1'}>
           {t('createLoadingOrder.signature.label')}:
         </label>
@@ -88,6 +90,7 @@ function DriverSignature() {
           {!(isSignatureLoaded || showLoading) && (
             <Button
               variant="contained"
+              data-testid={'get-signature-btn'}
               className={'center'}
               onClick={() => {
                 sendNotification('Please sign to confirm checkout');
