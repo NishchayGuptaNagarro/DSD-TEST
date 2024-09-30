@@ -4,6 +4,10 @@ import axios, {
   InternalAxiosRequestConfig,
 } from 'axios';
 import {URL} from './config.ts';
+import {
+  generateCorrelationId,
+  isCorrelationIdExpired,
+} from '../utilities/correlationHelper';
 
 const genericHeaders = {'Content-type': 'application/json'};
 
@@ -12,10 +16,33 @@ export const api = axios.create({
   headers: genericHeaders,
 });
 
-api.interceptors.request.use((request: InternalAxiosRequestConfig) => {
+export const setCorrelationIdHeader = async (request: any) => {
+  try {
+    let correlationIdStr = await localStorage.getItem('correlationIdObject');
+    let correlationId = correlationIdStr ? JSON.parse(correlationIdStr) : null;
+
+    if (correlationId && !isCorrelationIdExpired(correlationId.timestamp)) {
+      request.headers.set('X-Correlation-ID', correlationId.id);
+    } else {
+      await generateCorrelationId();
+      let updatedCorrelationIdStr = await localStorage.getItem(
+        'correlationIdObject',
+      );
+      let updatedCorrelationId = updatedCorrelationIdStr
+        ? JSON.parse(updatedCorrelationIdStr)
+        : null;
+      request.headers.set('X-Correlation-ID', updatedCorrelationId.id);
+    }
+  } catch (error) {
+    console.error('Error setting correlation ID header:', error);
+  }
+};
+
+api.interceptors.request.use(async (request: InternalAxiosRequestConfig) => {
   if (localStorage.getItem('access_token')) {
     request.headers.Authorization = `Bearer ${localStorage.getItem('access_token')}`;
   }
+  await setCorrelationIdHeader(request);
   return request;
 });
 
