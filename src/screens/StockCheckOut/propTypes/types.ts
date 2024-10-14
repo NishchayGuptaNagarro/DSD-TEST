@@ -45,16 +45,9 @@ interface ApiProductData {
   category_id: string;
   updated_at: string;
   quantity: number;
-  img: ApiProductImage;
+  img: string;
 }
 
-interface ApiProductImage {
-  mime_type: string | null;
-  updated_at: string;
-  product_image: string;
-  product_id: string;
-  creation_date: string;
-}
 
 export interface ProductApiResponse {
   status_code: number;
