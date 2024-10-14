@@ -44,7 +44,7 @@ const OrderTable = () => {
           externalId: product.external_id,
           name: product.description,
           description: product.description,
-          imageSrc: product.img.product_image,
+          imageSrc: product.img,
           uom: product.unit_of_measure,
           quantity: product.quantity,
         };
