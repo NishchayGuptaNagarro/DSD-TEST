@@ -3,13 +3,14 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from 'axios';
-import {URL} from './config.ts';
+import { URL, exceptionUrls } from './config.ts';
 import {
   generateCorrelationId,
   isCorrelationIdExpired,
 } from '../utilities/correlationHelper';
+import CryptoJS from 'crypto-js'; // Add this import for hashing
 
-const genericHeaders = {'Content-type': 'application/json'};
+const genericHeaders = { 'Content-type': 'application/json' };
 
 export const api = axios.create({
   baseURL: URL,
@@ -38,9 +39,36 @@ export const setCorrelationIdHeader = async (request: any) => {
   }
 };
 
+const generateIdempotenceKey = (
+  payload: any,
+  userToken: string,
+  url: string,
+) => {
+  const dataToHash = JSON.stringify(payload) + userToken + url;
+  const hash = CryptoJS.MD5(dataToHash).toString(); // Generates a 128-bit key in hex format
+  return hash;
+};
+
 api.interceptors.request.use(async (request: InternalAxiosRequestConfig) => {
-  if (localStorage.getItem('access_token')) {
+  const userToken = localStorage.getItem('access_token');
+  if (userToken) {
     request.headers.Authorization = `Bearer ${localStorage.getItem('access_token')}`;
+
+    if (
+      ['PUT', 'PATCH', 'POST'].includes(
+        request.method?.toUpperCase() as string,
+      ) &&
+      !exceptionUrls.includes(request.url as string)
+    ) {
+      if (request.url) {
+        const idempotenceKey = generateIdempotenceKey(
+          request.data,
+          userToken,
+          request.url,
+        );
+        request.headers['X-Idempotency-Key'] = idempotenceKey;
+      }
+    }
   }
   await setCorrelationIdHeader(request);
   return request;
