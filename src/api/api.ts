@@ -50,12 +50,13 @@ const generateIdempotenceKey = (
 };
 
 api.interceptors.request.use(async (request: InternalAxiosRequestConfig) => {
+  console.log(request.url)
   const userToken = localStorage.getItem('access_token');
   if (userToken) {
     request.headers.Authorization = `Bearer ${localStorage.getItem('access_token')}`;
 
     if (
-      ['PUT', 'PATCH', 'POST'].includes(
+      ['PUT', 'PATCH', 'POST','DELETE'].includes(
         request.method?.toUpperCase() as string,
       ) &&
       !exceptionUrls.includes(request.url as string)
