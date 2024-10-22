@@ -8,7 +8,7 @@ import {
   generateCorrelationId,
   isCorrelationIdExpired,
 } from '../utilities/correlationHelper';
-import CryptoJS from 'crypto-js'; // Add this import for hashing
+import { generateIdempotencyKey } from 'utilities/idempotencyHelper.ts';
 
 const genericHeaders = { 'Content-type': 'application/json' };
 
@@ -39,18 +39,9 @@ export const setCorrelationIdHeader = async (request: any) => {
   }
 };
 
-const generateIdempotenceKey = (
-  payload: any,
-  userToken: string,
-  url: string,
-) => {
-  const dataToHash = JSON.stringify(payload) + userToken + url;
-  const hash = CryptoJS.MD5(dataToHash).toString(); // Generates a 128-bit key in hex format
-  return hash;
-};
+
 
 api.interceptors.request.use(async (request: InternalAxiosRequestConfig) => {
-  console.log(request.url)
   const userToken = localStorage.getItem('access_token');
   if (userToken) {
     request.headers.Authorization = `Bearer ${localStorage.getItem('access_token')}`;
@@ -62,7 +53,7 @@ api.interceptors.request.use(async (request: InternalAxiosRequestConfig) => {
       !exceptionUrls.includes(request.url as string)
     ) {
       if (request.url) {
-        const idempotenceKey = generateIdempotenceKey(
+        const idempotenceKey = generateIdempotencyKey(
           request.data,
           userToken,
           request.url,
