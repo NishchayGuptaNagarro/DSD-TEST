@@ -3,13 +3,14 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from 'axios';
-import {URL} from './config.ts';
+import { URL, exceptionUrls } from './config.ts';
 import {
   generateCorrelationId,
   isCorrelationIdExpired,
 } from '../utilities/correlationHelper';
+import { generateIdempotencyKey } from 'utilities/idempotencyHelper.ts';
 
-const genericHeaders = {'Content-type': 'application/json'};
+const genericHeaders = { 'Content-type': 'application/json' };
 
 export const api = axios.create({
   baseURL: URL,
@@ -38,9 +39,28 @@ export const setCorrelationIdHeader = async (request: any) => {
   }
 };
 
+
+
 api.interceptors.request.use(async (request: InternalAxiosRequestConfig) => {
-  if (localStorage.getItem('access_token')) {
+  const userToken = localStorage.getItem('access_token');
+  if (userToken) {
     request.headers.Authorization = `Bearer ${localStorage.getItem('access_token')}`;
+
+    if (
+      ['PUT', 'PATCH', 'POST','DELETE'].includes(
+        request.method?.toUpperCase() as string,
+      ) &&
+      !exceptionUrls.includes(request.url as string)
+    ) {
+      if (request.url) {
+        const idempotenceKey = generateIdempotencyKey(
+          request.data,
+          userToken,
+          request.url,
+        );
+        request.headers['X-Idempotency-Key'] = idempotenceKey;
+      }
+    }
   }
   await setCorrelationIdHeader(request);
   return request;
