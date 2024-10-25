@@ -1,17 +1,17 @@
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 
-import {useEffect, useRef, useState} from 'react';
 import {AxiosResponse} from 'axios';
+import {useEffect, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {useOutletContext} from 'react-router-dom';
 import {ClipLoader} from 'react-spinners';
 // import DropDownButton from 'component/DropDownButton/DropDownButton.tsx';
 import {api} from 'api/api.ts';
-import {SignatureApiResponse} from './propTypes/types.ts';
-import {StockCheckOutContext} from '../propTypes/types.ts';
 import {sendNotification} from 'utilities/sendNotification.ts';
+import {StockCheckOutContext} from '../propTypes/types.ts';
 import './DriverSignature.scss';
+import {SignatureApiResponse} from './propTypes/types.ts';
 
 function DriverSignature() {
   const {isSignatureLoaded, setIsSignatureLoaded} =
@@ -131,3 +131,4 @@ function DriverSignature() {
 }
 
 export default DriverSignature;
+

@@ -6,13 +6,17 @@
 
   .productText {
     font-weight: $font-normal;
+    padding-bottom: 30%;
+    color: $charcoal-dark;
   }
   .quantity {
     font-weight: $font-bold;
     color: $green-mint;
   }
   .stock {
-    font-weight: $font-bold;
+    font-weight: $font-normal;
+    padding-bottom: 80%;
+    color: $charcoal-dark;
   }
   .language-select {
     @extend .language-selection-dropdown;

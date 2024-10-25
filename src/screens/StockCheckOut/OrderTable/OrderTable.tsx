@@ -1,17 +1,17 @@
 import {useOutletContext} from 'react-router-dom';
 
-import Table from 'component/Table/Table.tsx';
-import {StockCheckOutContext, ProductApiResponse} from '../propTypes/types.ts';
-import {useContext, useEffect, useState} from 'react';
-import {Row} from 'component/Table/propTypes/types.ts';
-import {AxiosResponse} from 'axios';
 import {api} from 'api/api.ts';
-import {checkApiError} from 'utilities/checkApiError.ts';
-import timelineContext from 'context/timeline/timelineContext.ts';
+import {AxiosResponse} from 'axios';
 import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
-import {orderColDef} from './OrderColDef/OrderColDef.tsx';
+import {Row} from 'component/Table/propTypes/types.ts';
+import Table from 'component/Table/Table.tsx';
+import timelineContext from 'context/timeline/timelineContext.ts';
 import {Product} from 'models/Product.ts';
+import {useContext, useEffect, useState} from 'react';
+import {checkApiError} from 'utilities/checkApiError.ts';
 import {getProductRowId} from 'utilities/getProductRowId.ts';
+import {ProductApiResponse, StockCheckOutContext} from '../propTypes/types.ts';
+import {orderColDef} from './OrderColDef/OrderColDef.tsx';
 
 const OrderTable = () => {
   const {setRows, rows} = useOutletContext<StockCheckOutContext>();
@@ -73,7 +73,7 @@ const OrderTable = () => {
         isOpen={isDialogOpen}
         handleDismiss={handleDialogDismiss}></AlertDialog>
       <Table
-        noOfRows={5}
+        noOfRows={4}
         showMenu={false}
         showLoading={!isTableLoaded}
         rows={rows}
@@ -85,3 +85,4 @@ const OrderTable = () => {
 };
 
 export default OrderTable;
+

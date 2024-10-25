@@ -1,33 +1,43 @@
-import Stack from '@mui/material/Stack';
 import {Typography} from '@mui/material';
 import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
 
-import {ProductIconProps} from './propTypes/types.ts';
 import styles from 'styles/design-systems.module.scss';
+import {ProductIconProps} from './propTypes/types.ts';
 
 function ProductIcon({productName, productId, productImage}: ProductIconProps) {
   return (
-    <Stack alignItems="center" direction="row" spacing={2}>
+    <Stack
+      alignItems="center"
+      justifyContent="center"
+      direction="row"
+      spacing={2}
+      sx={{padding: '14px 0px 16px', marginLeft: '4px'}}>
       {/*Avatar component displays image in a circular icon*/}
       <Avatar
         alt={productName}
         src={productImage}
         sx={{
-          width: 45,
-          height: 45,
+          width: 40,
+          height: 40,
         }}
       />
-      <Stack>
+      <Stack spacing={0} sx={{paddingTop: '2px'}}>
+        <Stack sx={{maxWidth: '200px'}}>
+          <Typography
+            variant="h5"
+            noWrap
+            fontSize={styles.fontSizeSm}
+            color={styles.charcoalDark}
+            fontWeight={styles.fontWeightNormal}>
+            {productName}
+          </Typography>
+        </Stack>
         <Typography
-          fontSize={styles.fontSizeSm}
-          variant={'h5'}
-          fontWeight={styles.fontWeightNormal}>
-          {productName}
-        </Typography>
-        <Typography
+          variant="subtitle1"
+          color={styles.grayCharcoal}
           fontSize={styles.fontSizeXsm}
-          variant={'h6'}
-          fontWeight={styles.fontWeightLight}>
+          fontWeight={styles.fontWeightNormal}>
           {productId}
         </Typography>
       </Stack>
@@ -36,3 +46,4 @@ function ProductIcon({productName, productId, productImage}: ProductIconProps) {
 }
 
 export default ProductIcon;
+

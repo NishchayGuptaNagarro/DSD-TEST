@@ -1,3 +1,5 @@
+import Box from '@mui/material/Box';
+import {styled} from '@mui/material/styles';
 import {
   DataGrid,
   gridClasses,
@@ -7,8 +9,6 @@ import {
   GridColumnMenuProps,
   GridLoadingOverlay,
 } from '@mui/x-data-grid';
-import Box from '@mui/material/Box';
-import {styled} from '@mui/material/styles';
 
 import {TableProps} from './propTypes/types.ts';
 import './Table.scss';
@@ -154,8 +154,11 @@ export default function Table({
         color: styles.blueSteel,
         backgroundColor: styles.whitePure,
         borderRadius: 3,
+        '& .MuiDataGrid-root': {
+          border: 'none',
+        },
         '& .MuiDataGrid-row:last-child': {
-          borderBottom: '1px solid lightgray',
+          borderBottom: 'none',
         },
         [`& .${gridClasses.cell}`]: {
           paddingTop: 0.4,
@@ -168,15 +171,19 @@ export default function Table({
           },
         [`& .${gridClasses.columnHeader}`]: {
           paddingLeft: 3,
-          fontWeight: styles.fontWeightBolder,
-          color: styles.greyDarker,
+          fontWeight: styles.fontWeightNormal,
+          fontSize: styles.fontSizeMd,
+          color: styles.whitePure,
+          backgroundColor: styles.bgGrayishBlue,
         },
         ['.MuiDataGrid-footerContainer']: {
           p: 0,
           height: 30,
           minHeight: 10,
+          backgroundColor: styles.bgColorBeigeLight,
         },
       }}
     />
   );
 }
+
