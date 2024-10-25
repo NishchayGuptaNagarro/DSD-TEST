@@ -1,6 +1,9 @@
-@import "src/styles/design-systems.module";
+@import 'src/styles/design-systems.module';
 //All css related to this screen should go inside this
-.select-driver-screen{
+.select-driver-screen {
+  padding-left: 2%;
+  padding-right: 2%;
+
   .productText {
     font-weight: $font-normal;
   }
@@ -8,13 +11,14 @@
     font-weight: $font-bold;
     color: $green-mint;
   }
-  .stock{
+  .stock {
     font-weight: $font-bold;
   }
-  .language-select{
-    @extend .language-selection-dropdown
+  .language-select {
+    @extend .language-selection-dropdown;
   }
   .buttons-group {
-   @extend .position-bottom
+    @extend .position-bottom;
   }
 }
+

@@ -23,7 +23,7 @@
   "createLoadingOrder.next": "Next",
   "createLoadingOrder.finish": "Finish",
   "createLoadingOrder.driverTypeText": "Select Driver Type",
-  "createLoadingOrder.vanSeller": "Van-Seller",
+  "createLoadingOrder.vanSeller": "Vanseller",
   "createLoadingOrder.delivery": "Delivery",
   "createLoadingOrder.hybrid": "Hybrid",
   "createLoadingOrder.searchInput": "Search Driver",
@@ -97,3 +97,4 @@
   "alert.btn1": "Okay",
   "alert.btn2": "Dismiss"
 }
+
