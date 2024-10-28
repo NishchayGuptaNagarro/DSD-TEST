@@ -12,6 +12,7 @@ function ProductIcon({productName, productId, productImage}: ProductIconProps) {
       justifyContent="center"
       direction="row"
       spacing={2}
+      display={'flex'}
       sx={{padding: '14px 0px 16px', marginLeft: '4px'}}>
       {/*Avatar component displays image in a circular icon*/}
       <Avatar
@@ -22,8 +23,19 @@ function ProductIcon({productName, productId, productImage}: ProductIconProps) {
           height: 40,
         }}
       />
-      <Stack spacing={0} sx={{paddingTop: '2px'}}>
-        <Stack sx={{maxWidth: '200px'}}>
+      <Stack
+        spacing={0}
+        sx={{
+          paddingTop: '2px',
+          display: 'flex',
+          width: '100%',
+          maxWidth: '200px',
+          minWidth: '50px',
+          flexGrow: 1,
+          flexShrink: 1,
+          flexBasis: '50%',
+        }}>
+        <Stack sx={{}}>
           <Typography
             variant="h5"
             noWrap
