@@ -24,8 +24,8 @@ function Timeline() {
           {steps?.map((step, i) => (
             //when the value of currentStep is equal to key+1 which is i+1 then it is our active div
             //when the value of currentStep is greater than key+1 then these are our completed div
-            <div className="timeline_indicator" key={i}>
-              <div className={'step-item'}>
+            <>
+              <div className={'step-item'} key={i}>
                 {/* if currentStep is greater or equal to key+1 it means they are completed, and we have to show them as dark blue// */}
                 <div data-testid="step" className="step">
                   <div className="steps-done">
@@ -49,7 +49,7 @@ function Timeline() {
                         : 'pending'
                   }
                   style={{textTransform: 'capitalize'}}>
-                  <p className="steps">{` ${i + 1}.  ${t(step)}`}</p>
+                  <span className="steps">{` ${i + 1}.  ${t(step)}`}</span>
                   <span style={{display: 'flex', justifyContent: 'center'}}>
                     {i + 1 < currentStep
                       ? 'Completed'
@@ -59,20 +59,8 @@ function Timeline() {
                   </span>
                 </div>
               </div>
-              {i + 1 < steps.length && (
-                <div className="step-indicator">
-                  <hr
-                    className="timeline-hr"
-                    style={{
-                      backgroundColor:
-                        i + 1 < currentStep
-                          ? styles.bgFreshGreen
-                          : styles.bgSoftSky,
-                    }}
-                  />
-                </div>
-              )}
-            </div>
+              {i + 1 < steps.length && <div className={'timeline-hr'}></div>}
+            </>
           ))}
         </div>
       </div>
@@ -81,4 +69,3 @@ function Timeline() {
 }
 
 export default Timeline;
-

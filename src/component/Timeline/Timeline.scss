@@ -19,19 +19,16 @@
 
   .timeline_indicator {
     @include flex-row;
-    justify-content: space-evenly;
     flex: 1;
-    max-width: fit-content;
   }
 
   .step-item {
-    position: relative;
     @include flex-column;
     @include flex-center;
     @extend .font-xsm;
     padding: 10px;
     margin: 2px;
-    flex: 1;
+    flex: 0.5;
   }
 
   .step-indicator {
@@ -40,13 +37,12 @@
   }
 
   .timeline-hr {
-    margin-top: 8%;
-    height: 5px;
     background-color: $bg-soft-sky;
-    border-radius: 8px;
-    border: 1px solid $bg-soft-sky;
+    height: 5px;
+    flex:1;
+    border-radius: 10px;
+    margin-bottom: 40px;
   }
-
   // .step-item:not(:first-child)::before {
   //   content: '';
   //   background-color: $bg-soft-sky;
