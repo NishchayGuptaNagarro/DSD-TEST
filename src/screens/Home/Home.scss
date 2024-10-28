@@ -1,6 +1,6 @@
-@import "src/styles/design-systems.module";
+@import 'src/styles/design-systems.module';
 
-.avl-stock-screen{
+.avl-stock-screen {
   .productText {
     font-weight: $font-normal;
   }
@@ -8,7 +8,8 @@
     font-weight: $font-bold;
     color: $green-mint;
   }
-  .avl-language-select{
+  .avl-language-select {
     @extend .language-selection-dropdown;
   }
 }
+

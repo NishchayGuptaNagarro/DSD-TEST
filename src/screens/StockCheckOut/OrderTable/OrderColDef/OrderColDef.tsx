@@ -36,6 +36,9 @@ export const orderColDef: GridColDef[] = [
         </div>
       );
     },
+    renderCell: params => {
+      return <div style={{paddingBottom: '6%'}}>{params.value}</div>;
+    },
     flex: 0.8,
     cellClassName: 'productText font-sm',
     sortable: false,
@@ -45,6 +48,9 @@ export const orderColDef: GridColDef[] = [
     headerName: 'table.initialStock',
     renderHeader: (params: GridColumnHeaderParams) => {
       return <ColumnHeader headerName={params.colDef.headerName || ''} />;
+    },
+    renderCell: params => {
+      return <div style={{paddingBottom: '19%'}}>{params.value}</div>;
     },
     headerClassName: 'font-md',
     flex: 0.3,
@@ -58,6 +64,9 @@ export const orderColDef: GridColDef[] = [
     headerName: 'table.uom',
     renderHeader: (params: GridColumnHeaderParams) => {
       return <ColumnHeader headerName={params.colDef.headerName || ''} />;
+    },
+    renderCell: params => {
+      return <div style={{paddingBottom: '19%'}}>{params.value}</div>;
     },
     headerClassName: 'font-md',
     flex: 0.3,

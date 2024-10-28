@@ -7,7 +7,7 @@ import {useTranslation} from 'react-i18next';
 import {Outlet, useNavigate} from 'react-router';
 import {useLocation} from 'react-router-dom';
 
-import BlackButton from 'component/BlackButton/BlackButton.tsx';
+import BlueButton from 'component/BlueButton/BlueButton.tsx';
 import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
 import PageHeading from 'component/PageHeading/PageHeading.tsx';
 import ScreenLayout from 'component/ScreenLayout/ScreenLayout.tsx';
@@ -15,6 +15,7 @@ import Timeline from 'component/Timeline/Timeline.tsx';
 
 import {api} from 'api/api.ts';
 import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
+import BlueBorderButton from 'component/BlueBorderButton/BlueBorderButton.tsx';
 import timelineContext from 'context/timeline/timelineContext.ts';
 import {createBrowserHistory} from 'history';
 import {Driver} from 'models/Driver.ts';
@@ -271,15 +272,16 @@ function StockCheckOut() {
           <br />
           <br />
           <div className="buttons-group">
-            <BlackButton
+            <BlueBorderButton
               size={'small'}
               variant={'contained'}
               onClick={decreaseSteps}
               disabled={currentStep === 1}>
               {t('createLoadingOrder.back')}
-            </BlackButton>
+            </BlueBorderButton>
+
             {currentStep === steps.length ? (
-              <BlackButton
+              <BlueButton
                 size={'small'}
                 variant={'contained'}
                 disabled={!isSignatureLoaded}
@@ -287,15 +289,15 @@ function StockCheckOut() {
                   assignInitialStock();
                 }}>
                 {t('createLoadingOrder.finish')}
-              </BlackButton>
+              </BlueButton>
             ) : (
-              <BlackButton
+              <BlueButton
                 size={'small'}
                 variant={'contained'}
                 disabled={nextDisabled}
                 onClick={increaseSteps}>
                 {t('createLoadingOrder.next')}
-              </BlackButton>
+              </BlueButton>
             )}
           </div>
         </Stack>

@@ -1,40 +1,40 @@
-import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
 
+import {ChangeEvent, useContext, useEffect, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
+import {Outlet} from 'react-router';
 import {useLocation, useNavigate} from 'react-router-dom';
 import {ClipLoader} from 'react-spinners';
-import {ChangeEvent, useContext, useEffect, useRef, useState} from 'react';
-import {Outlet} from 'react-router';
 
 import {AxiosResponse} from 'axios';
-import ScreenLayout from 'component/ScreenLayout/ScreenLayout.tsx';
+import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
 import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
 import PageHeading from 'component/PageHeading/PageHeading.tsx';
+import ScreenLayout from 'component/ScreenLayout/ScreenLayout.tsx';
 import Timeline from 'component/Timeline/Timeline.tsx';
-import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
 
-import BlackButton from 'component/BlackButton/BlackButton.tsx';
+import {api} from 'api/api.ts';
+import BlueButton from 'component/BlueButton/BlueButton.tsx';
 import timelineContext from 'context/timeline/timelineContext.ts';
-import {checkInSteps} from 'utilities/timelineSteps.ts';
+import {createBrowserHistory} from 'history';
+import {Attachment} from 'models/Attachment.ts';
+import {Driver} from 'models/Driver.ts';
+import {DriverHistoryResponse} from 'models/DriverHistoryResponse.ts';
+import {driverTypes} from 'models/driverTypes.ts';
+import {Stock} from 'models/Stock.ts';
+import {TransactionHistory} from 'models/TransactionHistory.ts';
+import {checkApiError} from 'utilities/checkApiError.ts';
+import {sendNotification} from 'utilities/sendNotification.ts';
 import {checkInRoutes} from 'utilities/timelineRoutes.ts';
+import {checkInSteps} from 'utilities/timelineSteps.ts';
 import {
   PendingCheckInResponse,
   StockCheckInContext,
 } from './propTypes/types.ts';
-import {useStockCheckInState} from './useStockCheckInState.ts';
-import {driverTypes} from 'models/driverTypes.ts';
-import {api} from 'api/api.ts';
-import {Driver} from 'models/Driver.ts';
-import {checkApiError} from 'utilities/checkApiError.ts';
-import {Attachment} from 'models/Attachment.ts';
-import {Stock} from 'models/Stock.ts';
-import {TransactionHistory} from 'models/TransactionHistory.ts';
-import {DriverHistoryResponse} from 'models/DriverHistoryResponse.ts';
-import {sendNotification} from 'utilities/sendNotification.ts';
 import './StockCheckIn.scss';
-import {createBrowserHistory} from 'history';
+import {useStockCheckInState} from './useStockCheckInState.ts';
 
 function StockCheckIn() {
   const {t} = useTranslation();
@@ -282,7 +282,7 @@ function StockCheckIn() {
           <br />
           <br />
           <div className="buttons-group">
-            <BlackButton
+            <BlueButton
               size={'small'}
               variant={'contained'}
               onClick={() => {
@@ -290,17 +290,17 @@ function StockCheckIn() {
               }}
               disabled={currentStep === 1}>
               {t('createLoadingOrder.back')}
-            </BlackButton>
+            </BlueButton>
             {currentStep === steps.length ? (
-              <BlackButton
+              <BlueButton
                 size={'small'}
                 variant={'contained'}
                 disabled={!isSignatureDone}
                 onClick={unAssignStock}>
                 {t('createLoadingOrder.finish')}
-              </BlackButton>
+              </BlueButton>
             ) : (
-              <BlackButton
+              <BlueButton
                 size={'small'}
                 variant={'contained'}
                 disabled={nextDisabled}
@@ -318,7 +318,7 @@ function StockCheckIn() {
                 ) : (
                   t('createLoadingOrder.next')
                 )}
-              </BlackButton>
+              </BlueButton>
             )}
           </div>
         </Paper>
@@ -328,3 +328,4 @@ function StockCheckIn() {
 }
 
 export default StockCheckIn;
+

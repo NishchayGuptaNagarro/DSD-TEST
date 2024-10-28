@@ -8,11 +8,17 @@ import {
   GridColumnMenuItemProps,
   GridColumnMenuProps,
   GridLoadingOverlay,
+  gridPageCountSelector,
+  gridPageSelector,
+  useGridApiContext,
+  useGridSelector,
 } from '@mui/x-data-grid';
 
 import {TableProps} from './propTypes/types.ts';
 import './Table.scss';
 
+import Pagination from '@mui/material/Pagination';
+import PaginationItem from '@mui/material/PaginationItem';
 import styles from 'styles/design-systems.module.scss';
 
 const StyledGridOverlay = styled('div')(({theme}) => ({
@@ -90,6 +96,39 @@ function CustomNoRowsOverlay() {
   );
 }
 
+function CustomPagination() {
+  const apiRef = useGridApiContext();
+  const page = useGridSelector(apiRef, gridPageSelector);
+  const pageCount = useGridSelector(apiRef, gridPageCountSelector);
+
+  return (
+    <Pagination
+      sx={{
+        '& .MuiPaginationItem-root': {
+          backgroundColor: 'white',
+          color: 'black',
+          '&:hover': {
+            backgroundColor: styles.bgColorWhiteSmoke,
+          },
+          '&.Mui-selected': {
+            backgroundColor: styles.bgGrayishBlue,
+            color: styles.whitePure,
+            '&:hover': {
+              backgroundColor: styles.bgGrayishBlue,
+            },
+          },
+        },
+      }}
+      variant="outlined"
+      shape="rounded"
+      page={page + 1}
+      count={pageCount}
+      renderItem={props => <PaginationItem {...props} disableRipple />}
+      onChange={(event, value) => apiRef.current.setPage(value - 1)}
+    />
+  );
+}
+
 function CustomFilterItem(props: GridColumnMenuItemProps) {
   return <GridColumnMenuFilterItem className={'filter-btn'} {...props} />;
 }
@@ -128,6 +167,7 @@ export default function Table({
         noRowsOverlay: CustomNoRowsOverlay,
         columnMenu: CustomColumnMenu,
         noResultsOverlay: CustomNoRowsOverlay,
+        pagination: CustomPagination,
       }}
       rows={rows}
       columns={columns}
@@ -150,15 +190,18 @@ export default function Table({
       disableColumnMenu={!showMenu}
       disableRowSelectionOnClick
       sx={{
+        border: 'none',
+        overflow: 'hidden',
         minHeight: minHeight,
         color: styles.blueSteel,
         backgroundColor: styles.whitePure,
-        borderRadius: 3,
-        '& .MuiDataGrid-root': {
-          border: 'none',
-        },
-        '& .MuiDataGrid-row:last-child': {
-          borderBottom: 'none',
+        borderRadius: 2,
+        '& .MuiDataGrid-root': {},
+        '& .last-row': {
+          borderBottomLeftRadius: 15,
+          borderBottomRightRadius: 8,
+          overflow: 'hidden',
+          border: '1px solid black',
         },
         [`& .${gridClasses.cell}`]: {
           paddingTop: 0.4,
@@ -177,10 +220,11 @@ export default function Table({
           backgroundColor: styles.bgGrayishBlue,
         },
         ['.MuiDataGrid-footerContainer']: {
-          p: 0,
+          py: 3,
           height: 30,
           minHeight: 10,
           backgroundColor: styles.bgColorBeigeLight,
+          border: `1px solid ${styles.bgColorBeigeLight}`,
         },
       }}
     />

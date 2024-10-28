@@ -77,12 +77,8 @@ $margin-y: 8px;
   .MuiToggleButton-root {
     color: black;
     &.Mui-selected {
-      background-color: #10304e;
+      background-color: $deep-navy;
       color: white;
-
-      &:hover {
-        background-color: #0e2b4b;
-      }
     }
     &.MuiToggleButtonGroup-grouped {
       margin: $margin-y $margin-x;

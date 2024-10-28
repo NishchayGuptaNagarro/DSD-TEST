@@ -1,11 +1,11 @@
 @import 'src/styles/design-systems.module';
 .driver-card {
   &:hover {
-    background-color: $bg-sky-blue;
+    background-color: $bg-white-smoke;
   }
   &.selected {
     outline: 1px solid $border-blue-bright;
-    background-color: $bg-sky-blue;
+    background-color: $bg-beige-light;
   }
   .radio-btn {
     margin-left: auto;

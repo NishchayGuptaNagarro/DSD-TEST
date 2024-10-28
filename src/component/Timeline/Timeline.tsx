@@ -49,7 +49,7 @@ function Timeline() {
                         : 'pending'
                   }
                   style={{textTransform: 'capitalize'}}>
-                  <span className="steps">{` ${i + 1}.  ${t(step)}`}</span>
+                  <p className="steps">{` ${i + 1}.  ${t(step)}`}</p>
                   <span style={{display: 'flex', justifyContent: 'center'}}>
                     {i + 1 < currentStep
                       ? 'Completed'
@@ -59,7 +59,16 @@ function Timeline() {
                   </span>
                 </div>
               </div>
-              {i + 1 < steps.length && <div className={'timeline-hr'}></div>}
+              {i + 1 < steps.length && (
+                <div
+                  className={'timeline-hr'}
+                  style={{
+                    backgroundColor:
+                      i + 1 < currentStep
+                        ? styles.bgFreshGreen
+                        : styles.bgSoftSky,
+                  }}></div>
+              )}
             </>
           ))}
         </div>
@@ -69,3 +78,4 @@ function Timeline() {
 }
 
 export default Timeline;
+

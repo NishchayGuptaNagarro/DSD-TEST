@@ -5,7 +5,7 @@
   @include flex-column;
   @include flex-center;
   position: relative;
-  top: -40px;
+  top: -20px;
 
   .container-timeline {
     display: flex;
@@ -15,19 +15,14 @@
     background: $white-pure;
     border-radius: 16px;
     align-items: center;
-  }
-
-  .timeline_indicator {
-    @include flex-row;
-    flex: 1;
+    padding: 0 4%;
   }
 
   .step-item {
     @include flex-column;
     @include flex-center;
     @extend .font-xsm;
-    padding: 10px;
-    margin: 2px;
+    padding: 10px 0;
     flex: 0.5;
   }
 
@@ -37,23 +32,11 @@
   }
 
   .timeline-hr {
-    background-color: $bg-soft-sky;
     height: 5px;
-    flex:1;
+    flex: 1;
     border-radius: 10px;
     margin-bottom: 40px;
   }
-  // .step-item:not(:first-child)::before {
-  //   content: '';
-  //   background-color: $bg-soft-sky;
-  //   position: absolute;
-  //   width: 100%;
-  //   height: 3px;
-  //   right: 50%;
-  //   top: 34.3333%;
-  //   border-radius: 5px;
-  //   transform: translateY(-50%);
-  // }
 
   .step {
     width: 24px;
@@ -83,6 +66,7 @@
     color: $gray-charcoal;
     display: flex;
     justify-content: flex-start;
+    white-space: nowrap;
   }
 
   .in-progress {
