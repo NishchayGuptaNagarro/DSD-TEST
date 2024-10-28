@@ -150,7 +150,6 @@ function StockCheckOut() {
     let driverData: Driver[];
     try {
       response = await api.get('/warehouse/drivers');
-      console.log(response);
       checkApiError(response);
       driverData = response.data.data.map(driver => {
         const parsedRes: Driver = {

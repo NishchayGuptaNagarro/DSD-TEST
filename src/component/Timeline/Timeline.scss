@@ -67,27 +67,20 @@
     display: flex;
     justify-content: flex-start;
     white-space: nowrap;
+    font-size: $font-sm;
+    font-weight: $font-normal;
   }
 
   .in-progress {
-    color: $white-pure;
-    span {
-      color: $primary-blue;
-    }
+    color: $primary-blue;
   }
 
   .completed {
-    color: $white-pure;
-    span {
-      color: $vibrant-green;
-    }
+    color: $vibrant-green;
   }
 
   .pending {
-    color: $white-translucent;
-    span {
-      color: $gray-muted;
-    }
+    color: $gray-muted;
   }
 }
 

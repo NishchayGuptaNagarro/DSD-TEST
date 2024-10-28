@@ -13,7 +13,6 @@ import {DriverCardProps} from './propTypes/types.ts';
 
 function DriverCard({driver, selectedDriverId}: DriverCardProps) {
   // const {increaseSteps} = useContext(timelineContext);
-  console.log(driver.driverId);
   return (
     <Paper
       data-testid={'driver-btn'}

@@ -40,6 +40,7 @@ function Timeline() {
                 </div>
 
                 {/* completed text will be shown as white and non completed as in faded white */}
+                <p className="steps">{` ${i + 1}.  ${t(step)}`}</p>
                 <div
                   className={
                     i + 1 < currentStep
@@ -49,13 +50,12 @@ function Timeline() {
                         : 'pending'
                   }
                   style={{textTransform: 'capitalize'}}>
-                  <p className="steps">{` ${i + 1}.  ${t(step)}`}</p>
                   <span style={{display: 'flex', justifyContent: 'center'}}>
                     {i + 1 < currentStep
-                      ? 'Completed'
+                      ? t('timeline.completed')
                       : i + 1 === currentStep
-                        ? 'In Progress'
-                        : 'Pending'}
+                        ? t('timeline.inProgress')
+                        : t('timeline.pending')}
                   </span>
                 </div>
               </div>

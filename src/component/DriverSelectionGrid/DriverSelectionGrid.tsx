@@ -59,8 +59,6 @@ function DriverSelectionGrid({
   function searchDriver(searchInput: string) {
     setSearchText(searchInput);
   }
-  console.log('entered with value');
-  console.log(selectedDriverId);
 
   // Use effect will trigger array filter
   useEffect(() => {
