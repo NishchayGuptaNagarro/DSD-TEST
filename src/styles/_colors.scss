@@ -36,7 +36,7 @@ $border-blue-dark: rgba(29, 99, 227, 1);
 // Gradients
 $gradient-black: linear-gradient(
   180deg,
-  rgb(60, 61, 67) 0%,
+  rgba(60, 61, 67, 1) 0%,
   rgba(30, 30, 30) 100%
 );
 $gradient-blue: linear-gradient(
@@ -47,7 +47,7 @@ $gradient-blue: linear-gradient(
 $gradient-grey: linear-gradient(
   90deg,
   rgba(241, 244, 246, 0.2) 0%,
-  #f1f2f6 47.52%,
+  rgba(241, 242, 246, 1) 47.52%,
   rgba(241, 242, 246, 0.2) 100%
 );
 

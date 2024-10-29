@@ -11,7 +11,6 @@ function ProductIcon({productName, productId, productImage}: ProductIconProps) {
       alignItems="center"
       justifyContent="start"
       direction="row"
-      display={'flex'}
       maxWidth={'100%'}
       spacing={1}
       flex={'1'}
@@ -34,16 +33,14 @@ function ProductIcon({productName, productId, productImage}: ProductIconProps) {
           maxWidth: '72%',
           paddingTop: '2px',
         }}>
-        <Stack>
-          <Typography
-            variant="h5"
-            noWrap
-            fontSize={styles.fontSizeSm}
-            color={styles.charcoalDark}
-            fontWeight={styles.fontWeightNormal}>
-            {productName}
-          </Typography>
-        </Stack>
+        <Typography
+          variant="h5"
+          noWrap
+          fontSize={styles.fontSizeSm}
+          color={styles.charcoalDark}
+          fontWeight={styles.fontWeightNormal}>
+          {productName}
+        </Typography>
         <Typography
           variant="subtitle1"
           color={styles.grayCharcoal}

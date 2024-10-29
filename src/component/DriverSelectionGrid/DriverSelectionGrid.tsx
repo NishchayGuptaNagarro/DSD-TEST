@@ -186,19 +186,14 @@ function DriverNameGridHeader({
             className={'text-field'}
             fullWidth
             InputProps={{
-              sx: {
-                '&::placeholder': {
-                  color: 'red',
-                  opacity: 1, // otherwise firefox shows a lighter color
-                },
-              },
               startAdornment: (
                 <InputAdornment position="start">
                   <img src={SearchIcon} className="icon" alt="Search Icon" />
                 </InputAdornment>
               ),
               className: 'search-input',
-            }}></TextField>
+            }}
+          />
         </div>
       </Box>
     </Stack>

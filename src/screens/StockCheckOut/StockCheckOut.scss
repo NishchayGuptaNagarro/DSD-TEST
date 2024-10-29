@@ -21,5 +21,21 @@
   .buttons-group {
     @extend .position-bottom;
   }
+
+  .description-header {
+    padding-left: 46px;
+  }
+
+  .description-cell {
+    padding-bottom: 6%;
+  }
+
+  .quantity-cell {
+    padding-bottom: 22.2%;
+  }
+
+  .uom-cell {
+    padding-bottom: 42.4%;
+  }
 }
 

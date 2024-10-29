@@ -6,9 +6,9 @@ import {useTranslation} from 'react-i18next';
 import {useOutletContext} from 'react-router-dom';
 import {ClipLoader} from 'react-spinners';
 // import DropDownButton from 'component/DropDownButton/DropDownButton.tsx';
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import {api} from 'api/api.ts';
+import styles from 'styles/design-systems.module.scss';
 import {sendNotification} from 'utilities/sendNotification.ts';
 import {StockCheckOutContext} from '../propTypes/types.ts';
 import './DriverSignature.scss';
@@ -78,7 +78,7 @@ function DriverSignature() {
     };
   });
   return (
-    <Box>
+    <>
       <div className="signature-label">
         {t('createLoadingOrder.signature.label')}
       </div>
@@ -100,7 +100,7 @@ function DriverSignature() {
           )}
           {showLoading && (
             <div className={'loading-spinner'}>
-              <ClipLoader color="#344767" />
+              <ClipLoader color={styles.blueSteel} />
             </div>
           )}
           {isSignatureLoaded && (
@@ -110,7 +110,7 @@ function DriverSignature() {
           )}
         </span>
       </Paper>
-    </Box>
+    </>
   );
 }
 

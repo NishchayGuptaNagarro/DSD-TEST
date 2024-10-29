@@ -68,7 +68,7 @@ i18n.use(initReactI18next).init({
 function App() {
   const theme = createTheme({
     typography: {
-      fontFamily: '"Poppins", "Montserrat", sans-serif',
+      fontFamily: '"Poppins", sans-serif',
     },
     palette: {
       background: {

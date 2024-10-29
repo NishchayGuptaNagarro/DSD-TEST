@@ -12,7 +12,6 @@ import './DriverCard.scss';
 import {DriverCardProps} from './propTypes/types.ts';
 
 function DriverCard({driver, selectedDriverId}: DriverCardProps) {
-  // const {increaseSteps} = useContext(timelineContext);
   return (
     <Paper
       data-testid={'driver-btn'}

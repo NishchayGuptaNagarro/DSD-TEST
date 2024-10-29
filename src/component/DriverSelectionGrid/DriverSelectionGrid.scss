@@ -71,8 +71,7 @@
 }
 
 $border-radius: 4px;
-$margin-x: 10px;
-$margin-y: 8px;
+
 .toggle-button-group {
   .MuiToggleButton-root {
     color: black;
@@ -81,9 +80,9 @@ $margin-y: 8px;
       color: white;
     }
     &.MuiToggleButtonGroup-grouped {
-      margin: $margin-y $margin-x;
+      margin: 8px 10px;
       border: 0;
-      border-radius: $border-radius;
+      border-radius: 4px;
 
       &.Mui-disabled {
         border: 0;

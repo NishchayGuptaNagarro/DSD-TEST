@@ -31,13 +31,13 @@ export const orderColDef: GridColDef[] = [
     headerName: 'table.description',
     renderHeader: (params: GridColumnHeaderParams) => {
       return (
-        <div style={{paddingLeft: '46px'}}>
+        <div className="description-header">
           <ColumnHeader headerName={params.colDef.headerName || ''} />
         </div>
       );
     },
     renderCell: params => {
-      return <div style={{paddingBottom: '6%'}}>{params.value}</div>;
+      return <div className="description-cell">{params.value}</div>;
     },
     flex: 0.9,
     cellClassName: 'productText font-sm',
@@ -50,7 +50,7 @@ export const orderColDef: GridColDef[] = [
       return <ColumnHeader headerName={params.colDef.headerName || ''} />;
     },
     renderCell: params => {
-      return <div style={{paddingBottom: '22.2%'}}>{params.value}</div>;
+      return <div className="quantity-cell">{params.value}</div>;
     },
     headerClassName: 'font-md',
     flex: 0.3,
@@ -66,7 +66,7 @@ export const orderColDef: GridColDef[] = [
       return <ColumnHeader headerName={params.colDef.headerName || ''} />;
     },
     renderCell: params => {
-      return <div style={{paddingBottom: '42.4%'}}>{params.value}</div>;
+      return <div className="uom-cell">{params.value}</div>;
     },
     headerClassName: 'font-md',
     flex: 0.2,

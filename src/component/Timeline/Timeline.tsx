@@ -42,21 +42,14 @@ function Timeline() {
                 {/* completed text will be shown as white and non completed as in faded white */}
                 <p className="steps">{` ${i + 1}.  ${t(step)}`}</p>
                 <div
-                  className={
+                  className={`step-indicator ${
                     i + 1 < currentStep
                       ? 'completed'
                       : i + 1 === currentStep
                         ? 'in-progress'
                         : 'pending'
-                  }
-                  style={{textTransform: 'capitalize'}}>
-                  <span
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      fontSize: styles.fontSizeXsm,
-                      fontWeight: styles.fontWeightNormal,
-                    }}>
+                  }`}>
+                  <span>
                     {i + 1 < currentStep
                       ? t('timeline.completed')
                       : i + 1 === currentStep

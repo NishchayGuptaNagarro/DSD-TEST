@@ -26,11 +26,6 @@
     flex: 0.5;
   }
 
-  .step-indicator {
-    flex: 1;
-    border-radius: 8px;
-  }
-
   .timeline-hr {
     height: 5px;
     flex: 1;
@@ -71,16 +66,23 @@
     font-weight: $font-normal;
   }
 
-  .in-progress {
-    color: $primary-blue;
-  }
+  .step-indicator {
+    display: flex;
+    justify-content: center;
+    font-size: $font-xsm;
+    font-weight: $font-normal;
 
-  .completed {
-    color: $vibrant-green;
-  }
+    &.in-progress {
+      color: $primary-blue;
+    }
 
-  .pending {
-    color: $gray-muted;
+    &.completed {
+      color: $vibrant-green;
+    }
+
+    &.pending {
+      color: $gray-muted;
+    }
   }
 }
 

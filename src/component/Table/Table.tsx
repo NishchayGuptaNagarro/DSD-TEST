@@ -105,8 +105,8 @@ function CustomPagination() {
     <Pagination
       sx={{
         '& .MuiPaginationItem-root': {
-          backgroundColor: 'white',
-          color: 'black',
+          backgroundColor: styles.whitePure,
+          color: styles.black,
           '&:hover': {
             backgroundColor: styles.bgColorWhiteSmoke,
           },
