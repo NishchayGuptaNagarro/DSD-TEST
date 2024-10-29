@@ -5,6 +5,7 @@ import styles from 'styles/design-systems.module.scss';
 const BlueButton = styled(Button)({
   minWidth: 120,
   backgroundColor: styles.deepNavy,
+  borderRadius: '3px',
   '&:hover': {
     backgroundColor: styles.deepNavy,
   },

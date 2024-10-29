@@ -39,7 +39,7 @@ export const orderColDef: GridColDef[] = [
     renderCell: params => {
       return <div style={{paddingBottom: '6%'}}>{params.value}</div>;
     },
-    flex: 0.8,
+    flex: 0.9,
     cellClassName: 'productText font-sm',
     sortable: false,
   },
@@ -50,7 +50,7 @@ export const orderColDef: GridColDef[] = [
       return <ColumnHeader headerName={params.colDef.headerName || ''} />;
     },
     renderCell: params => {
-      return <div style={{paddingBottom: '19%'}}>{params.value}</div>;
+      return <div style={{paddingBottom: '22.2%'}}>{params.value}</div>;
     },
     headerClassName: 'font-md',
     flex: 0.3,
@@ -66,10 +66,10 @@ export const orderColDef: GridColDef[] = [
       return <ColumnHeader headerName={params.colDef.headerName || ''} />;
     },
     renderCell: params => {
-      return <div style={{paddingBottom: '19%'}}>{params.value}</div>;
+      return <div style={{paddingBottom: '42.4%'}}>{params.value}</div>;
     },
     headerClassName: 'font-md',
-    flex: 0.3,
+    flex: 0.2,
     cellClassName: 'productText font-sm',
     sortable: false,
     headerAlign: 'center',

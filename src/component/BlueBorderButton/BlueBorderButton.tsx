@@ -8,6 +8,8 @@ const BlueBorderButton = styled(Button)({
   color: styles.deepNavy,
   backgroundColor: styles.bgColorBeigeLight,
   border: `1px solid ${styles.deepNavy}`,
+  boxShadow: 'none',
+  borderRadius: '3px',
   '&:hover': {backgroundColor: styles.bgColorWhiteSmoke},
 });
 

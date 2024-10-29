@@ -193,19 +193,23 @@ export default function Table({
         border: 'none',
         overflow: 'hidden',
         minHeight: minHeight,
-        color: styles.blueSteel,
-        backgroundColor: styles.whitePure,
-        borderRadius: 2,
-        '& .MuiDataGrid-root': {},
-        '& .last-row': {
-          borderBottomLeftRadius: 15,
-          borderBottomRightRadius: 8,
+        color: styles.greenMint,
+        backgroundColor: styles.bgColorBeigeLight,
+        '& .MuiDataGrid-virtualScroller': {
           overflow: 'hidden',
-          border: '1px solid black',
+        },
+        '& .MuiDataGrid-main': {
+          borderRadius: '8px',
+        },
+        '& .MuiDataGrid-row': {
+          backgroundColor: styles.whitePure,
+
+          '&:hover': {
+            backgroundColor: styles.bgColorWhiteSmoke,
+          },
         },
         [`& .${gridClasses.cell}`]: {
           paddingTop: 0.4,
-          paddingBottom: 0.4,
           paddingLeft: 3,
         },
         [`& .${gridClasses.cell}:focus, .${gridClasses.cell}:focus-within,  & .${gridClasses.columnHeader}:focus`]:

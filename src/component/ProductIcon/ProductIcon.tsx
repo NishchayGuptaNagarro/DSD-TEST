@@ -9,11 +9,16 @@ function ProductIcon({productName, productId, productImage}: ProductIconProps) {
   return (
     <Stack
       alignItems="center"
-      justifyContent="center"
+      justifyContent="start"
       direction="row"
-      spacing={2}
       display={'flex'}
-      sx={{padding: '14px 0px 16px', marginLeft: '4px'}}>
+      maxWidth={'100%'}
+      spacing={1}
+      flex={'1'}
+      sx={{
+        padding: '14px 0px 16px',
+        marginLeft: '0px',
+      }}>
       {/*Avatar component displays image in a circular icon*/}
       <Avatar
         alt={productName}
@@ -26,16 +31,10 @@ function ProductIcon({productName, productId, productImage}: ProductIconProps) {
       <Stack
         spacing={0}
         sx={{
+          maxWidth: '72%',
           paddingTop: '2px',
-          display: 'flex',
-          width: '100%',
-          maxWidth: '200px',
-          minWidth: '50px',
-          flexGrow: 1,
-          flexShrink: 1,
-          flexBasis: '50%',
         }}>
-        <Stack sx={{}}>
+        <Stack>
           <Typography
             variant="h5"
             noWrap

@@ -50,7 +50,13 @@ function Timeline() {
                         : 'pending'
                   }
                   style={{textTransform: 'capitalize'}}>
-                  <span style={{display: 'flex', justifyContent: 'center'}}>
+                  <span
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      fontSize: styles.fontSizeXsm,
+                      fontWeight: styles.fontWeightNormal,
+                    }}>
                     {i + 1 < currentStep
                       ? t('timeline.completed')
                       : i + 1 === currentStep

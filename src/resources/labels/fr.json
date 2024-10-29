@@ -23,7 +23,7 @@
   "createLoadingOrder.vanSeller": "Vendeur de camionnettes",
   "createLoadingOrder.delivery": "Livraison",
   "createLoadingOrder.hybrid": "Hybride",
-  "createLoadingOrder.searchInput": "Rechercher un conducteur",
+  "createLoadingOrder.searchInput": "Rechercher",
   "createLoadingOrder.signature.label": "Signature du conducteur",
   "createLoadingOrder.button.label": "OBTENIR LA SIGNATURE",
   "createLoadingOrder.note.label": "Ajouter des notes",
