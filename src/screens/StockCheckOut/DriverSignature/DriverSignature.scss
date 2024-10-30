@@ -12,13 +12,12 @@
   .signature-container {
     height: 320px;
     padding: 20px;
-    align-items: center;
-    justify-content: center;
+    @include flex-center;
     display: flex;
 
     .signature-btn {
-      background-color: #10304e;
-      color: white;
+      background-color: $deep-navy;
+      color: $white-pure;
       padding: 1.2% 4%;
       font-weight: $font-normal;
       font-size: $font-md;
