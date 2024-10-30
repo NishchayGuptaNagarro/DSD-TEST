@@ -1,24 +1,26 @@
-import RadioGroup from '@mui/material/RadioGroup';
 import Box from '@mui/material/Box';
+import RadioGroup from '@mui/material/RadioGroup';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-
+import Loading from 'screens/Loading/Loading.tsx';
+import DriverCard from './DriverCard/DriverCard.tsx';
+import './DriverSelectionGrid.scss';
 import {
   DriverNameGridHeaderProps,
   DriverSelectionGridProps,
 } from './propTypes/types.ts';
-import Loading from 'screens/Loading/Loading.tsx';
-import DriverCard from './DriverCard/DriverCard.tsx';
-import './DriverSelectionGrid.scss';
 
 import styles from 'styles/design-systems.module.scss';
-import vanSellerIcon from 'assets/SVG/VanSeller.svg';
-import deliveryIcon from 'assets/SVG/Delivery.svg';
 
-import hybridIcon from 'assets/SVG/Hybrid.svg';
-import {useState, MouseEvent, ChangeEvent, useRef, useEffect} from 'react';
-import {useTranslation} from 'react-i18next';
+import InputAdornment from '@mui/material/InputAdornment';
+import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import SearchIcon from 'assets/SVG/SearchIcon.svg';
 import {Driver} from 'models/Driver.ts';
+import {ChangeEvent, MouseEvent, useEffect, useRef, useState} from 'react';
+import {useTranslation} from 'react-i18next';
+
 function DriverSelectionGrid({
   selectedDriverId,
   handleDriverSelection,
@@ -39,8 +41,10 @@ function DriverSelectionGrid({
         .filter(driver => driver.driverType === driverType)
         .filter(
           driver =>
-            driver.driverName.toLowerCase().includes(searchText) ||
-            driver.driverId.toLowerCase().includes(searchText),
+            driver.driverName
+              .toLowerCase()
+              .includes(searchText.toLowerCase()) ||
+            driver.driverId.toLowerCase().includes(searchText.toLowerCase()),
         ),
     );
   }
@@ -79,7 +83,7 @@ function DriverSelectionGrid({
           sx={{
             display: 'grid',
             gap: 1,
-            gridTemplateColumns: 'repeat(4,1fr)',
+            gridTemplateColumns: 'repeat(3,1fr)',
           }}>
           {/*  Iterating through driver data and rendering it as driver card*/}
           {filteredArray.map(driver => {
@@ -116,7 +120,7 @@ function DriverNameGridHeader({
     if (searchTimeout.current) {
       clearTimeout(searchTimeout.current);
     }
-    setSearchInput(event.target.value.toLowerCase());
+    setSearchInput(event.target.value);
 
     // Search timeout is set to 300ms can be changed to trigger search faster
     searchTimeout.current = setTimeout(() => {
@@ -125,46 +129,74 @@ function DriverNameGridHeader({
   }
 
   return (
-    <Box className={'driver-grid-header font-sm'}>
-      <span className={'select-text'}>
-        {t('createLoadingOrder.driverTypeText')}:
+    <Stack direction="column" spacing={1} sx={{marginBottom: 2}}>
+      <span className={'select-text font-md'}>
+        {t('createLoadingOrder.driverTypeText')}
       </span>
-      <ToggleButtonGroup
-        data-testid={'toggle-parent'}
-        color="primary"
-        value={driverType}
-        exclusive
-        onChange={handleDriverTypeChange}
-        size={'small'}>
-        <ToggleButton
-          className={'font-xsm'}
-          sx={{fontWeight: styles.fontWeightBolder}}
-          value="VAN-SELLER">
-          <img src={vanSellerIcon} alt={'icon'} />
-          {t('createLoadingOrder.vanSeller')}
-        </ToggleButton>
-        <ToggleButton
-          className={'font-xsm'}
-          sx={{fontWeight: styles.fontWeightBolder}}
-          value="DELIVERY">
-          <img src={deliveryIcon} alt={'icon'} />
-          {t('createLoadingOrder.delivery')}
-        </ToggleButton>
-        <ToggleButton
-          className={'font-xsm'}
-          sx={{fontWeight: styles.fontWeightBolder}}
-          value="HYBRID">
-          <img src={hybridIcon} alt={'icon'} />
-          {t('createLoadingOrder.hybrid')}
-        </ToggleButton>
-      </ToggleButtonGroup>
-      <input
-        data-testid={'search-box'}
-        value={searchInput}
-        onChange={handleSearchInput}
-        placeholder={t('createLoadingOrder.searchInput')}
-        className={'search-box'}
-      />
-    </Box>
+      <Box className={'driver-grid-header font-sm'}>
+        <Paper elevation={0}>
+          <ToggleButtonGroup
+            data-testid={'toggle-parent'}
+            value={driverType}
+            exclusive
+            className="toggle-button-group"
+            onChange={handleDriverTypeChange}
+            size={'small'}>
+            <ToggleButton
+              className={'font-sm'}
+              sx={{
+                fontWeight: styles.fontWeightNormal,
+                textTransform: 'none',
+                paddingX: 2,
+                paddingY: 0.5,
+              }}
+              value="VAN-SELLER">
+              {t('createLoadingOrder.vanSeller')}
+            </ToggleButton>
+            <ToggleButton
+              className={'font-sm'}
+              sx={{
+                fontWeight: styles.fontWeightNormal,
+                textTransform: 'none',
+                paddingX: 2,
+                paddingY: 0.5,
+              }}
+              value="DELIVERY">
+              {t('createLoadingOrder.delivery')}
+            </ToggleButton>
+            <ToggleButton
+              className={'font-sm'}
+              sx={{
+                fontWeight: styles.fontWeightNormal,
+                textTransform: 'none',
+                paddingX: 2,
+                paddingY: 0.5,
+              }}
+              value="HYBRID">
+              {t('createLoadingOrder.hybrid')}
+            </ToggleButton>
+          </ToggleButtonGroup>
+        </Paper>
+        <div className={'search-box'}>
+          <TextField
+            data-testid={'search-box'}
+            value={searchInput}
+            onChange={handleSearchInput}
+            placeholder={t('createLoadingOrder.searchInput')}
+            className={'text-field'}
+            fullWidth
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <img src={SearchIcon} className="icon" alt="Search Icon" />
+                </InputAdornment>
+              ),
+              className: 'search-input',
+            }}
+          />
+        </div>
+      </Box>
+    </Stack>
   );
 }
+

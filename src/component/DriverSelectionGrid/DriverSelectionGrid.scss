@@ -1,27 +1,99 @@
-@import "src/styles/design-systems.module";
+@import 'src/styles/design-systems.module';
 //All driver name grid header related css must go inside this
-.driver-grid-header{
+.driver-grid-header {
   margin-bottom: 10px;
   display: flex;
   align-items: center;
-  .select-text{
-    color:$grey-soft;
-    font-weight: $font-normal;
-    margin-right: 8px;
-  }
-  img{
-    height: 20px;
-    width: 20px;
-    margin-right: 5px;
-  }
-  .search-box{
-    border: 1px solid $border-grey-light;
-    height: 35px;
-    color: $border-grey-dark;
-    padding: 5px;
-    border-radius: 8px;
-    outline-color: $border-grey-dark;
+
+  .search-box {
     margin-left: auto;
-    flex-basis: 200px;
+    display: flex;
+    max-width: 370px;
+    width: 100%;
+    border-radius: 22px;
+    padding: 0%;
+
+    .search-input {
+      height: 44px;
+      border-radius: 22px;
+      color: $gray-muted;
+      font-size: $font-sm;
+      font-weight: $font-light;
+      background-color: $white-pure;
+      opacity: 1;
+    }
+
+    .text-field {
+      max-width: 370px;
+      width: 100%;
+      padding: 0%;
+    }
+    .text-field .MuiInputBase-input::placeholder {
+      color: $gray-muted;
+      opacity: 1;
+    }
+
+    .text-field .MuiOutlinedInput-root {
+      border: none;
+    }
+
+    .text-field .MuiOutlinedInput-root fieldset {
+      border: 1px solid transparent;
+    }
+
+    .text-field .MuiOutlinedInput-root:hover fieldset {
+      border: 1px solid $black;
+    }
+
+    .text-field .MuiOutlinedInput-root.Mui-focused fieldset {
+      border: 1px solid $border-blue-bright;
+    }
+
+    .text-field
+      .MuiOutlinedInput-root
+      .MuiInputBase-input:not(:placeholder-shown)
+      ~ fieldset {
+      border: 1px solid $border-blue-bright;
+    }
+
+    .icon {
+      padding-top: 1px;
+      width: 12px;
+      height: 12px;
+      color: $gray-muted;
+    }
   }
 }
+.select-text {
+  color: $gray-charcoal;
+  font-weight: $font-normal;
+  margin-right: 8px;
+}
+
+$border-radius: 4px;
+
+.toggle-button-group {
+  .MuiToggleButton-root {
+    color: black;
+    &.Mui-selected {
+      background-color: $deep-navy;
+      color: $white-pure;
+    }
+    &.MuiToggleButtonGroup-grouped {
+      margin: 8px 10px;
+      border: 0;
+      border-radius: 4px;
+
+      &.Mui-disabled {
+        border: 0;
+      }
+    }
+
+    .MuiToggleButtonGroup-middleButton,
+    .MuiToggleButtonGroup-lastButton {
+      margin-left: -1px;
+      border-left: 1px solid transparent;
+    }
+  }
+}
+

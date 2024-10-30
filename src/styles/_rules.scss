@@ -1,24 +1,24 @@
-.language-selection-dropdown{
+.language-selection-dropdown {
   position: absolute;
-  right:10px ;
-  top:2px;
+  right: 10px;
+  top: 2px;
 }
 
 //IMPORTANT! Only these classes should be used for defining font size of each element so we can use media queries in future to add responsiveness
-.font-xl{
+.font-xl {
   font-size: $font-xl;
 }
-.font-lg{
+.font-lg {
   font-size: $font-lg; //18px
 }
-.font-md{
+.font-md {
   font-size: $font-md; //16px
 }
-.font-sm{
-  font-size: $font-sm ; //14px
+.font-sm {
+  font-size: $font-sm; //14px
 }
-.font-xsm{
-  font-size: $font-xsm ; //12px
+.font-xsm {
+  font-size: $font-xsm; //12px
 }
 
 //Can be used to center anything
@@ -31,25 +31,25 @@
   height: 100%;
   object-fit: cover;
 }
-.transparent-textbox{
+.transparent-textbox {
   background-color: $bg-black-translucent;
   color: $white-pure;
   font-weight: 300;
   position: absolute;
   z-index: 1;
   bottom: 5%;
-  left:10px;
+  left: 10px;
   right: 10px;
   padding: 10px 15px 20px 15px;
   border-radius: 4px;
 }
 
-%common-form-rules{
-  .form-label{
+%common-form-rules {
+  .form-label {
     font-weight: $font-bolder;
     color: $blue-steel;
-    &.form-label-error{
-      color:$red-error;
+    &.form-label-error {
+      color: $red-error;
     }
   }
   .form-input {
@@ -69,7 +69,7 @@
       outline-color: $blue-steel;
     }
   }
-  .form-input-error{
+  .form-input-error {
     outline: 1px solid $red-error !important;
     //  Reason for adding 'important' to this property was that outline was being override on focus visible
     //  but it should stay red until error is resolved
@@ -90,34 +90,35 @@
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .hide-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
-.position-bottom{
+.position-bottom {
   display: flex;
   position: absolute;
   width: 98%;
   bottom: 5px;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
-.dialog-position-end{
-  & .MuiDialog-container{
+.dialog-position-end {
+  & .MuiDialog-container {
     justify-content: flex-end;
   }
 }
 
-.attachment{
+.attachment {
   width: 100%;
   object-fit: contain;
 }
-.attachment-download{
-  &:hover{
-    color: $indigo-deep
+.attachment-download {
+  &:hover {
+    color: $indigo-deep;
   }
 }
 
-.display-none{
+.display-none {
   display: none;
 }
+

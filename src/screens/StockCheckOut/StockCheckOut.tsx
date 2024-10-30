@@ -1,39 +1,39 @@
-import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
 
-import {useLocation} from 'react-router-dom';
-import {ChangeEvent, useContext, useEffect, useRef} from 'react';
-import {Outlet, useNavigate} from 'react-router';
-import {useTranslation} from 'react-i18next';
 import {AxiosResponse} from 'axios';
+import {ChangeEvent, useContext, useEffect, useRef} from 'react';
+import {useTranslation} from 'react-i18next';
+import {Outlet, useNavigate} from 'react-router';
+import {useLocation} from 'react-router-dom';
 
-import PageHeading from 'component/PageHeading/PageHeading.tsx';
-import Timeline from 'component/Timeline/Timeline.tsx';
+import BlueButton from 'component/BlueButton/BlueButton.tsx';
 import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
-import BlackButton from 'component/BlackButton/BlackButton.tsx';
+import PageHeading from 'component/PageHeading/PageHeading.tsx';
 import ScreenLayout from 'component/ScreenLayout/ScreenLayout.tsx';
+import Timeline from 'component/Timeline/Timeline.tsx';
 
-import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
-import timelineContext from 'context/timeline/timelineContext.ts';
 import {api} from 'api/api.ts';
-import {checkApiError} from 'utilities/checkApiError.ts';
+import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
+import BlueBorderButton from 'component/BlueBorderButton/BlueBorderButton.tsx';
+import timelineContext from 'context/timeline/timelineContext.ts';
+import {createBrowserHistory} from 'history';
 import {Driver} from 'models/Driver.ts';
-import {DriverApiResponse, StockCheckOutContext} from './propTypes/types.ts';
-import {
-  deliverySteps,
-  hybridSteps,
-  vanSellerSteps,
-} from 'utilities/timelineSteps.ts';
+import {checkApiError} from 'utilities/checkApiError.ts';
+import {sendNotification} from 'utilities/sendNotification.ts';
 import {
   deliveryRoutes,
   hybridRoutes,
   vanSellerRoutes,
 } from 'utilities/timelineRoutes.ts';
-import {useStockCheckOutState} from './useStockCheckOutState.ts';
-import {sendNotification} from 'utilities/sendNotification.ts';
+import {
+  deliverySteps,
+  hybridSteps,
+  vanSellerSteps,
+} from 'utilities/timelineSteps.ts';
+import {DriverApiResponse, StockCheckOutContext} from './propTypes/types.ts';
 import './StockCheckOut.scss';
-import {createBrowserHistory} from 'history';
+import {useStockCheckOutState} from './useStockCheckOutState.ts';
 
 function StockCheckOut() {
   const {t} = useTranslation();
@@ -150,7 +150,6 @@ function StockCheckOut() {
     let driverData: Driver[];
     try {
       response = await api.get('/warehouse/drivers');
-      console.log(response);
       checkApiError(response);
       driverData = response.data.data.map(driver => {
         const parsedRes: Driver = {
@@ -223,7 +222,7 @@ function StockCheckOut() {
       unlisten();
     };
   }, []);
-
+  //navigates to different routes from here
   useEffect(() => {
     if (firstRender.current) {
       navigate('driver');
@@ -254,9 +253,13 @@ function StockCheckOut() {
           textAlign={'center'}>
           <PageHeading heading={heading} subHeading={subHeading} />
         </Box>
-        <Paper
-          elevation={1}
-          sx={{p: 1.5, minHeight: '70vh', position: 'relative'}}>
+        <Stack
+          spacing={2}
+          sx={{
+            p: 1.5,
+            minHeight: '70vh',
+            position: 'relative',
+          }}>
           <Timeline />
           {/*This outlet will display child components , all props are provided in context*/}
           <Outlet
@@ -268,15 +271,16 @@ function StockCheckOut() {
           <br />
           <br />
           <div className="buttons-group">
-            <BlackButton
+            <BlueBorderButton
               size={'small'}
               variant={'contained'}
               onClick={decreaseSteps}
               disabled={currentStep === 1}>
               {t('createLoadingOrder.back')}
-            </BlackButton>
+            </BlueBorderButton>
+
             {currentStep === steps.length ? (
-              <BlackButton
+              <BlueButton
                 size={'small'}
                 variant={'contained'}
                 disabled={!isSignatureLoaded}
@@ -284,21 +288,22 @@ function StockCheckOut() {
                   assignInitialStock();
                 }}>
                 {t('createLoadingOrder.finish')}
-              </BlackButton>
+              </BlueButton>
             ) : (
-              <BlackButton
+              <BlueButton
                 size={'small'}
                 variant={'contained'}
                 disabled={nextDisabled}
                 onClick={increaseSteps}>
                 {t('createLoadingOrder.next')}
-              </BlackButton>
+              </BlueButton>
             )}
           </div>
-        </Paper>
+        </Stack>
       </Stack>
     </ScreenLayout>
   );
 }
 
 export default StockCheckOut;
+

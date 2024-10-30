@@ -1,19 +1,19 @@
 import {createTheme, CssBaseline, ThemeProvider} from '@mui/material';
 
-import {lazy, Suspense} from 'react';
 import i18n from 'i18next';
+import {lazy, Suspense} from 'react';
 import {initReactI18next} from 'react-i18next';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
-import Login from 'screens/Login/Login.tsx';
-import Loading from 'screens/Loading/Loading.tsx';
 import ProtectedRoute from 'component/ProtectedRoute/ProtectedRoute.tsx';
 import TimelineState from 'context/timeline/TimelineState.tsx';
+import Loading from 'screens/Loading/Loading.tsx';
+import Login from 'screens/Login/Login.tsx';
 
-import frJSON from 'resources/labels/fr.json';
-import enJSON from 'resources/labels/en.json';
-import styles from 'styles/design-systems.module.scss';
 import 'App.scss';
+import enJSON from 'resources/labels/en.json';
+import frJSON from 'resources/labels/fr.json';
+import styles from 'styles/design-systems.module.scss';
 
 const Home = lazy(() => import('screens/Home/Home.tsx'));
 const History = lazy(() => import('screens/AllHistory/AllHistory.tsx'));
@@ -68,7 +68,7 @@ i18n.use(initReactI18next).init({
 function App() {
   const theme = createTheme({
     typography: {
-      fontFamily: '"Montserrat", sans-serif',
+      fontFamily: '"Poppins", sans-serif',
     },
     palette: {
       background: {
@@ -217,3 +217,4 @@ function App() {
 }
 
 export default App;
+

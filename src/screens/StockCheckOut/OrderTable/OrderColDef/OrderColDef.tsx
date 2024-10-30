@@ -1,14 +1,15 @@
 // Table Column Definition
 import {GridColDef, GridColumnHeaderParams} from '@mui/x-data-grid';
-import ProductIcon from 'component/ProductIcon/ProductIcon.tsx';
 import ColumnHeader from 'component/ColumnHeader/ColumnHeader.tsx';
+import ProductIcon from 'component/ProductIcon/ProductIcon.tsx';
 
 export const orderColDef: GridColDef[] = [
   {
     field: 'name',
     headerName: 'table.product',
-    flex: 0.7,
+    flex: 0.6,
     headerClassName: 'font-md',
+    headerAlign: 'center',
     renderHeader: (params: GridColumnHeaderParams) => {
       return <ColumnHeader headerName={params.colDef.headerName || ''} />;
     },
@@ -29,10 +30,17 @@ export const orderColDef: GridColDef[] = [
     headerClassName: 'font-md',
     headerName: 'table.description',
     renderHeader: (params: GridColumnHeaderParams) => {
-      return <ColumnHeader headerName={params.colDef.headerName || ''} />;
+      return (
+        <div className="description-header">
+          <ColumnHeader headerName={params.colDef.headerName || ''} />
+        </div>
+      );
     },
-    flex: 0.8,
-    cellClassName: 'productText font-xsm',
+    renderCell: params => {
+      return <div className="description-cell">{params.value}</div>;
+    },
+    flex: 0.9,
+    cellClassName: 'productText font-sm',
     sortable: false,
   },
   {
@@ -41,8 +49,11 @@ export const orderColDef: GridColDef[] = [
     renderHeader: (params: GridColumnHeaderParams) => {
       return <ColumnHeader headerName={params.colDef.headerName || ''} />;
     },
+    renderCell: params => {
+      return <div className="quantity-cell">{params.value}</div>;
+    },
     headerClassName: 'font-md',
-    flex: 0.4,
+    flex: 0.3,
     cellClassName: 'stock font-sm',
     sortable: false,
     headerAlign: 'center',
@@ -54,11 +65,15 @@ export const orderColDef: GridColDef[] = [
     renderHeader: (params: GridColumnHeaderParams) => {
       return <ColumnHeader headerName={params.colDef.headerName || ''} />;
     },
+    renderCell: params => {
+      return <div className="uom-cell">{params.value}</div>;
+    },
     headerClassName: 'font-md',
-    flex: 0.3,
+    flex: 0.2,
     cellClassName: 'productText font-sm',
     sortable: false,
     headerAlign: 'center',
     align: 'center',
   },
 ];
+

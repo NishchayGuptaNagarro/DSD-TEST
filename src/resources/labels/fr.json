@@ -23,7 +23,7 @@
   "createLoadingOrder.vanSeller": "Vendeur de camionnettes",
   "createLoadingOrder.delivery": "Livraison",
   "createLoadingOrder.hybrid": "Hybride",
-  "createLoadingOrder.searchInput": "Rechercher un conducteur",
+  "createLoadingOrder.searchInput": "Rechercher",
   "createLoadingOrder.signature.label": "Signature du conducteur",
   "createLoadingOrder.button.label": "OBTENIR LA SIGNATURE",
   "createLoadingOrder.note.label": "Ajouter des notes",
@@ -69,6 +69,9 @@
   "timeline.option8": "Stock",
   "timeline.option9": "Pièces jointes",
   "timeline.option10": "Envoyer la signature",
+  "timeline.inProgress": "En cours",
+  "timeline.completed": "Terminé",
+  "timeline.pending": "En attente",
   "table.items": "Articles",
   "table.amount": "Montant brut",
   "table.payment": "Méthodes de paiement : Montant",
@@ -93,3 +96,4 @@
   "alert.btn2": "Ignorer",
   "stockcheckout.heading": "Sortie de stock"
 }
+

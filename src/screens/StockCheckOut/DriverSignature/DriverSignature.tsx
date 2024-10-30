@@ -1,17 +1,18 @@
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
 
-import {useEffect, useRef, useState} from 'react';
 import {AxiosResponse} from 'axios';
+import {useEffect, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {useOutletContext} from 'react-router-dom';
 import {ClipLoader} from 'react-spinners';
 // import DropDownButton from 'component/DropDownButton/DropDownButton.tsx';
+import Paper from '@mui/material/Paper';
 import {api} from 'api/api.ts';
-import {SignatureApiResponse} from './propTypes/types.ts';
-import {StockCheckOutContext} from '../propTypes/types.ts';
+import styles from 'styles/design-systems.module.scss';
 import {sendNotification} from 'utilities/sendNotification.ts';
+import {StockCheckOutContext} from '../propTypes/types.ts';
 import './DriverSignature.scss';
+import {SignatureApiResponse} from './propTypes/types.ts';
 
 function DriverSignature() {
   const {isSignatureLoaded, setIsSignatureLoaded} =
@@ -78,12 +79,10 @@ function DriverSignature() {
   });
   return (
     <>
-      <form
-        data-testid={'driver-signature-form'}
-        className={'driver-signature-form'}>
-        <label className={'form-label label-1'}>
-          {t('createLoadingOrder.signature.label')}:
-        </label>
+      <div className="signature-label">
+        {t('createLoadingOrder.signature.label')}
+      </div>
+      <Paper elevation={1} className="wrapper">
         <span className={'signature-container'}>
           {/*This center class is defined in app.scss we can use it to center anything*/}
 
@@ -91,7 +90,7 @@ function DriverSignature() {
             <Button
               variant="contained"
               data-testid={'get-signature-btn'}
-              className={'center'}
+              className={'signature-btn'}
               onClick={() => {
                 sendNotification('Please sign to confirm checkout');
                 fetchSignature();
@@ -100,34 +99,20 @@ function DriverSignature() {
             </Button>
           )}
           {showLoading && (
-            <div className={'loading-spinner center'}>
-              <ClipLoader color="#344767" />
+            <div className={'loading-spinner'}>
+              <ClipLoader color={styles.blueSteel} />
             </div>
           )}
-          {isSignatureLoaded && <img src={signatureURL} alt={'img'} />}
+          {isSignatureLoaded && (
+            <Paper elevation={2} className="img-container">
+              <img src={signatureURL} alt={'img'} />
+            </Paper>
+          )}
         </span>
-
-        <label className={'form-label label-2 display-none'}>
-          {t('createLoadingOrder.note.label')}:
-        </label>
-        <textarea
-          placeholder={t('createLoadingOrder.note.placeholder')}
-          className={'text-box font-sm display-none'}></textarea>
-        <Box
-          className={'form-action'}
-          display={'flex'}
-          flexDirection={'column'}
-          alignItems={'center'}
-          gap={4}>
-          <label className={'form-label display-none'}>
-            {t('createLoadingOrder.action.label')}:
-          </label>
-          {/*This button will display list of all actions*/}
-          {/*<DropDownButton options={actions} handleClick={handleAction} />*/}
-        </Box>
-      </form>
+      </Paper>
     </>
   );
 }
 
 export default DriverSignature;
+

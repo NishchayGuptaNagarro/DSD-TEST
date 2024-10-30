@@ -1,20 +1,42 @@
-@import "src/styles/design-systems.module";
+@import 'src/styles/design-systems.module';
 //All css related to this screen should go inside this
-.select-driver-screen{
+.select-driver-screen {
+  padding-right: 4%;
+  padding-left: 4%;
+
   .productText {
     font-weight: $font-normal;
+    color: $charcoal-dark;
   }
   .quantity {
     font-weight: $font-bold;
     color: $green-mint;
   }
-  .stock{
-    font-weight: $font-bold;
+  .stock {
+    font-weight: $font-normal;
+    color: $charcoal-dark;
   }
-  .language-select{
-    @extend .language-selection-dropdown
+  .language-select {
+    @extend .language-selection-dropdown;
   }
   .buttons-group {
-   @extend .position-bottom
+    @extend .position-bottom;
+  }
+
+  .description-header {
+    padding-left: 46px;
+  }
+
+  .description-cell {
+    padding-bottom: 6%;
+  }
+
+  .quantity-cell {
+    padding-bottom: 22.2%;
+  }
+
+  .uom-cell {
+    padding-bottom: 42.4%;
   }
 }
+

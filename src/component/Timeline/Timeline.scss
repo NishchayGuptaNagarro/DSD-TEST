@@ -1,38 +1,36 @@
-@import "src/styles/design-systems.module";
+@import 'src/styles/design-systems.module';
 
 .container-timeline-outer {
   background-color: transparent; /* Replace var(--bg-color) with the desired background color */
   @include flex-column;
   @include flex-center;
   position: relative;
-  top:-40px;
+  top: -20px;
 
   .container-timeline {
     display: flex;
-    justify-content: center;
-    height: 72px;
+    @include flex-row;
+    height: 124px;
     width: 100%;
-    background: $gradient-blue;
-    border-radius: 16px;
+    background: $white-pure;
+    border-radius: 8px;
+    align-items: center;
+    padding: 0 4%;
   }
 
   .step-item {
-    position: relative;
     @include flex-column;
     @include flex-center;
-    width: 400px;
-    @extend .font-xsm
+    @extend .font-xsm;
+    padding: 10px 0;
+    flex: 0.5;
   }
 
-  .step-item:not(:first-child)::before {
-    content: '';
-    background-color: $white-pure;
-    position: absolute;
-    width: 100%;
-    height: 3px;
-    right: 50%;
-    top: 34.3333%;
-    transform: translateY(-50%);
+  .timeline-hr {
+    height: 5px;
+    flex: 1;
+    border-radius: 10px;
+    margin-bottom: 40px;
   }
 
   .step {
@@ -49,18 +47,42 @@
   }
 
   .steps-done {
-    height: 10px;
-    width: 10px;
-    background-color: $border-blue-dark;
+    height: 24px;
+    width: 24px;
     border-radius: 10px;
   }
 
-  .active {
-    color: $white-pure;
+  img {
+    height: 24px;
+    width: 24px;
   }
 
-  .disable {
-    color: $white-translucent;
+  .steps {
+    color: $gray-charcoal;
+    display: flex;
+    justify-content: flex-start;
+    white-space: nowrap;
+    font-size: $font-sm;
+    font-weight: $font-normal;
+  }
+
+  .step-indicator {
+    display: flex;
+    justify-content: center;
+    font-size: $font-xsm;
+    font-weight: $font-normal;
+
+    &.in-progress {
+      color: $primary-blue;
+    }
+
+    &.completed {
+      color: $vibrant-green;
+    }
+
+    &.pending {
+      color: $gray-muted;
+    }
   }
 }
 
