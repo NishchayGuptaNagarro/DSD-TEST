@@ -1,4 +1,5 @@
 @import 'src/styles/design-systems.module';
+$block-margin: 16px;
 
 .all-history-screen {
   .driver-id {
@@ -53,18 +54,19 @@
   margin-left: 60px;
 }
 .stock-cell {
-  padding-block: 18px;
+  padding-block: $block-margin;
 }
 
 .stock-item-cell {
   padding-left: 36px;
-  padding-block: 16px;
+  padding-block: $block-margin;
 }
 
 .attachment-header {
   margin-left: 30px;
 }
 .attachment-cell {
+  padding-block: $block-margin;
   padding-left: 26%;
 }
 
