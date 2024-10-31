@@ -14,4 +14,6 @@ export interface TableProps {
   showMenu: boolean;
   noOfRows: number;
   minHeight?: number;
+  withBorder?: boolean;
 }
+

@@ -11,8 +11,9 @@ export interface TransactionHistory extends Row {
 export interface PaymentMethods {
   cash?: number;
   cheque?: number;
-  card?: number;
+  credit?: number;
 }
 export interface PaymentGridProps {
   paymentMethods: PaymentMethods;
 }
+

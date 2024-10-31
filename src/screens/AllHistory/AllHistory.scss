@@ -1,8 +1,70 @@
-@import "src/styles/design-systems.module";
+@import 'src/styles/design-systems.module';
 
-.all-history-screen{
+.all-history-screen {
+  .driver-id {
+    font-size: $font-md;
+    font-weight: $font-normal;
+  }
 
-  .history-language-select{
+  .action-cell {
+    padding-bottom: 16px;
+    padding-top: 14px;
+  }
+
+  .action-button {
+    box-shadow: none;
+    padding-block: 2px;
+    padding-inline: 20px;
+    text-transform: none;
+    font-size: $font-sm;
+    font-weight: $font-normal;
+    border-radius: 33px;
+    &:hover {
+      background-color: $bg-white-smoke;
+    }
+  }
+
+  .history-language-select {
     @extend .language-selection-dropdown;
   }
 }
+
+.table-dialog {
+  & .MuiDialogContent-root {
+    padding-bottom: 6px;
+    padding-top: 4px;
+  }
+  & .MuiPaper-root.MuiDialog-paper {
+    border-radius: 12px;
+    padding-bottom: 0px;
+  }
+}
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+
+  .cross-container {
+    width: min-content;
+  }
+}
+
+.stock-header {
+  margin-left: 60px;
+}
+.stock-cell {
+  padding-block: 18px;
+}
+
+.stock-item-cell {
+  padding-left: 36px;
+  padding-block: 16px;
+}
+
+.attachment-header {
+  margin-left: 30px;
+}
+.attachment-cell {
+  padding-left: 26%;
+}
+

@@ -167,7 +167,7 @@ function StockCheckIn() {
         orderId: Number(transaction.order_number),
         paymentMethods: {
           cash: transaction.payment_method.cash,
-          card: transaction.payment_method.credit,
+          credit: transaction.payment_method.credit,
           cheque: transaction.payment_method.cheque,
         },
       }));

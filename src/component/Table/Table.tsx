@@ -91,7 +91,7 @@ function CustomNoRowsOverlay() {
           </g>
         </g>
       </svg>
-      <Box sx={{mt: 1}}>No Data</Box>
+      <Box sx={{mt: 1}}>No data available</Box>
     </StyledGridOverlay>
   );
 }
@@ -105,8 +105,11 @@ function CustomPagination() {
     <Pagination
       sx={{
         '& .MuiPaginationItem-root': {
+          minWidth: '22px',
+          height: '26px',
           backgroundColor: styles.whitePure,
           color: styles.black,
+          fontSize: styles.fontSizeXsm,
           '&:hover': {
             backgroundColor: styles.bgColorWhiteSmoke,
           },
@@ -155,6 +158,7 @@ export default function Table({
   showMenu,
   noOfRows,
   minHeight = 270,
+  withBorder = false,
 }: TableProps) {
   return (
     <DataGrid
@@ -193,20 +197,27 @@ export default function Table({
         border: 'none',
         overflow: 'hidden',
         minHeight: minHeight,
-        color: styles.greenMint,
-        backgroundColor: styles.bgColorBeigeLight,
+        color: styles.grayCharcoal,
+        backgroundColor: 'transparent',
+        '& .MuiDataGrid-sortIcon': {
+          color: styles.whitePure,
+        },
         '& .MuiDataGrid-virtualScroller': {
           overflow: 'hidden',
         },
         '& .MuiDataGrid-main': {
           borderRadius: '8px',
+          backgroundColor: styles.whitePure,
+          border: withBorder ? `1px solid ${styles.grayMuted}` : 'none',
         },
         '& .MuiDataGrid-row': {
           backgroundColor: styles.whitePure,
-
           '&:hover': {
             backgroundColor: styles.bgColorWhiteSmoke,
           },
+        },
+        '& .MuiDataGrid-row:last-child': {
+          borderBottom: `1px solid ${styles.borderGrayMuted}`, // or your desired border color
         },
         [`& .${gridClasses.cell}`]: {
           paddingTop: 0.4,
@@ -218,17 +229,19 @@ export default function Table({
           },
         [`& .${gridClasses.columnHeader}`]: {
           paddingLeft: 3,
-          fontWeight: styles.fontWeightNormal,
-          fontSize: styles.fontSizeMd,
           color: styles.whitePure,
           backgroundColor: styles.bgGrayishBlue,
+        },
+        [`& .${gridClasses.columnHeaderTitle}`]: {
+          fontWeight: styles.fontWeightNormal,
+          color: styles.whitePure,
         },
         ['.MuiDataGrid-footerContainer']: {
           py: 3,
           height: 30,
           minHeight: 10,
-          backgroundColor: styles.bgColorBeigeLight,
-          border: `1px solid ${styles.bgColorBeigeLight}`,
+          backgroundColor: 'transparent',
+          borderTop: 'none',
         },
       }}
     />

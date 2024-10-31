@@ -1,27 +1,27 @@
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import {useEffect, useState} from 'react';
 import {AxiosResponse} from 'axios';
 import {format} from 'date-fns';
+import {useEffect, useState} from 'react';
 
 import Table from 'component/Table/Table.tsx';
-import {transactionColDef} from 'utilities/TransactionColDef/TransactionColDef.tsx';
-import {stockColDef} from 'utilities/StockColDef/StockColDef.tsx';
 import {attachmentColDef} from 'utilities/AttachmentColDef/AttachmentColDef.tsx';
+import {stockColDef} from 'utilities/StockColDef/StockColDef.tsx';
+import {transactionColDef} from 'utilities/TransactionColDef/TransactionColDef.tsx';
 import {allHistoryColDef} from './AllHistoryColDef/AllHistoryColDef.tsx';
 
-import {AllDriverHistory} from './propTypes/types.ts';
-import {DriverHistoryResponse} from 'models/DriverHistoryResponse.ts';
-import {checkApiError} from 'utilities/checkApiError.ts';
 import {api} from 'api/api.ts';
-import {TransactionHistory} from 'models/TransactionHistory.ts';
-import {Stock} from 'models/Stock.ts';
-import {Attachment} from 'models/Attachment.ts';
-import {getTransactionRowId} from 'utilities/getTransactionRowId.ts';
-import {getStockRowId} from 'utilities/getStockRowId.ts';
 import {Row} from 'component/Table/propTypes/types.ts';
+import TableDialogContent from 'component/TableDialogContent/TableDialogContent.tsx';
+import {Attachment} from 'models/Attachment.ts';
+import {DriverHistoryResponse} from 'models/DriverHistoryResponse.ts';
+import {Stock} from 'models/Stock.ts';
+import {TransactionHistory} from 'models/TransactionHistory.ts';
+import {checkApiError} from 'utilities/checkApiError.ts';
 import {getAttachmentRowId} from 'utilities/getAttachmentRowId.ts';
-
+import {getStockRowId} from 'utilities/getStockRowId.ts';
+import {getTransactionRowId} from 'utilities/getTransactionRowId.ts';
+import {AllDriverHistory} from './propTypes/types.ts';
 function AllHistoryTable() {
   const [driverHistoryArr, setDriverHistoryArr] = useState<AllDriverHistory[]>(
     [],
@@ -37,18 +37,24 @@ function AllHistoryTable() {
   const [showAttachments, setShowAttachments] = useState(false);
   const [showImage, setShowImage] = useState(false);
   const [imageSrc, setImageSrc] = useState('');
-
   const [tableLoading, setTableLoading] = useState(true);
+  const [selectedDriverId, setSelectedDriverId] = useState('');
 
-  function handleOrdersClick(transactions: TransactionHistory[]) {
+  function handleOrdersClick(
+    transactions: TransactionHistory[],
+    driverId: string,
+  ) {
+    setSelectedDriverId(driverId);
     setTransactionArr(transactions);
     setShowTransaction(true);
   }
-  function handleStocksClick(stocks: Stock[]) {
+  function handleStocksClick(stocks: Stock[], driverId: string) {
+    setSelectedDriverId(driverId);
     setStockArr(stocks);
     setShowStocks(true);
   }
-  function handleAttachmentsClick(attachments: Attachment[]) {
+  function handleAttachmentsClick(attachments: Attachment[], driverId: string) {
+    setSelectedDriverId(driverId);
     setAttachmentArr(attachments);
     setShowAttachments(true);
   }
@@ -75,7 +81,7 @@ function AllHistoryTable() {
           orderId: Number(order.order_number),
           paymentMethods: {
             cash: order.payment_method.cash,
-            card: order.payment_method.credit,
+            credit: order.payment_method.credit,
             cheque: order.payment_method.cheque,
           },
         };
@@ -183,64 +189,64 @@ function AllHistoryTable() {
   return (
     <>
       <Dialog
-        className={'dialog-position-end'}
+        className={'dialog-position-end table-dialog'}
         fullWidth={true}
         maxWidth={'md'}
         open={showTransaction}
         onClose={() => {
           setShowTransaction(false);
         }}>
-        <DialogContent>
-          <Table
-            noOfRows={5}
-            showMenu={false}
-            rows={transactionArr}
-            columns={transactionColDef}
-            getRowId={getTransactionRowId}
-            showLoading={false}
-          />
-        </DialogContent>
+        <TableDialogContent
+          rows={transactionArr}
+          columns={transactionColDef}
+          getRowId={getTransactionRowId}
+          setShowDialog={() => {
+            setShowTransaction(false);
+          }}
+          selectedDriverId={selectedDriverId}
+          dialogHeader="history.orderSummary"
+        />
       </Dialog>
       <Dialog
-        className={'dialog-position-end'}
+        className={'dialog-position-end table-dialog'}
         fullWidth={true}
         maxWidth={'md'}
         open={showStocks}
         onClose={() => {
           setShowStocks(false);
         }}>
-        <DialogContent>
-          <Table
-            noOfRows={5}
-            showMenu={false}
-            rows={stockArr}
-            columns={stockColDef}
-            getRowId={getStockRowId}
-            showLoading={false}
-          />
-        </DialogContent>
+        <TableDialogContent
+          rows={stockArr}
+          columns={stockColDef}
+          getRowId={getStockRowId}
+          setShowDialog={() => {
+            setShowStocks(false);
+          }}
+          selectedDriverId={selectedDriverId}
+          dialogHeader="history.stockDetails"
+        />
       </Dialog>
       <Dialog
-        className={'dialog-position-end'}
+        className={'dialog-position-end table-dialog'}
         fullWidth={true}
         maxWidth={'md'}
         open={showAttachments}
         onClose={() => {
           setShowAttachments(false);
         }}>
-        <DialogContent>
-          <Table
-            noOfRows={5}
-            showMenu={false}
-            rows={attachmentArr}
-            columns={attachmentColDef(handleImageClick)}
-            getRowId={getAttachmentRowId}
-            showLoading={false}
-          />
-        </DialogContent>
+        <TableDialogContent
+          rows={attachmentArr}
+          columns={attachmentColDef(handleImageClick)}
+          getRowId={getAttachmentRowId}
+          setShowDialog={() => {
+            setShowAttachments(false);
+          }}
+          selectedDriverId={selectedDriverId}
+          dialogHeader="history.attachment"
+        />
       </Dialog>
       <Dialog
-        className={'dialog-position-end'}
+        className={'dialog-position-end table-dialog'}
         fullWidth={true}
         maxWidth={'md'}
         open={showImage}
@@ -252,7 +258,7 @@ function AllHistoryTable() {
         </DialogContent>
       </Dialog>
       <Table
-        noOfRows={10}
+        noOfRows={7}
         showMenu={true}
         minHeight={400}
         rows={driverHistoryArr}
@@ -268,3 +274,4 @@ function AllHistoryTable() {
   );
 }
 export default AllHistoryTable;
+
