@@ -14,6 +14,7 @@ export default function TableDialogContent({
   setShowDialog,
   selectedDriverId,
   dialogHeader,
+  noOfRows = 5,
 }: TableDialogContentProps) {
   const {t} = useTranslation();
 
@@ -23,7 +24,7 @@ export default function TableDialogContent({
         <Typography
           variant="h4"
           sx={{
-            fontSize: styles.fontSizeXxl,
+            fontSize: styles.fontSizeLgPlus,
             fontWeight: styles.fontWeightNormal,
             color: styles.charcoalDark,
             marginBottom: 1,
@@ -32,15 +33,16 @@ export default function TableDialogContent({
         </Typography>
         <div className={'cross-container'}>
           <IconButton
+            sx={{height: '28px', width: '28px'}}
             onClick={() => {
               setShowDialog(false);
             }}>
-            <img src={cross} className="cross-img" alt="no-image-present" />
+            <img src={cross} alt="no-image-present" className="cross-img" />
           </IconButton>
         </div>
       </div>
       <Table
-        noOfRows={5}
+        noOfRows={noOfRows}
         showMenu={false}
         rows={rows}
         columns={columns}

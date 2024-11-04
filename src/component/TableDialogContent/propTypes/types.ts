@@ -13,4 +13,5 @@ export interface TableDialogContentProps {
   setShowDialog: (value: boolean) => void;
   selectedDriverId: string;
   dialogHeader: string;
+  noOfRows?: number;
 }

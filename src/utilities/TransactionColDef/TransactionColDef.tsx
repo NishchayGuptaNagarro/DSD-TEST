@@ -33,7 +33,7 @@ export const transactionColDef: GridColDef[] = [
     valueGetter: ({value, row}) => {
       return `${value} : ${row.customerName}`;
     },
-    flex: 0.3,
+    flex: 0.34,
     cellClassName: 'font-md font-normal',
     sortable: false,
   },

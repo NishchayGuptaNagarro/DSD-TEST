@@ -205,6 +205,7 @@ function AllHistoryTable() {
           }}
           selectedDriverId={selectedDriverId}
           dialogHeader="history.orderSummary"
+          noOfRows={3}
         />
       </Dialog>
       <Dialog

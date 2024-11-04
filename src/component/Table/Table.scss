@@ -1,4 +1,4 @@
-@import "src/styles/design-systems.module";
+@import 'src/styles/design-systems.module';
 
 .filter-item {
   &.MuiDataGrid-menuList {
@@ -9,7 +9,8 @@
       margin: 0;
     }
 
-    & .MuiButtonBase-root.MuiMenuItem-root.MuiMenuItem-gutters.MuiMenuItem-root.MuiMenuItem-gutters[role="menuitem"] {
+    &
+      .MuiButtonBase-root.MuiMenuItem-root.MuiMenuItem-gutters.MuiMenuItem-root.MuiMenuItem-gutters[role='menuitem'] {
       padding: 10px;
 
       .MuiSvgIcon-root.MuiSvgIcon-fontSizeSmall {
@@ -18,7 +19,6 @@
 
       .MuiTypography-root {
         font-size: $font-xsm;
-
       }
 
       .MuiListItemIcon-root {
@@ -28,9 +28,7 @@
   }
 }
 
-
 .MuiDataGrid-filterForm {
-
   padding: 4px;
 
   .MuiNativeSelect-select.MuiNativeSelect-standard.MuiInputBase-input.MuiInput-input {
@@ -40,5 +38,10 @@
   .MuiInputBase-input.MuiInput-input {
     font-size: $font-xsm;
   }
+}
+
+.no-data-img {
+  width: 88px;
+  height: 88px;
 }
 

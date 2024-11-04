@@ -32,8 +32,8 @@ $block-margin: 16px;
 
 .table-dialog {
   & .MuiDialogContent-root {
-    padding-bottom: 6px;
-    padding-top: 4px;
+    padding-bottom: 8px;
+    padding-top: 30px;
   }
   & .MuiPaper-root.MuiDialog-paper {
     border-radius: 12px;
@@ -43,10 +43,16 @@ $block-margin: 16px;
 .dialog-header {
   display: flex;
   justify-content: space-between;
-  align-items: end;
+  align-items: center;
 
   .cross-container {
     width: min-content;
+    padding-bottom: 28px;
+  }
+
+  .cross-img {
+    width: 28px;
+    height: 28px;
   }
 }
 
