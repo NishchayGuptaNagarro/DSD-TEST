@@ -78,6 +78,7 @@ function AllHistoryTable() {
           customerId: Number(order.customer.external_id),
           customerName: order.customer.customer_name,
           grossAmount: order.gross_amount,
+          currIso: order.curr_iso,
           orderId: Number(order.order_number),
           paymentMethods: {
             cash: order.payment_method.cash,

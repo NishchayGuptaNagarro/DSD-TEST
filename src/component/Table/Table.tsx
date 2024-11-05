@@ -20,6 +20,7 @@ import './Table.scss';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import NoDataError from 'assets/PNG/NoDataError.png';
+import {useTranslation} from 'react-i18next';
 import styles from 'styles/design-systems.module.scss';
 
 const StyledGridOverlay = styled('div')(({theme}) => ({
@@ -52,6 +53,8 @@ const StyledGridOverlay = styled('div')(({theme}) => ({
 }));
 
 function CustomNoRowsOverlay() {
+  const {t} = useTranslation();
+
   return (
     <StyledGridOverlay>
       <img src={NoDataError} alt="No data" className="no-data-img" />
@@ -63,7 +66,7 @@ function CustomNoRowsOverlay() {
           fontWeight: styles.fontWeightNormal,
           mb: 0.5,
         }}>
-        No data available
+        {t('table.noDataAvailable')}
       </Box>
     </StyledGridOverlay>
   );
@@ -190,7 +193,7 @@ export default function Table({
           },
         },
         '& .MuiDataGrid-row:last-child': {
-          borderBottom: `1px solid ${styles.borderGrayMuted}`, // or your desired border color
+          borderBottom: `1px solid ${styles.borderGrayMuted}`,
         },
         [`& .${gridClasses.cell}`]: {
           paddingTop: 0.4,

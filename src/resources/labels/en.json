@@ -51,6 +51,7 @@
   "table.customerDesc": "Customer ID",
   "table.products": "Products",
   "table.button": "Show Products",
+  "table.noDataAvailable": "No data available",
 
   "sidebar.home": "Home",
   "sidebar.stock": "Stock Check-In / Check-Out",

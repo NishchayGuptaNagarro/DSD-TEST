@@ -46,6 +46,7 @@
   "table.customerDesc": "Numéro client",
   "table.products": "Des produits",
   "table.button": "Afficher les produits",
+  "table.noDataAvailable": "Aucune donnée disponible",
 
   "sidebar.home": "Maison",
   "sidebar.stock": "Enregistrement / Départ des stocks",

@@ -45,8 +45,10 @@ export const transactionColDef: GridColDef[] = [
     renderHeader: (params: GridColumnHeaderParams) => {
       return <ColumnHeader headerName={params.colDef.headerName || ''} />;
     },
-    valueGetter: ({value}) => {
-      return `${(value ?? 0).toFixed(2)} MAD`;
+    renderCell: (params: GridRenderCellParams<TransactionHistory>) => {
+      return (
+        <div>{`${(params.value ?? 0).toFixed(2)} ${params.row.currIso}`}</div>
+      );
     },
     sortable: false,
     headerAlign: 'center',

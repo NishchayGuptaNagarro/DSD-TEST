@@ -5,6 +5,7 @@ export interface TransactionHistory extends Row {
   customerId: number;
   customerName: string;
   grossAmount: number;
+  currIso: string;
   paymentMethods: PaymentMethods;
 }
 
