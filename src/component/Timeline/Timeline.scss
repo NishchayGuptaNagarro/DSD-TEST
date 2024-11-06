@@ -38,7 +38,7 @@
     height: 24px;
     display: flex;
     @include flex-center;
-    z-index: 10;
+    z-index: 2;
     position: relative;
     background-color: $white-pure;
     border-radius: 50%;
