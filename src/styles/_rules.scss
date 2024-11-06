@@ -5,9 +5,18 @@
 }
 
 //IMPORTANT! Only these classes should be used for defining font size of each element so we can use media queries in future to add responsiveness
-.font-xl {
-  font-size: $font-xl;
+.font-xxl {
+  font-size: $font-xxl; //28px
 }
+
+.font-xl {
+  font-size: $font-xl; //25px
+}
+
+.font-lg-plus {
+  font-size: $font-lg-plus; //22px
+}
+
 .font-lg {
   font-size: $font-lg; //18px
 }
@@ -19,6 +28,31 @@
 }
 .font-xsm {
   font-size: $font-xsm; //12px
+}
+
+//font-weights:
+.font-boldest {
+  font-weight: $font-boldest; // 800
+}
+
+.font-bold {
+  font-weight: $font-bold; // 700
+}
+
+.font-bolder {
+  font-weight: $font-bolder; // 600
+}
+
+.font-normal {
+  font-weight: $font-normal; // 500
+}
+
+.font-light {
+  font-weight: $font-light; // 400
+}
+
+.font-lighter {
+  font-weight: $font-lighter; // 300
 }
 
 //Can be used to center anything

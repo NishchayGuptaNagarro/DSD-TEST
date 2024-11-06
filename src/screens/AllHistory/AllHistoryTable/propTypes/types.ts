@@ -1,7 +1,7 @@
-import {TransactionHistory} from 'models/TransactionHistory.ts';
-import {Stock} from 'models/Stock.ts';
-import {Attachment} from 'models/Attachment.ts';
 import {Row} from 'component/Table/propTypes/types.ts';
+import {Attachment} from 'models/Attachment.ts';
+import {Stock} from 'models/Stock.ts';
+import {TransactionHistory} from 'models/TransactionHistory.ts';
 
 export interface AllDriverHistory extends Row {
   rowId: number;
@@ -14,13 +14,17 @@ export interface AllDriverHistory extends Row {
 
 export interface AllOrderButtonProps {
   orders: TransactionHistory[];
-  handleOrdersClick: (orders: TransactionHistory[]) => void;
+  driverId: string;
+  handleOrdersClick: (orders: TransactionHistory[], driverId: string) => void;
 }
 export interface AllStockButtonProps {
   stocks: Stock[];
-  handleStocksClick: (stocks: Stock[]) => void;
+  driverId: string;
+  handleStocksClick: (stocks: Stock[], driverId: string) => void;
 }
 export interface AllAttachmentsButtonProps {
   attachments: Attachment[];
-  handleAttachmentsClick: (attachments: Attachment[]) => void;
+  driverId: string;
+  handleAttachmentsClick: (attachments: Attachment[], driverId: string) => void;
 }
+

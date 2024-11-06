@@ -5,14 +5,16 @@ export interface TransactionHistory extends Row {
   customerId: number;
   customerName: string;
   grossAmount: number;
+  currIso: string;
   paymentMethods: PaymentMethods;
 }
 
 export interface PaymentMethods {
   cash?: number;
   cheque?: number;
-  card?: number;
+  credit?: number;
 }
 export interface PaymentGridProps {
   paymentMethods: PaymentMethods;
 }
+

@@ -1,7 +1,4 @@
-import {format} from 'date-fns';
-import {TransactionHistory} from 'models/TransactionHistory.ts';
-import {Stock} from 'models/Stock.ts';
-import {Attachment} from 'models/Attachment.ts';
+import Button from '@mui/material/Button';
 import {
   getGridDateOperators,
   getGridStringOperators,
@@ -9,9 +6,12 @@ import {
   GridRenderCellParams,
   GridValueFormatterParams,
 } from '@mui/x-data-grid';
-
+import {format} from 'date-fns';
+import {Attachment} from 'models/Attachment.ts';
+import {Stock} from 'models/Stock.ts';
+import {TransactionHistory} from 'models/TransactionHistory.ts';
 import {useTranslation} from 'react-i18next';
-import Button from '@mui/material/Button';
+import styles from 'styles/design-systems.module.scss';
 import {
   AllAttachmentsButtonProps,
   AllDriverHistory,
@@ -27,9 +27,12 @@ const dateFilter = getGridDateOperators().filter(item => {
 });
 
 export const allHistoryColDef: (
-  handleOrdersClick: (transactions: TransactionHistory[]) => void,
-  handleStocksClick: (stocks: Stock[]) => void,
-  handleAttachmentsClick: (attachments: Attachment[]) => void,
+  handleOrdersClick: (
+    transactions: TransactionHistory[],
+    driverId: string,
+  ) => void,
+  handleStocksClick: (stocks: Stock[], driverId: string) => void,
+  handleAttachmentsClick: (attachments: Attachment[], driverId: string) => void,
 ) => GridColDef[] = (
   handleOrdersClick,
   handleStocksClick,
@@ -43,6 +46,7 @@ export const allHistoryColDef: (
       flex: 0.3,
       headerClassName: 'font-md',
       filterOperators: stringFilters,
+      cellClassName: 'driver-id',
       sortable: false,
     },
     {
@@ -52,14 +56,14 @@ export const allHistoryColDef: (
       filterOperators: dateFilter,
       type: 'date',
       valueFormatter: (params: GridValueFormatterParams) => {
-        return format(params.value, 'dd-MM-yyyy');
+        return format(params.value, 'do MMMM, yyyy');
       },
       valueGetter: (params: GridRenderCellParams) => {
         return new Date(params.value);
       },
       flex: 0.4,
-      cellClassName: 'font-sm',
       sortable: true,
+      cellClassName: 'driver-id',
     },
     {
       field: 'transaction',
@@ -69,14 +73,16 @@ export const allHistoryColDef: (
         params: GridRenderCellParams<AllDriverHistory, TransactionHistory[]>,
       ) => {
         return (
-          <OrdersButton
-            orders={params.value || []}
-            handleOrdersClick={handleOrdersClick}
-          />
+          <div className="action-cell">
+            <OrdersButton
+              orders={params.value || []}
+              driverId={params.row.driverId || ''}
+              handleOrdersClick={handleOrdersClick}
+            />
+          </div>
         );
       },
       flex: 0.3,
-      cellClassName: 'font-sm',
       sortable: false,
       filterable: false,
       disableColumnMenu: true,
@@ -90,10 +96,13 @@ export const allHistoryColDef: (
 
       renderCell: (params: GridRenderCellParams<AllDriverHistory, Stock[]>) => {
         return (
-          <StocksButton
-            stocks={params.value || []}
-            handleStocksClick={handleStocksClick}
-          />
+          <div className="action-cell">
+            <StocksButton
+              stocks={params.value || []}
+              driverId={params.row.driverId || ''}
+              handleStocksClick={handleStocksClick}
+            />
+          </div>
         );
       },
       flex: 0.3,
@@ -112,10 +121,13 @@ export const allHistoryColDef: (
         params: GridRenderCellParams<AllDriverHistory, Attachment[]>,
       ) => {
         return (
-          <AttachmentsButton
-            attachments={params.value || []}
-            handleAttachmentsClick={handleAttachmentsClick}
-          />
+          <div className="action-cell">
+            <AttachmentsButton
+              attachments={params.value || []}
+              driverId={params.row.driverId || ''}
+              handleAttachmentsClick={handleAttachmentsClick}
+            />
+          </div>
         );
       },
       flex: 0.3,
@@ -129,54 +141,70 @@ export const allHistoryColDef: (
   ];
 };
 
-function OrdersButton({orders, handleOrdersClick}: AllOrderButtonProps) {
+function OrdersButton({
+  orders,
+  driverId,
+  handleOrdersClick,
+}: AllOrderButtonProps) {
   const {t} = useTranslation();
   return (
     <Button
-      variant="text"
+      variant="contained"
+      className="action-button"
       sx={{
-        fontSize: 10,
+        backgroundColor: styles.bgPowderBlue,
+        color: styles.deepNavy,
       }}
       size={'small'}
       onClick={() => {
-        handleOrdersClick(orders);
+        handleOrdersClick(orders, driverId);
       }}>
-      {t('table.view.orders')}
+      {t('table.view')}
     </Button>
   );
 }
-function StocksButton({stocks, handleStocksClick}: AllStockButtonProps) {
+function StocksButton({
+  stocks,
+  driverId,
+  handleStocksClick,
+}: AllStockButtonProps) {
   const {t} = useTranslation();
   return (
     <Button
-      variant="text"
+      variant="contained"
+      className="action-button"
       sx={{
-        fontSize: 10,
+        backgroundColor: styles.bgLightMintGreen,
+        color: styles.forestGreen,
       }}
       size={'small'}
       onClick={() => {
-        handleStocksClick(stocks);
+        handleStocksClick(stocks, driverId);
       }}>
-      {t('table.view.stocks')}
+      {t('table.view')}
     </Button>
   );
 }
 function AttachmentsButton({
   attachments,
+  driverId,
   handleAttachmentsClick,
 }: AllAttachmentsButtonProps) {
   const {t} = useTranslation();
   return (
     <Button
-      variant="text"
+      variant="contained"
+      className="action-button"
       sx={{
-        fontSize: 10,
+        backgroundColor: styles.bgPeach,
+        color: styles.chocolateBrown,
       }}
       size={'small'}
       onClick={() => {
-        handleAttachmentsClick(attachments);
+        handleAttachmentsClick(attachments, driverId);
       }}>
-      {t('table.view.attachments')}
+      {t('table.view')}
     </Button>
   );
 }
+
