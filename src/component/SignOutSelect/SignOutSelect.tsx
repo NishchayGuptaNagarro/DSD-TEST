@@ -26,7 +26,7 @@ export default function SignOutSelect() {
     setOpen(!open);
   };
 
-  const sxProp = {
+  const sxListProp = {
     bgcolor: 'transparent',
     width: 80,
     borderRadius: 6,
@@ -48,7 +48,7 @@ export default function SignOutSelect() {
   };
 
   return (
-    <List sx={sxProp} component="nav">
+    <List sx={sxListProp} component="nav">
       <ListItemButton onClick={handleClick} sx={{padding: 0, borderRadius: 10}}>
         <ListItemIcon sx={{px: 0}}>
           <Avatar

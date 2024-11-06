@@ -1,9 +1,9 @@
 import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
 import SignOutSelect from 'component/SignOutSelect/SignOutSelect.tsx';
-import './AppHeader.scss';
-import {AppHeaderProps} from './propTypes/types.ts';
+import './Header.scss';
+import {HeaderProps} from './propTypes/types.ts';
 
-export default function AppHeader({children}: AppHeaderProps) {
+export default function Header({children}: HeaderProps) {
   return (
     <header className={'header'}>
       <div className={'header-container'}>

@@ -1,11 +1,8 @@
 import Typography from '@mui/material/Typography';
 import styles from 'styles/design-systems.module.scss';
-import {DashboardHeaderContentProps} from './propTypes/types.ts';
+import {PageDetailsProps} from './propTypes/types.ts';
 
-export default function AppHeader({
-  heading,
-  subHeading,
-}: DashboardHeaderContentProps) {
+export default function PageDetails({heading, subHeading}: PageDetailsProps) {
   return (
     <>
       <div>

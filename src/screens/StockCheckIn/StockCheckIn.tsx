@@ -12,10 +12,10 @@ import ScreenLayout from 'component/ScreenLayout/ScreenLayout.tsx';
 import Timeline from 'component/Timeline/Timeline.tsx';
 
 import {api} from 'api/api.ts';
-import AppHeader from 'component/AppHeader/AppHeader.tsx';
 import BlueBorderButton from 'component/BlueBorderButton/BlueBorderButton.tsx';
 import BlueButton from 'component/BlueButton/BlueButton.tsx';
-import DashboardHeaderContent from 'component/DashboardHeaderContent/DashboardHeaderContent.tsx';
+import Header from 'component/Header/Header.tsx';
+import PageDetails from 'component/PageDetails/PageDetails.tsx';
 import timelineContext from 'context/timeline/timelineContext.ts';
 import {createBrowserHistory} from 'history';
 import {Attachment} from 'models/Attachment.ts';
@@ -249,9 +249,9 @@ function StockCheckIn() {
   }, [currentStep]);
   return (
     <ScreenLayout>
-      <AppHeader>
-        <DashboardHeaderContent heading={heading} subHeading={subHeading} />
-      </AppHeader>
+      <Header>
+        <PageDetails heading={heading} subHeading={subHeading} />
+      </Header>
       <AlertDialog
         messageText={'alert.text1'}
         isOpen={alertOpen}

@@ -12,9 +12,9 @@ import Timeline from 'component/Timeline/Timeline.tsx';
 
 import {api} from 'api/api.ts';
 import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
-import AppHeader from 'component/AppHeader/AppHeader.tsx';
 import BlueBorderButton from 'component/BlueBorderButton/BlueBorderButton.tsx';
-import DashboardHeaderContent from 'component/DashboardHeaderContent/DashboardHeaderContent.tsx';
+import Header from 'component/Header/Header.tsx';
+import PageDetails from 'component/PageDetails/PageDetails.tsx';
 import timelineContext from 'context/timeline/timelineContext.ts';
 import {createBrowserHistory} from 'history';
 import {Driver} from 'models/Driver.ts';
@@ -233,9 +233,9 @@ function StockCheckOut() {
 
   return (
     <ScreenLayout>
-      <AppHeader>
-        <DashboardHeaderContent heading={heading} subHeading={subHeading} />
-      </AppHeader>
+      <Header>
+        <PageDetails heading={heading} subHeading={subHeading} />
+      </Header>
       <AlertDialog
         messageText={'alert.text2'}
         isOpen={alertOpen}
