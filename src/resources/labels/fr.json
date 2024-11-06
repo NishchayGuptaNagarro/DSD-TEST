@@ -91,7 +91,8 @@
   "table.view.orders": "Voir les commandes",
   "table.view.attachments": "Voir les pièces jointes",
   "table.view.attachment": "Voir la pièce jointe",
-  "history.pageHeading": "Historique de toutes les commandes",
+  "history.pageHeading": "Historique des commandes",
+  "history.pageSubHeading": "Toutes les commandes sont disponibles ici.",
   "history.orderSummary": "Résumé de la commande",
   "history.stockDetails": "Détails du stock",
   "history.attachment": "Pièce jointe",
@@ -100,6 +101,8 @@
   "alert.text3": "Stock initial déjà attribué au chauffeur",
   "alert.btn1": "D'accord",
   "alert.btn2": "Ignorer",
-  "stockcheckout.heading": "Sortie de stock"
+  "stockcheckout.heading": "Sortie de stock",
+
+  "header.logout": "Se déconnecter"
 }
 

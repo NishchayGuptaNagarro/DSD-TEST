@@ -1,6 +1,9 @@
-@import "src/styles/design-systems.module";
+@import 'src/styles/design-systems.module';
 
-.stock-check-in{
+.stock-check-in {
+  padding-right: 4%;
+  padding-left: 4%;
+  margin-top: 27px;
   .productText {
     font-weight: $font-normal;
   }
@@ -8,10 +11,11 @@
     font-weight: $font-bold;
     color: $green-mint;
   }
-  .language-select{
+  .language-select {
     @extend .language-selection-dropdown;
   }
-  .buttons-group{
+  .buttons-group {
     @extend .position-bottom;
   }
 }
+

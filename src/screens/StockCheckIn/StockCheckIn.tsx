@@ -1,5 +1,3 @@
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 
 import {ChangeEvent, useContext, useEffect, useRef, useState} from 'react';
@@ -10,13 +8,14 @@ import {ClipLoader} from 'react-spinners';
 
 import {AxiosResponse} from 'axios';
 import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
-import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
-import PageHeading from 'component/PageHeading/PageHeading.tsx';
 import ScreenLayout from 'component/ScreenLayout/ScreenLayout.tsx';
 import Timeline from 'component/Timeline/Timeline.tsx';
 
 import {api} from 'api/api.ts';
+import AppHeader from 'component/AppHeader/AppHeader.tsx';
+import BlueBorderButton from 'component/BlueBorderButton/BlueBorderButton.tsx';
 import BlueButton from 'component/BlueButton/BlueButton.tsx';
+import DashboardHeaderContent from 'component/DashboardHeaderContent/DashboardHeaderContent.tsx';
 import timelineContext from 'context/timeline/timelineContext.ts';
 import {createBrowserHistory} from 'history';
 import {Attachment} from 'models/Attachment.ts';
@@ -164,6 +163,7 @@ function StockCheckIn() {
         customerId: Number(transaction.customer.external_id),
         customerName: transaction.customer.customer_name,
         grossAmount: transaction.gross_amount,
+        currIso: transaction.curr_iso,
         orderId: Number(transaction.order_number),
         paymentMethods: {
           cash: transaction.payment_method.cash,
@@ -249,6 +249,9 @@ function StockCheckIn() {
   }, [currentStep]);
   return (
     <ScreenLayout>
+      <AppHeader>
+        <DashboardHeaderContent heading={heading} subHeading={subHeading} />
+      </AppHeader>
       <AlertDialog
         messageText={'alert.text1'}
         isOpen={alertOpen}
@@ -256,41 +259,32 @@ function StockCheckIn() {
         handleDismiss={handleAlertClose}
       />
       <Stack className={'stock-check-in'}>
-        <span className={'language-select'}>
-          <LanguageSelect />
-        </span>
-        <br />
-        <br />
-        <Box
-          padding={2}
-          paddingBottom={0}
-          marginBottom={5}
-          textAlign={'center'}>
-          <PageHeading heading={heading} subHeading={subHeading} />
-        </Box>
-        <Paper
-          elevation={1}
-          sx={{p: 1.5, minHeight: '70vh', position: 'relative'}}>
+        <Stack
+          spacing={2}
+          sx={{
+            p: 1.5,
+            minHeight: '70vh',
+            position: 'relative',
+          }}>
           <Timeline />
-
           <Outlet
             context={
               {
                 ...contextObj,
               } satisfies StockCheckInContext
-            }></Outlet>
+            }
+          />
           <br />
           <br />
           <div className="buttons-group">
-            <BlueButton
+            <BlueBorderButton
               size={'small'}
               variant={'contained'}
-              onClick={() => {
-                decreaseSteps();
-              }}
+              onClick={decreaseSteps}
               disabled={currentStep === 1}>
               {t('createLoadingOrder.back')}
-            </BlueButton>
+            </BlueBorderButton>
+
             {currentStep === steps.length ? (
               <BlueButton
                 size={'small'}
@@ -321,7 +315,7 @@ function StockCheckIn() {
               </BlueButton>
             )}
           </div>
-        </Paper>
+        </Stack>
       </Stack>
     </ScreenLayout>
   );

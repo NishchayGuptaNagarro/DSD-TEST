@@ -16,12 +16,12 @@ export const transactionColDef: GridColDef[] = [
     field: 'orderId',
     headerName: 'table.orderId',
     flex: 0.2,
-    headerClassName: 'font-lg font-normal',
+    headerClassName: 'font-md font-normal',
     renderHeader: (params: GridColumnHeaderParams) => {
       return <ColumnHeader headerName={params.colDef.headerName || ''} />;
     },
     sortable: false,
-    cellClassName: 'font-md font-normal',
+    cellClassName: 'font-sm font-normal',
   },
   {
     field: 'customerId',
@@ -29,30 +29,30 @@ export const transactionColDef: GridColDef[] = [
     renderHeader: (params: GridColumnHeaderParams) => {
       return <ColumnHeader headerName={params.colDef.headerName || ''} />;
     },
-    headerClassName: 'font-lg font-normal',
+    headerClassName: 'font-md font-normal',
     valueGetter: ({value, row}) => {
       return `${value} : ${row.customerName}`;
     },
     flex: 0.34,
-    cellClassName: 'font-md font-normal',
+    cellClassName: 'font-sm font-normal',
     sortable: false,
   },
   {
     field: 'grossAmount',
     headerName: 'table.amount',
     flex: 0.2,
-    headerClassName: 'font-lg font-normal',
+    headerClassName: 'font-md font-normal',
     renderHeader: (params: GridColumnHeaderParams) => {
       return <ColumnHeader headerName={params.colDef.headerName || ''} />;
     },
     renderCell: (params: GridRenderCellParams<TransactionHistory>) => {
       return (
-        <div>{`${(params.value ?? 0).toFixed(2)} ${params.row.currIso}`}</div>
+        <div>{`${(params.value ?? 0).toFixed(2)} ${params.row.currIso || ''}`}</div>
       );
     },
     sortable: false,
     headerAlign: 'center',
-    cellClassName: 'font-md font-normal',
+    cellClassName: 'font-sm font-normal',
     align: 'center',
   },
   {
@@ -61,7 +61,7 @@ export const transactionColDef: GridColDef[] = [
     renderHeader: (params: GridColumnHeaderParams) => {
       return <ColumnHeader headerName={params.colDef.headerName || ''} />;
     },
-    headerClassName: 'font-lg font-normal',
+    headerClassName: 'font-md font-normal',
 
     renderCell: (
       params: GridRenderCellParams<TransactionHistory, PaymentMethods>,
@@ -69,7 +69,7 @@ export const transactionColDef: GridColDef[] = [
       return <PaymentGrid paymentMethods={params.value || {}} />;
     },
     flex: 0.3,
-    cellClassName: 'font-md font-normal',
+    cellClassName: 'font-sm font-normal',
     sortable: false,
     headerAlign: 'center',
   },
