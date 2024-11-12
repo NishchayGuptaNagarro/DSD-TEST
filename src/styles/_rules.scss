@@ -3,7 +3,19 @@
   right: 10px;
   top: 2px;
 }
-
+.language-dropdown {
+  position: absolute;
+  right: 130px;
+  top: -30px;
+}
+.sign-out-dropdown {
+  position: absolute;
+  right: 20px;
+  top: -36px;
+}
+.nav-icon {
+  padding-left: 10px;
+}
 //IMPORTANT! Only these classes should be used for defining font size of each element so we can use media queries in future to add responsiveness
 .font-xxl {
   font-size: $font-xxl; //28px
@@ -154,5 +166,14 @@
 
 .display-none {
   display: none;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: $white-pure;
+  z-index: 3;
+  height: 106px;
 }
 

@@ -5,7 +5,7 @@ import {ScreenLayoutProps} from './propTypes/types.ts';
 function ScreenLayout({children}: ScreenLayoutProps) {
   return (
     <Grid container>
-      <Grid height={'100vh'} item xs={2.6} padding={0.3}>
+      <Grid height={'100vh'} item xs={2.6}>
         <Sidebar />
       </Grid>
       <Grid

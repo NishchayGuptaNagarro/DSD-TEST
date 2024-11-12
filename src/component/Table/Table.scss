@@ -1,5 +1,5 @@
 @import 'src/styles/design-systems.module';
-
+$block-margin: 14px;
 .filter-item {
   &.MuiDataGrid-menuList {
     padding: 0;
@@ -43,5 +43,25 @@
 .no-data-img {
   width: 88px;
   height: 88px;
+}
+
+.stock-header {
+  margin-left: 60px;
+}
+.stock-cell {
+  padding-block: $block-margin;
+}
+
+.stock-item-cell {
+  padding-left: 36px;
+  padding-block: $block-margin;
+}
+
+.attachment-header {
+  margin-left: 30px;
+}
+.attachment-cell {
+  padding-block: $block-margin;
+  padding-left: 26%;
 }
 

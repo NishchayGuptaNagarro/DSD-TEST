@@ -46,7 +46,7 @@ export const allHistoryColDef: (
       flex: 0.3,
       headerClassName: 'font-md',
       filterOperators: stringFilters,
-      cellClassName: 'driver-id',
+      cellClassName: 'font-sm font-normal',
       sortable: false,
     },
     {
@@ -63,7 +63,7 @@ export const allHistoryColDef: (
       },
       flex: 0.4,
       sortable: true,
-      cellClassName: 'driver-id',
+      cellClassName: 'font-sm font-normal',
     },
     {
       field: 'transaction',
@@ -106,7 +106,7 @@ export const allHistoryColDef: (
         );
       },
       flex: 0.3,
-      cellClassName: 'font-sm',
+      cellClassName: 'font-sm font-normal',
       sortable: false,
       filterable: false,
       disableColumnMenu: true,
@@ -131,7 +131,7 @@ export const allHistoryColDef: (
         );
       },
       flex: 0.3,
-      cellClassName: 'font-sm',
+      cellClassName: 'font-sm font-normal',
       sortable: false,
       filterable: false,
       disableColumnMenu: true,

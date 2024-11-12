@@ -40,7 +40,9 @@ function Timeline() {
                 </div>
 
                 {/* completed text will be shown as white and non completed as in faded white */}
-                <p className="steps">{` ${i + 1}.  ${t(step)}`}</p>
+                <div className="steps">
+                  <p>{` ${i + 1}.  ${t(step)}`}</p>
+                </div>
                 <div
                   className={`step-indicator ${
                     i + 1 < currentStep

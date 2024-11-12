@@ -95,7 +95,8 @@
   "table.view.orders": "View Orders",
   "table.view.attachments": "View Attachments",
   "table.view.attachment": "View Attachment",
-  "history.pageHeading": "All Orders History",
+  "history.pageHeading": "Order History",
+  "history.pageSubHeading": "All orders are available here",
   "history.orderSummary": "Order Summary",
   "history.stockDetails": "Stock Details",
   "history.attachment": "Attachment's",
@@ -103,6 +104,8 @@
   "alert.text2": "Stock Assigned To Driver",
   "alert.text3": "Initial stock already assigned to driver",
   "alert.btn1": "Okay",
-  "alert.btn2": "Dismiss"
+  "alert.btn2": "Dismiss",
+
+  "header.logout": "Logout"
 }
 
