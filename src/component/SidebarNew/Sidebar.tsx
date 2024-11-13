@@ -3,7 +3,7 @@ import sidebarContext from 'context/sidebar/sidebarContext.ts';
 import {useContext, useEffect} from 'react';
 import './Sidebar.scss';
 import {SidebarData} from './SidebarData';
-import SubMenu from './SubMenu.tsx';
+import SubMenu from './SubMenu';
 
 function Sidebar() {
   const {currentNav, updateCurrentNav, rememberNav} =
@@ -30,10 +30,10 @@ function Sidebar() {
               <li key={index}>
                 <SubMenu
                   key={index}
-                  selected={false}
                   item={item}
                   selectedNav={currentNav}
-                  handleSelectedNav={handleSelectedNav}></SubMenu>
+                  handleSelectedNav={handleSelectedNav}
+                />
               </li>
             );
           })}

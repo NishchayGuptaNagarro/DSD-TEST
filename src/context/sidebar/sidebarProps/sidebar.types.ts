@@ -1,6 +1,6 @@
 interface SideBarContextProps {
   currentNav: number;
-  updateCurrentNav: (selectedNav: number) => void;
+  updateCurrentNav: (id: number) => void;
   rememberNav: () => void;
 }
 
