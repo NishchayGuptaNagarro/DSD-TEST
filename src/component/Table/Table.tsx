@@ -102,8 +102,8 @@ function CustomPagination() {
       shape="rounded"
       page={page + 1}
       count={pageCount}
-      renderItem={props => <PaginationItem {...props} disableRipple />}
-      onChange={(event, value) => apiRef.current.setPage(value - 1)}
+      renderItem={props => <PaginationItem {...props} />}
+      onChange={(_, value) => apiRef.current.setPage(value - 1)}
     />
   );
 }
