@@ -1,24 +1,21 @@
+import logo from 'assets/SVG/NagarroWhite.svg';
+import sidebarContext from 'context/sidebar/sidebarContext.ts';
+import {useContext, useEffect} from 'react';
+import './Sidebar.scss';
 import {SidebarData} from './SidebarData';
 import SubMenu from './SubMenu.tsx';
-import './Sidebar.scss';
-import {Link, useNavigate} from 'react-router-dom';
-import Signout from 'assets/PNG/Sign Out.png';
-import Settings from 'assets/PNG/Settings.png';
-import logo from 'assets/SVG/NotionEdgeWhite.svg';
-import {useTranslation} from 'react-i18next';
-import {useState} from 'react';
 
-const Sidebar = () => {
-  const {t} = useTranslation();
-  const navigate = useNavigate();
-  const [subnav, setSubnav] = useState(false);
-  const showSubnav = () => setSubnav(!subnav);
+function Sidebar() {
+  const {currentNav, updateCurrentNav, rememberNav} =
+    useContext(sidebarContext);
+  //When someone refresh the page this method will get called//
+  useEffect(() => {
+    rememberNav();
+  }, []);
 
-  const clearStorage = () => {
-    localStorage.clear();
-    navigate('/');
+  const handleSelectedNav = (id: number) => {
+    updateCurrentNav(id);
   };
-
   return (
     <>
       <nav data-testid={'sidebar'} className={'sidebar-nav'}>
@@ -32,44 +29,19 @@ const Sidebar = () => {
             return (
               <li key={index}>
                 <SubMenu
-                  item={item}
                   key={index}
-                  subnav={subnav}
-                  showSubnav={showSubnav}
-                />
+                  selected={false}
+                  item={item}
+                  selectedNav={currentNav}
+                  handleSelectedNav={handleSelectedNav}></SubMenu>
               </li>
             );
           })}
         </ul>
-
-        <div className={'sidebar-bottom'}>
-          <Link
-            className={'sidebar-link '}
-            data-testid="signout-id"
-            to=""
-            onClick={clearStorage}>
-            <span className={'sidebar-btn '}>
-              <img className={'nav-icon'} src={Signout} alt={'signout'} />
-              <span className={'sidebar-label sidebar-important'}>
-                {t('sidebar.signout')}
-              </span>
-            </span>
-          </Link>
-          <Link
-            className={'sidebar-link'}
-            to="/settings"
-            data-testid="settings-id">
-            <span className={'sidebar-btn '}>
-              <img className={'nav-icon'} src={Settings} alt={'settings'} />
-              <span className={'sidebar-label  sidebar-important '}>
-                {t('sidebar.settings')}
-              </span>
-            </span>
-          </Link>
-        </div>
       </nav>
     </>
   );
-};
+}
 
 export default Sidebar;
+
