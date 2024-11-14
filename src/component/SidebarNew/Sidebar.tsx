@@ -1,16 +1,22 @@
 import logo from 'assets/SVG/NagarroWhite.svg';
 import sidebarContext from 'context/sidebar/sidebarContext.ts';
 import {useContext, useEffect} from 'react';
+import {useLocation} from 'react-router-dom';
 import './Sidebar.scss';
 import {SidebarData} from './SidebarData';
 import SubMenu from './SubMenu';
 
 function Sidebar() {
-  const {currentNav, updateCurrentNav, rememberNav} =
-    useContext(sidebarContext);
+  const location = useLocation();
+  const {currentNav, updateCurrentNav} = useContext(sidebarContext);
   //When someone refresh the page this method will get called//
   useEffect(() => {
-    rememberNav();
+    const currentSidebarItem = SidebarData.find(item =>
+      location.pathname.startsWith(item.path),
+    );
+    console.log(`location path: ${location.pathname}`);
+    console.log(currentSidebarItem?.path);
+    updateCurrentNav(currentSidebarItem ? currentSidebarItem.id : 1);
   }, []);
 
   const handleSelectedNav = (id: number) => {

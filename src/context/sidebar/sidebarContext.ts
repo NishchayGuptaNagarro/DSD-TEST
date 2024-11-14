@@ -5,7 +5,6 @@ import SideBarContextProps from './sidebarProps/sidebar.types';
 const sidebarContext = createContext<SideBarContextProps>({
   currentNav: 1,
   updateCurrentNav: () => {},
-  rememberNav: () => {},
 });
 
 export default sidebarContext;

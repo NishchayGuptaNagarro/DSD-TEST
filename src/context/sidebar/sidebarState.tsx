@@ -13,23 +13,11 @@ function SidebarState({children}: UserProvidedProps) {
     setCurrentNav(selectedNav);
   };
 
-  // Remember Steps Function:
-  // This function retrieves the current step value from local storage when the component mounts.
-  // If no value is found in local storage, it defaults to 1.
-  const rememberNav = () => {
-    // Retrieve the current step value from local storage or default to 1
-    const currentNavs = JSON.parse(sessionStorage.getItem('currentNav') || '1');
-    if (currentNavs) {
-      setCurrentNav(currentNavs);
-    }
-  };
-
   return (
     <SidebarContext.Provider
       value={{
         currentNav,
         updateCurrentNav,
-        rememberNav,
       }}>
       {children}
     </SidebarContext.Provider>
