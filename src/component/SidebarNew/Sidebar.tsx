@@ -14,8 +14,6 @@ function Sidebar() {
     const currentSidebarItem = SidebarData.find(item =>
       location.pathname.startsWith(item.path),
     );
-    console.log(`location path: ${location.pathname}`);
-    console.log(currentSidebarItem?.path);
     updateCurrentNav(currentSidebarItem ? currentSidebarItem.id : 1);
   }, []);
 

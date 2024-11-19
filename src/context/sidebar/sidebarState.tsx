@@ -1,9 +1,6 @@
-import {ReactNode, useState} from 'react';
+import {useState} from 'react';
 import SidebarContext from './sidebarContext';
-
-type UserProvidedProps = {
-  children: ReactNode;
-};
+import UserProvidedProps from './sidebarProps/sidebarState.types';
 
 function SidebarState({children}: UserProvidedProps) {
   const [currentNav, setCurrentNav] = useState<number>(1);
