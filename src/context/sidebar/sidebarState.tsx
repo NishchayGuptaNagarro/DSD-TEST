@@ -1,8 +1,8 @@
 import {useState} from 'react';
 import SidebarContext from './sidebarContext';
-import UserProvidedProps from './sidebarProps/sidebarState.types';
+import SidebarStateProps from './sidebarProps/sidebarState.types';
 
-function SidebarState({children}: UserProvidedProps) {
+function SidebarState({children}: SidebarStateProps) {
   const [currentNav, setCurrentNav] = useState<number>(1);
 
   const updateCurrentNav = (selectedNav: number) => {

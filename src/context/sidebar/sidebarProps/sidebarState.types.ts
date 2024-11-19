@@ -1,7 +1,7 @@
 import {ReactNode} from 'react';
 
-interface UserProvidedProps {
+interface SidebarStateProps {
   children: ReactNode;
 }
 
-export default UserProvidedProps;
+export default SidebarStateProps;
