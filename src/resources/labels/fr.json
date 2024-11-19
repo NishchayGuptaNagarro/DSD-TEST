@@ -15,7 +15,7 @@
   "forgotPassword.link.label": "Retour à la connexion",
   "forgotPassword.quote": "La plupart des gens passent à côté d'une opportunité parce qu'elle est vêtue d'une salopette et qu'elle ressemble à du travail.",
   "createLoadingOrder.title": "Créer un ordre de chargement",
-  "createLoadingOrder.subtitle": "Pour créer un ordre de chargement, veuillez suivre les étapes",
+  "createLoadingOrder.subtitle": "Suivez les étapes",
   "createLoadingOrder.back": "Retour",
   "createLoadingOrder.next": "Suivant",
   "createLoadingOrder.finish": "Finition",
@@ -103,6 +103,6 @@
   "alert.btn2": "Ignorer",
   "stockcheckout.heading": "Sortie de stock",
 
-  "header.logout": "Se déconnecter"
+  "header.logout": "déconnexion"
 }
 

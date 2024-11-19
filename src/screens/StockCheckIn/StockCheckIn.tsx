@@ -263,7 +263,7 @@ function StockCheckIn() {
           spacing={2}
           sx={{
             p: 1.5,
-            minHeight: '70vh',
+            minHeight: '80vh',
             position: 'relative',
           }}>
           <Timeline />

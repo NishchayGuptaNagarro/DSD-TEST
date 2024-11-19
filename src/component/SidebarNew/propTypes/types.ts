@@ -2,20 +2,11 @@ export interface SidebarOption {
   title: string;
   path: string;
   icon: JSX.Element;
-  iconClosed?: JSX.Element;
-  iconOpened?: JSX.Element;
-  subNav?: SubOption[];
+  id: number;
 }
-
-interface SubOption {
-  title: string;
-  path: string;
-  icon: JSX.Element;
-  cName: string;
-}
-
 export interface SubMenuProps {
   item: SidebarOption;
-  subnav?: boolean;
-  showSubnav?: () => void;
+  selectedNav: number;
+  handleSelectedNav: (id: number) => void;
 }
+

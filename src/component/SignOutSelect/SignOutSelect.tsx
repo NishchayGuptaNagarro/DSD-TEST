@@ -19,6 +19,7 @@ export default function SignOutSelect() {
   const navigate = useNavigate();
   const clearStorage = () => {
     localStorage.clear();
+    sessionStorage.clear();
     navigate('/');
   };
 

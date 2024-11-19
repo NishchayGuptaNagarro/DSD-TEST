@@ -82,7 +82,7 @@ function DriverSelectionGrid({
           onChange={handleDriverSelection}
           sx={{
             display: 'grid',
-            gap: 1,
+            gap: 2,
             gridTemplateColumns: 'repeat(3,1fr)',
           }}>
           {/*  Iterating through driver data and rendering it as driver card*/}

@@ -5,13 +5,13 @@ import {ScreenLayoutProps} from './propTypes/types.ts';
 function ScreenLayout({children}: ScreenLayoutProps) {
   return (
     <Grid container>
-      <Grid height={'100vh'} item xs={2.6}>
+      <Grid height={'100vh'} item xs={2.75}>
         <Sidebar />
       </Grid>
       <Grid
         className={'avl-stock-screen hide-scrollbar'}
         item
-        xs={9.4}
+        xs={9.25}
         minHeight={400}
         sx={{maxHeight: '100vh', overflowY: 'scroll'}}>
         {children}
