@@ -19,7 +19,8 @@ $forest-green: rgba(16, 78, 22, 1);
 $chocolate-brown: rgba(120, 59, 26, 1);
 $medium-gray: rgba(119, 119, 119, 1);
 $pale-sky-blue: rgba(172, 231, 255, 1);
-
+$off-white-gray: rgba(235, 235, 235, 1);
+$dark-navy: rgba(9, 9, 71, 1);
 // Background Colors
 $bg-white-smoke: rgba(236, 236, 237, 1);
 $bg-beige-light: rgba(241, 242, 246, 1);
@@ -36,6 +37,11 @@ $bg-light-mint-green: rgba(224, 255, 220, 1);
 $bg-peach: rgba(255, 231, 220, 1);
 $bg-gray-light-transparent: rgba(163, 165, 168, 0.11);
 $bg-pale-slate-blue: rgba(111, 123, 160, 0.42);
+$bg-vibrant-ocean-blue: rgba(81, 136, 218, 1);
+$bg-silver-mist: rgba(142, 142, 142, 0.25);
+$bg-frost-blue: rgba(225, 243, 255, 1);
+$bg-midnight-blue-gray: rgba(37, 44, 60, 1);
+$bg-translucent-white: rgba(255, 255, 255, 0.16);
 
 // Border Colors
 $border-grey-light: rgba(218, 218, 218, 1);
@@ -61,5 +67,11 @@ $gradient-grey: linear-gradient(
   rgba(241, 244, 246, 0.2) 0%,
   rgba(241, 242, 246, 1) 47.52%,
   rgba(241, 242, 246, 0.2) 100%
+);
+
+$gradient-blue-mist: linear-gradient(
+  91.03deg,
+  rgba(213, 234, 255, 1) 15.38%,
+  rgba(226, 226, 226, 1) 101.13%
 );
 

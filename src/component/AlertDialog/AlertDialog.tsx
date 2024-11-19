@@ -3,9 +3,9 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
-import {AlertDialogProps} from './propTypes/types.ts';
-import styles from 'styles/design-systems.module.scss';
 import {useTranslation} from 'react-i18next';
+import styles from 'styles/design-systems.module.scss';
+import {AlertDialogProps} from './propTypes/types.ts';
 
 function AlertDialog({
   messageText,
@@ -21,7 +21,14 @@ function AlertDialog({
 
   return (
     <>
-      <Dialog open={isOpen}>
+      <Dialog
+        open={isOpen}
+        PaperProps={{
+          style: {
+            marginLeft: 'auto',
+            marginRight: '26%',
+          },
+        }}>
         <DialogContent dividers={true} sx={{minWidth: 250}}>
           <DialogContentText
             sx={{
@@ -43,3 +50,4 @@ function AlertDialog({
 }
 
 export default AlertDialog;
+

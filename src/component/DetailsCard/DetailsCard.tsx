@@ -1,55 +1,76 @@
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 
-import './DetailsCard.scss';
+import Avatar from '@mui/material/Avatar';
 import styles from 'styles/design-systems.module.scss';
+import './DetailsCard.scss';
 import {DetailsCardProps} from './propTypes/types.ts';
 
 function DetailsCard({
-  heading,
+  iconBackground,
   icon,
+  cardBackground,
   mainInfo,
+  mainInfoColor,
   secondaryInfo,
+  secondaryInfoColor,
 }: DetailsCardProps) {
   return (
     // Initial width of card is defined using flexBasis
     <Card
       className={'details-card'}
       variant={'outlined'}
-      sx={{borderRadius: 3, flexBasis: 400}}>
+      sx={{
+        borderRadius: 3,
+        flexBasis: 572,
+        height: 110,
+        backgroundColor: cardBackground,
+      }}>
       <CardContent
         sx={{
-          color: styles.blueSteel,
           padding: 1,
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
         }}>
         <Stack
           direction="row"
-          justifyContent="space-between"
+          justifyContent="center"
           alignItems="center"
-          marginBottom={1}>
-          <Typography
-            fontSize={styles.fontSizeXsm}
-            fontWeight={styles.fontWeightNormal}
-            sx={{color: styles.greySoft}}>
-            {heading}
-          </Typography>
-          <img data-testid={'icon'} src={icon} alt={'icon'} />
+          width={'100%'}
+          height={'100%'}>
+          <div className="icon-container">
+            <Avatar
+              sx={{
+                width: 50,
+                height: 50,
+                bgcolor: iconBackground,
+              }}>
+              <img src={icon} alt="no-image-present"></img>
+            </Avatar>
+          </div>
+          <div className="info-container">
+            <Typography
+              fontSize={styles.fontSizeLgPlus}
+              fontWeight={styles.fontWeightBolder}
+              sx={{color: mainInfoColor}}>
+              {mainInfo}
+            </Typography>
+            <Typography
+              fontSize={styles.fontSizeSm}
+              fontWeight={styles.fontWeightNormal}
+              sx={{color: secondaryInfoColor}}>
+              {secondaryInfo}
+            </Typography>
+          </div>
         </Stack>
-        <Typography
-          fontSize={styles.fontSizeSm}
-          fontWeight={styles.fontWeightBolder}>
-          {mainInfo}
-        </Typography>
-        <Typography
-          fontSize={styles.fontSizeSm}
-          fontWeight={styles.fontWeightLight}>
-          {secondaryInfo}
-        </Typography>
       </CardContent>
     </Card>
   );
 }
 
 export default DetailsCard;
+

@@ -14,9 +14,8 @@ function SubMenu({item, selectedNav, handleSelectedNav}: SubMenuProps) {
         <div
           className={`${item.id === selectedNav ? 'active-sidebar-vr' : 'inactive-sidebar-vr'}`}></div>
         <span className={'sidebar-btn'}>
-          <span
-            className={`${item.id === selectedNav ? 'active-sidebar-icon' : 'inactive-sidebar-icon'}`}>
-            {item.icon}
+          <span className={'sidebar-icon'}>
+            {item.id === selectedNav ? item.iconSkyBlue : item.icon}
           </span>
           <span className={'sidebar-label'}>{t(item.title)}</span>
         </span>
