@@ -247,6 +247,11 @@ function StockCheckOut() {
           spacing={2}
           sx={{
             p: 1.5,
+            px: {
+              md: 1,
+              lg: 1.6,
+              xl: 1,
+            },
             minHeight: '70vh',
             position: 'relative',
           }}>

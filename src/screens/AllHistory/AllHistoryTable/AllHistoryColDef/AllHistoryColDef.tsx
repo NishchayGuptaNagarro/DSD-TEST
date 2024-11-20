@@ -56,7 +56,7 @@ export const allHistoryColDef: (
       filterOperators: dateFilter,
       type: 'date',
       valueFormatter: (params: GridValueFormatterParams) => {
-        return format(params.value, 'do MMMM, yyyy');
+        return format(params.value, 'dd MMMM, yyyy');
       },
       valueGetter: (params: GridRenderCellParams) => {
         return new Date(params.value);

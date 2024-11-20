@@ -18,10 +18,24 @@ function DriverCard({driver, selectedDriverId}: DriverCardProps) {
       className={`driver-card ${selectedDriverId == driver.driverId ? 'selected' : ''}`}
       variant="outlined"
       sx={{
-        py: 2.5,
-        px: 2,
+        py: {
+          sm: 2,
+          md: 2,
+          lg: 3,
+        },
+        px: {
+          sm: 2,
+          md: 2,
+          lg: 2,
+          xl: 2.5,
+        },
         borderRadius: '8px',
-        width: '290px',
+        width: {
+          sm: '260px',
+          md: '350px',
+          lg: '97%',
+          xl: '350px',
+        },
       }}>
       <Stack alignItems="center" direction="row" spacing={1} height={'100%'}>
         {/*Avatar component displays image in a circular icon*/}

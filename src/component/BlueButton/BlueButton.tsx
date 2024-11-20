@@ -6,6 +6,7 @@ const BlueButton = styled(Button)({
   minWidth: 120,
   backgroundColor: styles.deepNavy,
   borderRadius: '3px',
+  textTransform: 'none',
   '&:hover': {
     backgroundColor: styles.deepNavy,
   },
