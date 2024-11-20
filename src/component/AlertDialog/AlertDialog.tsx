@@ -3,6 +3,8 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
+import {useTheme} from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import {useTranslation} from 'react-i18next';
 import styles from 'styles/design-systems.module.scss';
 import {AlertDialogProps} from './propTypes/types.ts';
@@ -18,6 +20,8 @@ function AlertDialog({
   };
 
   const {t} = useTranslation();
+  const theme = useTheme();
+  const isExtraLargeScreen = useMediaQuery(theme.breakpoints.up('xl'));
 
   return (
     <>
@@ -26,7 +30,7 @@ function AlertDialog({
         PaperProps={{
           style: {
             marginLeft: 'auto',
-            marginRight: '26%',
+            marginRight: isExtraLargeScreen ? '30%' : '26%',
           },
         }}>
         <DialogContent dividers={true} sx={{minWidth: 250}}>
