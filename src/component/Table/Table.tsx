@@ -1,4 +1,3 @@
-import Box from '@mui/material/Box';
 import {styled} from '@mui/material/styles';
 import {
   DataGrid,
@@ -17,9 +16,10 @@ import {
 import {TableProps} from './propTypes/types.ts';
 import './Table.scss';
 
+import Box from '@mui/material/Box';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
-import NoDataError from 'assets/PNG/NoDataError.png';
+import NoDataAvailable from 'assets/PNG/NoDataAvailableIcon.png';
 import {useTranslation} from 'react-i18next';
 import styles from 'styles/design-systems.module.scss';
 
@@ -57,7 +57,7 @@ function CustomNoRowsOverlay() {
 
   return (
     <StyledGridOverlay>
-      <img src={NoDataError} alt="No data" className="no-data-img" />
+      <img src={NoDataAvailable} alt="No data" className="no-data-img" />
       <Box
         sx={{
           mt: 0.5,

@@ -50,7 +50,10 @@ export default function SignOutSelect() {
 
   return (
     <List sx={sxListProp} component="nav">
-      <ListItemButton onClick={handleClick} sx={{padding: 0, borderRadius: 10}}>
+      <ListItemButton
+        onClick={handleClick}
+        sx={{borderRadius: 10}}
+        disableRipple>
         <ListItemIcon sx={{px: 0}}>
           <Avatar
             sx={{
