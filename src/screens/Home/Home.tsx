@@ -34,7 +34,7 @@ function Home() {
         <Box marginBottom={'16px'} position={'relative'}>
           <CardStack />
         </Box>
-        <Stack
+        <Box
           sx={{
             maxWidth: '100%',
             width: '100%',
@@ -47,11 +47,8 @@ function Home() {
               lg: 'repeat(4, 1fr)',
               xl: 'repeat(4, 1fr)',
             },
-          }}
-          direction={'row'}
-          flexWrap={'wrap'}
-          marginBottom={3}
-          justifyContent={'space-between'}>
+            marginBottom: 3,
+          }}>
           {SidebarData.map(
             (item, index) =>
               index !== 0 && <NavigationCard item={item} key={index} />,
@@ -133,7 +130,7 @@ function Home() {
               </CardContent>
             </Card>
           </Stack>
-        </Stack>
+        </Box>
         <Stack
           direction={'row'}
           sx={{
