@@ -26,8 +26,6 @@
 
   .download-container {
     margin-block: 16px;
-    padding-right: 15px;
-    display: flex;
     justify-content: end;
 
     .download-btn-container {
@@ -55,14 +53,7 @@
   }
 }
 
-.create-loading-card {
-  width: 270px;
-  height: 256px;
-}
 .navigation-card {
-  width: 270px;
-  height: 256px;
-  margin-inline: 12px;
   transition: transform 0.3s;
   &:hover {
     transform: scale(1.05);

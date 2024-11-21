@@ -19,7 +19,19 @@ function NavigationCard({item}: NavigationCardProps) {
       <Card
         className={'navigation-card'}
         variant={'outlined'}
-        sx={{borderRadius: 2}}>
+        sx={{
+          borderRadius: 2,
+          width: {
+            md: '94%',
+            lg: '98%',
+            xl: '90%',
+          },
+          height: {
+            md: '256px',
+            lg: '256px',
+            xl: '300px',
+          },
+        }}>
         <CardActionArea
           onClick={() => navigate(item.path)}
           sx={{cursor: 'pointer', height: '100%'}}>

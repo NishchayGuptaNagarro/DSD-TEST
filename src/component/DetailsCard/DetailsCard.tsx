@@ -24,7 +24,7 @@ function DetailsCard({
       variant={'outlined'}
       sx={{
         borderRadius: 3,
-        flexBasis: 572,
+        flexBasis: 650,
         height: 110,
         backgroundColor: cardBackground,
       }}>
