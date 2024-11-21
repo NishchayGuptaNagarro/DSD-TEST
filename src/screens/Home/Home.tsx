@@ -31,23 +31,45 @@ function Home() {
         <img className="header-icon" src={NagarroGray}></img>
       </Header>
       <Stack className="nav-container">
-        <Box paddingLeft={2} marginBottom={'16px'} position={'relative'}>
+        <Box marginBottom={'16px'} position={'relative'}>
           <CardStack />
         </Box>
         <Stack
+          sx={{
+            maxWidth: '100%',
+            width: '100%',
+            rowGap: '7%',
+            columnGap: '2%',
+            display: 'grid',
+            gridTemplateColumns: {
+              sm: 'repeat(2, 1fr)',
+              md: 'repeat(2, 1fr)',
+              lg: 'repeat(4, 1fr)',
+              xl: 'repeat(4, 1fr)',
+            },
+          }}
           direction={'row'}
           flexWrap={'wrap'}
           marginBottom={3}
-          justifyContent={'space-evenly'}>
+          justifyContent={'space-between'}>
           {SidebarData.map(
             (item, index) =>
               index !== 0 && <NavigationCard item={item} key={index} />,
           )}
           <Stack>
             <Card
-              className={'create-loading-card'}
               variant={'outlined'}
               sx={{
+                width: {
+                  md: '94%',
+                  lg: '98%',
+                  xl: '90%',
+                },
+                height: {
+                  md: '256px',
+                  lg: '256px',
+                  xl: '300px',
+                },
                 borderRadius: 2,
                 backgroundColor: styles.bgVibrantOceanBlue,
                 position: 'relative',
@@ -112,7 +134,16 @@ function Home() {
             </Card>
           </Stack>
         </Stack>
-        <div className="download-container">
+        <Stack
+          direction={'row'}
+          sx={{
+            paddingRight: {
+              md: '3%',
+              lg: '0.3%',
+              xl: '2%',
+            },
+          }}
+          className="download-container">
           <Stack
             direction={'row'}
             justifyContent={'space-between'}
@@ -121,7 +152,7 @@ function Home() {
             sx={{
               background: styles.gradientBlueMist,
               paddingLeft: '3%',
-              paddingRight: '2px',
+
               height: '100px',
               width: '572px',
             }}>
@@ -156,7 +187,7 @@ function Home() {
               </div>
             </div>
           </Stack>
-        </div>
+        </Stack>
       </Stack>
     </div>
   );
@@ -174,7 +205,23 @@ function CardStack() {
   const adminMainInfo = `${t('home.welcomeAdmin')} ${user.username?.split(' ')[0] || ''}!`;
   const dateMainInfo = t('home.dateHeading');
   return (
-    <Stack direction="row" spacing={3} marginBottom={2} paddingLeft={'2px'}>
+    <Stack
+      direction="row"
+      columnGap={'3%'}
+      marginBottom={2}
+      sx={{
+        justifyContent: {
+          sm: 'inherit',
+          md: 'space-between',
+          xl: 'inherit',
+        },
+        paddingRight: {
+          md: '3%',
+          lg: '0.6%',
+          xl: '2%',
+        },
+      }}
+      paddingLeft={'2px'}>
       <DetailsCard
         iconBackground={styles.bgTranslucentWhite}
         icon={PersonBlue}
