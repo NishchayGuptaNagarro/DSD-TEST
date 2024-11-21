@@ -2,10 +2,9 @@ import InProgressStep from 'assets/PNG/InProgressStep.png';
 import CompletedStep from 'assets/SVG/CompletedStep.svg';
 import PendingStep from 'assets/SVG/PendingStep.svg';
 import timelineContext from 'context/timeline/timelineContext';
-import {useContext, useEffect} from 'react';
+import {Fragment, useContext, useEffect} from 'react';
 import {useTranslation} from 'react-i18next';
 import styles from 'styles/design-systems.module.scss';
-
 import './Timeline.scss';
 
 function Timeline() {
@@ -24,8 +23,8 @@ function Timeline() {
           {steps?.map((step, i) => (
             //when the value of currentStep is equal to key+1 which is i+1 then it is our active div
             //when the value of currentStep is greater than key+1 then these are our completed div
-            <>
-              <div className={'step-item'} key={i}>
+            <Fragment key={i}>
+              <div className={'step-item'}>
                 {/* if currentStep is greater or equal to key+1 it means they are completed, and we have to show them as dark blue// */}
                 <div data-testid="step" className="step">
                   <div className="steps-done">
@@ -70,7 +69,7 @@ function Timeline() {
                         : styles.bgSoftSky,
                   }}></div>
               )}
-            </>
+            </Fragment>
           ))}
         </div>
       </div>

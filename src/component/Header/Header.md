@@ -5,7 +5,7 @@ The `Header` component is designed to display a header over required screens. It
 ### Inclusion
 
 ```
-import AppHeader from 'component/Header/Header.tsx';
+import Header from 'component/Header/Header.tsx';
 
 <Header>
     <PageDetails heading={heading} subHeading={subHeading} />

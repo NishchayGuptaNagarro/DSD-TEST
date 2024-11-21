@@ -12,6 +12,7 @@ import {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {useNavigate} from 'react-router-dom';
 import styles from 'styles/design-systems.module.scss';
+import './SignOutSelect.scss';
 
 export default function SignOutSelect() {
   const {t} = useTranslation();
@@ -71,12 +72,12 @@ export default function SignOutSelect() {
         <List component="nav" disablePadding>
           <ListItemButton
             sx={{
-              padding: '2px 0 0 3px',
+              padding: '2px 10px 0 3px',
               borderRadius: '4px',
               marginTop: '10px',
               bgcolor: styles.whitePure,
               border: `1px solid ${styles.borderSoftGray}`,
-              width: '133px',
+              width: 'min-content',
               height: '40px',
               position: 'absolute',
               right: 0,
@@ -92,7 +93,7 @@ export default function SignOutSelect() {
             <ListItemText
               sx={{
                 color: styles.mediumGray,
-                paddingLeft: '14px',
+                paddingLeft: '10px',
               }}
               primary={t('header.logout')}
             />

@@ -29,13 +29,8 @@
       flex-grow: 1;
       align-items: center;
 
-      .inactive-sidebar-icon {
+      .sidebar-icon {
         width: min-content;
-      }
-      .active-sidebar-icon {
-        width: min-content;
-        filter: invert(25%) sepia(10%) saturate(500%) hue-rotate(190deg)
-          brightness(100%) contrast(150%);
       }
     }
 
@@ -63,6 +58,7 @@
   }
 
   .nav-icon {
+    padding-left: 10px;
     margin-left: 16px;
     height: 20px;
     display: flex;

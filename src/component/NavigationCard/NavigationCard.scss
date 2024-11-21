@@ -1,0 +1,34 @@
+.nav-icon {
+  height: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 0;
+}
+
+.card-icon-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  height: min-content;
+  padding-top: 4px;
+  flex: 0.5;
+}
+
+.card-text-container {
+  padding-left: 6px;
+  flex: 1;
+}
+
+.bottom-icon-container {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  display: flex;
+  justify-content: flex-end;
+  width: min-content;
+}
+
+.bottom-icon {
+  width: 18px;
+}
