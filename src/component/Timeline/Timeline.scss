@@ -64,17 +64,14 @@
   .steps-wrapper {
     position: absolute;
     top: 48%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @include flex-column;
+    @include flex-center;
   }
 
   .steps {
     color: $gray-charcoal;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex-row;
+    @include flex-center;
     word-wrap: break-word;
     font-size: $font-xsm;
     font-weight: $font-normal;
