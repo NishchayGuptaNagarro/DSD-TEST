@@ -17,6 +17,7 @@ import {isTokenValid} from 'utilities/isTokenValid.ts';
 import {checkApiError} from 'utilities/checkApiError.ts';
 import styles from 'styles/design-systems.module.scss';
 import bgImage from '../../assets/WEBP/LoginBackground.webp';
+import {EMAIL_REGEX} from '../../utilities/regex.ts';
 
 function ForgotPassword() {
   const navigator = useNavigate();
