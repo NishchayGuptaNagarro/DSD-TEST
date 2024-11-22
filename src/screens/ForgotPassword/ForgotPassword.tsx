@@ -46,10 +46,7 @@ function ForgotPassword() {
     },
     validationSchema: Yup.object({
       email: Yup.string()
-        .matches(
-          /^[\w]+([-.+']?[\w]+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
-          t('forgotPassword.email.error'),
-        )
+        .matches(EMAIL_REGEX, t('forgotPassword.email.error'))
         .required('*Required'),
     }),
     onSubmit: async values => {
@@ -65,7 +62,7 @@ function ForgotPassword() {
     return null;
   } else {
     return (
-      <div className={'root'}>
+      <div className={'forgot-password-root'}>
         <img src={bgImage} className={'bg-image'} alt={'background'} />
         <Stack direction={'row'} justifyContent={'space-between'} px={4} py={2}>
           <img src={logo} className={'logo'} alt={'logo'} />

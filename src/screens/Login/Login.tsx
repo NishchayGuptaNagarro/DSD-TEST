@@ -86,7 +86,7 @@ function Login() {
     return null;
   } else {
     return (
-      <div className={'root'}>
+      <div className={'login-root'}>
         <img src={bgImage} className={'bg-image'} alt={'background'} />
         <Stack direction={'row'} justifyContent={'space-between'} px={4} py={2}>
           <img src={logo} className={'logo'} alt={'logo'} />
