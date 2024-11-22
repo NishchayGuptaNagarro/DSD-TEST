@@ -84,11 +84,11 @@
     padding-bottom: 1%;
   }
 
-  .steps-wrapper:first-child {
-    margin-left: 2%;
+  .step-item:first-of-type .steps-wrapper > .steps:first-child {
+    padding-left: 3%;
   }
-  .steps-wrapper:last-child {
-    margin-right: 5%;
+  .step-item:last-of-type .steps-wrapper > .steps:first-child {
+    padding-right: 14%;
   }
 
   .step-indicator {
