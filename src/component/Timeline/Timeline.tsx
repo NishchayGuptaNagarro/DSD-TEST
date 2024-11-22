@@ -39,24 +39,26 @@ function Timeline() {
                 </div>
 
                 {/* completed text will be shown as white and non completed as in faded white */}
-                <div className="steps">
-                  <p>{` ${i + 1}.  ${t(step)}`}</p>
-                </div>
-                <div
-                  className={`step-indicator ${
-                    i + 1 < currentStep
-                      ? 'completed'
-                      : i + 1 === currentStep
-                        ? 'in-progress'
-                        : 'pending'
-                  }`}>
-                  <span>
-                    {i + 1 < currentStep
-                      ? t('timeline.completed')
-                      : i + 1 === currentStep
-                        ? t('timeline.inProgress')
-                        : t('timeline.pending')}
-                  </span>
+                <div className="steps-wrapper">
+                  <div className="steps">
+                    <p>{` ${i + 1}.  ${t(step)}`}</p>
+                  </div>
+                  <div
+                    className={`step-indicator ${
+                      i + 1 < currentStep
+                        ? 'completed'
+                        : i + 1 === currentStep
+                          ? 'in-progress'
+                          : 'pending'
+                    }`}>
+                    <span>
+                      {i + 1 < currentStep
+                        ? t('timeline.completed')
+                        : i + 1 === currentStep
+                          ? t('timeline.inProgress')
+                          : t('timeline.pending')}
+                    </span>
+                  </div>
                 </div>
               </div>
               {i + 1 < steps.length && (
