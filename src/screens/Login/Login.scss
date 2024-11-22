@@ -2,28 +2,67 @@
 //IMPORTANT write all classes related to login form inside '.login-form' so they only affect this form and not entire application
 .login-form {
   @include flex-column;
-  padding: 0 18%;
-  gap: 10px;
-
-  @media(width>=1440px){
-    padding: 0 27%;
-  }
+  gap: 5px;
   @extend %common-form-rules;
+
   .form-link {
-    text-decoration: underline;
+    text-decoration: none;
+    color: $deep-navy;
   }
-  .eye-icon{
+
+  .eye-icon {
     position: absolute;
-    top:8%;
-    right:1%;
+    top: 5%;
+    right: 1%;
     z-index: 1;
   }
-  .password-input-container{
+
+  .password-input-container {
     position: relative;
+  }
+
+  .MuiButtonBase-root[type='submit'] {
+    background-color: $deep-navy;
+    text-transform: none;
+  }
+
+  .MuiButtonBase-root:disabled {
+    background-color: $gray-muted;
+    color: $white-pure;
   }
 }
 
-.login-language-select{
+.login-language-select {
   @extend .language-selection-dropdown;
-  top:10px;
+  top: 10px;
 }
+
+.root {
+  .bg-image {
+    position: absolute;
+    @include responsive-image;
+    min-height: 500px;
+
+    z-index: -1;
+    filter: brightness(0.45) contrast(0.8);
+  }
+
+  .logo {
+    width: 150px;
+    object-fit: contain;
+  }
+
+  .form-container {
+    @extend .center-element;
+    top: 52%;
+    position: absolute;
+    width: 500px;
+    background-color: $white-pure;
+    padding: 60px 70px;
+    border-radius: 12px;
+    @media screen and (min-width: $breakpoint-xl) {
+      width: 550px;
+    }
+  }
+}
+

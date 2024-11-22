@@ -79,42 +79,38 @@
 }
 
 %common-form-rules {
+
   .form-label {
-    font-weight: $font-bolder;
-    color: $blue-steel;
+    font-weight: $font-light;
+    color: $charcoal-dark;
     &.form-label-error {
       color: $red-error;
     }
   }
   .form-input {
-    color: $blue-steel;
-    background-color: $bg-white-smoke;
-    border: none;
+    color:  $charcoal-dark;
+    background-color: $white-pure;
+    border: 0.6px solid $gray-muted;
     height: 40px;
-    border-radius: 4px;
+    border-radius: 5px;
     font-weight: $font-light;
     padding: 0 10px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     width: 100%;
     &[type='password'] {
-      font-weight: $font-boldest;
+      font-weight: $font-bolder;
     }
     &:focus-visible {
-      outline-color: $blue-steel;
+      outline-color: $charcoal-dark;
+    }
+    &::placeholder{
+      color: $gray-muted;
     }
   }
   .form-input-error {
     outline: 1px solid $red-error !important;
     //  Reason for adding 'important' to this property was that outline was being override on focus visible
     //  but it should stay red until error is resolved
-  }
-  .form-checkbox {
-    margin-right: 5px;
-    cursor: pointer;
-    transform: scale(1.2);
-  }
-  .form-checkbox-label {
-    color: $blue-steel;
   }
 }
 
