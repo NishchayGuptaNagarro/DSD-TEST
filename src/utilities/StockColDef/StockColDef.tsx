@@ -11,7 +11,7 @@ export const stockColDef: GridColDef[] = [
     field: 'item',
     headerName: 'table.items',
     flex: 0.5,
-    headerClassName: 'font-lg font-normal',
+    headerClassName: 'font-md font-normal',
     renderHeader: (params: GridColumnHeaderParams) => {
       return (
         <div className="stock-header">
@@ -22,13 +22,13 @@ export const stockColDef: GridColDef[] = [
     renderCell: (params: GridRenderCellParams<Stock[]>) => {
       return <div className="stock-item-cell">{params.value}</div>;
     },
-    cellClassName: 'font-md font-normal',
+    cellClassName: 'font-sm font-normal',
     sortable: false,
   },
   {
     field: 'initial',
     headerName: 'table.initialStock',
-    headerClassName: 'font-lg font-normal',
+    headerClassName: 'font-md font-normal',
     flex: 0.5,
     renderHeader: (params: GridColumnHeaderParams) => {
       return <ColumnHeader headerName={params.colDef.headerName || ''} />;
@@ -36,7 +36,7 @@ export const stockColDef: GridColDef[] = [
     renderCell: (params: GridRenderCellParams<Stock[]>) => {
       return <div className="stock-cell">{params.value}</div>;
     },
-    cellClassName: 'font-md font-normal',
+    cellClassName: 'font-sm font-normal',
     sortable: false,
     headerAlign: 'center',
     align: 'center',
@@ -44,7 +44,7 @@ export const stockColDef: GridColDef[] = [
   {
     field: 'remaining',
     headerName: 'table.remaining',
-    headerClassName: 'font-lg font-normal',
+    headerClassName: 'font-md font-normal',
     renderHeader: (params: GridColumnHeaderParams) => {
       return <ColumnHeader headerName={params.colDef.headerName || ''} />;
     },
@@ -52,7 +52,7 @@ export const stockColDef: GridColDef[] = [
       return <div className="stock-cell">{params.value}</div>;
     },
     flex: 0.5,
-    cellClassName: 'font-md font-normal',
+    cellClassName: 'font-sm font-normal',
     sortable: false,
     headerAlign: 'center',
     align: 'center',

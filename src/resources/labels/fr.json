@@ -16,7 +16,9 @@
   "forgotPassword.link.label": "Retour à la connexion",
   "forgotPassword.quote": "La plupart des gens passent à côté d'une opportunité parce qu'elle est vêtue d'une salopette et qu'elle ressemble à du travail.",
   "createLoadingOrder.title": "Créer un ordre de chargement",
-  "createLoadingOrder.subtitle": "Pour créer un ordre de chargement, veuillez suivre les étapes",
+  "createLoadingOrder.heading": "Chargement de la commande",
+  "createLoadingOrder.subHeading": "Créer des ordres de chargement.",
+  "createLoadingOrder.subtitle": "Suivez les étapes",
   "createLoadingOrder.back": "Retour",
   "createLoadingOrder.next": "Suivant",
   "createLoadingOrder.finish": "Finition",
@@ -37,6 +39,7 @@
   "availablestock.card2Heading": "Nom et identifiant du responsable",
   "availablestock.card3Heading": "Date",
   "availablestock.button": "Créer un ordre de chargement",
+  "availablestock.creatNow": "Créer maintenant",
   "table.product": "Produit",
   "table.description": "Description du produit",
   "table.quantity": "Quantité",
@@ -66,7 +69,9 @@
   "driversignature.action2": "Rejeter",
 
   "stockcheckin.heading": "Réception de stock",
+  "stockcheckin.cardTitle": "En stock",
   "stockcheckin.subheading": "Pour réceptionner le stock, veuillez suivre les étapes",
+  "stockcheckin.secondaryInfo": "Cliquez pour voir les stocks enregistrés",
   "timeline.option6": "Sélectionner la réception en attente",
   "timeline.option7": "Historique des transactions",
   "timeline.option8": "Stock",
@@ -92,7 +97,9 @@
   "table.view.orders": "Voir les commandes",
   "table.view.attachments": "Voir les pièces jointes",
   "table.view.attachment": "Voir la pièce jointe",
-  "history.pageHeading": "Historique de toutes les commandes",
+  "history.pageHeading": "Historique des commandes",
+  "history.pageSubHeading": "Toutes les commandes sont disponibles ici.",
+  "history.secondaryInfo": "Cliquez pour voir l'historique des commandes",
   "history.orderSummary": "Résumé de la commande",
   "history.stockDetails": "Détails du stock",
   "history.attachment": "Pièce jointe",
@@ -101,6 +108,16 @@
   "alert.text3": "Stock initial déjà attribué au chauffeur",
   "alert.btn1": "D'accord",
   "alert.btn2": "Ignorer",
-  "stockcheckout.heading": "Sortie de stock"
+  "stockcheckout.heading": "Sortie de stock",
+  "stockcheckout.cardTitle": "En rupture de stock",
+  "stockcheckout.secondaryInfo": "Cliquez pour voir les stocks sortis",
+
+  "header.logout": "déconnexion",
+  "downloadContainer.buttonText": "Télécharger maintenant",
+  "downloadContainer.line1": "Notre application mobile est",
+  "downloadContainer.line2": "disponible sur le SAP Store !",
+  "home.welcomeAdmin": "Bon retour,",
+  "home.adminSecondaryHeading": "Profil : Administrateur d'entrepôt",
+  "home.dateHeading": "La date d'aujourd'hui"
 }
 

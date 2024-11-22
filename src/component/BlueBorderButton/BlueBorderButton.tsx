@@ -10,6 +10,7 @@ const BlueBorderButton = styled(Button)({
   border: `1px solid ${styles.deepNavy}`,
   boxShadow: 'none',
   borderRadius: '3px',
+  textTransform: 'none',
   '&:hover': {backgroundColor: styles.bgColorWhiteSmoke},
 });
 

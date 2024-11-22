@@ -1,8 +1,9 @@
 import IconButton from '@mui/material/IconButton';
-import DeleteSharpIcon from '@mui/icons-material/DeleteSharp';
-import {useOutletContext} from 'react-router-dom';
+import Paper from '@mui/material/Paper';
+import RedCross from 'assets/SVG/RedCross.svg';
 import {useEffect, useRef} from 'react';
 import {useTranslation} from 'react-i18next';
+import {useOutletContext} from 'react-router-dom';
 import SignatureCanvas from 'react-signature-canvas';
 import {StockCheckInContext} from '../propTypes/types.ts';
 import './AdminSignature.scss';
@@ -30,13 +31,11 @@ function AdminSignature() {
 
   return (
     <>
-      <form
-        data-testid={'admin-signature-form'}
-        className={'admin-signature-form'}>
-        <label className={'form-label label-1'}>
-          {t('createLoadingOrder.signature.admin')}:
-        </label>
-        <span
+      <div className="signature-label">
+        {t('createLoadingOrder.signature.admin')}
+      </div>
+      <Paper elevation={1} className="wrapper">
+        <div
           data-testid={'signature-container'}
           className={'signature-container'}>
           <SignatureCanvas
@@ -48,19 +47,13 @@ function AdminSignature() {
             onEnd={handleSignatureDone}
             throttle={0}></SignatureCanvas>
           <IconButton className={'clear-btn'} onClick={clearSignature}>
-            <DeleteSharpIcon />
+            <img src={RedCross} alt="clear-btn" />
           </IconButton>
-        </span>
-
-        <label className={'form-label label-2 display-none'}>
-          {t('createLoadingOrder.note.label')}:
-        </label>
-        <textarea
-          placeholder={t('createLoadingOrder.note.placeholder')}
-          className={'text-box font-sm display-none'}></textarea>
-      </form>
+        </div>
+      </Paper>
     </>
   );
 }
 
 export default AdminSignature;
+

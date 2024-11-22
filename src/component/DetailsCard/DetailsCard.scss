@@ -1,7 +1,18 @@
+@import 'src/styles/design-systems.module';
 //Overriding material UI defaults
-
-.details-card{
+.details-card {
   .MuiCardContent-root:last-child {
     padding-bottom: 2%;
   }
+
+  .info-container {
+    flex: 1;
+  }
+
+  .icon-container {
+    @include flex-row;
+    @include flex-center;
+    flex: 0.25;
+  }
 }
+

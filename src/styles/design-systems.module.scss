@@ -24,6 +24,10 @@
   deepNavy: $deep-navy;
   forestGreen: $forest-green;
   chocolateBrown: $chocolate-brown;
+  mediumGray: $medium-gray;
+  paleSkyBlue: $pale-sky-blue;
+  offWhiteGray: $off-white-gray;
+  darkNavy: $dark-navy;
 
   // Background Colors
   bgColorWhiteSmoke: $bg-white-smoke;
@@ -39,7 +43,13 @@
   bgFreshGreen: $bg-fresh-green;
   bgLightMintGreen: $bg-light-mint-green;
   bgPeach: $bg-peach;
-
+  bgGrayLightTransparent: $bg-gray-light-transparent;
+  bgPaleSlateBlue: $bg-pale-slate-blue;
+  bgVibrantOceanBlue: $bg-vibrant-ocean-blue;
+  bgSilverMist: $bg-silver-mist;
+  bgFrostBlue: $bg-frost-blue;
+  bgMidnightBlueGray: $bg-midnight-blue-gray;
+  bgTranslucentWhite: $bg-translucent-white;
   // Border Colors
   borderGreyLight: $border-grey-light;
   borderGreyFocus: $border-grey-focus;
@@ -47,10 +57,12 @@
   borderBlueBright: $border-blue-bright;
   borderBlueDark: $border-blue-dark;
   borderGrayMuted: $border-gray-muted;
+  borderSoftGray: $border-soft-gray;
   // Gradients
   gradientBlack: $gradient-black;
   gradientBlue: $gradient-blue;
   gradientGrey: $gradient-grey;
+  gradientBlueMist: $gradient-blue-mist;
 
   // Font Sizes
   fontSizeXxl: $font-xxl; //28px
@@ -60,6 +72,8 @@
   fontSizeMd: $font-md; //16px
   fontSizeSm: $font-sm; //14px
   fontSizeXsm: $font-xsm; //12px
+  fontSizeXxsm: $font-xxsm; //10px
+  fontSizeXxxsm: $font-xxxsm; //8px
 
   // Font Weights
   fontWeightBoldest: $font-boldest; //800

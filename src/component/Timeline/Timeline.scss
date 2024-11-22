@@ -10,7 +10,7 @@
   .container-timeline {
     display: flex;
     @include flex-row;
-    height: 124px;
+    height: 120px;
     width: 100%;
     background: $white-pure;
     border-radius: 8px;
@@ -22,15 +22,15 @@
     @include flex-column;
     @include flex-center;
     @extend .font-xsm;
-    padding: 10px 0;
-    flex: 0.5;
+    padding: 1% 0;
+    width: 10%;
   }
 
   .timeline-hr {
     height: 5px;
     flex: 1;
     border-radius: 10px;
-    margin-bottom: 40px;
+    margin-bottom: 32px;
   }
 
   .step {
@@ -38,7 +38,7 @@
     height: 24px;
     display: flex;
     @include flex-center;
-    z-index: 10;
+    z-index: 2;
     position: relative;
     background-color: $white-pure;
     border-radius: 50%;
@@ -58,18 +58,23 @@
   }
 
   .steps {
+    margin-top: 2px;
     color: $gray-charcoal;
     display: flex;
-    justify-content: flex-start;
-    white-space: nowrap;
-    font-size: $font-sm;
+    justify-content: center;
+    align-items: center;
+    word-wrap: break-word;
+    font-size: $font-xsm;
     font-weight: $font-normal;
+    width: 180%;
+    min-width: 68px;
+    text-align: center;
   }
 
   .step-indicator {
     display: flex;
     justify-content: center;
-    font-size: $font-xsm;
+    font-size: $font-xxsm;
     font-weight: $font-normal;
 
     &.in-progress {

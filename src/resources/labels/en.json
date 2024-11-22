@@ -17,9 +17,10 @@
   "forgotPassword.button.label": "Send Code",
   "forgotPassword.link.label": "Back to login",
   "forgotPassword.quote": "Opportunity is missed by most people because it is dressed in overalls and looks like work.",
-
+  "createLoadingOrder.heading": "Loading Order",
+  "createLoadingOrder.subHeading": "Create loading orders.",
   "createLoadingOrder.title": "Create Loading Order",
-  "createLoadingOrder.subtitle": "To create a loading order, Please follow the steps",
+  "createLoadingOrder.subtitle": "Follow the steps",
   "createLoadingOrder.back": "Back",
   "createLoadingOrder.next": "Next",
   "createLoadingOrder.finish": "Finish",
@@ -41,6 +42,7 @@
   "availablestock.card2Heading": "Manager Name & ID",
   "availablestock.card3Heading": "Date",
   "availablestock.button": "Create a loading Order",
+  "availablestock.creatNow": "Create Now",
 
   "table.product": "Product",
   "table.description": "Product Description",
@@ -69,8 +71,12 @@
   "driversignature.action1": "Activate",
   "driversignature.action2": "Reject",
   "stockcheckin.heading": "Stock Check In",
+  "stockcheckin.cardTitle": "Stock In",
   "stockcheckout.heading": "Stock Check Out",
+  "stockcheckout.cardTitle": "Stock Out",
+  "stockcheckout.secondaryInfo": "Click to view Stocks checked out.",
   "stockcheckin.subheading": "To check in stock, Please follow the steps",
+  "stockcheckin.secondaryInfo": "Click to view Stocks checked in.",
   "timeline.option6": "Select Pending Check-In",
   "timeline.option7": "Transaction History",
   "timeline.option8": "Stock",
@@ -96,7 +102,9 @@
   "table.view.orders": "View Orders",
   "table.view.attachments": "View Attachments",
   "table.view.attachment": "View Attachment",
-  "history.pageHeading": "All Orders History",
+  "history.pageHeading": "Order History",
+  "history.pageSubHeading": "All orders are available here",
+  "history.secondaryInfo": "Click to view order history",
   "history.orderSummary": "Order Summary",
   "history.stockDetails": "Stock Details",
   "history.attachment": "Attachment's",
@@ -104,6 +112,14 @@
   "alert.text2": "Stock Assigned To Driver",
   "alert.text3": "Initial stock already assigned to driver",
   "alert.btn1": "Okay",
-  "alert.btn2": "Dismiss"
+  "alert.btn2": "Dismiss",
+
+  "header.logout": "Logout",
+  "downloadContainer.buttonText": "Download Now",
+  "downloadContainer.line1": "Our mobile app is",
+  "downloadContainer.line2": "available on SAP Store!",
+  "home.welcomeAdmin": "Welcome Back,",
+  "home.adminSecondaryHeading": "Profile : Warehouse Admin",
+  "home.dateHeading": "Today's Date"
 }
 

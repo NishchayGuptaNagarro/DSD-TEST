@@ -77,14 +77,23 @@ function DriverSelectionGrid({
         />
         {/* Radio Group will control which radio button is selected based on value attribute, its onChange event is triggered when we click on a radio button*/}
         <RadioGroup
+          className="radio-buttons-wrapper"
           name="controlled-radio-buttons-group"
           value={selectedDriverId}
-          onChange={handleDriverSelection}
           sx={{
+            maxWidth: '100%',
+            width: '100%',
+            rowGap: '7%',
+            columnGap: '1%',
             display: 'grid',
-            gap: 1,
-            gridTemplateColumns: 'repeat(3,1fr)',
-          }}>
+            gridTemplateColumns: {
+              sm: 'repeat(2, 1fr)',
+              md: 'repeat(2, 1fr)',
+              lg: 'repeat(3, 1fr)',
+              xl: 'repeat(5, 1fr)',
+            },
+          }}
+          onChange={handleDriverSelection}>
           {/*  Iterating through driver data and rendering it as driver card*/}
           {filteredArray.map(driver => {
             return (

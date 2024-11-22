@@ -1,28 +1,23 @@
-import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import {useTranslation} from 'react-i18next';
+import Stack from '@mui/material/Stack';
+import Header from 'component/Header/Header.tsx';
+import PageDetails from 'component/PageDetails/PageDetails.tsx';
 import ScreenLayout from 'component/ScreenLayout/ScreenLayout.tsx';
-import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
-import PageHeading from 'component/PageHeading/PageHeading.tsx';
-import AllHistoryTable from './AllHistoryTable/AllHistoryTable.tsx';
+import {useTranslation} from 'react-i18next';
 import './AllHistory.scss';
+import AllHistoryTable from './AllHistoryTable/AllHistoryTable.tsx';
 
 function AllHistory() {
   const {t} = useTranslation();
   const heading = t('history.pageHeading');
+  const subHeading = t('history.pageSubHeading');
 
   return (
     <ScreenLayout>
+      <Header>
+        <PageDetails heading={heading} subHeading={subHeading} />
+      </Header>
       <Stack className={'all-history-screen'}>
-        <Box padding={2} paddingBottom={0} position={'relative'}>
-          <span className={'history-language-select'}>
-            <LanguageSelect />
-          </span>
-          {/*THESE br will be removed when language selection is added to separate component*/}
-          <br />
-          <br />
-          <PageHeading heading={heading} subHeading={''} />
-        </Box>
         <Box padding={2} sx={{textAlign: 'center'}}>
           <AllHistoryTable />
         </Box>
@@ -32,3 +27,4 @@ function AllHistory() {
 }
 
 export default AllHistory;
+

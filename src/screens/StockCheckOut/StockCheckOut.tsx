@@ -1,4 +1,3 @@
-import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 
 import {AxiosResponse} from 'axios';
@@ -8,14 +7,14 @@ import {Outlet, useNavigate} from 'react-router';
 import {useLocation} from 'react-router-dom';
 
 import BlueButton from 'component/BlueButton/BlueButton.tsx';
-import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
-import PageHeading from 'component/PageHeading/PageHeading.tsx';
 import ScreenLayout from 'component/ScreenLayout/ScreenLayout.tsx';
 import Timeline from 'component/Timeline/Timeline.tsx';
 
 import {api} from 'api/api.ts';
 import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
 import BlueBorderButton from 'component/BlueBorderButton/BlueBorderButton.tsx';
+import Header from 'component/Header/Header.tsx';
+import PageDetails from 'component/PageDetails/PageDetails.tsx';
 import timelineContext from 'context/timeline/timelineContext.ts';
 import {createBrowserHistory} from 'history';
 import {Driver} from 'models/Driver.ts';
@@ -234,6 +233,9 @@ function StockCheckOut() {
 
   return (
     <ScreenLayout>
+      <Header>
+        <PageDetails heading={heading} subHeading={subHeading} />
+      </Header>
       <AlertDialog
         messageText={'alert.text2'}
         isOpen={alertOpen}
@@ -241,22 +243,15 @@ function StockCheckOut() {
         handleDismiss={handleAlertClose}
       />
       <Stack className={'select-driver-screen'}>
-        <span className={'language-select'}>
-          <LanguageSelect />
-        </span>
-        <br />
-        <br />
-        <Box
-          padding={2}
-          paddingBottom={0}
-          marginBottom={5}
-          textAlign={'center'}>
-          <PageHeading heading={heading} subHeading={subHeading} />
-        </Box>
         <Stack
           spacing={2}
           sx={{
             p: 1.5,
+            px: {
+              md: 1,
+              lg: 1.6,
+              xl: 1,
+            },
             minHeight: '70vh',
             position: 'relative',
           }}>

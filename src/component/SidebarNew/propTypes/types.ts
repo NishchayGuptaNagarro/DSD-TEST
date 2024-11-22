@@ -1,21 +1,18 @@
+import {ReactNode} from 'react';
+
 export interface SidebarOption {
   title: string;
+  cardTitle: string;
   path: string;
-  icon: JSX.Element;
-  iconClosed?: JSX.Element;
-  iconOpened?: JSX.Element;
-  subNav?: SubOption[];
+  icon: ReactNode;
+  iconSkyBlue: ReactNode;
+  iconNavyBlue: ReactNode;
+  id: number;
+  secondaryInfo: string;
 }
-
-interface SubOption {
-  title: string;
-  path: string;
-  icon: JSX.Element;
-  cName: string;
-}
-
 export interface SubMenuProps {
   item: SidebarOption;
-  subnav?: boolean;
-  showSubnav?: () => void;
+  selectedNav: number;
+  handleSelectedNav: (id: number) => void;
 }
+

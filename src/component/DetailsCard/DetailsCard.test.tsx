@@ -2,25 +2,28 @@ import {render, screen} from '@testing-library/react';
 import DetailsCard from './DetailsCard.tsx';
 
 describe('Details Card Tests', () => {
-  const mockHeading = 'Mock Heading';
   const mockIcon = 'Mock Icon';
+  const mockIconBackground = 'red';
+  const mockCardBackground = 'blue';
   const mockMainInfo = 'Main Info';
+  const mockMainInfoColor = 'black';
   const mockSecondaryInfo = 'Secondary Info';
+  const mockSecondaryInfoColor = 'gray';
 
   beforeEach(() => {
     render(
       <DetailsCard
-        heading={mockHeading}
         icon={mockIcon}
+        iconBackground={mockIconBackground}
+        cardBackground={mockCardBackground}
         mainInfo={mockMainInfo}
+        mainInfoColor={mockMainInfoColor}
         secondaryInfo={mockSecondaryInfo}
+        secondaryInfoColor={mockSecondaryInfoColor}
       />,
     );
   });
   describe('Render Tests', () => {
-    test('should render heading', () => {
-      expect(screen.getByText(mockHeading)).toBeInTheDocument();
-    });
     test('should render image', () => {
       expect(screen.getByTestId('icon')).toHaveAttribute('src', mockIcon);
     });
@@ -32,3 +35,4 @@ describe('Details Card Tests', () => {
     });
   });
 });
+
