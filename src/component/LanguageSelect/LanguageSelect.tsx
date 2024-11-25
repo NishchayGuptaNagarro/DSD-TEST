@@ -43,6 +43,8 @@ function LanguageSelect() {
 
   // Function to handle language change
   const handleClick = () => {
+    console.log(`current: ${currentLanguage}`);
+
     const newLanguage = currentLanguage === 'en' ? 'fr' : 'en';
     setCurrentLanguage(newLanguage);
     changeLanguage(newLanguage);
@@ -65,7 +67,7 @@ function LanguageSelect() {
         <ListItemButton
           data-testid={'language-select-btn'}
           className={'language-select-btn'}
-          onClick={handleClick}>
+          onClick={handleToggle}>
           {currentLanguage === 'en' ? <EnglishButton /> : <FrenchButton />}
 
           <Button

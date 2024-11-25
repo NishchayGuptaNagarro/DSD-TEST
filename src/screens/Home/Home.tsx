@@ -132,8 +132,11 @@ function Home() {
           </Stack>
         </Box>
         <Stack
-          direction={'row'}
+          display={'grid'}
           sx={{
+            gridTemplateColumns: {
+              sm: 'repeat(4, 1fr)',
+            },
             paddingRight: {
               md: '3%',
               lg: '0.3%',
@@ -151,10 +154,17 @@ function Home() {
               paddingLeft: '3%',
 
               height: '100px',
-              width: '572px',
+              width: {
+                sm: '95%',
+                md: '97%',
+                xl: '96%',
+              },
+              gridColumn: '3/5',
+              justifySelf: 'end',
             }}>
             <Typography
               flex={1}
+              sx={{paddingLeft: '2%'}}
               color={styles.darkNavy}
               fontSize={styles.fontSizeMd}
               fontWeight={styles.fontWeightNormal}>
