@@ -159,12 +159,13 @@ function StockCheckIn() {
 
       const {orders, stocks, attachments} = response.data.data;
 
-      const parsedTransactions = orders.map(transaction => ({
+      const parsedTransactions = orders.map((transaction, i) => ({
+        rowId: i,
         customerId: Number(transaction.customer.external_id),
         customerName: transaction.customer.customer_name,
         grossAmount: transaction.gross_amount,
         currIso: transaction.curr_iso,
-        orderId: Number(transaction.order_number),
+        orderId: transaction.order_number || '0',
         paymentMethods: {
           cash: transaction.payment_method.cash,
           credit: transaction.payment_method.credit,

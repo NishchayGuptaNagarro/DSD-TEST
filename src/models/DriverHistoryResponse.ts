@@ -8,7 +8,7 @@ export interface DriverHistoryResponse {
   };
 }
 
-interface OrdersResponse {
+export interface OrdersResponse {
   user_id: string;
   order_number: string;
   customer: {
@@ -57,3 +57,4 @@ interface AttachmentsResponse {
   user_id: string;
   description: string;
 }
+

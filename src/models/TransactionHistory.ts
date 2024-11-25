@@ -1,7 +1,8 @@
 import {Row} from 'component/Table/propTypes/types.ts';
 
 export interface TransactionHistory extends Row {
-  orderId: number;
+  rowId: number;
+  orderId: string;
   customerId: number;
   customerName: string;
   grossAmount: number;
