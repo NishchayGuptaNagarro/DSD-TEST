@@ -12,7 +12,7 @@
     display: flex;
     @include flex-row;
     height: 120px;
-    @media (width>=1440px) {
+    @media screen and (min-width: $breakpoint-xl) {
       height: 160px;
     }
     width: 100%;
@@ -37,14 +37,14 @@
     flex: 1;
     border-radius: 10px;
     margin-bottom: 26px;
-    @media (width>=1440px) {
+    @media screen and (min-width: $breakpoint-xl) {
       margin-bottom: 39px;
     }
   }
 
   .step {
     margin-top: 26px;
-    @media (width>=1440px) {
+    @media screen and (min-width: $breakpoint-xl) {
       margin-top: 40px;
     }
     width: 24px;
@@ -73,7 +73,7 @@
   .steps-wrapper {
     position: absolute;
     top: 49%;
-    @media (width>=1440px) {
+    @media screen and (min-width: $breakpoint-xl) {
       top: 54%;
     }
     @include flex-column;

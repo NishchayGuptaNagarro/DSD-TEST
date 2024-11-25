@@ -14,7 +14,10 @@ import {api} from 'api/api.ts';
 import {Row} from 'component/Table/propTypes/types.ts';
 import TableDialogContent from 'component/TableDialogContent/TableDialogContent.tsx';
 import {Attachment} from 'models/Attachment.ts';
-import {DriverHistoryResponse} from 'models/DriverHistoryResponse.ts';
+import {
+  DriverHistoryResponse,
+  OrdersResponse,
+} from 'models/DriverHistoryResponse.ts';
 import {Stock} from 'models/Stock.ts';
 import {TransactionHistory} from 'models/TransactionHistory.ts';
 import {checkApiError} from 'utilities/checkApiError.ts';
@@ -73,7 +76,7 @@ function AllHistoryTable() {
       const {orders, stocks, attachments} = response.data.data;
       const parsedResponse: AllDriverHistory[] = [];
 
-      orders.forEach((order, i) => {
+      orders.forEach((order: OrdersResponse, i: number) => {
         const parsedOrder: TransactionHistory = {
           rowId: i,
           customerId: Number(order.customer.external_id),
