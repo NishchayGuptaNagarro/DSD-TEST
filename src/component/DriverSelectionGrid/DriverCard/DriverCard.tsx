@@ -34,7 +34,7 @@ function DriverCard({driver, selectedDriverId}: DriverCardProps) {
           sm: '260px',
           md: '350px',
           lg: '97%',
-          xl: '350px',
+          xl: '98%',
         },
       }}>
       <Stack alignItems="center" direction="row" spacing={1} height={'100%'}>

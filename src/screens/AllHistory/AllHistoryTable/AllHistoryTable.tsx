@@ -73,13 +73,14 @@ function AllHistoryTable() {
       const {orders, stocks, attachments} = response.data.data;
       const parsedResponse: AllDriverHistory[] = [];
 
-      orders.forEach(order => {
+      orders.forEach((order, i) => {
         const parsedOrder: TransactionHistory = {
+          rowId: i,
           customerId: Number(order.customer.external_id),
           customerName: order.customer.customer_name,
           grossAmount: order.gross_amount,
           currIso: order.curr_iso,
-          orderId: Number(order.order_number),
+          orderId: order.order_number || '0',
           paymentMethods: {
             cash: order.payment_method.cash,
             credit: order.payment_method.credit,

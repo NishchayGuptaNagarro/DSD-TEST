@@ -12,6 +12,9 @@
     display: flex;
     @include flex-row;
     height: 120px;
+    @media (width>=1440px) {
+      height: 160px;
+    }
     width: 100%;
     background: $white-pure;
     border-radius: 8px;
@@ -33,11 +36,17 @@
     height: 5px;
     flex: 1;
     border-radius: 10px;
-    margin-bottom: 39px;
+    margin-bottom: 26px;
+    @media (width>=1440px) {
+      margin-bottom: 39px;
+    }
   }
 
   .step {
-    margin-top: 26%;
+    margin-top: 26px;
+    @media (width>=1440px) {
+      margin-top: 40px;
+    }
     width: 24px;
     height: 24px;
     display: flex;
@@ -63,7 +72,10 @@
 
   .steps-wrapper {
     position: absolute;
-    top: 48%;
+    top: 49%;
+    @media (width>=1440px) {
+      top: 54%;
+    }
     @include flex-column;
     @include flex-center;
   }

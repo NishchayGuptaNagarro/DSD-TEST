@@ -252,7 +252,7 @@ function StockCheckOut() {
               lg: 1.6,
               xl: 1,
             },
-            minHeight: '70vh',
+            minHeight: '100vh',
             position: 'relative',
           }}>
           <Timeline />
