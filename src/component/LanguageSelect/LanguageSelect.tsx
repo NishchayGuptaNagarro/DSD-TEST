@@ -12,7 +12,7 @@ import EnglishIcon from 'assets/SVG/English.svg';
 import FrenchIcon from 'assets/SVG/French.svg';
 import './LanguageSelect.scss';
 
-import {MouseEvent, useState} from 'react';
+import {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import styles from 'styles/design-systems.module.scss';
 
@@ -51,10 +51,7 @@ function LanguageSelect() {
   };
 
   // Function to hide and show dropdown
-  function handleToggle(
-    event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
-  ) {
-    event.stopPropagation();
+  function handleToggle() {
     setOpen(!open);
   }
 
