@@ -131,7 +131,7 @@ function Home() {
             </Card>
           </Stack>
         </Box>
-        <Stack
+        <Box
           display={'grid'}
           sx={{
             gridTemplateColumns: {
@@ -194,7 +194,7 @@ function Home() {
               </div>
             </div>
           </Stack>
-        </Stack>
+        </Box>
       </Stack>
     </div>
   );

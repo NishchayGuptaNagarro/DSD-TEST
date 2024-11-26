@@ -43,8 +43,6 @@ function LanguageSelect() {
 
   // Function to handle language change
   const handleClick = () => {
-    console.log(`current: ${currentLanguage}`);
-
     const newLanguage = currentLanguage === 'en' ? 'fr' : 'en';
     setCurrentLanguage(newLanguage);
     changeLanguage(newLanguage);
