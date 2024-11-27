@@ -53,7 +53,12 @@ export default function SignOutSelect() {
     <List sx={sxListProp} component="nav">
       <ListItemButton
         onClick={handleClick}
-        sx={{borderRadius: 10}}
+        sx={{
+          borderRadius: 10,
+          '&:hover': {
+            backgroundColor: 'transparent',
+          },
+        }}
         disableRipple>
         <ListItemIcon sx={{px: 0}}>
           <Avatar
@@ -72,7 +77,7 @@ export default function SignOutSelect() {
         <List component="nav" disablePadding>
           <ListItemButton
             sx={{
-              padding: '2px 10px 0 3px',
+              padding: '2px 10px 0 8px',
               borderRadius: '4px',
               marginTop: '10px',
               bgcolor: styles.whitePure,
