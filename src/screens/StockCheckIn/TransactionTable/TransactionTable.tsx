@@ -1,11 +1,13 @@
 import Table from 'component/Table/Table.tsx';
 import {useOutletContext} from 'react-router-dom';
-import {StockCheckInContext} from '../propTypes/types.ts';
 import {getTransactionRowId} from 'utilities/getTransactionRowId.ts';
 import {transactionColDef} from 'utilities/TransactionColDef/TransactionColDef.tsx';
+import {StockCheckInContext} from '../propTypes/types.ts';
 import './TransactionTable.scss';
 function TransactionTable() {
   const {transactionArr} = useOutletContext<StockCheckInContext>();
+  console.log('transaction array');
+  console.log(transactionArr);
 
   return (
     <>
@@ -22,3 +24,4 @@ function TransactionTable() {
 }
 
 export default TransactionTable;
+

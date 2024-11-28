@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box';
-import RadioGroup from '@mui/material/RadioGroup';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Loading from 'screens/Loading/Loading.tsx';
@@ -22,7 +21,6 @@ import {ChangeEvent, MouseEvent, useEffect, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 
 function DriverSelectionGrid({
-  selectedDriverId,
   handleDriverSelection,
   driverType,
   isDriverGridLoading,
@@ -76,10 +74,8 @@ function DriverSelectionGrid({
           searchDriver={searchDriver}
         />
         {/* Radio Group will control which radio button is selected based on value attribute, its onChange event is triggered when we click on a radio button*/}
-        <RadioGroup
+        <Box
           className="radio-buttons-wrapper"
-          name="controlled-radio-buttons-group"
-          value={selectedDriverId}
           sx={{
             maxWidth: '100%',
             width: '100%',
@@ -92,19 +88,18 @@ function DriverSelectionGrid({
               lg: 'repeat(3, 1fr)',
               xl: 'repeat(4, 1fr)',
             },
-          }}
-          onChange={handleDriverSelection}>
+          }}>
           {/*  Iterating through driver data and rendering it as driver card*/}
           {filteredArray.map(driver => {
             return (
               <DriverCard
                 key={driver.driverId}
                 driver={driver}
-                selectedDriverId={selectedDriverId}
+                handleDriverSelection={handleDriverSelection}
               />
             );
           })}
-        </RadioGroup>
+        </Box>
       </>
     );
   }

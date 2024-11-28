@@ -2,7 +2,7 @@
 @import 'typography';
 @import 'mixins';
 @import 'rules';
-@import "variables";
+@import 'variables';
 
 :export {
   // Colors
@@ -50,6 +50,7 @@
   bgFrostBlue: $bg-frost-blue;
   bgMidnightBlueGray: $bg-midnight-blue-gray;
   bgTranslucentWhite: $bg-translucent-white;
+  bgSoftBabyBlue: $bg-soft-baby-blue;
   // Border Colors
   borderGreyLight: $border-grey-light;
   borderGreyFocus: $border-grey-focus;

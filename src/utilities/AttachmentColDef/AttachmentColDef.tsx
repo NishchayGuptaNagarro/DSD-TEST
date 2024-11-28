@@ -1,4 +1,3 @@
-import DownloadIcon from '@mui/icons-material/Download';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
@@ -7,6 +6,7 @@ import {
   GridColumnHeaderParams,
   GridRenderCellParams,
 } from '@mui/x-data-grid';
+import AttachmentBlue from 'assets/SVG/AttachmentBlue.svg';
 import ColumnHeader from 'component/ColumnHeader/ColumnHeader.tsx';
 import {Attachment, AttachmentStackProps} from 'models/Attachment.ts';
 import {useTranslation} from 'react-i18next';
@@ -62,32 +62,46 @@ function AttachmentStack({attachment, handleClick}: AttachmentStackProps) {
     <Stack
       flexDirection={'row'}
       alignItems={'center'}
-      justifyContent={'center'}
+      justifyContent={'end'}
+      width={'100%'}
       gap={1}>
-      <Button
-        variant="text"
-        className="action-button"
-        sx={{
-          fontWeight: styles.fontWeightBolder,
-          fontSize: styles.fontSizeMd,
-          color: styles.deepNavy,
-          borderRadius: '20px',
-          '&:hover': {
-            backgroundColor: styles.whitePure,
-          },
-        }}
-        size={'small'}
-        onClick={() => {
-          handleClick(attachment);
-        }}>
-        {t('table.view')}
-      </Button>
-      <Link
-        className={'attachment-download'}
-        download={'attachment.png'}
-        href={attachment}>
-        <DownloadIcon fontSize={'small'} sx={{mt: 1, color: styles.deepNavy}} />
-      </Link>
+      <Stack
+        flexDirection={'row'}
+        alignItems={'center'}
+        mr={'14%'}
+        justifyContent={'space-between'}
+        width={'44%'}
+        gap={1}>
+        <Button
+          variant="text"
+          className="action-button"
+          sx={{
+            textTransform: 'none',
+            fontWeight: styles.fontWeightBolder,
+            fontSize: styles.fontSizeMd,
+            color: styles.deepNavy,
+            borderRadius: '20px',
+            '&:hover': {
+              backgroundColor: styles.whitePure,
+            },
+          }}
+          size={'small'}
+          onClick={() => {
+            handleClick(attachment);
+          }}>
+          {t('table.view')}
+        </Button>
+        <Link
+          className={'attachment-download'}
+          download={'attachment.png'}
+          href={attachment}>
+          <img
+            src={AttachmentBlue}
+            className="attachment-icon"
+            alt="no-image-present"
+          />
+        </Link>
+      </Stack>
     </Stack>
   );
 }

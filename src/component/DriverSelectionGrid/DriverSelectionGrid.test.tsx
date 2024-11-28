@@ -1,8 +1,8 @@
 import {render, screen, waitFor, within} from '@testing-library/react';
-import DriverSelectionGrid from './DriverSelectionGrid.tsx';
 import {userEvent} from '@testing-library/user-event';
 import {Driver} from 'models/Driver.ts';
 import {ReactNode} from 'react';
+import DriverSelectionGrid from './DriverSelectionGrid.tsx';
 
 describe('Driver Selection Grid Tests', () => {
   const driverSelectionMock = jest.fn();
@@ -27,7 +27,6 @@ describe('Driver Selection Grid Tests', () => {
       <DriverSelectionGrid
         driverType={driverTypeMock}
         handleDriverSelection={driverSelectionMock}
-        selectedDriverId={'1A'}
         driverArray={driverArrMock}
         isDriverGridLoading={false}
         handleTypeChange={typeChangeMock}
@@ -94,7 +93,6 @@ describe('Driver Selection Grid Tests', () => {
         <DriverSelectionGrid
           driverType={'DELIVERY'}
           handleDriverSelection={driverSelectionMock}
-          selectedDriverId={''}
           driverArray={driverArrMock}
           isDriverGridLoading={false}
           handleTypeChange={typeChangeMock}
@@ -122,3 +120,4 @@ describe('Driver Selection Grid Tests', () => {
     });
   });
 });
+
