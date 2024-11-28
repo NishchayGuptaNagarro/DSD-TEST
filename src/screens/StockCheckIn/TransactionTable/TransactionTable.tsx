@@ -6,8 +6,6 @@ import {StockCheckInContext} from '../propTypes/types.ts';
 import './TransactionTable.scss';
 function TransactionTable() {
   const {transactionArr} = useOutletContext<StockCheckInContext>();
-  console.log('transaction array');
-  console.log(transactionArr);
 
   return (
     <>
