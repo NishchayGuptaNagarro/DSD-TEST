@@ -77,7 +77,6 @@ function DriverSelectionGrid({
         <Box
           className="radio-buttons-wrapper"
           sx={{
-            maxWidth: '100%',
             width: '100%',
             rowGap: '7%',
             columnGap: '1%',
@@ -203,4 +202,3 @@ function DriverNameGridHeader({
     </Stack>
   );
 }
-

@@ -254,7 +254,6 @@ function StockCheckOut() {
               lg: 1.6,
               xl: 1,
             },
-            minHeight: '100vh',
             position: 'relative',
           }}>
           <Timeline />
@@ -304,4 +303,3 @@ function StockCheckOut() {
 }
 
 export default StockCheckOut;
-

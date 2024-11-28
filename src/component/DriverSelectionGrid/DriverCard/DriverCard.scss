@@ -2,13 +2,11 @@
 .right-icon {
   width: 11px;
 }
-
-.right-icon-container {
-  position: absolute;
-  right: 0px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: min-content;
-  border: 1px solid red;
+.driver-text-box{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient:  vertical;
 }
-

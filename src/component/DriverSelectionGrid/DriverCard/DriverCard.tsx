@@ -21,13 +21,13 @@ function DriverCard({driver, handleDriverSelection}: DriverCardProps) {
         }}>
         <CardActionArea
           onClick={() => handleDriverSelection(driver.driverId)}
-          sx={{cursor: 'pointer', height: '100%', width: '100%'}}>
-          <CardContent sx={{height: '100%', width: '100%'}}>
+          sx={{cursor: 'pointer'}}>
+          <CardContent>
             <Stack
               alignItems="center"
               direction="row"
               spacing={1}
-              height={'100%'}
+              justifyContent={'space-between'}
               sx={{
                 py: {
                   sm: 1,
@@ -39,36 +39,31 @@ function DriverCard({driver, handleDriverSelection}: DriverCardProps) {
                   md: 0,
                   lg: '2%',
                 },
-                position: 'relative',
               }}>
               {/*Avatar component displays image in a circular icon*/}
-              <Stack
-                direction="row"
-                spacing={1}
-                sx={{
-                  flexBasis: '70%',
-                  marginRight: '2px',
-                  border: '1px solid red',
-                }}>
+              <Stack direction="row" spacing={1}>
                 <Avatar
                   sx={{
                     width: 45,
                     height: 45,
                     bgcolor: styles.bgSoftAqua,
                   }}>
-                  <img src={Person} alt="no-image-present"></img>
+                  <img src={Person} alt="no-image-present" />
                 </Avatar>
-                <Box sx={{border: '1px solid green', maxWidth: '100%'}}>
+                <Box>
                   <Typography
                     fontSize={styles.fontSizeMd}
                     color={styles.charcoalDark}
                     fontWeight={styles.fontWeightBolder}
-                    sx={{
-                      whiteSpace: 'nowrap',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      maxWidth: '100%',
-                    }}>
+                    className={'driver-text-box'}
+                    sx={
+                      {
+                        // textOverflow: 'ellipsis',
+                        // overflow: 'hidden',
+                        // // whiteSpace: 'noWrap',
+                        // height: '25px',
+                      }
+                    }>
                     {`${driver.driverName} Smith John`}
                   </Typography>
                   <Typography
@@ -79,21 +74,19 @@ function DriverCard({driver, handleDriverSelection}: DriverCardProps) {
                   </Typography>
                 </Box>
               </Stack>
-              <div className={'right-icon-container'}>
-                <Avatar
-                  sx={{
-                    width: 25,
-                    height: 25,
-                    bgcolor: styles.bgSoftBabyBlue,
-                  }}>
-                  <img
-                    className="right-icon"
-                    data-testid={'icon'}
-                    src={RightArrowBlue}
-                    alt={'icon'}
-                  />
-                </Avatar>
-              </div>
+              <Avatar
+                sx={{
+                  width: 25,
+                  height: 25,
+                  bgcolor: styles.bgSoftBabyBlue,
+                }}>
+                <img
+                  className="right-icon"
+                  data-testid={'icon'}
+                  src={RightArrowBlue}
+                  alt={'icon'}
+                />
+              </Avatar>
             </Stack>
           </CardContent>
         </CardActionArea>
@@ -103,4 +96,3 @@ function DriverCard({driver, handleDriverSelection}: DriverCardProps) {
 }
 
 export default DriverCard;
-
