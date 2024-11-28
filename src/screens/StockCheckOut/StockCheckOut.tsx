@@ -78,7 +78,6 @@ function StockCheckOut() {
     sessionStorage.removeItem('currentStep');
   }
   function handleDriverSelection(driverId: string): void {
-    console.log(`driver: ${driverId}`);
     setSelectedDriver(driverId);
     increaseSteps();
     sessionStorage.setItem('selected_driver', driverId);
@@ -303,3 +302,4 @@ function StockCheckOut() {
 }
 
 export default StockCheckOut;
+

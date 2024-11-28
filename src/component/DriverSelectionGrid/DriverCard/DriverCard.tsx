@@ -55,16 +55,8 @@ function DriverCard({driver, handleDriverSelection}: DriverCardProps) {
                     fontSize={styles.fontSizeMd}
                     color={styles.charcoalDark}
                     fontWeight={styles.fontWeightBolder}
-                    className={'driver-text-box'}
-                    sx={
-                      {
-                        // textOverflow: 'ellipsis',
-                        // overflow: 'hidden',
-                        // // whiteSpace: 'noWrap',
-                        // height: '25px',
-                      }
-                    }>
-                    {`${driver.driverName} Smith John`}
+                    className={'driver-text-box'}>
+                    {driver.driverName}
                   </Typography>
                   <Typography
                     fontSize={styles.fontSizeXsm}
@@ -96,3 +88,4 @@ function DriverCard({driver, handleDriverSelection}: DriverCardProps) {
 }
 
 export default DriverCard;
+
