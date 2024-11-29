@@ -117,6 +117,7 @@ function Home() {
                           mt: 1,
                           color: styles.bgVibrantOceanBlue,
                           backgroundColor: styles.whitePure,
+                          textTransform: 'none',
                         }}
                         variant="contained"
                         size="small"
@@ -178,6 +179,7 @@ function Home() {
                 <Button
                   className="action-btn"
                   sx={{
+                    textTransform: 'none',
                     color: styles.charcoalDark,
                     backgroundColor: styles.whitePure,
                     borderRadius: '29px',

@@ -64,3 +64,14 @@ $block-margin: 14px;
   padding-left: 26%;
 }
 
+.attachment-icon {
+  margin-top: 8px;
+  object-fit: contain;
+  width: 25px;
+}
+.attachment-download {
+  &:hover {
+    color: $indigo-deep;
+  }
+}
+

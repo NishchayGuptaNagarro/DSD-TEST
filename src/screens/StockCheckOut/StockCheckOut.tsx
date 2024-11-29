@@ -1,7 +1,7 @@
 import Stack from '@mui/material/Stack';
 
 import {AxiosResponse} from 'axios';
-import {ChangeEvent, useContext, useEffect, useRef} from 'react';
+import {useContext, useEffect, useRef} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Outlet, useNavigate} from 'react-router';
 import {useLocation} from 'react-router-dom';
@@ -77,9 +77,10 @@ function StockCheckOut() {
     sessionStorage.removeItem('selected_driver_type');
     sessionStorage.removeItem('currentStep');
   }
-  function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
-    setSelectedDriver(event.target.value);
-    sessionStorage.setItem('selected_driver', event.target.value);
+  function handleDriverSelection(driverId: string): void {
+    setSelectedDriver(driverId);
+    increaseSteps();
+    sessionStorage.setItem('selected_driver', driverId);
     sessionStorage.setItem('selected_driver_type', driverType);
   }
   function handleAlertClose() {
@@ -252,7 +253,6 @@ function StockCheckOut() {
               lg: 1.6,
               xl: 1,
             },
-            minHeight: '100vh',
             position: 'relative',
           }}>
           <Timeline />
@@ -265,35 +265,36 @@ function StockCheckOut() {
             }></Outlet>
           <br />
           <br />
-          <div className="buttons-group">
-            <BlueBorderButton
-              size={'small'}
-              variant={'contained'}
-              onClick={decreaseSteps}
-              disabled={currentStep === 1}>
-              {t('createLoadingOrder.back')}
-            </BlueBorderButton>
+          {currentStep > 1 && (
+            <div className="buttons-group">
+              <BlueBorderButton
+                size={'small'}
+                variant={'contained'}
+                onClick={decreaseSteps}>
+                {t('createLoadingOrder.back')}
+              </BlueBorderButton>
 
-            {currentStep === steps.length ? (
-              <BlueButton
-                size={'small'}
-                variant={'contained'}
-                disabled={!isSignatureLoaded}
-                onClick={() => {
-                  assignInitialStock();
-                }}>
-                {t('createLoadingOrder.finish')}
-              </BlueButton>
-            ) : (
-              <BlueButton
-                size={'small'}
-                variant={'contained'}
-                disabled={nextDisabled}
-                onClick={increaseSteps}>
-                {t('createLoadingOrder.next')}
-              </BlueButton>
-            )}
-          </div>
+              {currentStep === steps.length ? (
+                <BlueButton
+                  size={'small'}
+                  variant={'contained'}
+                  disabled={!isSignatureLoaded}
+                  onClick={() => {
+                    assignInitialStock();
+                  }}>
+                  {t('createLoadingOrder.finish')}
+                </BlueButton>
+              ) : (
+                <BlueButton
+                  size={'small'}
+                  variant={'contained'}
+                  disabled={nextDisabled}
+                  onClick={increaseSteps}>
+                  {t('createLoadingOrder.next')}
+                </BlueButton>
+              )}
+            </div>
+          )}
         </Stack>
       </Stack>
     </ScreenLayout>

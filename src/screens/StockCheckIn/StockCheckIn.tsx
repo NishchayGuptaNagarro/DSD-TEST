@@ -1,10 +1,9 @@
 import Stack from '@mui/material/Stack';
 
-import {ChangeEvent, useContext, useEffect, useRef, useState} from 'react';
+import {useContext, useEffect, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Outlet} from 'react-router';
 import {useLocation, useNavigate} from 'react-router-dom';
-import {ClipLoader} from 'react-spinners';
 
 import {AxiosResponse} from 'axios';
 import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
@@ -41,7 +40,7 @@ function StockCheckIn() {
   const navigate = useNavigate();
   const history = createBrowserHistory();
   const heading = t('stockcheckin.heading');
-  const subHeading = t('stockcheckin.subheading');
+  const subHeading = t('createLoadingOrder.subtitle');
   const firstRender = useRef(true);
   const [dataLoading, setDataLoading] = useState(false);
   const [transactionArr, setTransactionArr] = useState<TransactionHistory[]>(
@@ -79,10 +78,14 @@ function StockCheckIn() {
     alertOpen,
   } = useStockCheckInState();
 
-  function handleDriverSelection(event: ChangeEvent<HTMLInputElement>) {
-    setSelectedDriver(event.target.value);
-    sessionStorage.setItem('selected_driver', event.target.value);
+  //This will only be executed when currentStep is 1
+  function handleDriverSelection(driverId: string): void {
+    setSelectedDriver(driverId);
+    sessionStorage.setItem('selected_driver', driverId);
     sessionStorage.setItem('selected_driver_type', driverType);
+    fetchDriverHistory().then(() => {
+      increaseSteps();
+    });
   }
   function buttonDisabled() {
     if (sessionStorage.getItem('selected_driver') && !dataLoading) {
@@ -124,6 +127,7 @@ function StockCheckIn() {
     attachmentArr,
     setSignatureURL,
     signatureURL,
+    dataLoading,
   };
 
   async function fetchDrivers() {
@@ -277,45 +281,37 @@ function StockCheckIn() {
           />
           <br />
           <br />
-          <div className="buttons-group">
-            <BlueBorderButton
-              size={'small'}
-              variant={'contained'}
-              onClick={decreaseSteps}
-              disabled={currentStep === 1}>
-              {t('createLoadingOrder.back')}
-            </BlueBorderButton>
+          {currentStep > 1 && (
+            <div className="buttons-group">
+              <BlueBorderButton
+                size={'small'}
+                variant={'contained'}
+                onClick={decreaseSteps}
+                disabled={currentStep === 1}>
+                {t('createLoadingOrder.back')}
+              </BlueBorderButton>
 
-            {currentStep === steps.length ? (
-              <BlueButton
-                size={'small'}
-                variant={'contained'}
-                disabled={!isSignatureDone}
-                onClick={unAssignStock}>
-                {t('createLoadingOrder.finish')}
-              </BlueButton>
-            ) : (
-              <BlueButton
-                size={'small'}
-                variant={'contained'}
-                disabled={nextDisabled}
-                onClick={() => {
-                  if (currentStep == 1) {
-                    fetchDriverHistory().then(() => {
-                      increaseSteps();
-                    });
-                  } else {
+              {currentStep === steps.length ? (
+                <BlueButton
+                  size={'small'}
+                  variant={'contained'}
+                  disabled={!isSignatureDone}
+                  onClick={unAssignStock}>
+                  {t('createLoadingOrder.finish')}
+                </BlueButton>
+              ) : (
+                <BlueButton
+                  size={'small'}
+                  variant={'contained'}
+                  disabled={nextDisabled}
+                  onClick={() => {
                     increaseSteps();
-                  }
-                }}>
-                {dataLoading ? (
-                  <ClipLoader size={20} />
-                ) : (
-                  t('createLoadingOrder.next')
-                )}
-              </BlueButton>
-            )}
-          </div>
+                  }}>
+                  {t('createLoadingOrder.next')}
+                </BlueButton>
+              )}
+            </div>
+          )}
         </Stack>
       </Stack>
     </ScreenLayout>

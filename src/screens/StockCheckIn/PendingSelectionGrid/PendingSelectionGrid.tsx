@@ -1,22 +1,22 @@
-import {useOutletContext} from 'react-router-dom';
 import DriverSelectionGrid from 'component/DriverSelectionGrid/DriverSelectionGrid.tsx';
+import {useOutletContext} from 'react-router-dom';
 import {StockCheckInContext} from '../propTypes/types.ts';
 
 function PendingSelectionGrid() {
   const {
     isDriverGridLoading,
-    selectedDriverId,
     handleDriverSelection,
     driverType,
     handleTypeChange,
     driverArray,
+    dataLoading,
   } = useOutletContext<StockCheckInContext>();
 
   return (
     <DriverSelectionGrid
       isDriverGridLoading={isDriverGridLoading}
       driverArray={driverArray}
-      selectedDriverId={selectedDriverId}
+      dataLoading={dataLoading}
       handleDriverSelection={handleDriverSelection}
       driverType={driverType}
       handleTypeChange={handleTypeChange}
@@ -25,3 +25,4 @@ function PendingSelectionGrid() {
 }
 
 export default PendingSelectionGrid;
+

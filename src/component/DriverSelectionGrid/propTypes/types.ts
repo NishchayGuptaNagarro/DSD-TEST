@@ -1,15 +1,12 @@
 import {Driver} from 'models/Driver.ts';
-import {ChangeEvent, MouseEvent} from 'react';
 import {driverTypes} from 'models/driverTypes.ts';
+import {MouseEvent} from 'react';
 
 export interface DriverSelectionGridProps {
   isDriverGridLoading: boolean;
   driverArray: Driver[];
-  selectedDriverId: string;
-  handleDriverSelection:
-    | ((event: ChangeEvent<HTMLInputElement>) => void)
-    | (() => void);
-
+  dataLoading?: boolean;
+  handleDriverSelection: ((driverId: string) => void) | (() => void);
   driverType: driverTypes;
   handleTypeChange: (type: driverTypes) => void;
 }
@@ -22,3 +19,4 @@ export interface DriverNameGridHeaderProps {
   ) => void;
   searchDriver: (searchText: string) => void;
 }
+
