@@ -7,11 +7,16 @@ import CardContent from '@mui/material/CardContent';
 import Stack from '@mui/material/Stack';
 import Person from 'assets/SVG/Person.svg';
 import RightArrowBlue from 'assets/SVG/RightArrowBlue.svg';
+import {ClipLoader} from 'react-spinners';
 import styles from 'styles/design-systems.module.scss';
 import './DriverCard.scss';
 import {DriverCardProps} from './propTypes/types.ts';
 
-function DriverCard({driver, handleDriverSelection}: DriverCardProps) {
+function DriverCard({
+  driver,
+  dataLoading,
+  handleDriverSelection,
+}: DriverCardProps) {
   return (
     <Stack data-testid={'driver-btn'}>
       <Card
@@ -66,19 +71,23 @@ function DriverCard({driver, handleDriverSelection}: DriverCardProps) {
                   </Typography>
                 </Box>
               </Stack>
-              <Avatar
-                sx={{
-                  width: 25,
-                  height: 25,
-                  bgcolor: styles.bgSoftBabyBlue,
-                }}>
-                <img
-                  className="right-icon"
-                  data-testid={'icon'}
-                  src={RightArrowBlue}
-                  alt={'icon'}
-                />
-              </Avatar>
+              {dataLoading ? (
+                <ClipLoader size={20} />
+              ) : (
+                <Avatar
+                  sx={{
+                    width: 25,
+                    height: 25,
+                    bgcolor: styles.bgSoftBabyBlue,
+                  }}>
+                  <img
+                    className="right-icon"
+                    data-testid={'icon'}
+                    src={RightArrowBlue}
+                    alt={'icon'}
+                  />
+                </Avatar>
+              )}
             </Stack>
           </CardContent>
         </CardActionArea>

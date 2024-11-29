@@ -5,6 +5,7 @@ import {MouseEvent} from 'react';
 export interface DriverSelectionGridProps {
   isDriverGridLoading: boolean;
   driverArray: Driver[];
+  dataLoading?: boolean;
   handleDriverSelection: ((driverId: string) => void) | (() => void);
   driverType: driverTypes;
   handleTypeChange: (type: driverTypes) => void;

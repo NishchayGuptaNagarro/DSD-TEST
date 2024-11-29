@@ -4,7 +4,6 @@ import {useContext, useEffect, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Outlet} from 'react-router';
 import {useLocation, useNavigate} from 'react-router-dom';
-import {ClipLoader} from 'react-spinners';
 
 import {AxiosResponse} from 'axios';
 import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
@@ -128,6 +127,7 @@ function StockCheckIn() {
     attachmentArr,
     setSignatureURL,
     signatureURL,
+    dataLoading,
   };
 
   async function fetchDrivers() {
@@ -307,11 +307,7 @@ function StockCheckIn() {
                   onClick={() => {
                     increaseSteps();
                   }}>
-                  {dataLoading ? (
-                    <ClipLoader size={20} />
-                  ) : (
-                    t('createLoadingOrder.next')
-                  )}
+                  {t('createLoadingOrder.next')}
                 </BlueButton>
               )}
             </div>
