@@ -3,3 +3,21 @@
 .info-gray-outlined-icon {
   color: $pale-soft-gray;
 }
+.icon-wrapper {
+  margin-top: 6px;
+}
+.hover-show {
+  display: none;
+}
+
+.hover-hide {
+  display: inline-block;
+}
+
+.icon-wrapper:hover .hover-show {
+  display: inline-block;
+}
+
+.icon-wrapper:hover .hover-hide {
+  display: none;
+}
