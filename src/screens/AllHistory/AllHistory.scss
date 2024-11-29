@@ -52,4 +52,15 @@
     height: 28px;
   }
 }
+.info-gray-outlined-icon {
+  color: $pale-soft-gray;
+}
+.popper-container {
+  height: auto;
+  background-color: $white-pure;
+  color: $gray-charcoal;
+  font-size: $font-xxsm;
+  font-weight: $font-light;
+  box-shadow: 2.96px 2.37px 20.7px 0px $border-smoke-gray;
+}
 

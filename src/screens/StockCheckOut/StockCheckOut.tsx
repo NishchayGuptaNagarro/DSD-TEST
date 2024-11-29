@@ -10,6 +10,7 @@ import BlueButton from 'component/BlueButton/BlueButton.tsx';
 import ScreenLayout from 'component/ScreenLayout/ScreenLayout.tsx';
 import Timeline from 'component/Timeline/Timeline.tsx';
 
+import Box from '@mui/material/Box';
 import {api} from 'api/api.ts';
 import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
 import BlueBorderButton from 'component/BlueBorderButton/BlueBorderButton.tsx';
@@ -248,6 +249,7 @@ function StockCheckOut() {
           spacing={2}
           sx={{
             p: 1.5,
+            minHeight: '80vh',
             px: {
               md: 1,
               lg: 1.6,
@@ -257,14 +259,16 @@ function StockCheckOut() {
           }}>
           <Timeline />
           {/*This outlet will display child components , all props are provided in context*/}
-          <Outlet
-            context={
-              {
-                ...contextObj,
-              } satisfies StockCheckOutContext
-            }></Outlet>
-          <br />
-          <br />
+          <Box height={'min-content'}>
+            <Outlet
+              context={
+                {
+                  ...contextObj,
+                } satisfies StockCheckOutContext
+              }></Outlet>
+            <br />
+            <br />
+          </Box>
           {currentStep > 1 && (
             <div className="buttons-group">
               <BlueBorderButton

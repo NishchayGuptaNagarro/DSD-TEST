@@ -120,6 +120,10 @@
   "downloadContainer.line2": "available on SAP Store!",
   "home.welcomeAdmin": "Welcome Back,",
   "home.adminSecondaryHeading": "Profile : Warehouse Admin",
-  "home.dateHeading": "Today's Date"
+  "home.dateHeading": "Today's Date",
+
+  "toolTip.stocks": "To view stocks, user needs to check-in",
+  "toolTip.orders": "To view order, user needs to create an order",
+  "toolTip.attachments": "To view attachments, user needs to upload files"
 }
 

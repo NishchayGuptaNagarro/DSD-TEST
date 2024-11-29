@@ -3,9 +3,12 @@ import {
   getGridDateOperators,
   getGridStringOperators,
   GridColDef,
+  GridColumnHeaderParams,
   GridRenderCellParams,
   GridValueFormatterParams,
 } from '@mui/x-data-grid';
+import ColumnHeader from 'component/ColumnHeader/ColumnHeader.tsx';
+import {InfoToolTip} from 'component/InfoToolTip/InfoToolTip.tsx';
 import {format} from 'date-fns';
 import {Attachment} from 'models/Attachment.ts';
 import {Stock} from 'models/Stock.ts';
@@ -69,16 +72,24 @@ export const allHistoryColDef: (
       field: 'transaction',
       headerName: t('sidebar.orders'),
       headerClassName: 'font-md',
+      renderHeader: (params: GridColumnHeaderParams) => (
+        <div style={{display: 'flex', alignItems: 'center'}}>
+          <ColumnHeader headerName={params.colDef.headerName || ''} />
+          <InfoToolTip title={'toolTip.orders'} />
+        </div>
+      ),
       renderCell: (
         params: GridRenderCellParams<AllDriverHistory, TransactionHistory[]>,
       ) => {
         return (
           <div className="action-cell">
-            <OrdersButton
-              orders={params.value || []}
-              driverId={params.row.driverId || ''}
-              handleOrdersClick={handleOrdersClick}
-            />
+            {params.value && params.value.length > 0 && (
+              <OrdersButton
+                orders={params.value}
+                driverId={params.row.driverId || ''}
+                handleOrdersClick={handleOrdersClick}
+              />
+            )}
           </div>
         );
       },
@@ -93,15 +104,22 @@ export const allHistoryColDef: (
       field: 'stock',
       headerName: t('table.stocks'),
       headerClassName: 'font-md',
-
+      renderHeader: (params: GridColumnHeaderParams) => (
+        <div style={{display: 'flex', alignItems: 'center'}}>
+          <ColumnHeader headerName={params.colDef.headerName || ''} />
+          <InfoToolTip title={'toolTip.stocks'} />
+        </div>
+      ),
       renderCell: (params: GridRenderCellParams<AllDriverHistory, Stock[]>) => {
         return (
           <div className="action-cell">
-            <StocksButton
-              stocks={params.value || []}
-              driverId={params.row.driverId || ''}
-              handleStocksClick={handleStocksClick}
-            />
+            {params.value && params.value.length > 0 && (
+              <StocksButton
+                stocks={params.value || []}
+                driverId={params.row.driverId || ''}
+                handleStocksClick={handleStocksClick}
+              />
+            )}
           </div>
         );
       },
@@ -117,16 +135,24 @@ export const allHistoryColDef: (
       field: 'attachment',
       headerName: t('timeline.option9'),
       headerClassName: 'font-md',
+      renderHeader: (params: GridColumnHeaderParams) => (
+        <div style={{display: 'flex', alignItems: 'center'}}>
+          <ColumnHeader headerName={params.colDef.headerName || ''} />
+          <InfoToolTip title={'toolTip.attachments'} />
+        </div>
+      ),
       renderCell: (
         params: GridRenderCellParams<AllDriverHistory, Attachment[]>,
       ) => {
         return (
           <div className="action-cell">
-            <AttachmentsButton
-              attachments={params.value || []}
-              driverId={params.row.driverId || ''}
-              handleAttachmentsClick={handleAttachmentsClick}
-            />
+            {params.value && params.value.length > 0 && (
+              <AttachmentsButton
+                attachments={params.value || []}
+                driverId={params.row.driverId || ''}
+                handleAttachmentsClick={handleAttachmentsClick}
+              />
+            )}
           </div>
         );
       },
