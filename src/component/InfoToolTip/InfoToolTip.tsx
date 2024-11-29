@@ -36,11 +36,11 @@ export function InfoToolTip({title}: InfoToolTipProps) {
       }}>
       <div className="icon-wrapper">
         <span className="hover-show">
-          <InfoIcon sx={{marginLeft: '6px', fontSize: 16}} />
+          <InfoIcon sx={{fontSize: 16, padding: 0, margin: 0}} />
         </span>
         <span className="hover-hide">
           <InfoOutlinedIcon
-            sx={{marginLeft: '6px', fontSize: 16}}
+            sx={{fontSize: 16, padding: 0, margin: 0}}
             className="info-gray-outlined-icon"
           />
         </span>
