@@ -10,6 +10,7 @@ import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
 import ScreenLayout from 'component/ScreenLayout/ScreenLayout.tsx';
 import Timeline from 'component/Timeline/Timeline.tsx';
 
+import Box from '@mui/material/Box';
 import {api} from 'api/api.ts';
 import BlueBorderButton from 'component/BlueBorderButton/BlueBorderButton.tsx';
 import BlueButton from 'component/BlueButton/BlueButton.tsx';
@@ -272,15 +273,17 @@ function StockCheckIn() {
             position: 'relative',
           }}>
           <Timeline />
-          <Outlet
-            context={
-              {
-                ...contextObj,
-              } satisfies StockCheckInContext
-            }
-          />
-          <br />
-          <br />
+          <Box height={'min-content'}>
+            <Outlet
+              context={
+                {
+                  ...contextObj,
+                } satisfies StockCheckInContext
+              }
+            />
+            <br />
+            <br />
+          </Box>
           {currentStep > 1 && (
             <div className="buttons-group">
               <BlueBorderButton

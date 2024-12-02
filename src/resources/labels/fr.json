@@ -118,6 +118,10 @@
   "downloadContainer.line2": "disponible sur le SAP Store !",
   "home.welcomeAdmin": "Bon retour,",
   "home.adminSecondaryHeading": "Profil : Administrateur d'entrepôt",
-  "home.dateHeading": "La date d'aujourd'hui"
+  "home.dateHeading": "La date d'aujourd'hui",
+
+  "toolTip.stocks": "Pour consulter les stocks, l'utilisateur doit s'enregistrer",
+  "toolTip.orders": "Pour afficher la commande, l'utilisateur doit créer une commande",
+  "toolTip.attachments": "Pour consulter les pièces jointes, l'utilisateur doit télécharger des fichiers"
 }
 
