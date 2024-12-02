@@ -40,7 +40,7 @@ export function InfoTooltip({title}: InfoTooltipProps) {
         </span>
         <span className="hover-hide">
           <InfoOutlinedIcon
-            sx={{fontSize: 16, padding: 0, margin: 0}}
+            sx={{fontSize: styles.fontSizeMd, padding: 0, margin: 0}}
             className="info-gray-outlined-icon"
           />
         </span>
