@@ -1,0 +1,28 @@
+@import 'src/styles/design-systems.module';
+
+.info-gray-outlined-icon {
+  color: $pale-soft-gray;
+}
+.icon-wrapper {
+  padding: 0;
+  height: 20px;
+  margin-bottom: 8px;
+  margin-left: 6px;
+}
+.hover-show {
+  display: none;
+  height: min-content;
+}
+
+.hover-hide {
+  display: inline;
+  height: min-content;
+}
+
+.icon-wrapper:hover .hover-show {
+  display: inline-block;
+}
+
+.icon-wrapper:hover .hover-hide {
+  display: none;
+}
