@@ -1,13 +1,13 @@
 ## Overview
 
-The `InfoToolTip` component is a reusable and customizable tooltip component designed to provide contextual information when hovering over a UI element.
+The `InfoTooltip` component is a reusable and customizable tooltip component designed to provide contextual information when hovering over a UI element.
 
 ### Inclusion
 
 ```
-import InfoToolTip from 'components/InfoToolTip/InfoToolTip.tsx';
+import InfoTooltip from 'components/InfoTooltip/InfoTooltip.tsx';
 
-<InfoToolTip title="Hover over this icon for more information" />
+<InfoTooltip title="Hover over this icon for more information" />
 ```
 
 ### Use Case Description

@@ -3,10 +3,10 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import Tooltip, {tooltipClasses} from '@mui/material/Tooltip';
 import {useTranslation} from 'react-i18next';
 import styles from 'styles/design-systems.module.scss';
-import './InfoToolTip.scss';
-import {InfoToolTipProps} from './propTypes/types';
+import './InfoTooltip.scss';
+import {InfoTooltipProps} from './propTypes/types';
 
-export function InfoToolTip({title}: InfoToolTipProps) {
+export function InfoTooltip({title}: InfoTooltipProps) {
   const {t} = useTranslation();
   return (
     <Tooltip
@@ -30,13 +30,13 @@ export function InfoToolTip({title}: InfoToolTipProps) {
             color: styles.grayCharcoal,
             fontSize: styles.fontSizeXxsm,
             fontWeight: styles.fontWeightLight,
-            boxShadow: `2.96px 2.37px 20.7px 0px ${styles.borderSmokeGray}`,
+            boxShadow: `3px 2px 21px 0px ${styles.borderSmokeGray}`,
           },
         },
       }}>
       <div className="icon-wrapper">
         <span className="hover-show">
-          <InfoIcon sx={{fontSize: 16, padding: 0, margin: 0}} />
+          <InfoIcon sx={{fontSize: styles.fontSizeMd, padding: 0, margin: 0}} />
         </span>
         <span className="hover-hide">
           <InfoOutlinedIcon

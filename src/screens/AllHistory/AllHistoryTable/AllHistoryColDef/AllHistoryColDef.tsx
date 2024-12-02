@@ -8,7 +8,7 @@ import {
   GridValueFormatterParams,
 } from '@mui/x-data-grid';
 import ColumnHeader from 'component/ColumnHeader/ColumnHeader.tsx';
-import {InfoToolTip} from 'component/InfoToolTip/InfoToolTip.tsx';
+import {InfoTooltip} from 'component/InfoTooltip/InfoTooltip.tsx';
 import {format} from 'date-fns';
 import {Attachment} from 'models/Attachment.ts';
 import {Stock} from 'models/Stock.ts';
@@ -73,9 +73,9 @@ export const allHistoryColDef: (
       headerName: t('sidebar.orders'),
       headerClassName: 'font-md',
       renderHeader: (params: GridColumnHeaderParams) => (
-        <div style={{display: 'flex', alignItems: 'center'}}>
+        <div className="column-header">
           <ColumnHeader headerName={params.colDef.headerName || ''} />
-          <InfoToolTip title={'toolTip.orders'} />
+          <InfoTooltip title={'toolTip.orders'} />
         </div>
       ),
       renderCell: (
@@ -83,9 +83,9 @@ export const allHistoryColDef: (
       ) => {
         return (
           <div className="action-cell">
-            {params.value && params.value.length > 0 && (
+            {(params.value?.length || 0) > 0 && (
               <OrdersButton
-                orders={params.value}
+                orders={params.value || []}
                 driverId={params.row.driverId || ''}
                 handleOrdersClick={handleOrdersClick}
               />
@@ -105,15 +105,15 @@ export const allHistoryColDef: (
       headerName: t('table.stocks'),
       headerClassName: 'font-md',
       renderHeader: (params: GridColumnHeaderParams) => (
-        <div style={{display: 'flex', alignItems: 'center'}}>
+        <div className="column-header">
           <ColumnHeader headerName={params.colDef.headerName || ''} />
-          <InfoToolTip title={'toolTip.stocks'} />
+          <InfoTooltip title={'toolTip.stocks'} />
         </div>
       ),
       renderCell: (params: GridRenderCellParams<AllDriverHistory, Stock[]>) => {
         return (
           <div className="action-cell">
-            {params.value && params.value.length > 0 && (
+            {(params.value?.length || 0) > 0 && (
               <StocksButton
                 stocks={params.value || []}
                 driverId={params.row.driverId || ''}
@@ -136,9 +136,9 @@ export const allHistoryColDef: (
       headerName: t('timeline.option9'),
       headerClassName: 'font-md',
       renderHeader: (params: GridColumnHeaderParams) => (
-        <div style={{display: 'flex', alignItems: 'center'}}>
+        <div className="column-header">
           <ColumnHeader headerName={params.colDef.headerName || ''} />
-          <InfoToolTip title={'toolTip.attachments'} />
+          <InfoTooltip title={'toolTip.attachments'} />
         </div>
       ),
       renderCell: (
@@ -146,7 +146,7 @@ export const allHistoryColDef: (
       ) => {
         return (
           <div className="action-cell">
-            {params.value && params.value.length > 0 && (
+            {(params.value?.length || 0) > 0 && (
               <AttachmentsButton
                 attachments={params.value || []}
                 driverId={params.row.driverId || ''}

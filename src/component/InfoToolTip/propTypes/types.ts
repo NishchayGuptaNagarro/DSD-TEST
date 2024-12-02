@@ -1,3 +1,3 @@
-export interface InfoToolTipProps {
+export interface InfoTooltipProps {
   title: string;
 }
