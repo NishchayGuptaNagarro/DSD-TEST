@@ -8,7 +8,7 @@ import {
   GridValueFormatterParams,
 } from '@mui/x-data-grid';
 import ColumnHeader from 'component/ColumnHeader/ColumnHeader.tsx';
-import {InfoTooltip} from 'component/InfoToolTip/InfoToolTip.tsx';
+import {InfoTooltip} from 'component/InfoTooltip/InfoTooltip.tsx';
 import {format} from 'date-fns';
 import {Attachment} from 'models/Attachment.ts';
 import {Stock} from 'models/Stock.ts';
