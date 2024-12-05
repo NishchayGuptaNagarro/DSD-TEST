@@ -11,6 +11,7 @@ function DriverNameGrid() {
     handleDriverSelection,
     driverType,
     handleTypeChange,
+    selectedDriverId,
   } = useOutletContext<StockCheckOutContext>();
 
   return (
@@ -19,6 +20,7 @@ function DriverNameGrid() {
       driverArray={driverArray}
       handleDriverSelection={handleDriverSelection}
       driverType={driverType}
+      selectedDriverId={selectedDriverId}
       handleTypeChange={handleTypeChange}
     />
   );

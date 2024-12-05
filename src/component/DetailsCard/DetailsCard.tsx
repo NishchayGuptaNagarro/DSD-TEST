@@ -45,8 +45,8 @@ function DetailsCard({
           <div className="icon-container">
             <Avatar
               sx={{
-                width: 50,
-                height: 50,
+                width: '60px',
+                height: '60px',
                 bgcolor: iconBackground,
               }}>
               <img src={icon} alt="no-image-present"></img>
@@ -54,13 +54,13 @@ function DetailsCard({
           </div>
           <div className="info-container">
             <Typography
-              fontSize={styles.fontSizeLgPlus}
-              fontWeight={styles.fontWeightBolder}
+              fontSize={styles.fontSizeXl}
+              fontWeight={styles.fontWeightNormal}
               sx={{color: mainInfoColor}}>
               {mainInfo}
             </Typography>
             <Typography
-              fontSize={styles.fontSizeSm}
+              fontSize={styles.fontSizeMd}
               fontWeight={styles.fontWeightNormal}
               sx={{color: secondaryInfoColor}}>
               {secondaryInfo}

@@ -15,6 +15,7 @@ import {DriverCardProps} from './propTypes/types.ts';
 function DriverCard({
   driver,
   dataLoading,
+  selectedDriverId,
   handleDriverSelection,
 }: DriverCardProps) {
   return (
@@ -71,7 +72,7 @@ function DriverCard({
                   </Typography>
                 </Box>
               </Stack>
-              {dataLoading ? (
+              {dataLoading && selectedDriverId === driver.driverId ? (
                 <ClipLoader size={20} />
               ) : (
                 <Avatar

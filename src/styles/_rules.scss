@@ -88,7 +88,6 @@
 }
 
 %common-form-rules {
-
   .form-label {
     font-weight: $font-light;
     color: $charcoal-dark;
@@ -97,7 +96,7 @@
     }
   }
   .form-input {
-    color:  $charcoal-dark;
+    color: $charcoal-dark;
     background-color: $white-pure;
     border: 0.6px solid $gray-muted;
     height: 40px;
@@ -112,7 +111,7 @@
     &:focus-visible {
       outline-color: $charcoal-dark;
     }
-    &::placeholder{
+    &::placeholder {
       color: $gray-muted;
     }
   }
@@ -168,5 +167,13 @@
   background-color: $white-pure;
   z-index: 3;
   height: 106px;
+}
+
+.transaction-header {
+  min-width: max-content;
+  margin-left: 30px;
+}
+.transaction-cell {
+  margin-left: 20px;
 }
 

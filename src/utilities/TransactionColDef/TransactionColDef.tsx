@@ -18,7 +18,14 @@ export const transactionColDef: GridColDef[] = [
     flex: 0.2,
     headerClassName: 'font-md font-normal',
     renderHeader: (params: GridColumnHeaderParams) => {
-      return <ColumnHeader headerName={params.colDef.headerName || ''} />;
+      return (
+        <div className="transaction-header">
+          <ColumnHeader headerName={params.colDef.headerName || ''} />
+        </div>
+      );
+    },
+    renderCell: (params: GridRenderCellParams<TransactionHistory>) => {
+      return <div className="transaction-cell">{params.value}</div>;
     },
     sortable: false,
     cellClassName: 'font-sm font-normal',
@@ -27,7 +34,14 @@ export const transactionColDef: GridColDef[] = [
     field: 'customerId',
     headerName: 'table.customerDesc',
     renderHeader: (params: GridColumnHeaderParams) => {
-      return <ColumnHeader headerName={params.colDef.headerName || ''} />;
+      return (
+        <div className="transaction-header">
+          <ColumnHeader headerName={params.colDef.headerName || ''} />
+        </div>
+      );
+    },
+    renderCell: (params: GridRenderCellParams<TransactionHistory>) => {
+      return <div className="transaction-cell">{params.value}</div>;
     },
     headerClassName: 'font-md font-normal',
     valueGetter: ({value, row}) => {
@@ -72,12 +86,13 @@ export const transactionColDef: GridColDef[] = [
     cellClassName: 'font-sm font-normal',
     sortable: false,
     headerAlign: 'center',
+    align: 'center',
   },
 ];
 
 function PaymentGrid({paymentMethods}: PaymentGridProps) {
   return (
-    <Stack sx={{ml: 9, paddingBlock: '6px'}} flexDirection={'column'} gap={0.2}>
+    <Stack sx={{paddingBlock: '6px'}} flexDirection={'column'} gap={0.2}>
       <div>Credit: {(paymentMethods.credit ?? 0).toFixed(2)}</div>
       <div>Cash: {(paymentMethods.cash ?? 0).toFixed(2)}</div>
       <div>Cheque: {(paymentMethods.cheque ?? 0).toFixed(2)}</div>

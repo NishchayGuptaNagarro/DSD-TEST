@@ -290,7 +290,8 @@ function StockCheckIn() {
                 size={'small'}
                 variant={'contained'}
                 onClick={decreaseSteps}
-                disabled={currentStep === 1}>
+                disabled={currentStep === 1}
+                disableElevation>
                 {t('createLoadingOrder.back')}
               </BlueBorderButton>
 
@@ -299,7 +300,8 @@ function StockCheckIn() {
                   size={'small'}
                   variant={'contained'}
                   disabled={!isSignatureDone}
-                  onClick={unAssignStock}>
+                  onClick={unAssignStock}
+                  disableElevation>
                   {t('createLoadingOrder.finish')}
                 </BlueButton>
               ) : (
@@ -309,7 +311,8 @@ function StockCheckIn() {
                   disabled={nextDisabled}
                   onClick={() => {
                     increaseSteps();
-                  }}>
+                  }}
+                  disableElevation>
                   {t('createLoadingOrder.next')}
                 </BlueButton>
               )}

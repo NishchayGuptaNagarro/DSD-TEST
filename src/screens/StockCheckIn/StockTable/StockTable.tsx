@@ -1,8 +1,8 @@
-import {useOutletContext} from 'react-router-dom';
 import Table from 'component/Table/Table.tsx';
+import {useOutletContext} from 'react-router-dom';
+import {getStockRowId} from 'utilities/getStockRowId.ts';
 import {stockColDef} from 'utilities/StockColDef/StockColDef.tsx';
 import {StockCheckInContext} from '../propTypes/types.ts';
-import {getStockRowId} from 'utilities/getStockRowId.ts';
 
 function StockTable() {
   const {stockArr} = useOutletContext<StockCheckInContext>();
@@ -16,9 +16,11 @@ function StockTable() {
         getRowId={getStockRowId}
         showLoading={false}
         columns={stockColDef}
+        minHeight={344}
       />
     </>
   );
 }
 
 export default StockTable;
+

@@ -123,7 +123,7 @@
   "home.dateHeading": "Today's Date",
 
   "toolTip.stocks": "To view stocks, user needs to check-in",
-  "toolTip.orders": "To view order, user needs to create an order",
+  "toolTip.orders": "To view orders, user needs to create an order",
   "toolTip.attachments": "To view attachments, user needs to upload files"
 }
 

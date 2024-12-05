@@ -175,6 +175,12 @@ export default function Table({
         minHeight: minHeight,
         color: styles.grayCharcoal,
         backgroundColor: 'transparent',
+        '& .MuiDataGrid-columnSeparator': {
+          display: 'none',
+        },
+        '& .MuiDataGrid-columnHeadersInner': {
+          backgroundColor: styles.bgGrayishBlue,
+        },
         '& .MuiDataGrid-sortIcon': {
           color: styles.whitePure,
         },
@@ -186,10 +192,13 @@ export default function Table({
           backgroundColor: styles.whitePure,
           border: withBorder ? `1px solid ${styles.grayMuted}` : 'none',
         },
+        '& .MuiDataGrid-row.Mui-hovered': {
+          backgroundColor: 'transparent',
+        },
         '& .MuiDataGrid-row': {
           backgroundColor: styles.whitePure,
           '&:hover': {
-            backgroundColor: styles.bgColorWhiteSmoke,
+            backgroundColor: 'transparent',
           },
         },
         '& .MuiDataGrid-row:last-child': {

@@ -82,7 +82,7 @@ function DriverSignature() {
       <div className="signature-label">
         {t('createLoadingOrder.signature.label')}
       </div>
-      <Paper elevation={1} className="wrapper">
+      <Paper elevation={0} className="wrapper">
         <span className={'signature-container'}>
           {/*This center class is defined in app.scss we can use it to center anything*/}
 
@@ -94,7 +94,8 @@ function DriverSignature() {
               onClick={() => {
                 sendNotification('Please sign to confirm checkout');
                 fetchSignature();
-              }}>
+              }}
+              disableElevation>
               {t('createLoadingOrder.button.label')}
             </Button>
           )}

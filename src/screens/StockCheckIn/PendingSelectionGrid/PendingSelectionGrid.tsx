@@ -10,6 +10,7 @@ function PendingSelectionGrid() {
     handleTypeChange,
     driverArray,
     dataLoading,
+    selectedDriverId,
   } = useOutletContext<StockCheckInContext>();
 
   return (
@@ -17,6 +18,7 @@ function PendingSelectionGrid() {
       isDriverGridLoading={isDriverGridLoading}
       driverArray={driverArray}
       dataLoading={dataLoading}
+      selectedDriverId={selectedDriverId}
       handleDriverSelection={handleDriverSelection}
       driverType={driverType}
       handleTypeChange={handleTypeChange}

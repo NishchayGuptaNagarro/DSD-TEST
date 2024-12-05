@@ -28,29 +28,8 @@ export default function SignOutSelect() {
     setOpen(!open);
   };
 
-  const sxListProp = {
-    bgcolor: 'transparent',
-    width: 80,
-    borderRadius: 6,
-
-    '& .MuiTypography-root': {
-      fontSize: styles.fontSizeSm,
-      fontWeight: styles.fontWeightNormal,
-    },
-    ['.language-select-btn.MuiListItemButton-root']: {
-      color: styles.blueSteel,
-      px: 0.5,
-      py: 0.5,
-      borderRadius: 10,
-      ['.MuiListItemText-primary']: {
-        fontWeight: styles.fontWeightNormal,
-        fontSize: styles.fontSizeXsm,
-      },
-    },
-  };
-
   return (
-    <List sx={sxListProp} component="nav">
+    <List component="nav">
       <ListItemButton
         onClick={handleClick}
         sx={{
@@ -77,9 +56,9 @@ export default function SignOutSelect() {
         <List component="nav" disablePadding>
           <ListItemButton
             sx={{
-              padding: '2px 10px 0 8px',
+              padding: '2px 20px 0 14px',
               borderRadius: '4px',
-              marginTop: '10px',
+              marginTop: '4px',
               bgcolor: styles.whitePure,
               border: `1px solid ${styles.borderSoftGray}`,
               width: 'min-content',
@@ -93,7 +72,12 @@ export default function SignOutSelect() {
             }}
             onClick={clearStorage}>
             <ListItemIcon sx={{minWidth: 'min-content'}}>
-              <img className={'nav-icon'} src={LogOut} alt={'signout'} />
+              <img
+                loading="eager"
+                className={'logout-icon'}
+                src={LogOut}
+                alt={'signout'}
+              />
             </ListItemIcon>
             <ListItemText
               sx={{

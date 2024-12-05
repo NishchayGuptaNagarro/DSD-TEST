@@ -274,7 +274,8 @@ function StockCheckOut() {
               <BlueBorderButton
                 size={'small'}
                 variant={'contained'}
-                onClick={decreaseSteps}>
+                onClick={decreaseSteps}
+                disableElevation>
                 {t('createLoadingOrder.back')}
               </BlueBorderButton>
 
@@ -285,7 +286,8 @@ function StockCheckOut() {
                   disabled={!isSignatureLoaded}
                   onClick={() => {
                     assignInitialStock();
-                  }}>
+                  }}
+                  disableElevation>
                   {t('createLoadingOrder.finish')}
                 </BlueButton>
               ) : (
@@ -293,7 +295,8 @@ function StockCheckOut() {
                   size={'small'}
                   variant={'contained'}
                   disabled={nextDisabled}
-                  onClick={increaseSteps}>
+                  onClick={increaseSteps}
+                  disableElevation>
                   {t('createLoadingOrder.next')}
                 </BlueButton>
               )}

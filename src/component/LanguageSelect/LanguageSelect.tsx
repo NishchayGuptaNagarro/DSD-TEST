@@ -91,6 +91,7 @@ function LanguageSelect() {
             disablePadding>
             <ListItemButton
               className={'language-select-btn'}
+              sx={{mt: '6px'}}
               onClick={handleClick}>
               {currentLanguage !== 'en' ? <EnglishButton /> : <FrenchButton />}
             </ListItemButton>
