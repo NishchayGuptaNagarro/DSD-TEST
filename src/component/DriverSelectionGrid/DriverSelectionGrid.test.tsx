@@ -25,6 +25,7 @@ describe('Driver Selection Grid Tests', () => {
     userEvent.setup();
     const {rerender} = render(
       <DriverSelectionGrid
+        selectedDriverId={''}
         driverType={driverTypeMock}
         handleDriverSelection={driverSelectionMock}
         driverArray={driverArrMock}
@@ -91,6 +92,7 @@ describe('Driver Selection Grid Tests', () => {
       expect(screen.queryByText('XYZ')).toBeInTheDocument();
       rerenderFunc(
         <DriverSelectionGrid
+          selectedDriverId={''}
           driverType={'DELIVERY'}
           handleDriverSelection={driverSelectionMock}
           driverArray={driverArrMock}
