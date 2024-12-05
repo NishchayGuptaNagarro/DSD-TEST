@@ -51,6 +51,10 @@ export const allHistoryColDef: (
       filterOperators: stringFilters,
       cellClassName: 'font-sm font-normal',
       sortable: false,
+      headerAlign: 'center',
+      renderCell: (params: GridRenderCellParams<AllDriverHistory>) => {
+        return <div className="driver-cell">{params.value}</div>;
+      },
     },
     {
       field: 'date',
@@ -58,6 +62,13 @@ export const allHistoryColDef: (
       headerName: t('table.date'),
       filterOperators: dateFilter,
       type: 'date',
+      renderHeader: (params: GridColumnHeaderParams) => {
+        return (
+          <div className="date-header">
+            <ColumnHeader headerName={params.colDef.headerName || ''} />
+          </div>
+        );
+      },
       valueFormatter: (params: GridValueFormatterParams) => {
         return format(params.value, 'dd MMMM, yyyy');
       },

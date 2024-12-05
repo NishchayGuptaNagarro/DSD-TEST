@@ -1,8 +1,8 @@
-import DialogContent from '@mui/material/DialogContent';
 import Dialog from '@mui/material/Dialog';
-import {useOutletContext} from 'react-router-dom';
-import {useState} from 'react';
+import DialogContent from '@mui/material/DialogContent';
 import Table from 'component/Table/Table.tsx';
+import {useState} from 'react';
+import {useOutletContext} from 'react-router-dom';
 import {attachmentColDef} from 'utilities/AttachmentColDef/AttachmentColDef.tsx';
 import {getAttachmentRowId} from 'utilities/getAttachmentRowId.ts';
 import {StockCheckInContext} from '../propTypes/types.ts';
@@ -39,9 +39,11 @@ function AttachmentTable() {
         getRowId={getAttachmentRowId}
         showLoading={false}
         columns={attachmentColDef(handleClick)}
+        minHeight={344}
       />
     </>
   );
 }
 
 export default AttachmentTable;
+

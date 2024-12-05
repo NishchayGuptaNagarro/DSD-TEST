@@ -26,6 +26,7 @@ function DriverSelectionGrid({
   isDriverGridLoading,
   driverArray,
   dataLoading = false,
+  selectedDriverId,
   handleTypeChange,
 }: DriverSelectionGridProps) {
   // State containing array filtered after driver type and search text
@@ -96,6 +97,7 @@ function DriverSelectionGrid({
                 key={driver.driverId}
                 driver={driver}
                 dataLoading={dataLoading}
+                selectedDriverId={selectedDriverId}
                 handleDriverSelection={handleDriverSelection}
               />
             );

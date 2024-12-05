@@ -6,6 +6,7 @@ export interface DriverSelectionGridProps {
   isDriverGridLoading: boolean;
   driverArray: Driver[];
   dataLoading?: boolean;
+  selectedDriverId: string;
   handleDriverSelection: ((driverId: string) => void) | (() => void);
   driverType: driverTypes;
   handleTypeChange: (type: driverTypes) => void;

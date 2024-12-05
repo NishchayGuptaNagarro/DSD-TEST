@@ -16,6 +16,7 @@ function TransactionTable() {
         columns={transactionColDef}
         getRowId={getTransactionRowId}
         showLoading={false}
+        minHeight={480}
       />
     </>
   );

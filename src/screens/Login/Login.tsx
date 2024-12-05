@@ -1,27 +1,27 @@
-import Stack from '@mui/material/Stack';
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 import {Typography} from '@mui/material';
 import Button from '@mui/material/Button';
-import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
-import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import IconButton from '@mui/material/IconButton';
+import Stack from '@mui/material/Stack';
 
-import {useFormik} from 'formik';
-import * as Yup from 'yup';
-import {Link, useNavigate} from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode';
 import {AxiosResponse} from 'axios';
+import {useFormik} from 'formik';
+import {jwtDecode} from 'jwt-decode';
 import {useEffect, useState} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
+import * as Yup from 'yup';
 
-import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
-import {LoginApiResponse} from './propTypes/types.ts';
-import {isTokenValid} from 'utilities/isTokenValid.ts';
-import {checkApiError} from 'utilities/checkApiError.ts';
 import {api} from 'api/api.ts';
-import './Login.scss';
 import logo from 'assets/PNG/NagarroLogoWhite.png';
 import bgImage from 'assets/WEBP/LoginBackground.webp';
+import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
 import {useTranslation} from 'react-i18next';
 import styles from 'styles/design-systems.module.scss';
+import {checkApiError} from 'utilities/checkApiError.ts';
+import {isTokenValid} from 'utilities/isTokenValid.ts';
+import './Login.scss';
+import {LoginApiResponse} from './propTypes/types.ts';
 
 function Login() {
   const [apiError, setApiError] = useState('');
@@ -88,7 +88,12 @@ function Login() {
     return (
       <div className={'login-root'}>
         <img src={bgImage} className={'bg-image'} alt={'background'} />
-        <Stack direction={'row'} justifyContent={'space-between'} px={4} py={2}>
+        <Stack
+          direction={'row'}
+          justifyContent={'space-between'}
+          alignItems={'flex-start'}
+          px={4}
+          py={2}>
           <img src={logo} className={'logo'} alt={'logo'} />
           <LanguageSelect />
         </Stack>
@@ -199,3 +204,4 @@ function Login() {
 }
 
 export default Login;
+

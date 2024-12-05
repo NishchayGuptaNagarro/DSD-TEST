@@ -34,7 +34,7 @@ function AdminSignature() {
       <div className="signature-label">
         {t('createLoadingOrder.signature.admin')}
       </div>
-      <Paper elevation={1} className="wrapper">
+      <Paper elevation={0} className="wrapper">
         <div
           data-testid={'signature-container'}
           className={'signature-container'}>

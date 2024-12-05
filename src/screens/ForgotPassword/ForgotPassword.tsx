@@ -1,23 +1,23 @@
-import Stack from '@mui/material/Stack';
 import {Typography} from '@mui/material';
+import Stack from '@mui/material/Stack';
 
 import Button from '@mui/material/Button';
 
 import {useFormik} from 'formik';
-import * as Yup from 'yup';
-import {useNavigate} from 'react-router-dom';
 import {useEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
+import * as Yup from 'yup';
 
-import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
 import {api} from 'api/api.ts';
-import './ForgotPassword.scss';
 import logo from 'assets/PNG/NagarroLogoWhite.png';
+import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
 import {useTranslation} from 'react-i18next';
-import {isTokenValid} from 'utilities/isTokenValid.ts';
-import {checkApiError} from 'utilities/checkApiError.ts';
 import styles from 'styles/design-systems.module.scss';
+import {checkApiError} from 'utilities/checkApiError.ts';
+import {isTokenValid} from 'utilities/isTokenValid.ts';
 import bgImage from '../../assets/WEBP/LoginBackground.webp';
 import {EMAIL_REGEX} from '../../utilities/regex.ts';
+import './ForgotPassword.scss';
 
 function ForgotPassword() {
   const navigator = useNavigate();
@@ -65,7 +65,12 @@ function ForgotPassword() {
     return (
       <div className={'forgot-password-root'}>
         <img src={bgImage} className={'bg-image'} alt={'background'} />
-        <Stack direction={'row'} justifyContent={'space-between'} px={4} py={2}>
+        <Stack
+          direction={'row'}
+          justifyContent={'space-between'}
+          alignItems={'flex-start'}
+          px={4}
+          py={2}>
           <img src={logo} className={'logo'} alt={'logo'} />
           <LanguageSelect />
         </Stack>
@@ -123,3 +128,4 @@ function ForgotPassword() {
 }
 
 export default ForgotPassword;
+

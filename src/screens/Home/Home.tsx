@@ -122,7 +122,8 @@ function Home() {
                         variant="contained"
                         size="small"
                         component={Link}
-                        to="/stock-check-out/driver">
+                        to="/stock-check-out/driver"
+                        disableElevation>
                         {t('availablestock.creatNow')}
                       </Button>
                     </Box>
@@ -140,8 +141,8 @@ function Home() {
             },
             paddingRight: {
               md: '3%',
-              lg: '0.3%',
-              xl: '2%',
+              lg: '0.5%',
+              xl: '2.4%',
             },
           }}
           className="download-container">
@@ -190,7 +191,8 @@ function Home() {
                   variant="contained"
                   size="small"
                   component={Link}
-                  to="">
+                  to=""
+                  disableElevation>
                   {t('downloadContainer.buttonText')}
                 </Button>
               </div>

@@ -15,8 +15,13 @@ import {DriverCardProps} from './propTypes/types.ts';
 function DriverCard({
   driver,
   dataLoading,
+  selectedDriverId,
   handleDriverSelection,
 }: DriverCardProps) {
+  console.log(
+    `------------> ${dataLoading}, selected: ${selectedDriverId}, driver: ${driver.driverId}`,
+  );
+  console.log(dataLoading && selectedDriverId === driver.driverId);
   return (
     <Stack data-testid={'driver-btn'}>
       <Card
@@ -71,7 +76,7 @@ function DriverCard({
                   </Typography>
                 </Box>
               </Stack>
-              {dataLoading ? (
+              {dataLoading && selectedDriverId === driver.driverId ? (
                 <ClipLoader size={20} />
               ) : (
                 <Avatar

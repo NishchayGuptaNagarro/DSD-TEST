@@ -121,7 +121,7 @@
   "home.dateHeading": "La date d'aujourd'hui",
 
   "toolTip.stocks": "Pour consulter les stocks, l'utilisateur doit s'enregistrer",
-  "toolTip.orders": "Pour afficher la commande, l'utilisateur doit créer une commande",
+  "toolTip.orders": "Pour afficher les commandes, l'utilisateur doit créer une commande",
   "toolTip.attachments": "Pour consulter les pièces jointes, l'utilisateur doit télécharger des fichiers"
 }
 
