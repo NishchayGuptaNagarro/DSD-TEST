@@ -18,10 +18,6 @@ function DriverCard({
   selectedDriverId,
   handleDriverSelection,
 }: DriverCardProps) {
-  console.log(
-    `------------> ${dataLoading}, selected: ${selectedDriverId}, driver: ${driver.driverId}`,
-  );
-  console.log(dataLoading && selectedDriverId === driver.driverId);
   return (
     <Stack data-testid={'driver-btn'}>
       <Card

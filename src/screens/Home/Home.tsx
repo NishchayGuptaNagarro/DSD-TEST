@@ -139,6 +139,11 @@ function Home() {
             gridTemplateColumns: {
               sm: 'repeat(4, 1fr)',
             },
+            paddingLeft: {
+              md: '0.2%',
+              lg: '0%',
+              xl: '0.6%',
+            },
             paddingRight: {
               md: '3%',
               lg: '0.5%',
@@ -159,6 +164,7 @@ function Home() {
               width: {
                 sm: '95%',
                 md: '97%',
+                lg: '97.5%',
                 xl: '96%',
               },
               gridColumn: '3/5',
