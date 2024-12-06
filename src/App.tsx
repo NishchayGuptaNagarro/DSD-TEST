@@ -57,12 +57,13 @@ const AttachmentTable = lazy(
 const AdminSignature = lazy(
   () => import('screens/StockCheckIn/AdminSignature/AdminSignature.tsx'),
 );
+const initialLanguage = localStorage.getItem('currentLanguage') || 'en';
 i18n.use(initReactI18next).init({
   resources: {
     en: {translation: {...enJSON}},
     fr: {translation: {...frJSON}},
   },
-  lng: 'en',
+  lng: initialLanguage,
   fallbackLng: 'en',
 });
 

@@ -39,12 +39,19 @@ function LanguageSelect() {
     i18n: {changeLanguage, language},
   } = useTranslation();
   const [open, setOpen] = useState(false); //state to toggle dropdown menu
-  const [currentLanguage, setCurrentLanguage] = useState(language);
+  const [currentLanguage, setCurrentLanguage] = useState<string>(
+    localStorage.getItem('currentLanguage') || language,
+  );
+
+  const updateCurrentLanguage = (selectedLanguage: string) => {
+    localStorage.setItem('currentLanguage', selectedLanguage);
+    setCurrentLanguage(selectedLanguage);
+  };
 
   // Function to handle language change
   const handleClick = () => {
     const newLanguage = currentLanguage === 'en' ? 'fr' : 'en';
-    setCurrentLanguage(newLanguage);
+    updateCurrentLanguage(newLanguage);
     changeLanguage(newLanguage);
   };
 
