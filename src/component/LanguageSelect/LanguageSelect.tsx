@@ -15,7 +15,7 @@ import './LanguageSelect.scss';
 import {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import styles from 'styles/design-systems.module.scss';
-import {Languages} from 'utilities/enum';
+import {languages} from 'utilities/enums.ts';
 
 function LanguageSelect() {
   //   Styles for list
@@ -52,9 +52,9 @@ function LanguageSelect() {
   // Function to handle language change
   const handleClick = () => {
     const newLanguage =
-      currentLanguage === Languages.ENGLISH
-        ? Languages.FRENCH
-        : Languages.ENGLISH;
+      currentLanguage === languages.ENGLISH
+        ? languages.FRENCH
+        : languages.ENGLISH;
     updateCurrentLanguage(newLanguage);
     changeLanguage(newLanguage);
   };
@@ -104,7 +104,7 @@ function LanguageSelect() {
               className={'language-select-btn'}
               sx={{mt: '6px'}}
               onClick={handleClick}>
-              {currentLanguage !== Languages.ENGLISH ? (
+              {currentLanguage !== languages.ENGLISH ? (
                 <EnglishButton />
               ) : (
                 <FrenchButton />
