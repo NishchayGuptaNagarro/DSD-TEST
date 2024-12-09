@@ -50,14 +50,14 @@ function LanguageSelect() {
   }
 
   // Function to handle language change
-  const handleClick = () => {
+  function handleClick(): void {
     const newLanguage =
       currentLanguage === languages.ENGLISH
         ? languages.FRENCH
         : languages.ENGLISH;
     updateCurrentLanguage(newLanguage);
     changeLanguage(newLanguage);
-  };
+  }
 
   // Function to hide and show dropdown
   function handleToggle() {
