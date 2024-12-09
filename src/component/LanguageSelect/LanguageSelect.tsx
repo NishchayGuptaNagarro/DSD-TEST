@@ -15,6 +15,7 @@ import './LanguageSelect.scss';
 import {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import styles from 'styles/design-systems.module.scss';
+import {Languages} from 'utilities/enum';
 
 function LanguageSelect() {
   //   Styles for list
@@ -43,14 +44,17 @@ function LanguageSelect() {
     localStorage.getItem('currentLanguage') || language,
   );
 
-  const updateCurrentLanguage = (selectedLanguage: string) => {
+  function updateCurrentLanguage(selectedLanguage: string): void {
     localStorage.setItem('currentLanguage', selectedLanguage);
     setCurrentLanguage(selectedLanguage);
-  };
+  }
 
   // Function to handle language change
   const handleClick = () => {
-    const newLanguage = currentLanguage === 'en' ? 'fr' : 'en';
+    const newLanguage =
+      currentLanguage === Languages.ENGLISH
+        ? Languages.FRENCH
+        : Languages.ENGLISH;
     updateCurrentLanguage(newLanguage);
     changeLanguage(newLanguage);
   };
@@ -100,7 +104,11 @@ function LanguageSelect() {
               className={'language-select-btn'}
               sx={{mt: '6px'}}
               onClick={handleClick}>
-              {currentLanguage !== 'en' ? <EnglishButton /> : <FrenchButton />}
+              {currentLanguage !== Languages.ENGLISH ? (
+                <EnglishButton />
+              ) : (
+                <FrenchButton />
+              )}
             </ListItemButton>
           </List>
         </Collapse>

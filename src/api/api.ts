@@ -3,6 +3,7 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from 'axios';
+import {Languages} from 'utilities/enum.ts';
 import {generateIdempotencyKey} from 'utilities/idempotencyHelper.ts';
 import {
   generateCorrelationId,
@@ -45,8 +46,8 @@ export const setLanguageHeader = async (
   try {
     if (langCodeEndpoints.some(endpoint => request.url?.includes(endpoint))) {
       const langCode =
-        localStorage.getItem('currentLanguage')?.toUpperCase() || 'EN';
-      request.headers.set('X-Lang-Code', langCode);
+        localStorage.getItem('currentLanguage') || Languages.ENGLISH;
+      request.headers.set('X-Lang-Code', langCode.toUpperCase());
     }
   } catch (error) {
     console.error('Error setting X-Lang-Code header:', error);
