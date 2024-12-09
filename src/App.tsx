@@ -15,6 +15,7 @@ import SidebarState from 'context/sidebar/sidebarState';
 import enJSON from 'resources/labels/en.json';
 import frJSON from 'resources/labels/fr.json';
 import styles from 'styles/design-systems.module.scss';
+import {languages} from 'utilities/enums';
 
 const Home = lazy(() => import('screens/Home/Home.tsx'));
 const History = lazy(() => import('screens/AllHistory/AllHistory.tsx'));
@@ -57,13 +58,15 @@ const AttachmentTable = lazy(
 const AdminSignature = lazy(
   () => import('screens/StockCheckIn/AdminSignature/AdminSignature.tsx'),
 );
+const initialLanguage =
+  localStorage.getItem('currentLanguage') || languages.ENGLISH;
 i18n.use(initReactI18next).init({
   resources: {
     en: {translation: {...enJSON}},
     fr: {translation: {...frJSON}},
   },
-  lng: 'en',
-  fallbackLng: 'en',
+  lng: initialLanguage,
+  fallbackLng: languages.ENGLISH,
 });
 
 function App() {

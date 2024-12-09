@@ -15,6 +15,7 @@ import './LanguageSelect.scss';
 import {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import styles from 'styles/design-systems.module.scss';
+import {languages} from 'utilities/enums.ts';
 
 function LanguageSelect() {
   //   Styles for list
@@ -39,14 +40,24 @@ function LanguageSelect() {
     i18n: {changeLanguage, language},
   } = useTranslation();
   const [open, setOpen] = useState(false); //state to toggle dropdown menu
-  const [currentLanguage, setCurrentLanguage] = useState(language);
+  const [currentLanguage, setCurrentLanguage] = useState<string>(
+    localStorage.getItem('currentLanguage') || language,
+  );
+
+  function updateCurrentLanguage(selectedLanguage: string): void {
+    localStorage.setItem('currentLanguage', selectedLanguage);
+    setCurrentLanguage(selectedLanguage);
+  }
 
   // Function to handle language change
-  const handleClick = () => {
-    const newLanguage = currentLanguage === 'en' ? 'fr' : 'en';
-    setCurrentLanguage(newLanguage);
+  function handleClick(): void {
+    const newLanguage =
+      currentLanguage === languages.ENGLISH
+        ? languages.FRENCH
+        : languages.ENGLISH;
+    updateCurrentLanguage(newLanguage);
     changeLanguage(newLanguage);
-  };
+  }
 
   // Function to hide and show dropdown
   function handleToggle() {
@@ -93,7 +104,11 @@ function LanguageSelect() {
               className={'language-select-btn'}
               sx={{mt: '6px'}}
               onClick={handleClick}>
-              {currentLanguage !== 'en' ? <EnglishButton /> : <FrenchButton />}
+              {currentLanguage !== languages.ENGLISH ? (
+                <EnglishButton />
+              ) : (
+                <FrenchButton />
+              )}
             </ListItemButton>
           </List>
         </Collapse>

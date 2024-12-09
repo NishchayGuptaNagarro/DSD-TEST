@@ -9,3 +9,8 @@ export const exceptionUrls = [
   '/accounts/refresh-token',
   '/accounts/swagger/',
 ];
+// Target URLs for X-Lang-Code header
+export const langCodeEndpoints = [
+  '/warehouse/assign-initial-stock',
+  '/warehouse/driver-dashboard-for-warehouse',
+];

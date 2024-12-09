@@ -3,14 +3,15 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from 'axios';
-import { URL, exceptionUrls } from './config.ts';
+import {languages} from 'utilities/enums.ts';
+import {generateIdempotencyKey} from 'utilities/idempotencyHelper.ts';
 import {
   generateCorrelationId,
   isCorrelationIdExpired,
 } from '../utilities/correlationHelper';
-import { generateIdempotencyKey } from 'utilities/idempotencyHelper.ts';
+import {URL, exceptionUrls, langCodeEndpoints} from './config.ts';
 
-const genericHeaders = { 'Content-type': 'application/json' };
+const genericHeaders = {'Content-type': 'application/json'};
 
 export const api = axios.create({
   baseURL: URL,
@@ -39,7 +40,19 @@ export const setCorrelationIdHeader = async (request: any) => {
   }
 };
 
-
+export const setLanguageHeader = async (
+  request: InternalAxiosRequestConfig,
+) => {
+  try {
+    if (langCodeEndpoints.some(endpoint => request.url?.includes(endpoint))) {
+      const langCode =
+        localStorage.getItem('currentLanguage') || languages.ENGLISH;
+      request.headers.set('X-Lang-Code', langCode.toUpperCase());
+    }
+  } catch (error) {
+    console.error('Error setting X-Lang-Code header:', error);
+  }
+};
 
 api.interceptors.request.use(async (request: InternalAxiosRequestConfig) => {
   const userToken = localStorage.getItem('access_token');
@@ -47,7 +60,7 @@ api.interceptors.request.use(async (request: InternalAxiosRequestConfig) => {
     request.headers.Authorization = `Bearer ${localStorage.getItem('access_token')}`;
 
     if (
-      ['PUT', 'PATCH', 'POST','DELETE'].includes(
+      ['PUT', 'PATCH', 'POST', 'DELETE'].includes(
         request.method?.toUpperCase() as string,
       ) &&
       !exceptionUrls.includes(request.url as string)
@@ -63,6 +76,7 @@ api.interceptors.request.use(async (request: InternalAxiosRequestConfig) => {
     }
   }
   await setCorrelationIdHeader(request);
+  await setLanguageHeader(request);
   return request;
 });
 
