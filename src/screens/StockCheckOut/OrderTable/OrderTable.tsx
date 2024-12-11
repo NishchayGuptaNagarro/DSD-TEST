@@ -79,7 +79,7 @@ const OrderTable = () => {
         rows={rows}
         columns={orderColDef}
         getRowId={getProductRowId}
-        minHeight={394}
+        minHeight={384}
       />
     </>
   );

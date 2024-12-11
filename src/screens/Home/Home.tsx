@@ -27,7 +27,7 @@ function Home() {
 
   return (
     <div className="avl-stock-screen hide-scrollbar">
-      <Header>
+      <Header showLanguageSelector={true}>
         <img className="header-icon" src={NagarroGray}></img>
       </Header>
       <Stack className="nav-container">
