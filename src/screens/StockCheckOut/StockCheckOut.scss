@@ -29,15 +29,24 @@
   }
 
   .description-cell {
-    padding-bottom: 6%;
+    padding-bottom: 5%;
+    @media screen and (min-width: $breakpoint-xl) {
+      padding-bottom: 3%;
+    }
   }
 
   .quantity-cell {
     padding-bottom: 22.2%;
+    @media screen and (min-width: $breakpoint-xl) {
+      padding-bottom: 10%;
+    }
   }
 
   .uom-cell {
     padding-bottom: 42.4%;
+    @media screen and (min-width: $breakpoint-xl) {
+      padding-bottom: 15%;
+    }
   }
 }
 

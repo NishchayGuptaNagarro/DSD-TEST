@@ -29,7 +29,6 @@ const StyledGridOverlay = styled('div')(({theme}) => ({
   alignItems: 'center',
   justifyContent: 'center',
   height: '100%',
-  marginTop: '45px',
   '& .ant-empty-img-1': {
     fill: theme.palette.mode === 'light' ? styles.greyDarker : styles.charcoal,
   },
@@ -152,7 +151,7 @@ export default function Table({
       rows={rows}
       columns={columns}
       getRowId={getRowId}
-      autoHeight={true}
+      autoHeight={false}
       getRowHeight={() => 'auto'} //Passing function to automatically set row height of each row
       getEstimatedRowHeight={() => 52} //giving estimated row height for performance enhancements
       initialState={{
@@ -172,7 +171,8 @@ export default function Table({
       sx={{
         border: 'none',
         overflow: 'hidden',
-        minHeight: minHeight,
+        minHeight: rows?.length > 0 ? minHeight : 400,
+        maxHeight: rows?.length > 0 ? minHeight : 400,
         color: styles.grayCharcoal,
         backgroundColor: 'transparent',
         '& .MuiDataGrid-columnSeparator': {
@@ -186,6 +186,9 @@ export default function Table({
         },
         '& .MuiDataGrid-virtualScroller': {
           overflow: 'hidden',
+        },
+        '& .MuiDataGrid-overlayWrapper': {
+          height: '100%',
         },
         '& .MuiDataGrid-main': {
           borderRadius: '8px',

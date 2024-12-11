@@ -49,7 +49,7 @@ export default function TableDialogContent({
         getRowId={getRowId}
         showLoading={false}
         withBorder={true}
-        minHeight={322}
+        minHeight={344}
       />
     </DialogContent>
   );
