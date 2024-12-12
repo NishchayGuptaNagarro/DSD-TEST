@@ -1,3 +1,17 @@
+export interface AllDriverHistoryResponse {
+  status_code: number;
+  msg?: string;
+  data: SingleDriverHistoryResponse[];
+}
+
+export interface SingleDriverHistoryResponse {
+  date: string;
+  user_id: string;
+  orders: OrdersResponse[];
+  stocks: StocksResponse[];
+  attachments: AttachmentsResponse[];
+}
+
 export interface DriverHistoryResponse {
   status_code: number;
   msg?: string;
@@ -7,7 +21,6 @@ export interface DriverHistoryResponse {
     attachments: AttachmentsResponse[];
   };
 }
-
 export interface OrdersResponse {
   user_id: string;
   order_number: string;
