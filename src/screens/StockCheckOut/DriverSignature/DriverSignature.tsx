@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button';
 
-import {AxiosResponse} from 'axios';
+import {AxiosResponse, isAxiosError} from 'axios';
 import {useEffect, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {useOutletContext} from 'react-router-dom';
@@ -33,39 +33,31 @@ function DriverSignature() {
     setShowLoading(true);
 
     let response: AxiosResponse<SignatureApiResponse>;
-    let status = 0;
-    try {
-      while (executeLoop) {
+
+    while (executeLoop) {
+      try {
         response = await api.get(
           `/warehouse/digital-signature?user_id=${sessionStorage.getItem('selected_driver')}`,
         );
         console.log(response);
-        status = response.data.status_code;
-        switch (status) {
-          case 200: {
-            setShowLoading(false);
-            setSignatureURL(response.data.data.driver_signature_image);
-            setIsSignatureLoaded(true);
-            executeLoop = false;
-            break;
+        setShowLoading(false);
+        setSignatureURL(response.data.data.driver_signature_image);
+        setIsSignatureLoaded(true);
+        executeLoop = false;
+      } catch (error) {
+        const statusCode = isAxiosError(error) ? error.response?.status : null;
+        if (statusCode === 404) {
+          //waiting before making new calls
+          await new Promise(resolve => setTimeout(resolve, 4000));
+          if (!isFocused.current) {
+            return;
           }
-          case 404: {
-            //waiting before making new calls
-            await new Promise(resolve => setTimeout(resolve, 4000));
-            if (!isFocused.current) {
-              return;
-            }
-            break;
-          }
-          default: {
-            setShowLoading(false);
-            throw new Error('an error occured while fetching signature');
-          }
+        } else {
+          executeLoop = false;
+          console.error(error);
+          setShowLoading(false);
         }
       }
-    } catch (error) {
-      console.log(error);
-      setShowLoading(false);
     }
   }
   useEffect(() => {

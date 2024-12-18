@@ -24,7 +24,6 @@ import {DriverHistoryResponse} from 'models/DriverHistoryResponse.ts';
 import {driverTypes} from 'models/driverTypes.ts';
 import {Stock} from 'models/Stock.ts';
 import {TransactionHistory} from 'models/TransactionHistory.ts';
-import {checkApiError} from 'utilities/checkApiError.ts';
 import {sendNotification} from 'utilities/sendNotification.ts';
 import {checkInRoutes} from 'utilities/timelineRoutes.ts';
 import {checkInSteps} from 'utilities/timelineSteps.ts';
@@ -137,7 +136,6 @@ function StockCheckIn() {
     try {
       response = await api.get('/warehouse/drivers/pending-checkin');
       console.log(response);
-      checkApiError(response);
       driverData = response.data.data.map(driver => {
         const parsedRes: Driver = {
           driverName: driver.username,
@@ -149,7 +147,7 @@ function StockCheckIn() {
       setDriverArray(driverData);
       setIsDriverGridLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setIsDriverGridLoading(false);
     }
   }
@@ -160,8 +158,6 @@ function StockCheckIn() {
       response = await api.get(
         `/warehouse/driver/history?user_id=${sessionStorage.getItem('selected_driver')}`,
       );
-      checkApiError(response);
-
       const {orders, stocks, attachments} = response.data.data;
 
       const parsedTransactions = orders.map((transaction, i) => ({
@@ -196,7 +192,7 @@ function StockCheckIn() {
       setAttachmentArr(parsedAttachments);
       setDataLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setDataLoading(false);
     }
   }
@@ -212,11 +208,10 @@ function StockCheckIn() {
         },
       );
       console.log(response);
-      checkApiError(response);
       sendNotification('Stock check in successful');
       setAlertOpen(true);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 

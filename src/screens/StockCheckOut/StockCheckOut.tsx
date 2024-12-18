@@ -19,7 +19,6 @@ import PageDetails from 'component/PageDetails/PageDetails.tsx';
 import timelineContext from 'context/timeline/timelineContext.ts';
 import {createBrowserHistory} from 'history';
 import {Driver} from 'models/Driver.ts';
-import {checkApiError} from 'utilities/checkApiError.ts';
 import {sendNotification} from 'utilities/sendNotification.ts';
 import {
   deliveryRoutes,
@@ -151,7 +150,6 @@ function StockCheckOut() {
     let driverData: Driver[];
     try {
       response = await api.get('/warehouse/drivers');
-      checkApiError(response);
       driverData = response.data.data.map(driver => {
         const parsedRes: Driver = {
           driverName: driver.username,
@@ -163,7 +161,7 @@ function StockCheckOut() {
       setDriverArray(driverData);
       setIsDriverGridLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setIsDriverGridLoading(false);
     }
   }
@@ -177,11 +175,10 @@ function StockCheckOut() {
         },
       );
       console.log(response);
-      checkApiError(response);
       sendNotification('Loading order created successfully');
       setAlertOpen(true);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 

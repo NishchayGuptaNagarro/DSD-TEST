@@ -20,7 +20,6 @@ import {
 } from 'models/DriverHistoryResponse.ts';
 import {Stock} from 'models/Stock.ts';
 import {TransactionHistory} from 'models/TransactionHistory.ts';
-import {checkApiError} from 'utilities/checkApiError.ts';
 import {getAttachmentRowId} from 'utilities/getAttachmentRowId.ts';
 import {getStockRowId} from 'utilities/getStockRowId.ts';
 import {getTransactionRowId} from 'utilities/getTransactionRowId.ts';
@@ -72,7 +71,6 @@ function AllHistoryTable() {
         '/warehouse/all/drivers/history',
       );
       console.log(response);
-      checkApiError(response);
       let parsedResponse: AllDriverHistory[] = [];
       parsedResponse = response.data.data.map(
         (history: SingleDriverHistoryResponse, i) => {
@@ -122,7 +120,7 @@ function AllHistoryTable() {
       setDriverHistoryArr(parsedResponse);
       setTableLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setDriverHistoryArr([]);
       setTableLoading(false);
     }

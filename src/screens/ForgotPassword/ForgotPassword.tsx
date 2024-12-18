@@ -13,7 +13,6 @@ import logo from 'assets/PNG/NagarroLogoWhite.png';
 import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
 import {useTranslation} from 'react-i18next';
 import styles from 'styles/design-systems.module.scss';
-import {checkApiError} from 'utilities/checkApiError.ts';
 import {isTokenValid} from 'utilities/isTokenValid.ts';
 import bgImage from '../../assets/WEBP/LoginBackground.webp';
 import {EMAIL_REGEX} from '../../utilities/regex.ts';
@@ -28,10 +27,10 @@ function ForgotPassword() {
       const response = await api.post('accounts/forgot-password', {
         identifier: email,
       });
-      checkApiError(response);
+      console.log(response);
       navigator('/home');
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
