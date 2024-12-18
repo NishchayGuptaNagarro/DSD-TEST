@@ -1,6 +1,5 @@
-import {AxiosResponse} from 'axios';
 import {api} from 'api/api.ts';
-import {checkApiError} from './checkApiError.ts';
+import {AxiosResponse} from 'axios';
 
 export async function sendNotification(message: string) {
   try {
@@ -13,8 +12,8 @@ export async function sendNotification(message: string) {
       },
     );
     console.log(response);
-    checkApiError(response);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
+

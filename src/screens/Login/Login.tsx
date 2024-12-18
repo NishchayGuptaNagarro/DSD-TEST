@@ -18,7 +18,6 @@ import bgImage from 'assets/WEBP/LoginBackground.webp';
 import LanguageSelect from 'component/LanguageSelect/LanguageSelect.tsx';
 import {useTranslation} from 'react-i18next';
 import styles from 'styles/design-systems.module.scss';
-import {checkApiError} from 'utilities/checkApiError.ts';
 import {isTokenValid} from 'utilities/isTokenValid.ts';
 import './Login.scss';
 import {LoginApiResponse} from './propTypes/types.ts';
@@ -39,7 +38,6 @@ function Login() {
           password: values.password,
         },
       );
-      checkApiError(res);
       const responseData = res.data;
 
       localStorage.setItem('access_token', responseData.data.access_token);
@@ -48,7 +46,7 @@ function Login() {
       localStorage.setItem('user', JSON.stringify(user));
       navigator('/home');
     } catch (error) {
-      console.log(error);
+      console.error(error);
       if (error instanceof Error) {
         setApiError(error.message);
       }
