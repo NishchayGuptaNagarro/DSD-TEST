@@ -13,15 +13,10 @@ export const stockColDef: GridColDef[] = [
     flex: 0.5,
     headerClassName: 'font-md font-normal',
     renderHeader: (params: GridColumnHeaderParams) => {
-      return (
-        <div className="stock-header">
-          <ColumnHeader headerName={params.colDef.headerName || ''} />
-        </div>
-      );
+      return <ColumnHeader headerName={params.colDef.headerName || ''} />;
     },
-    renderCell: (params: GridRenderCellParams<Stock[]>) => {
-      return <div className="stock-item-cell">{params.value}</div>;
-    },
+    align: 'center',
+    headerAlign: 'center',
     cellClassName: 'font-sm font-normal',
     sortable: false,
   },

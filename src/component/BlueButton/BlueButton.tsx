@@ -10,6 +10,10 @@ const BlueButton = styled(Button)({
   '&:hover': {
     backgroundColor: styles.deepNavy,
   },
+  '&:disabled': {
+    backgroundColor: styles.bgFrostedOceanBlue,
+    color: styles.whitePure,
+  },
 });
 
 export default BlueButton;

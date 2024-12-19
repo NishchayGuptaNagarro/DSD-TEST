@@ -179,6 +179,7 @@ export default function Table({
           display: 'none',
         },
         '& .MuiDataGrid-columnHeadersInner': {
+          width: '100%',
           backgroundColor: styles.bgGrayishBlue,
         },
         '& .MuiDataGrid-sortIcon': {

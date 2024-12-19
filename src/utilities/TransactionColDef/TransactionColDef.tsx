@@ -18,15 +18,10 @@ export const transactionColDef: GridColDef[] = [
     flex: 0.2,
     headerClassName: 'font-md font-normal',
     renderHeader: (params: GridColumnHeaderParams) => {
-      return (
-        <div className="transaction-header">
-          <ColumnHeader headerName={params.colDef.headerName || ''} />
-        </div>
-      );
+      return <ColumnHeader headerName={params.colDef.headerName || ''} />;
     },
-    renderCell: (params: GridRenderCellParams<TransactionHistory>) => {
-      return <div className="transaction-cell">{params.value}</div>;
-    },
+    headerAlign: 'center',
+    align: 'center',
     sortable: false,
     cellClassName: 'font-sm font-normal',
   },
