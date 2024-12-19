@@ -1,6 +1,6 @@
 import {api} from 'api/api.ts';
 import checkInError from 'assets/JSON/CheckInError.json';
-import {AxiosResponse} from 'axios';
+import {AxiosResponse, isAxiosError} from 'axios';
 import InfoAlertDialog from 'component/InfoAlertDialog/InfoAlertDialog.tsx';
 import {Row} from 'component/Table/propTypes/types.ts';
 import Table from 'component/Table/Table.tsx';
@@ -9,7 +9,6 @@ import {Product} from 'models/Product.ts';
 import {useContext, useEffect, useState} from 'react';
 import Lottie from 'react-lottie';
 import {useOutletContext} from 'react-router-dom';
-import {checkApiError} from 'utilities/checkApiError.ts';
 import {getProductRowId} from 'utilities/getProductRowId.ts';
 import {ProductApiResponse, StockCheckOutContext} from '../propTypes/types.ts';
 import {orderColDef} from './OrderColDef/OrderColDef.tsx';
@@ -32,13 +31,7 @@ const OrderTable = () => {
         `/warehouse/driver-dashboard-for-warehouse?user_id=${sessionStorage.getItem('selected_driver')}`,
       );
       console.log(response);
-      if (response.data.status_code == 400) {
-        setIsDialogOpen(true);
-        setIsTableLoaded(true);
-        return;
-      }
 
-      checkApiError(response);
       products = response.data.data.map(product => {
         const parsedRes: Product = {
           productId: Number(product.product_id),
@@ -54,7 +47,13 @@ const OrderTable = () => {
       setRows(products);
       setIsTableLoaded(true);
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      const statusCode = isAxiosError(error) ? error.response?.status : null;
+      if (statusCode == 400) {
+        setIsDialogOpen(true);
+        setIsTableLoaded(true);
+        return;
+      }
       setRows([]);
       setIsTableLoaded(true);
     }

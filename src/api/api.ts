@@ -86,7 +86,7 @@ api.interceptors.response.use(
     return response;
   },
   (error: AxiosError | Error) => {
-    // console.log('error now :', JSON.stringify(error));
+    // console.error('error now :', JSON.stringify(error));
     return Promise.reject(error);
   },
 );
