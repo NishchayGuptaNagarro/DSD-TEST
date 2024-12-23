@@ -3,8 +3,6 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
-import {useTheme} from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import {useTranslation} from 'react-i18next';
 import styles from 'styles/design-systems.module.scss';
 import './InfoAlertDialog.scss';
@@ -23,18 +21,16 @@ function InfoAlertDialog({
   };
 
   const {t} = useTranslation();
-  const theme = useTheme();
-  const isExtraLargeScreen = useMediaQuery(theme.breakpoints.up('xl'));
 
   return (
     <>
       <Dialog
         open={isOpen}
         PaperProps={{
-          style: {
+          sx: {
             borderRadius: '12px',
             marginLeft: 'auto',
-            marginRight: isExtraLargeScreen ? '30%' : '26%',
+            marginRight: {sm: '26%', xl: '30%'},
           },
         }}>
         <DialogContent

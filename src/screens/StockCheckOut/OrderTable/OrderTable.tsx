@@ -1,5 +1,5 @@
 import {api} from 'api/api.ts';
-import checkInError from 'assets/JSON/CheckInError.json';
+import checkInError from 'assets/LOTTIE/CheckInError.json';
 import {AxiosResponse, isAxiosError} from 'axios';
 import InfoAlertDialog from 'component/InfoAlertDialog/InfoAlertDialog.tsx';
 import {Row} from 'component/Table/propTypes/types.ts';

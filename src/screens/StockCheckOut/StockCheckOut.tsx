@@ -6,7 +6,7 @@ import {useTranslation} from 'react-i18next';
 import {Outlet, useNavigate} from 'react-router';
 import {useLocation} from 'react-router-dom';
 
-import confirmAnimation from 'assets/JSON/ConfirmAnimation.json';
+import confirmAnimation from 'assets/LOTTIE/ConfirmAnimation.json';
 import BlueButton from 'component/BlueButton/BlueButton.tsx';
 import ScreenLayout from 'component/ScreenLayout/ScreenLayout.tsx';
 import Timeline from 'component/Timeline/Timeline.tsx';
