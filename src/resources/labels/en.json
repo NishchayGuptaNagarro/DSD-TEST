@@ -80,7 +80,7 @@
   "timeline.option6": "Select Pending Check-In",
   "timeline.option7": "Transaction History",
   "timeline.option8": "Stock",
-  "timeline.option9": "Attachments",
+  "timeline.option9": "Attachment",
   "timeline.option10": "Send Signature",
   "timeline.inProgress": "In Progress",
   "timeline.completed": "Completed",
@@ -113,6 +113,8 @@
   "alert.text3": "Initial stock already assigned to driver",
   "alert.btn1": "Okay",
   "alert.btn2": "Dismiss",
+  "alert.title1": "Already Assigned",
+  "alert.title2": "Stock Assigned",
 
   "header.logout": "Logout",
   "downloadContainer.buttonText": "Download Now",

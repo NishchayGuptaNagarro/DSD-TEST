@@ -215,7 +215,7 @@ export default Home;
 // Component containing all cards
 function CardStack() {
   const {t} = useTranslation();
-  const date = format(new Date(), 'do, MMMM yyyy');
+  const date = format(new Date(), 'do MMMM, yyyy');
   const user = JSON.parse(
     localStorage.getItem('user') || '{username:"",employee_id:""}',
   );

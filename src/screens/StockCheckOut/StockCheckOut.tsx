@@ -6,19 +6,21 @@ import {useTranslation} from 'react-i18next';
 import {Outlet, useNavigate} from 'react-router';
 import {useLocation} from 'react-router-dom';
 
+import confirmAnimation from 'assets/LOTTIE/ConfirmAnimation.json';
 import BlueButton from 'component/BlueButton/BlueButton.tsx';
 import ScreenLayout from 'component/ScreenLayout/ScreenLayout.tsx';
 import Timeline from 'component/Timeline/Timeline.tsx';
 
 import Box from '@mui/material/Box';
 import {api} from 'api/api.ts';
-import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
 import BlueBorderButton from 'component/BlueBorderButton/BlueBorderButton.tsx';
 import Header from 'component/Header/Header.tsx';
+import InfoAlertDialog from 'component/InfoAlertDialog/InfoAlertDialog.tsx';
 import PageDetails from 'component/PageDetails/PageDetails.tsx';
 import timelineContext from 'context/timeline/timelineContext.ts';
 import {createBrowserHistory} from 'history';
 import {Driver} from 'models/Driver.ts';
+import Lottie from 'react-lottie';
 import {sendNotification} from 'utilities/sendNotification.ts';
 import {
   deliveryRoutes,
@@ -235,12 +237,24 @@ function StockCheckOut() {
       <Header>
         <PageDetails heading={heading} subHeading={subHeading} />
       </Header>
-      <AlertDialog
+      <InfoAlertDialog
+        titleText={'alert.title2'}
         messageText={'alert.text2'}
-        isOpen={alertOpen}
         closeBtnText={'alert.btn1'}
-        handleDismiss={handleAlertClose}
-      />
+        isOpen={alertOpen}
+        handleDismiss={handleAlertClose}>
+        <Lottie
+          options={{
+            loop: true,
+            animationData: confirmAnimation,
+            rendererSettings: {
+              preserveAspectRatio: 'xMidYMid slice',
+            },
+          }}
+          height={50}
+          width={50}
+        />
+      </InfoAlertDialog>
       <Stack className={'select-driver-screen'}>
         <Stack
           spacing={2}
@@ -280,7 +294,7 @@ function StockCheckOut() {
                 <BlueButton
                   size={'small'}
                   variant={'contained'}
-                  disabled={!isSignatureLoaded}
+                  disabled={false}
                   onClick={() => {
                     assignInitialStock();
                   }}

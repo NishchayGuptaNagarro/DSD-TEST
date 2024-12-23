@@ -52,8 +52,9 @@ export const allHistoryColDef: (
       cellClassName: 'font-sm font-normal',
       sortable: false,
       headerAlign: 'center',
-      renderCell: (params: GridRenderCellParams<AllDriverHistory>) => {
-        return <div className="driver-cell">{params.value}</div>;
+      align: 'center',
+      renderHeader: (params: GridColumnHeaderParams) => {
+        return <ColumnHeader headerName={params.colDef.headerName || ''} />;
       },
     },
     {

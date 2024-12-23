@@ -1,13 +1,14 @@
-import {useOutletContext} from 'react-router-dom';
-
 import {api} from 'api/api.ts';
+import checkInError from 'assets/LOTTIE/CheckInError.json';
 import {AxiosResponse, isAxiosError} from 'axios';
-import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
+import InfoAlertDialog from 'component/InfoAlertDialog/InfoAlertDialog.tsx';
 import {Row} from 'component/Table/propTypes/types.ts';
 import Table from 'component/Table/Table.tsx';
 import timelineContext from 'context/timeline/timelineContext.ts';
 import {Product} from 'models/Product.ts';
 import {useContext, useEffect, useState} from 'react';
+import Lottie from 'react-lottie';
+import {useOutletContext} from 'react-router-dom';
 import {getProductRowId} from 'utilities/getProductRowId.ts';
 import {ProductApiResponse, StockCheckOutContext} from '../propTypes/types.ts';
 import {orderColDef} from './OrderColDef/OrderColDef.tsx';
@@ -66,11 +67,24 @@ const OrderTable = () => {
 
   return (
     <>
-      <AlertDialog
+      <InfoAlertDialog
+        titleText={'alert.title1'}
         messageText={'alert.text3'}
         closeBtnText={'alert.btn2'}
         isOpen={isDialogOpen}
-        handleDismiss={handleDialogDismiss}></AlertDialog>
+        handleDismiss={handleDialogDismiss}>
+        <Lottie
+          options={{
+            loop: true,
+            animationData: checkInError,
+            rendererSettings: {
+              preserveAspectRatio: 'xMidYMid slice',
+            },
+          }}
+          height={50}
+          width={50}
+        />
+      </InfoAlertDialog>
       <Table
         noOfRows={4}
         showMenu={false}

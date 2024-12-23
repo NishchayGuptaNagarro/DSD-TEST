@@ -22,9 +22,12 @@ function LanguageSelect() {
   const sxProp = {
     bgcolor: 'background.paper',
     border: `1px solid ${styles.grayMuted}`,
-    width: 170,
+    width: 144,
     p: 0.5,
     borderRadius: 6,
+    '& .MuiListItemIcon-root': {
+      minWidth: 42,
+    },
     ['.language-select-btn.MuiListItemButton-root']: {
       color: styles.blueSteel,
       px: 0.5,
