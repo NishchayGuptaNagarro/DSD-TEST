@@ -64,11 +64,7 @@ export const allHistoryColDef: (
       filterOperators: dateFilter,
       type: 'date',
       renderHeader: (params: GridColumnHeaderParams) => {
-        return (
-          <div className="date-header">
-            <ColumnHeader headerName={params.colDef.headerName || ''} />
-          </div>
-        );
+        return <ColumnHeader headerName={params.colDef.headerName || ''} />;
       },
       valueFormatter: (params: GridValueFormatterParams) => {
         return format(params.value, 'dd MMMM, yyyy');
@@ -79,6 +75,8 @@ export const allHistoryColDef: (
       flex: 0.4,
       sortable: true,
       cellClassName: 'font-sm font-normal',
+      headerAlign: 'center',
+      align: 'right',
     },
     {
       field: 'transaction',

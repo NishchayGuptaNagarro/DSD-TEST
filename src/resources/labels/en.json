@@ -110,7 +110,7 @@
   "history.attachment": "Attachment's",
   "alert.text1": "Stock Unassigned From Driver",
   "alert.text2": "Stock Assigned To Driver",
-  "alert.text3": "Initial stock already assigned to driver",
+  "alert.text3": "Initial stock has already been assigned to driver",
   "alert.btn1": "Okay",
   "alert.btn2": "Dismiss",
   "alert.title1": "Already Assigned",

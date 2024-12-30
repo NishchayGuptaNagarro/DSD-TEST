@@ -294,7 +294,7 @@ function StockCheckOut() {
                 <BlueButton
                   size={'small'}
                   variant={'contained'}
-                  disabled={false}
+                  disabled={!isSignatureLoaded}
                   onClick={() => {
                     assignInitialStock();
                   }}
