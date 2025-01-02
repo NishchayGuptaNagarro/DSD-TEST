@@ -46,15 +46,17 @@ export const allHistoryColDef: (
     {
       field: 'driverId',
       headerName: t('table.driverId'),
-      flex: 0.3,
+      flex: 0.4,
       headerClassName: 'font-md',
       filterOperators: stringFilters,
       cellClassName: 'font-sm font-normal',
       sortable: false,
       headerAlign: 'center',
-      align: 'center',
       renderHeader: (params: GridColumnHeaderParams) => {
         return <ColumnHeader headerName={params.colDef.headerName || ''} />;
+      },
+      renderCell: (params: GridRenderCellParams<AllDriverHistory>) => {
+        return <div className="driver-id-cell">{params.value}</div>;
       },
     },
     {
@@ -64,7 +66,11 @@ export const allHistoryColDef: (
       filterOperators: dateFilter,
       type: 'date',
       renderHeader: (params: GridColumnHeaderParams) => {
-        return <ColumnHeader headerName={params.colDef.headerName || ''} />;
+        return (
+          <div className="date-header">
+            <ColumnHeader headerName={params.colDef.headerName || ''} />
+          </div>
+        );
       },
       valueFormatter: (params: GridValueFormatterParams) => {
         return format(params.value, 'dd MMMM, yyyy');
@@ -76,7 +82,7 @@ export const allHistoryColDef: (
       sortable: true,
       cellClassName: 'font-sm font-normal',
       headerAlign: 'center',
-      align: 'right',
+      align: 'center',
     },
     {
       field: 'transaction',
@@ -133,7 +139,7 @@ export const allHistoryColDef: (
           </div>
         );
       },
-      flex: 0.3,
+      flex: 0.2,
       cellClassName: 'font-sm font-normal',
       sortable: false,
       filterable: false,

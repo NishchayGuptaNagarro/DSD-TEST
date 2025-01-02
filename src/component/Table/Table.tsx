@@ -175,6 +175,13 @@ export default function Table({
         maxHeight: rows?.length > 0 ? minHeight : 400,
         color: styles.grayCharcoal,
         backgroundColor: 'transparent',
+        '& .MuiDataGrid-menuIcon': {
+          visibility: 'visible',
+          width: 'auto',
+        },
+        '& .MuiDataGrid-menuIconButton': {
+          color: styles.whitePure,
+        },
         '& .MuiDataGrid-columnSeparator': {
           display: 'none',
         },
