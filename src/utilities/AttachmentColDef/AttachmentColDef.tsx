@@ -21,16 +21,11 @@ export const attachmentColDef: (
     flex: 0.5,
     headerClassName: 'font-md font-normal',
     renderHeader: (params: GridColumnHeaderParams) => {
-      return (
-        <div className="attachment-header">
-          <ColumnHeader headerName={params.colDef.headerName || ''} />
-        </div>
-      );
+      return <ColumnHeader headerName={params.colDef.headerName || ''} />;
     },
-    renderCell: (params: GridRenderCellParams<Attachment[]>) => {
-      return <div className="attachment-cell">{params.value}</div>;
-    },
-    cellClassName: 'font-sm font-normal',
+    headerAlign: 'center',
+    align: 'center',
+    cellClassName: 'font-sm font-normal attachment-cell',
     sortable: false,
   },
   {
@@ -62,15 +57,15 @@ function AttachmentStack({attachment, handleClick}: AttachmentStackProps) {
     <Stack
       flexDirection={'row'}
       alignItems={'center'}
-      justifyContent={'end'}
-      width={'100%'}
-      gap={1}>
+      justifyContent={'center'}
+      width={'min-content'}
+      paddingBlock={1}
+      paddingRight={'4%'}>
       <Stack
         flexDirection={'row'}
         alignItems={'center'}
-        mr={'14%'}
         justifyContent={'space-between'}
-        width={'44%'}
+        width={'66px'}
         gap={1}>
         <Button
           variant="text"
@@ -80,7 +75,6 @@ function AttachmentStack({attachment, handleClick}: AttachmentStackProps) {
             fontWeight: styles.fontWeightBolder,
             fontSize: styles.fontSizeMd,
             color: styles.deepNavy,
-            borderRadius: '20px',
             '&:hover': {
               backgroundColor: styles.whitePure,
             },

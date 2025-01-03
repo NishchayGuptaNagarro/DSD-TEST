@@ -29,15 +29,10 @@ export const transactionColDef: GridColDef[] = [
     field: 'customerId',
     headerName: 'table.customerDesc',
     renderHeader: (params: GridColumnHeaderParams) => {
-      return (
-        <div className="transaction-header">
-          <ColumnHeader headerName={params.colDef.headerName || ''} />
-        </div>
-      );
+      return <ColumnHeader headerName={params.colDef.headerName || ''} />;
     },
-    renderCell: (params: GridRenderCellParams<TransactionHistory>) => {
-      return <div className="transaction-cell">{params.value}</div>;
-    },
+    headerAlign: 'center',
+    align: 'center',
     headerClassName: 'font-md font-normal',
     valueGetter: ({value, row}) => {
       return `${value} : ${row.customerName}`;

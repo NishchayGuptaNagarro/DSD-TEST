@@ -105,7 +105,7 @@
   "history.attachment": "Pièce jointe",
   "alert.text1": "Stock non attribué au chauffeur",
   "alert.text2": "Stock attribué au chauffeur",
-  "alert.text3": "Stock initial déjà attribué au chauffeur",
+  "alert.text3": "Le stock initial a déjà été attribué au chauffeur",
   "alert.btn1": "D'accord",
   "alert.btn2": "Ignorer",
   "alert.title1": "Déjà attribué",

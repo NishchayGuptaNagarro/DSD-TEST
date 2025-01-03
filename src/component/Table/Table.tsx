@@ -156,7 +156,7 @@ export default function Table({
       getEstimatedRowHeight={() => 52} //giving estimated row height for performance enhancements
       initialState={{
         sorting: {
-          sortModel: [{field: 'date', sort: 'asc'}],
+          sortModel: [{field: 'date', sort: 'desc'}],
         },
         pagination: {
           paginationModel: {
@@ -175,6 +175,13 @@ export default function Table({
         maxHeight: rows?.length > 0 ? minHeight : 400,
         color: styles.grayCharcoal,
         backgroundColor: 'transparent',
+        '& .MuiDataGrid-menuIcon': {
+          visibility: 'visible',
+          width: 'auto',
+        },
+        '& .MuiDataGrid-menuIconButton': {
+          color: styles.whitePure,
+        },
         '& .MuiDataGrid-columnSeparator': {
           display: 'none',
         },
@@ -184,6 +191,9 @@ export default function Table({
         },
         '& .MuiDataGrid-sortIcon': {
           color: styles.whitePure,
+          visibility: 'visible',
+          opacity: 1,
+          width: 'auto',
         },
         '& .MuiDataGrid-virtualScroller': {
           overflow: 'hidden',

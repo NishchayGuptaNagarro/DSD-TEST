@@ -46,15 +46,17 @@ export const allHistoryColDef: (
     {
       field: 'driverId',
       headerName: t('table.driverId'),
-      flex: 0.3,
+      flex: 0.4,
       headerClassName: 'font-md',
       filterOperators: stringFilters,
       cellClassName: 'font-sm font-normal',
       sortable: false,
       headerAlign: 'center',
-      align: 'center',
       renderHeader: (params: GridColumnHeaderParams) => {
         return <ColumnHeader headerName={params.colDef.headerName || ''} />;
+      },
+      renderCell: (params: GridRenderCellParams<AllDriverHistory>) => {
+        return <div className="driver-id-cell">{params.value}</div>;
       },
     },
     {
@@ -78,7 +80,10 @@ export const allHistoryColDef: (
       },
       flex: 0.4,
       sortable: true,
+      sortingOrder: ['desc', 'asc'],
       cellClassName: 'font-sm font-normal',
+      headerAlign: 'center',
+      align: 'center',
     },
     {
       field: 'transaction',
@@ -135,7 +140,7 @@ export const allHistoryColDef: (
           </div>
         );
       },
-      flex: 0.3,
+      flex: 0.2,
       cellClassName: 'font-sm font-normal',
       sortable: false,
       filterable: false,
