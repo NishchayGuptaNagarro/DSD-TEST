@@ -9,7 +9,12 @@ import {
   generateCorrelationId,
   isCorrelationIdExpired,
 } from '../utilities/correlationHelper';
-import {URL, exceptionUrls, langCodeEndpoints} from './config.ts';
+import {
+  URL,
+  exceptionUrls,
+  langCodeEndpoints,
+  timeZoneEndpoints,
+} from './config.ts';
 
 const genericHeaders = {'Content-type': 'application/json'};
 
@@ -40,9 +45,7 @@ export const setCorrelationIdHeader = async (request: any) => {
   }
 };
 
-export const setLanguageHeader = async (
-  request: InternalAxiosRequestConfig,
-) => {
+export const setLanguageHeader = (request: InternalAxiosRequestConfig) => {
   try {
     if (langCodeEndpoints.some(endpoint => request.url?.includes(endpoint))) {
       const langCode =
@@ -51,6 +54,17 @@ export const setLanguageHeader = async (
     }
   } catch (error) {
     console.error('Error setting X-Lang-Code header:', error);
+  }
+};
+
+export const setTimeZoneHeader = (request: InternalAxiosRequestConfig) => {
+  try {
+    if (timeZoneEndpoints.some(endpoint => request.url?.includes(endpoint))) {
+      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      request.headers.set('X-Time-Zone', timeZone);
+    }
+  } catch (error) {
+    console.error('Error setting X-Time-Zone header:', error);
   }
 };
 
@@ -63,7 +77,7 @@ api.interceptors.request.use(async (request: InternalAxiosRequestConfig) => {
       ['PUT', 'PATCH', 'POST', 'DELETE'].includes(
         request.method?.toUpperCase() as string,
       ) &&
-      !exceptionUrls.includes(request.url as string)
+      !exceptionUrls.some(endpoint => request.url?.includes(endpoint))
     ) {
       if (request.url) {
         const idempotenceKey = generateIdempotencyKey(
@@ -76,7 +90,8 @@ api.interceptors.request.use(async (request: InternalAxiosRequestConfig) => {
     }
   }
   await setCorrelationIdHeader(request);
-  await setLanguageHeader(request);
+  setLanguageHeader(request);
+  setTimeZoneHeader(request);
   return request;
 });
 

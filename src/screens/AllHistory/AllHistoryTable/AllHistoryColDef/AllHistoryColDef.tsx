@@ -9,12 +9,12 @@ import {
 } from '@mui/x-data-grid';
 import ColumnHeader from 'component/ColumnHeader/ColumnHeader.tsx';
 import {InfoTooltip} from 'component/InfoTooltip/InfoTooltip.tsx';
-import {format} from 'date-fns';
 import {Attachment} from 'models/Attachment.ts';
 import {Stock} from 'models/Stock.ts';
 import {TransactionHistory} from 'models/TransactionHistory.ts';
 import {useTranslation} from 'react-i18next';
 import styles from 'styles/design-systems.module.scss';
+import {getLocalDate} from 'utilities/getLocalDate.ts';
 import {
   AllAttachmentsButtonProps,
   AllDriverHistory,
@@ -71,7 +71,7 @@ export const allHistoryColDef: (
         );
       },
       valueFormatter: (params: GridValueFormatterParams) => {
-        return format(params.value, 'dd MMMM, yyyy');
+        return getLocalDate(params.value);
       },
       valueGetter: (params: GridRenderCellParams) => {
         return new Date(params.value);
