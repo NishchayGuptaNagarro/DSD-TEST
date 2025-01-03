@@ -14,3 +14,11 @@ export const langCodeEndpoints = [
   '/warehouse/assign-initial-stock',
   '/warehouse/driver-dashboard-for-warehouse',
 ];
+// Target URLs for X-Time-Zone header
+export const timeZoneEndpoints = [
+  '/warehouse/driver/history',
+  '/warehouse/unassign-stock',
+  '/warehouse/digital-signature',
+  '/warehouse/driver-dashboard-for-warehouse',
+];
+

@@ -9,7 +9,7 @@ import {
 } from '@mui/x-data-grid';
 import ColumnHeader from 'component/ColumnHeader/ColumnHeader.tsx';
 import {InfoTooltip} from 'component/InfoTooltip/InfoTooltip.tsx';
-import {format} from 'date-fns';
+import {addMinutes, format} from 'date-fns';
 import {Attachment} from 'models/Attachment.ts';
 import {Stock} from 'models/Stock.ts';
 import {TransactionHistory} from 'models/TransactionHistory.ts';
@@ -71,7 +71,10 @@ export const allHistoryColDef: (
         );
       },
       valueFormatter: (params: GridValueFormatterParams) => {
-        return format(params.value, 'dd MMMM, yyyy');
+        const offsetMinutes = new Date().getTimezoneOffset();
+        const utcDate = new Date(params.value);
+        const localDate = addMinutes(utcDate, -offsetMinutes);
+        return format(localDate, 'dd MMMM, yyyy');
       },
       valueGetter: (params: GridRenderCellParams) => {
         return new Date(params.value);

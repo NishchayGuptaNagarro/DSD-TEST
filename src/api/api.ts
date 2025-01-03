@@ -9,7 +9,12 @@ import {
   generateCorrelationId,
   isCorrelationIdExpired,
 } from '../utilities/correlationHelper';
-import {URL, exceptionUrls, langCodeEndpoints} from './config.ts';
+import {
+  URL,
+  exceptionUrls,
+  langCodeEndpoints,
+  timeZoneEndpoints,
+} from './config.ts';
 
 const genericHeaders = {'Content-type': 'application/json'};
 
@@ -54,6 +59,19 @@ export const setLanguageHeader = async (
   }
 };
 
+export const setTimeZoneHeader = async (
+  request: InternalAxiosRequestConfig,
+) => {
+  try {
+    if (timeZoneEndpoints.some(endpoint => request.url?.includes(endpoint))) {
+      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      request.headers.set('X-Time-Zone', timeZone);
+    }
+  } catch (error) {
+    console.error('Error setting X-Time-Zone header:', error);
+  }
+};
+
 api.interceptors.request.use(async (request: InternalAxiosRequestConfig) => {
   const userToken = localStorage.getItem('access_token');
   if (userToken) {
@@ -77,6 +95,7 @@ api.interceptors.request.use(async (request: InternalAxiosRequestConfig) => {
   }
   await setCorrelationIdHeader(request);
   await setLanguageHeader(request);
+  await setTimeZoneHeader(request);
   return request;
 });
 
