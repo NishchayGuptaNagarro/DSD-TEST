@@ -59,7 +59,7 @@ function AttachmentStack({attachment, handleClick}: AttachmentStackProps) {
       alignItems={'center'}
       justifyContent={'center'}
       width={'min-content'}
-      paddingBlock={'10px'}
+      marginBlock={'10px'}
       paddingRight={'4%'}>
       <Stack
         flexDirection={'row'}

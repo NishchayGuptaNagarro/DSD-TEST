@@ -80,6 +80,7 @@ export const allHistoryColDef: (
       },
       flex: 0.4,
       sortable: true,
+      sortingOrder: ['desc', 'asc'],
       cellClassName: 'font-sm font-normal',
       headerAlign: 'center',
       align: 'center',
