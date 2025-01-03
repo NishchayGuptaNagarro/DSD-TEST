@@ -52,19 +52,14 @@ $block-margin: 14px;
   padding-left: 36px;
   padding-block: $block-margin;
 }
-
-.attachment-header {
-  margin-left: 30px;
-}
 .attachment-cell {
-  padding-block: $block-margin;
-  padding-left: 26%;
+  color: $charcoal-dark;
 }
 
 .attachment-icon {
-  margin-top: 8px;
+  margin-top: 2px;
   object-fit: contain;
-  width: 25px;
+  width: 16px;
 }
 .attachment-download {
   &:hover {

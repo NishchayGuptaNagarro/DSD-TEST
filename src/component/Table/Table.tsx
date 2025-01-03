@@ -191,6 +191,7 @@ export default function Table({
         },
         '& .MuiDataGrid-sortIcon': {
           color: styles.whitePure,
+          width: 'auto',
         },
         '& .MuiDataGrid-virtualScroller': {
           overflow: 'hidden',
