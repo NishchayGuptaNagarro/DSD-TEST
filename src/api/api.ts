@@ -45,9 +45,7 @@ export const setCorrelationIdHeader = async (request: any) => {
   }
 };
 
-export const setLanguageHeader = async (
-  request: InternalAxiosRequestConfig,
-) => {
+export const setLanguageHeader = (request: InternalAxiosRequestConfig) => {
   try {
     if (langCodeEndpoints.some(endpoint => request.url?.includes(endpoint))) {
       const langCode =
@@ -59,9 +57,7 @@ export const setLanguageHeader = async (
   }
 };
 
-export const setTimeZoneHeader = async (
-  request: InternalAxiosRequestConfig,
-) => {
+export const setTimeZoneHeader = (request: InternalAxiosRequestConfig) => {
   try {
     if (timeZoneEndpoints.some(endpoint => request.url?.includes(endpoint))) {
       const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -81,7 +77,7 @@ api.interceptors.request.use(async (request: InternalAxiosRequestConfig) => {
       ['PUT', 'PATCH', 'POST', 'DELETE'].includes(
         request.method?.toUpperCase() as string,
       ) &&
-      !exceptionUrls.includes(request.url as string)
+      !exceptionUrls.some(endpoint => request.url?.includes(endpoint))
     ) {
       if (request.url) {
         const idempotenceKey = generateIdempotencyKey(
@@ -94,8 +90,8 @@ api.interceptors.request.use(async (request: InternalAxiosRequestConfig) => {
     }
   }
   await setCorrelationIdHeader(request);
-  await setLanguageHeader(request);
-  await setTimeZoneHeader(request);
+  setLanguageHeader(request);
+  setTimeZoneHeader(request);
   return request;
 });
 
