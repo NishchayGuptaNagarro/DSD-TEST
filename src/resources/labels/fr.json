@@ -110,6 +110,7 @@
   "alert.btn2": "Ignorer",
   "alert.title1": "Déjà attribué",
   "alert.title2": "Stock attribué",
+  "alert.title3": "Stock non attribué",
   "stockcheckout.heading": "Sortie de stock",
   "stockcheckout.cardTitle": "En rupture de stock",
   "stockcheckout.secondaryInfo": "Cliquez pour voir les stocks sortis",

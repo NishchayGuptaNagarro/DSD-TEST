@@ -5,16 +5,18 @@ export interface CorrelationObject {
   timestamp: number;
 }
 
-export async function generateCorrelationId() {
+export function generateCorrelationId() {
   const correlationObject: CorrelationObject = {
     id: uuidv4(),
     timestamp: new Date().getTime(),
   };
+
   localStorage.setItem(
     'correlationIdObject',
     JSON.stringify(correlationObject),
   );
-  return correlationObject;
+
+  return correlationObject.id;
 }
 
 //to check whether the id is expired or not
