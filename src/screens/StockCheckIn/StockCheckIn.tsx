@@ -6,12 +6,12 @@ import {Outlet} from 'react-router';
 import {useLocation, useNavigate} from 'react-router-dom';
 
 import {AxiosResponse} from 'axios';
-import AlertDialog from 'component/AlertDialog/AlertDialog.tsx';
 import ScreenLayout from 'component/ScreenLayout/ScreenLayout.tsx';
 import Timeline from 'component/Timeline/Timeline.tsx';
 
 import Box from '@mui/material/Box';
 import {api} from 'api/api.ts';
+import confirmAnimation from 'assets/LOTTIE/ConfirmAnimation.json';
 import BlueBorderButton from 'component/BlueBorderButton/BlueBorderButton.tsx';
 import BlueButton from 'component/BlueButton/BlueButton.tsx';
 import Header from 'component/Header/Header.tsx';
@@ -33,6 +33,8 @@ import {
 } from './propTypes/types.ts';
 import './StockCheckIn.scss';
 import {useStockCheckInState} from './useStockCheckInState.ts';
+import InfoAlertDialog from 'component/InfoAlertDialog/InfoAlertDialog.tsx';
+import Lottie from 'react-lottie';
 
 function StockCheckIn() {
   const {t} = useTranslation();
@@ -253,12 +255,24 @@ function StockCheckIn() {
       <Header>
         <PageDetails heading={heading} subHeading={subHeading} />
       </Header>
-      <AlertDialog
+      <InfoAlertDialog
+        titleText={'alert.title3'}
         messageText={'alert.text1'}
-        isOpen={alertOpen}
         closeBtnText={'alert.btn1'}
-        handleDismiss={handleAlertClose}
-      />
+        isOpen={alertOpen}
+        handleDismiss={handleAlertClose}>
+        <Lottie
+          options={{
+            loop: true,
+            animationData: confirmAnimation,
+            rendererSettings: {
+              preserveAspectRatio: 'xMidYMid slice',
+            },
+          }}
+          height={50}
+          width={50}
+        />
+      </InfoAlertDialog>
       <Stack className={'stock-check-in'}>
         <Stack
           spacing={2}

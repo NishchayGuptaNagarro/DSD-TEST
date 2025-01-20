@@ -23,22 +23,18 @@ export const api = axios.create({
   headers: genericHeaders,
 });
 
-export const setCorrelationIdHeader = async (request: any) => {
+export const setCorrelationIdHeader = (request: InternalAxiosRequestConfig) => {
   try {
-    let correlationIdStr = await localStorage.getItem('correlationIdObject');
-    let correlationId = correlationIdStr ? JSON.parse(correlationIdStr) : null;
+    const correlationIdStr = localStorage.getItem('correlationIdObject');
+    const correlationId = correlationIdStr
+      ? JSON.parse(correlationIdStr)
+      : null;
 
     if (correlationId && !isCorrelationIdExpired(correlationId.timestamp)) {
       request.headers.set('X-Correlation-ID', correlationId.id);
     } else {
-      await generateCorrelationId();
-      let updatedCorrelationIdStr = await localStorage.getItem(
-        'correlationIdObject',
-      );
-      let updatedCorrelationId = updatedCorrelationIdStr
-        ? JSON.parse(updatedCorrelationIdStr)
-        : null;
-      request.headers.set('X-Correlation-ID', updatedCorrelationId.id);
+      const newCorrelationId = generateCorrelationId();
+      request.headers.set('X-Correlation-ID', newCorrelationId);
     }
   } catch (error) {
     console.error('Error setting correlation ID header:', error);

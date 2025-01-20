@@ -114,6 +114,7 @@
   "alert.btn1": "Okay",
   "alert.btn2": "Dismiss",
   "alert.title1": "Already Assigned",
+  "alert.title3": "Stock Unassigned",
   "alert.title2": "Stock Assigned",
 
   "header.logout": "Logout",
