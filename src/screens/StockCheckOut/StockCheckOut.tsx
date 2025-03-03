@@ -152,11 +152,12 @@ function StockCheckOut() {
     let driverData: Driver[];
     try {
       response = await api.get('/warehouse/drivers');
-      driverData = response.data.data.map(driver => {
+      // Extracting only the VAN-SELLER drivers
+      driverData = response.data.data['VAN-SELLER'].map(driver => {
         const parsedRes: Driver = {
           driverName: driver.username,
           driverId: driver.user_id,
-          driverType: driver.business_role_id,
+          driverType: driver.business_role_id, // This will be 'VAN-SELLER'
         };
         return parsedRes;
       });
