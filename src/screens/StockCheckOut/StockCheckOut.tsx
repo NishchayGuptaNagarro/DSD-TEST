@@ -175,6 +175,7 @@ function StockCheckOut() {
         '/warehouse/assign-initial-stock',
         {
           user_id: sessionStorage.getItem('selected_driver'),
+          business_role_id: 'VAN-SELLER', //This needs to be dynamic
         },
       );
       console.log(response);
@@ -321,4 +322,3 @@ function StockCheckOut() {
 }
 
 export default StockCheckOut;
-
