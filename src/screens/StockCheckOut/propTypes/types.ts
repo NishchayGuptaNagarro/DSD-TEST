@@ -8,6 +8,7 @@ import {DriverSelectionGridProps} from 'component/DriverSelectionGrid/propTypes/
 import {driverTypes} from 'models/driverTypes.ts';
 import {OutletTableProps} from 'models/OutletTableProps.ts';
 
+
 // Interface for outlet context provider
 export interface StockCheckOutContext
   extends DriverSelectionGridProps,
@@ -16,21 +17,24 @@ export interface StockCheckOutContext
 // Interface for driver api response
 interface ApiDriverData {
   username: string;
-  business_role_id: driverTypes;
+  business_role_id: 'VAN-SELLER' | 'DELIVERY'; // Role-specific field
   user_id: string;
   business_partner_id: string;
-  creation_date: string;
-  territory: string | null; // Assuming territory can be a string or null
+  van_id: string | null;
+  creation_date: string | null;
   employee_id: string;
   email: string;
   is_active: boolean;
-  date_joined: string;
+  device_token: string | null;
   updated_at: string;
 }
 export interface DriverApiResponse {
   status_code: number;
   msg?: string;
-  data: ApiDriverData[];
+  data: {
+    'VAN-SELLER': ApiDriverData[];
+    'DELIVERY': ApiDriverData[];
+  };
 }
 
 //Interfaces for product API response

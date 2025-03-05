@@ -26,9 +26,10 @@ const OrderTable = () => {
   async function fetchRows() {
     let response: AxiosResponse<ProductApiResponse>;
     let products: Row[];
+    const business_role_id = 'VAN-SELLER';
     try {
       response = await api.get(
-        `/warehouse/driver-dashboard-for-warehouse?user_id=${sessionStorage.getItem('selected_driver')}`,
+        `/warehouse/driver-dashboard-for-warehouse?business_role_id=${business_role_id}&&user_id=${sessionStorage.getItem('selected_driver')}`,
       );
       console.log(response);
 
