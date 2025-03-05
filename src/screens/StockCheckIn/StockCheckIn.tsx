@@ -138,7 +138,7 @@ function StockCheckIn() {
     try {
       response = await api.get('/warehouse/drivers/pending-checkin');
       console.log(response);
-      driverData = response.data.data.map(driver => {
+      driverData = response.data.data['VAN-SELLER'].map(driver => {
         const parsedRes: Driver = {
           driverName: driver.username,
           driverId: driver.user_id,
@@ -334,4 +334,3 @@ function StockCheckIn() {
 }
 
 export default StockCheckIn;
-
