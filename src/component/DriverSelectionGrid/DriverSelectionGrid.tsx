@@ -37,7 +37,7 @@ function DriverSelectionGrid({
   // This function filters driver Arrays based on driver type and search text
   function filterDriverArray(searchText: string) {
     setFilteredArray(
-      driverArray
+      driverArray[driverType]
         .filter(driver => driver.driverType === driverType)
         .filter(
           driver =>

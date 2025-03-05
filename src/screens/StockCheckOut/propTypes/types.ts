@@ -1,7 +1,7 @@
 // Generic driver interface
 
 import {DriverSignatureProps} from '../DriverSignature/propTypes/types.ts';
-import {Driver} from 'models/Driver.ts';
+import {Drivers} from 'models/Driver.ts';
 import {Dispatch, SetStateAction} from 'react';
 import {Row} from 'component/Table/propTypes/types.ts';
 import {DriverSelectionGridProps} from 'component/DriverSelectionGrid/propTypes/types.ts';
@@ -34,6 +34,7 @@ export interface DriverApiResponse {
   data: {
     'VAN-SELLER': ApiDriverData[];
     'DELIVERY': ApiDriverData[];
+    'HYBRID': ApiDriverData[];
   };
 }
 
@@ -59,8 +60,8 @@ export interface ProductApiResponse {
 }
 
 export interface SelectDriverStates {
-  driverArray: Driver[];
-  setDriverArray: Dispatch<SetStateAction<Driver[]>>;
+  driverArray: Drivers;
+  setDriverArray: Dispatch<SetStateAction<Drivers>>;
   rows: Row[];
   setRows: Dispatch<SetStateAction<Row[]>>;
   selectedDriver: string;

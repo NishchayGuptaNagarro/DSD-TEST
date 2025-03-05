@@ -1,10 +1,10 @@
-import {Driver} from 'models/Driver.ts';
+import {Drivers} from 'models/Driver.ts';
 import {driverTypes} from 'models/driverTypes.ts';
 import {MouseEvent} from 'react';
 
 export interface DriverSelectionGridProps {
   isDriverGridLoading: boolean;
-  driverArray: Driver[];
+  driverArray: Drivers;
   dataLoading?: boolean;
   selectedDriverId: string;
   handleDriverSelection: ((driverId: string) => void) | (() => void);

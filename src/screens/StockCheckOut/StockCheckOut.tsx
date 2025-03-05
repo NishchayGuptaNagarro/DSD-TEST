@@ -148,20 +148,44 @@ function StockCheckOut() {
   }
 
   async function fetchDrivers() {
-    let response: AxiosResponse<DriverApiResponse>;
-    let driverData: Driver[];
+
     try {
-      response = await api.get('/warehouse/drivers');
-      // Extracting only the VAN-SELLER drivers
-      driverData = response.data.data['VAN-SELLER'].map(driver => {
-        const parsedRes: Driver = {
+      // Make the API call to get all driver types
+      const  response: AxiosResponse<DriverApiResponse> = await api.get('/warehouse/drivers');
+
+      // Check if 'VAN-SELLER' exists
+      const vanSellerDrivers: Driver[] = response.data.data['VAN-SELLER']
+        ? response.data.data['VAN-SELLER'].map((driver) => ({
           driverName: driver.username,
           driverId: driver.user_id,
-          driverType: driver.business_role_id, // This will be 'VAN-SELLER'
-        };
-        return parsedRes;
+          driverType: 'VAN-SELLER',
+        }))
+        : []; // If 'VAN-SELLER' is missing, set to an empty array
+
+      // Check if 'DELIVERY' exists
+      const deliveryDrivers: Driver[] = response.data.data['DELIVERY']
+        ? response.data.data['DELIVERY'].map((driver) => ({
+          driverName: driver.username,
+          driverId: driver.user_id,
+          driverType: 'DELIVERY',
+        }))
+        : []; // If 'DELIVERY' is missing, set to an empty array
+
+      // Check if 'HYBRID' exists
+      const hybridDrivers: Driver[] = response.data.data['HYBRID']
+        ? response.data.data['HYBRID'].map((driver) => ({
+          driverName: driver.username,
+          driverId: driver.user_id,
+          driverType: 'HYBRID',
+        }))
+        : []; // If 'HYBRID' is missing, set to an empty array
+
+      // Set the driver data in the state, categorized by type
+      setDriverArray({
+        'VAN-SELLER': vanSellerDrivers,
+        'DELIVERY': deliveryDrivers,
+        'HYBRID': hybridDrivers,
       });
-      setDriverArray(driverData);
       setIsDriverGridLoading(false);
     } catch (error) {
       console.error(error);

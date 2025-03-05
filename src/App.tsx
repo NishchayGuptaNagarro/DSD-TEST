@@ -150,7 +150,7 @@ function App() {
                     path="delivery-table"
                     element={
                       <Suspense fallback={<Loading />}>
-                        <DeliveryTable />
+                        <OrderTable />
                       </Suspense>
                     }
                   />

@@ -14,7 +14,7 @@ import {ProductApiResponse, StockCheckOutContext} from '../propTypes/types.ts';
 import {orderColDef} from './OrderColDef/OrderColDef.tsx';
 
 const OrderTable = () => {
-  const {setRows, rows} = useOutletContext<StockCheckOutContext>();
+  const {setRows, rows, driverType} = useOutletContext<StockCheckOutContext>();
   const {decreaseSteps} = useContext(timelineContext);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isTableLoaded, setIsTableLoaded] = useState(false);
@@ -26,10 +26,9 @@ const OrderTable = () => {
   async function fetchRows() {
     let response: AxiosResponse<ProductApiResponse>;
     let products: Row[];
-    const business_role_id = 'VAN-SELLER';
     try {
       response = await api.get(
-        `/warehouse/driver-dashboard-for-warehouse?business_role_id=${business_role_id}&&user_id=${sessionStorage.getItem('selected_driver')}`,
+        `/warehouse/driver-dashboard-for-warehouse?business_role_id=${driverType}&&user_id=${sessionStorage.getItem('selected_driver')}`,
       );
       console.log(response);
 
