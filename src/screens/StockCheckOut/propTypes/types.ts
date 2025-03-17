@@ -59,6 +59,29 @@ export interface ProductApiResponse {
   data: ApiProductData[];
 }
 
+interface Order {
+  order_id: string;
+  customer_id: string;
+  customer_name: string;
+}
+
+interface Pagination {
+  total_items: number;
+  current_page: number;
+  page_size: number;
+  total_pages: number;
+}
+export interface MyOrderApiResponse {
+  status_code: number;
+  msg?: string;
+  data: {
+    orders: Order[];
+    pagination: Pagination;
+  };
+}
+
+
+
 export interface SelectDriverStates {
   driverArray: Drivers;
   setDriverArray: Dispatch<SetStateAction<Drivers>>;

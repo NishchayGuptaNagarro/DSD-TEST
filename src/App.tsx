@@ -58,6 +58,12 @@ const AttachmentTable = lazy(
 const AdminSignature = lazy(
   () => import('screens/StockCheckIn/AdminSignature/AdminSignature.tsx'),
 );
+
+const MyOrders = lazy(
+  () => import('screens/StockCheckOut/MyOrder/MyOrder.tsx'),
+);
+
+
 const initialLanguage =
   localStorage.getItem('currentLanguage') || languages.ENGLISH;
 i18n.use(initReactI18next).init({
@@ -135,6 +141,14 @@ function App() {
                     element={
                       <Suspense fallback={<Loading />}>
                         <DriverNameGrid />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="my-order"
+                    element={
+                      <Suspense fallback={<Loading />}>
+                        <MyOrders />
                       </Suspense>
                     }
                   />
