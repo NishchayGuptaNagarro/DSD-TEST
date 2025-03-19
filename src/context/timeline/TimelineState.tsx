@@ -32,6 +32,7 @@ function TimelineState({children}: UserProvidedProps) {
           ? updatedStep
           : prevStep;
       sessionStorage.setItem('currentStep', JSON.stringify(step));
+      console.log('🚀 ~ updateSteps ~ step:', step);
       return step;
     });
   };

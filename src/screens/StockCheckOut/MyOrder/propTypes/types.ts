@@ -5,3 +5,8 @@ export interface Order extends Row {
     customerId: number;
     name: string;
 }
+
+export interface OrderInfoButtonProps {
+    orderId: string | number;
+    handleOrderInfoClick: (orderId: string | number) => void;
+}

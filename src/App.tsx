@@ -34,9 +34,6 @@ const DriverSignatureForm = lazy(
 const OrderTable = lazy(
   () => import('screens/StockCheckOut/OrderTable/OrderTable.tsx'),
 );
-const DeliveryTable = lazy(
-  () => import('screens/StockCheckOut/DeliveryTable/DeliveryTable.tsx'),
-);
 const StockCheckInScreen = lazy(
   () => import('screens/StockCheckIn/StockCheckIn.tsx'),
 );

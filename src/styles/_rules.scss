@@ -146,6 +146,14 @@
   }
 }
 
+.dialog-position-center {
+  & .MuiDialog-container {
+    justify-content: center;
+    align-items: center; 
+    margin-left: 20%;
+  }
+}
+
 .attachment {
   width: 100%;
   object-fit: contain;

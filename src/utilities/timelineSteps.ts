@@ -15,7 +15,7 @@ export const deliverySteps = [
   'timeline.option1',
   'timeline.option11',
   'timeline.option2',
-  'timeline.option3',
+  'timeline.option10',
 ];
 
 export const checkInSteps = [

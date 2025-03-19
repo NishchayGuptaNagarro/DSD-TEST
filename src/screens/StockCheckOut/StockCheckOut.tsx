@@ -86,6 +86,7 @@ function StockCheckOut() {
     sessionStorage.setItem('selected_driver_type', driverType);
   }
   function handleAlertClose() {
+    
     clearLocalStorage();
     setAlertOpen(false);
     navigate('/home');
@@ -130,7 +131,7 @@ function StockCheckOut() {
       }
       case 'DELIVERY': {
         if (currentStep == 2) {
-          setNextDisabled(true);
+          setNextDisabled(rows.length === 0);
         } else if (!selectedDriver) {
           setNextDisabled(true);
         } else {
@@ -256,7 +257,6 @@ function StockCheckOut() {
       navigate(orderRoutes[currentStep - 1]);
     }
   }, [currentStep]);
-
   return (
     <ScreenLayout>
       <Header>
@@ -310,7 +310,10 @@ function StockCheckOut() {
               <BlueBorderButton
                 size={'small'}
                 variant={'contained'}
-                onClick={decreaseSteps}
+                onClick={()=>{
+                  setRows([]);
+                  decreaseSteps();
+                }}
                 disableElevation>
                 {t('createLoadingOrder.back')}
               </BlueBorderButton>
@@ -331,7 +334,10 @@ function StockCheckOut() {
                   size={'small'}
                   variant={'contained'}
                   disabled={nextDisabled}
-                  onClick={increaseSteps}
+                  onClick={()=>{
+                    setRows([]);
+                    increaseSteps();
+                  }}
                   disableElevation>
                   {t('createLoadingOrder.next')}
                 </BlueButton>

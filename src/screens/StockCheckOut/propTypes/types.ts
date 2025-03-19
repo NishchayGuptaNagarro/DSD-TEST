@@ -39,7 +39,7 @@ export interface DriverApiResponse {
 }
 
 //Interfaces for product API response
-interface ApiProductData {
+export interface ApiProductData {
   product_id: string;
   product_name: string;
   status: string;
@@ -76,6 +76,22 @@ export interface MyOrderApiResponse {
   msg?: string;
   data: {
     orders: Order[];
+    pagination: Pagination;
+  };
+}
+
+interface Pagination {
+  total_items: number;
+  current_page: number;
+  page_size: number;
+  total_pages: number;
+}
+
+export interface MyOrderDetailApiResponse {
+  status_code: number;
+  msg?: string;
+  data: {
+    order_lines: ApiProductData[];
     pagination: Pagination;
   };
 }
