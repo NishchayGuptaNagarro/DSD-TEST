@@ -10,7 +10,6 @@ import './Timeline.scss';
 function Timeline() {
   const {t} = useTranslation();
   const {currentStep, steps, rememberSteps} = useContext(timelineContext);
-
   //When someone refresh the page this method will get called//
   useEffect(() => {
     rememberSteps();

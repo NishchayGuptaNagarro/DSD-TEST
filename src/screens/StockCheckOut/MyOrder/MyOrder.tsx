@@ -91,7 +91,6 @@ function MyOrder() {
     fetchRows();
 
     return () => {
-      console.log('🚀 ~ return ~ c:');
       setRows([]);
     };
   }, []);
