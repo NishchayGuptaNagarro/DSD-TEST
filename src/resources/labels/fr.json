@@ -46,8 +46,10 @@
   "table.initialStock": "Stock initial",
   "table.uom": "UOM",
   "table.orderId": "Commande ID",
+  "table.orderDetails": "Détails de la commande",
   "table.orderDescription": "Description de la commande",
   "table.customerDesc": "Numéro client",
+  "table.customerName": "Nom du client",
   "table.products": "Des produits",
   "table.button": "Afficher les produits",
   "table.noDataAvailable": "Aucune donnée disponible",
@@ -125,6 +127,9 @@
 
   "toolTip.stocks": "Pour consulter les stocks, l'utilisateur doit s'enregistrer",
   "toolTip.orders": "Pour afficher les commandes, l'utilisateur doit créer une commande",
-  "toolTip.attachments": "Pour consulter les pièces jointes, l'utilisateur doit télécharger des fichiers"
+  "toolTip.attachments": "Pour consulter les pièces jointes, l'utilisateur doit télécharger des fichiers",
+
+  "timeline.option11": "Mes commandes"
+  
 }
 
