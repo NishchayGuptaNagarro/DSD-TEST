@@ -22,7 +22,9 @@ import PaginationItem from '@mui/material/PaginationItem';
 import NoDataAvailable from 'assets/PNG/NoDataAvailableIcon.png';
 import {useTranslation} from 'react-i18next';
 import styles from 'styles/design-systems.module.scss';
-
+interface CustomPaginationProps {
+  handlePageChange?: (value: number) => void;
+}
 const StyledGridOverlay = styled('div')(({theme}) => ({
   display: 'flex',
   flexDirection: 'column',
@@ -71,7 +73,7 @@ function CustomNoRowsOverlay() {
   );
 }
 
-function CustomPagination() {
+function CustomPagination({ handlePageChange }: CustomPaginationProps) {
   const apiRef = useGridApiContext();
   const page = useGridSelector(apiRef, gridPageSelector);
   const pageCount = useGridSelector(apiRef, gridPageCountSelector);
@@ -102,7 +104,13 @@ function CustomPagination() {
       page={page + 1}
       count={pageCount}
       renderItem={props => <PaginationItem {...props} />}
-      onChange={(_, value) => apiRef.current.setPage(value - 1)}
+      onChange={(_, value) => {
+        if (handlePageChange) {
+          handlePageChange(value);
+        } else {
+          apiRef.current.setPage(value - 1);
+        }
+      }}
     />
   );
 }
@@ -134,6 +142,8 @@ export default function Table({
   noOfRows,
   minHeight = 270,
   withBorder = false,
+  handlePageChange,
+
 }: TableProps) {
   return (
     <DataGrid
@@ -146,7 +156,7 @@ export default function Table({
         noRowsOverlay: CustomNoRowsOverlay,
         columnMenu: CustomColumnMenu,
         noResultsOverlay: CustomNoRowsOverlay,
-        pagination: CustomPagination,
+        pagination: () => <CustomPagination handlePageChange={handlePageChange} />,
       }}
       rows={rows}
       columns={columns}

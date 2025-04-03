@@ -80,13 +80,6 @@ export interface MyOrderApiResponse {
   };
 }
 
-interface Pagination {
-  total_items: number;
-  current_page: number;
-  page_size: number;
-  total_pages: number;
-}
-
 export interface MyOrderDetailApiResponse {
   status_code: number;
   msg?: string;

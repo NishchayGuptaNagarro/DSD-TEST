@@ -36,7 +36,9 @@ export interface StockCheckInStates {
 export interface PendingCheckInResponse {
   status_code: number;
   msg?: string;
-  data: PendingDriver[];
+  data: {
+    'VAN-SELLER': PendingDriver[];
+  };
 }
 
 export interface PendingDriver {

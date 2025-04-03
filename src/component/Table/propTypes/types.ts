@@ -15,5 +15,6 @@ export interface TableProps {
   noOfRows: number;
   minHeight?: number;
   withBorder?: boolean;
+  handlePageChange?: (page: number) => void;
 }
 

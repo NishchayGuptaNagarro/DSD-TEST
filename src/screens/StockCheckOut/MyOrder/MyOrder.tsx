@@ -1,21 +1,21 @@
-import { api } from 'api/api.ts';
-import { AxiosResponse, isAxiosError } from 'axios';
-import { Row } from 'component/Table/propTypes/types';
+import {api} from 'api/api.ts';
+import {AxiosResponse, isAxiosError} from 'axios';
+import {Row} from 'component/Table/propTypes/types';
 import {
   MyOrderApiResponse,
   MyOrderDetailApiResponse,
   StockCheckOutContext,
 } from '../propTypes/types';
-import { useOutletContext } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import {useOutletContext} from 'react-router-dom';
+import {useEffect, useState} from 'react';
 import Table from 'component/Table/Table.tsx';
-import { myOrdercolumns, orderDetailsColumns } from './MyOrderCol/MyOrderColDef';
+import {myOrdercolumns, orderDetailsColumns} from './MyOrderCol/MyOrderColDef';
 import './MyOrder.scss';
-import { Dialog } from '@mui/material';
+import {Dialog} from '@mui/material';
 import TableDialogContent from 'component/TableDialogContent/TableDialogContent';
 
 function MyOrder() {
-  const { setRows, rows } = useOutletContext<StockCheckOutContext>();
+  const {setRows, rows} = useOutletContext<StockCheckOutContext>();
 
   // State variables
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -24,10 +24,10 @@ function MyOrder() {
   const [isDialogTableLoading, setDialogTableLoading] = useState(false);
 
   // Fetch orders
-  const fetchRows = async () => {
+  const fetchRows = async (page = 1) => {
     try {
       const response: AxiosResponse<MyOrderApiResponse> = await api.get(
-        `/warehouse/preorders?user_id=${sessionStorage.getItem('selected_driver')}&page=1`
+        `/warehouse/preorders?user_id=${sessionStorage.getItem('selected_driver')}&page=${page}`,
       );
 
       const orders: Row[] = (response?.data?.data?.orders || []).map(order => ({
@@ -38,7 +38,6 @@ function MyOrder() {
 
       setRows(orders);
       setIsTableLoaded(true);
-
     } catch (error) {
       console.error(error);
 
@@ -59,19 +58,20 @@ function MyOrder() {
 
     try {
       const response: AxiosResponse<MyOrderDetailApiResponse> = await api.get(
-        `/warehouse/preorder-products?pre_order_number=${orderId}&page=1`
+        `/warehouse/preorder-products?pre_order_number=${orderId}&page=1`,
       );
 
-      const orders: Row[] = (response?.data?.data?.order_lines || []).map(product => ({
-        productId: product.product_id,
-        description: product.description,
-        imageSrc: product.img,
-        uom: product.unit_of_measure,
-        quantity: product.quantity,
-      }));
+      const orders: Row[] = (response?.data?.data?.order_lines || []).map(
+        product => ({
+          productId: product.product_id,
+          description: product.description,
+          imageSrc: product.img,
+          uom: product.unit_of_measure,
+          quantity: product.quantity,
+        }),
+      );
 
       setDialogTableRow(orders);
-      
     } catch (error) {
       console.error(error);
 
@@ -104,7 +104,10 @@ function MyOrder() {
   };
 
   function getDialogProductRowId(row: Row): string | number {
-    if (typeof row.productId === 'string' || typeof row.productId === 'number') {
+    if (
+      typeof row.productId === 'string' ||
+      typeof row.productId === 'number'
+    ) {
       return row.productId;
     }
     throw new Error('Invalid product id: must be string or number');
@@ -115,6 +118,9 @@ function MyOrder() {
     setIsDialogOpen(true);
   };
 
+  const handlePageChange = (page) => {
+    fetchRows(page); // Fetch new data for the current page
+  };
   // JSX rendering
   return (
     <>
@@ -123,8 +129,7 @@ function MyOrder() {
         fullWidth
         maxWidth="md"
         open={isDialogOpen}
-        onClose={() => setIsDialogOpen(false)}
-      >
+        onClose={() => setIsDialogOpen(false)}>
         <TableDialogContent
           rows={dialogTableRow}
           columns={orderDetailsColumns}
@@ -145,7 +150,10 @@ function MyOrder() {
         columns={myOrdercolumns(handleOrderInfosClick)}
         getRowId={getProductRowId}
         minHeight={384}
+        handlePageChange={handlePageChange}
+
       />
+
     </>
   );
 }
