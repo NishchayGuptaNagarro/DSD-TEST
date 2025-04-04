@@ -15,6 +15,7 @@ export default function TableDialogContent({
   selectedDriverId,
   dialogHeader,
   noOfRows = 5,
+  showLoading = false,
 }: TableDialogContentProps) {
   const {t} = useTranslation();
 
@@ -29,7 +30,7 @@ export default function TableDialogContent({
             color: styles.charcoalDark,
             marginBottom: 1,
           }}>
-          {`${selectedDriverId}'s ` + t(dialogHeader)}
+          {`${selectedDriverId ? `${selectedDriverId}s` : ''} ${t(dialogHeader)}`}
         </Typography>
         <div className={'cross-container'}>
           <IconButton
@@ -47,7 +48,7 @@ export default function TableDialogContent({
         rows={rows}
         columns={columns}
         getRowId={getRowId}
-        showLoading={false}
+        showLoading={showLoading}
         withBorder={true}
         minHeight={344}
       />

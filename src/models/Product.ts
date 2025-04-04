@@ -8,3 +8,11 @@ export interface Product extends Row {
   uom: string;
   quantity: number;
 }
+
+export interface MyOrderDetailProduct extends Row {
+  productId: number | string;
+  description: string;
+  imageSrc: string;
+  uom: string;
+  quantity: number;
+}

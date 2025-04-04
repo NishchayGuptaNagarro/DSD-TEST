@@ -86,6 +86,7 @@ function StockCheckOut() {
     sessionStorage.setItem('selected_driver_type', driverType);
   }
   function handleAlertClose() {
+    
     clearLocalStorage();
     setAlertOpen(false);
     navigate('/home');
@@ -130,7 +131,7 @@ function StockCheckOut() {
       }
       case 'DELIVERY': {
         if (currentStep == 2) {
-          setNextDisabled(true);
+          setNextDisabled(rows.length === 0);
         } else if (!selectedDriver) {
           setNextDisabled(true);
         } else {
@@ -148,20 +149,44 @@ function StockCheckOut() {
   }
 
   async function fetchDrivers() {
-    let response: AxiosResponse<DriverApiResponse>;
-    let driverData: Driver[];
+
     try {
-      response = await api.get('/warehouse/drivers');
-      // Extracting only the VAN-SELLER drivers
-      driverData = response.data.data['VAN-SELLER'].map(driver => {
-        const parsedRes: Driver = {
+      // Make the API call to get all driver types
+      const  response: AxiosResponse<DriverApiResponse> = await api.get('/warehouse/drivers');
+
+      // Check if 'VAN-SELLER' exists
+      const vanSellerDrivers: Driver[] = response.data.data['VAN-SELLER']
+        ? response.data.data['VAN-SELLER'].map((driver) => ({
           driverName: driver.username,
           driverId: driver.user_id,
-          driverType: driver.business_role_id, // This will be 'VAN-SELLER'
-        };
-        return parsedRes;
+          driverType: 'VAN-SELLER',
+        }))
+        : []; // If 'VAN-SELLER' is missing, set to an empty array
+
+      // Check if 'DELIVERY' exists
+      const deliveryDrivers: Driver[] = response.data.data['DELIVERY']
+        ? response.data.data['DELIVERY'].map((driver) => ({
+          driverName: driver.username,
+          driverId: driver.user_id,
+          driverType: 'DELIVERY',
+        }))
+        : []; // If 'DELIVERY' is missing, set to an empty array
+
+      // Check if 'HYBRID' exists
+      const hybridDrivers: Driver[] = response.data.data['HYBRID']
+        ? response.data.data['HYBRID'].map((driver) => ({
+          driverName: driver.username,
+          driverId: driver.user_id,
+          driverType: 'HYBRID',
+        }))
+        : []; // If 'HYBRID' is missing, set to an empty array
+
+      // Set the driver data in the state, categorized by type
+      setDriverArray({
+        'VAN-SELLER': vanSellerDrivers,
+        'DELIVERY': deliveryDrivers,
+        'HYBRID': hybridDrivers,
       });
-      setDriverArray(driverData);
       setIsDriverGridLoading(false);
     } catch (error) {
       console.error(error);
@@ -233,7 +258,6 @@ function StockCheckOut() {
       navigate(orderRoutes[currentStep - 1]);
     }
   }, [currentStep]);
-
   return (
     <ScreenLayout>
       <Header>
@@ -287,7 +311,10 @@ function StockCheckOut() {
               <BlueBorderButton
                 size={'small'}
                 variant={'contained'}
-                onClick={decreaseSteps}
+                onClick={()=>{
+                  setRows([]);
+                  decreaseSteps();
+                }}
                 disableElevation>
                 {t('createLoadingOrder.back')}
               </BlueBorderButton>
@@ -308,7 +335,10 @@ function StockCheckOut() {
                   size={'small'}
                   variant={'contained'}
                   disabled={nextDisabled}
-                  onClick={increaseSteps}
+                  onClick={()=>{
+                    setRows([]);
+                    increaseSteps();
+                  }}
                   disableElevation>
                   {t('createLoadingOrder.next')}
                 </BlueButton>

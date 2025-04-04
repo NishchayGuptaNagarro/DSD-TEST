@@ -34,9 +34,6 @@ const DriverSignatureForm = lazy(
 const OrderTable = lazy(
   () => import('screens/StockCheckOut/OrderTable/OrderTable.tsx'),
 );
-const DeliveryTable = lazy(
-  () => import('screens/StockCheckOut/DeliveryTable/DeliveryTable.tsx'),
-);
 const StockCheckInScreen = lazy(
   () => import('screens/StockCheckIn/StockCheckIn.tsx'),
 );
@@ -58,6 +55,12 @@ const AttachmentTable = lazy(
 const AdminSignature = lazy(
   () => import('screens/StockCheckIn/AdminSignature/AdminSignature.tsx'),
 );
+
+const MyOrders = lazy(
+  () => import('screens/StockCheckOut/MyOrder/MyOrder.tsx'),
+);
+
+
 const initialLanguage =
   localStorage.getItem('currentLanguage') || languages.ENGLISH;
 i18n.use(initReactI18next).init({
@@ -139,6 +142,14 @@ function App() {
                     }
                   />
                   <Route
+                    path="my-order"
+                    element={
+                      <Suspense fallback={<Loading />}>
+                        <MyOrders />
+                      </Suspense>
+                    }
+                  />
+                  <Route
                     path="order"
                     element={
                       <Suspense fallback={<Loading />}>
@@ -150,7 +161,7 @@ function App() {
                     path="delivery-table"
                     element={
                       <Suspense fallback={<Loading />}>
-                        <DeliveryTable />
+                        <OrderTable />
                       </Suspense>
                     }
                   />

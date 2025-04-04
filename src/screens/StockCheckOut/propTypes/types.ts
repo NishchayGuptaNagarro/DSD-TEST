@@ -1,7 +1,7 @@
 // Generic driver interface
 
 import {DriverSignatureProps} from '../DriverSignature/propTypes/types.ts';
-import {Driver} from 'models/Driver.ts';
+import {Drivers} from 'models/Driver.ts';
 import {Dispatch, SetStateAction} from 'react';
 import {Row} from 'component/Table/propTypes/types.ts';
 import {DriverSelectionGridProps} from 'component/DriverSelectionGrid/propTypes/types.ts';
@@ -34,11 +34,12 @@ export interface DriverApiResponse {
   data: {
     'VAN-SELLER': ApiDriverData[];
     'DELIVERY': ApiDriverData[];
+    'HYBRID': ApiDriverData[];
   };
 }
 
 //Interfaces for product API response
-interface ApiProductData {
+export interface ApiProductData {
   product_id: string;
   product_name: string;
   status: string;
@@ -58,9 +59,41 @@ export interface ProductApiResponse {
   data: ApiProductData[];
 }
 
+interface Order {
+  order_id: string;
+  customer_id: string;
+  customer_name: string;
+}
+
+interface Pagination {
+  total_items: number;
+  current_page: number;
+  page_size: number;
+  total_pages: number;
+}
+export interface MyOrderApiResponse {
+  status_code: number;
+  msg?: string;
+  data: {
+    orders: Order[];
+    pagination: Pagination;
+  };
+}
+
+export interface MyOrderDetailApiResponse {
+  status_code: number;
+  msg?: string;
+  data: {
+    order_lines: ApiProductData[];
+    pagination: Pagination;
+  };
+}
+
+
+
 export interface SelectDriverStates {
-  driverArray: Driver[];
-  setDriverArray: Dispatch<SetStateAction<Driver[]>>;
+  driverArray: Drivers;
+  setDriverArray: Dispatch<SetStateAction<Drivers>>;
   rows: Row[];
   setRows: Dispatch<SetStateAction<Row[]>>;
   selectedDriver: string;

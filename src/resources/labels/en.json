@@ -50,8 +50,10 @@
   "table.initialStock": "Initial Stock",
   "table.uom": "UOM",
   "table.orderId": "Order ID",
+  "table.orderDetails": "Order Details",
   "table.orderDescription": "Order Description",
   "table.customerDesc": "Customer ID",
+  "table.customerName": "Customer Name",
   "table.products": "Products",
   "table.button": "Show Products",
   "table.noDataAvailable": "No data available",
@@ -127,6 +129,9 @@
 
   "toolTip.stocks": "To view stocks, user needs to check-in",
   "toolTip.orders": "To view orders, user needs to create an order",
-  "toolTip.attachments": "To view attachments, user needs to upload files"
+  "toolTip.attachments": "To view attachments, user needs to upload files",
+
+
+  "timeline.option11": "My Orders"
 }
 
