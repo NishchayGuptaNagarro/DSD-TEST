@@ -29,6 +29,8 @@ function DriverSelectionGrid({
   selectedDriverId,
   handleTypeChange,
 }: DriverSelectionGridProps) {
+  console.log('🚀 ~ driverType:', driverType);
+  console.log('🚀 ~ driverArray:', driverArray);
   // State containing array filtered after driver type and search text
   const [filteredArray, setFilteredArray] = useState<Driver[]>([]);
   // State containing search text from user
@@ -37,7 +39,7 @@ function DriverSelectionGrid({
   // This function filters driver Arrays based on driver type and search text
   function filterDriverArray(searchText: string) {
     setFilteredArray(
-      driverArray[driverType]
+      (driverArray[driverType] || [])
         .filter(driver => driver.driverType === driverType)
         .filter(
           driver =>

@@ -137,16 +137,40 @@ function StockCheckIn() {
     let driverData: Driver[];
     try {
       response = await api.get('/warehouse/drivers/pending-checkin');
-      console.log(response);
-      driverData = response.data.data['VAN-SELLER'].map(driver => {
-        const parsedRes: Driver = {
-          driverName: driver.username,
-          driverId: driver.user_id,
-          driverType: driver.business_role_id,
-        };
-        return parsedRes;
+      console.log('🚀 ~ fetchDrivers ~ response pending-checkin:', response);
+
+      const vanSellerDrivers: Driver[] = response.data.data['VAN-SELLER']
+        ? response.data.data['VAN-SELLER'].map(driver => ({
+            driverName: driver.username,
+            driverId: driver.user_id,
+            driverType: 'VAN-SELLER',
+          }))
+        : []; // If 'VAN-SELLER' is missing, set to an empty array
+
+      // Check if 'DELIVERY' exists
+      const deliveryDrivers: Driver[] = response.data.data['DELIVERY']
+        ? response.data.data['DELIVERY'].map(driver => ({
+            driverName: driver.username,
+            driverId: driver.user_id,
+            driverType: 'DELIVERY',
+          }))
+        : []; // If 'DELIVERY' is missing, set to an empty array
+
+      // Check if 'HYBRID' exists
+      const hybridDrivers: Driver[] = response.data.data['HYBRID']
+        ? response.data.data['HYBRID'].map(driver => ({
+            driverName: driver.username,
+            driverId: driver.user_id,
+            driverType: 'HYBRID',
+          }))
+        : []; // If 'HYBRID' is missing, set to an empty array
+
+      // Set the driver data in the state, categorized by type
+      setDriverArray({
+        'VAN-SELLER': vanSellerDrivers,
+        DELIVERY: deliveryDrivers,
+        HYBRID: hybridDrivers,
       });
-      setDriverArray(driverData);
       setIsDriverGridLoading(false);
     } catch (error) {
       console.error(error);
@@ -156,9 +180,11 @@ function StockCheckIn() {
   async function fetchDriverHistory() {
     setDataLoading(true);
     let response: AxiosResponse<DriverHistoryResponse>;
+    const selectedDriver = sessionStorage.getItem('selected_driver');
+    const selectedDriverType = sessionStorage.getItem('selected_driver_type');
     try {
       response = await api.get(
-        `/warehouse/driver/history?user_id=${sessionStorage.getItem('selected_driver')}`,
+        `/warehouse/driver/history?user_id=${selectedDriver}&business_role_id=${selectedDriverType}`,
       );
       const {orders, stocks, attachments} = response.data.data;
 
