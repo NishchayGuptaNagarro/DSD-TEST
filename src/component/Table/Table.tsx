@@ -162,7 +162,7 @@ export default function Table({
       columns={columns}
       getRowId={getRowId}
       autoHeight={false}
-      getRowHeight={() => 'auto'} //Passing function to automatically set row height of each row
+      getRowHeight={() => 52} //Passing function to automatically set row height of each row
       getEstimatedRowHeight={() => 52} //giving estimated row height for performance enhancements
       initialState={{
         sorting: {
