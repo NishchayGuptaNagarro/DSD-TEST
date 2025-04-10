@@ -24,6 +24,7 @@ export interface DriverHistoryResponse {
 export interface OrdersResponse {
   user_id: string;
   order_number: string;
+  status: string;
   customer: {
     role_code_text: string;
     external_id: string;

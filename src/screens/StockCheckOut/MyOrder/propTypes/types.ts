@@ -1,4 +1,5 @@
 import {Row} from 'component/Table/propTypes/types.ts';
+import { OrdersResponse } from 'models/DriverHistoryResponse';
 
 export interface Order extends Row {
     orderId: number;
@@ -7,6 +8,6 @@ export interface Order extends Row {
 }
 
 export interface OrderInfoButtonProps {
-    orderId: string | number;
+    orderId: string | number | OrdersResponse;
     handleOrderInfoClick: (orderId: string | number) => void;
 }

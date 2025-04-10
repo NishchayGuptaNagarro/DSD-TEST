@@ -1,3 +1,4 @@
+import {Button} from '@mui/material';
 import Stack from '@mui/material/Stack';
 import {
   GridColDef,
@@ -5,26 +6,59 @@ import {
   GridRenderCellParams,
 } from '@mui/x-data-grid';
 import ColumnHeader from 'component/ColumnHeader/ColumnHeader.tsx';
+import {OrdersResponse} from 'models/DriverHistoryResponse';
 import {
   PaymentGridProps,
   PaymentMethods,
   TransactionHistory,
 } from 'models/TransactionHistory.ts';
-
-export const transactionColDef: GridColDef[] = [
-  {
-    field: 'orderId',
-    headerName: 'table.orderId',
-    flex: 0.2,
-    headerClassName: 'font-md font-normal',
-    renderHeader: (params: GridColumnHeaderParams) => {
-      return <ColumnHeader headerName={params.colDef.headerName || ''} />;
+import {useTranslation} from 'react-i18next';
+import {OrderInfoButtonProps} from 'screens/StockCheckOut/MyOrder/propTypes/types';
+import styles from 'styles/design-systems.module.scss';
+export const transactionColDef: (
+  handleOrderInfoClick: (orderInfo: OrdersResponse) => void,
+) => GridColDef[] = handleOrderInfoClick => {
+  return [
+    {
+      field: 'orderId',
+      headerName: 'table.orderId',
+      flex: 0.2,
+      headerClassName: 'font-md font-normal',
+      renderHeader: (params: GridColumnHeaderParams) => {
+        return <ColumnHeader headerName={params.colDef.headerName || ''} />;
+      },
+      headerAlign: 'center',
+      align: 'center',
+      sortable: false,
+      cellClassName: 'font-sm font-normal',
     },
-    headerAlign: 'center',
-    align: 'center',
-    sortable: false,
-    cellClassName: 'font-sm font-normal',
-  },
+    {
+      field: 'order_detail',
+      headerName: 'table.orderDetails',
+      renderHeader: (params: GridColumnHeaderParams) => {
+        return <ColumnHeader headerName={params.colDef.headerName || ''} />;
+      },
+      renderCell: params => {
+        return (
+          <div className="action-cell">
+            <OrdersButton
+              orderInfo={params?.row || {}}
+              handleOrderInfoClick={handleOrderInfoClick}
+            />
+          </div>
+        );
+      },
+      headerClassName: 'font-md',
+      flex: 0.3,
+      cellClassName: 'stock font-sm',
+      sortable: false,
+      headerAlign: 'center',
+      align: 'center',
+    },
+  ];
+};
+
+export const historyDetailsColDef: GridColDef[] = [
   {
     field: 'customerId',
     headerName: 'table.customerDesc',
@@ -59,6 +93,7 @@ export const transactionColDef: GridColDef[] = [
     cellClassName: 'font-sm font-normal',
     align: 'center',
   },
+
   {
     field: 'paymentMethods',
     headerName: 'table.payment',
@@ -78,8 +113,24 @@ export const transactionColDef: GridColDef[] = [
     headerAlign: 'center',
     align: 'center',
   },
-];
 
+  {
+    field: 'status',
+    headerName: 'table.status',
+    renderHeader: (params: GridColumnHeaderParams) => {
+      return <ColumnHeader headerName={params.colDef.headerName || ''} />;
+    },
+    renderCell: params => {
+      return <div className="myOrder-cell">{params.value}</div>;
+    },
+    headerClassName: 'font-md',
+    flex: 0.3,
+    cellClassName: 'stock font-sm',
+    sortable: false,
+    headerAlign: 'center',
+    align: 'center',
+  },
+];
 function PaymentGrid({paymentMethods}: PaymentGridProps) {
   return (
     <Stack sx={{paddingBlock: '6px'}} flexDirection={'column'} gap={0.2}>
@@ -90,3 +141,21 @@ function PaymentGrid({paymentMethods}: PaymentGridProps) {
   );
 }
 
+function OrdersButton({orderInfo, handleOrderInfoClick}: OrderInfoButtonProps) {
+  const {t} = useTranslation();
+  return (
+    <Button
+      variant="contained"
+      className="action-button"
+      sx={{
+        backgroundColor: styles.bgPowderBlue,
+        color: styles.deepNavy,
+      }}
+      size={'small'}
+      onClick={() => {
+        handleOrderInfoClick(orderInfo);
+      }}>
+      {t('table.view')}
+    </Button>
+  );
+}

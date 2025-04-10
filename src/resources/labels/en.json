@@ -90,6 +90,7 @@
   "table.items": "Items",
   "table.amount": "Gross Amount",
   "table.payment": "Payment Methods",
+  "table.status": "Status",
   "table.itembtn": "Show Items",
   "table.itemsDesc": "Items: ID",
   "table.remaining": "Remaining",
