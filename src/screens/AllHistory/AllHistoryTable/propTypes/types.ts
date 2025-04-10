@@ -1,5 +1,6 @@
 import {Row} from 'component/Table/propTypes/types.ts';
 import {Attachment} from 'models/Attachment.ts';
+import {driverTypes} from 'models/driverTypes';
 import {Stock} from 'models/Stock.ts';
 import {TransactionHistory} from 'models/TransactionHistory.ts';
 
@@ -26,5 +27,10 @@ export interface AllAttachmentsButtonProps {
   attachments: Attachment[];
   driverId: string;
   handleAttachmentsClick: (attachments: Attachment[], driverId: string) => void;
+}
+
+export interface AllHistoryProps {
+  driverType: driverTypes;
+  searchText: string;
 }
 

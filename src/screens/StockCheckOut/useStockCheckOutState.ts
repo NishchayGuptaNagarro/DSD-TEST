@@ -1,29 +1,20 @@
-import {useState} from 'react';
-import {SelectDriverStates} from './propTypes/types.ts';
-import {Drivers} from 'models/Driver.ts';
 import {Row} from 'component/Table/propTypes/types.ts';
+import {Drivers} from 'models/Driver.ts';
+import {driverTypes} from 'models/driverTypes.ts';
+import {useState} from 'react';
+import getInitialDriverType from 'utilities/getInitialDriverType.ts';
+import {SelectDriverStates} from './propTypes/types.ts';
 
 export function useStockCheckOutState(): SelectDriverStates {
   const [driverArray, setDriverArray] = useState<Drivers>({
     'VAN-SELLER': [],
-    'DELIVERY': [],
-    'HYBRID': [],
+    DELIVERY: [],
+    HYBRID: [],
   });
-  function loadInitialType() {
-    const initialType = sessionStorage.getItem('selected_driver_type');
-    if (
-      initialType == 'VAN-SELLER' ||
-      initialType == 'DELIVERY' ||
-      initialType == 'HYBRID'
-    ) {
-      return initialType;
-    } else {
-      return 'VAN-SELLER';
-    }
-  }
-  const [driverType, setDriverType] = useState<
-    'VAN-SELLER' | 'DELIVERY' | 'HYBRID'
-  >(loadInitialType());
+
+  const [driverType, setDriverType] = useState<driverTypes>(
+    getInitialDriverType(),
+  );
 
   const [rows, setRows] = useState<Row[]>([]);
   const [selectedDriver, setSelectedDriver] = useState<string>('');
@@ -50,3 +41,4 @@ export function useStockCheckOutState(): SelectDriverStates {
     driverType,
   };
 }
+
