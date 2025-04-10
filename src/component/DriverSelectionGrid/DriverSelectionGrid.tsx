@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import DriverNameGridHeader from 'component/DriverNameGridHeader/DriverNameGridHeader.tsx';
 import {Driver} from 'models/Driver.ts';
+import {driverTypes} from 'models/driverTypes.ts';
 import {MouseEvent, useEffect, useState} from 'react';
 import Loading from 'screens/Loading/Loading.tsx';
 import DriverCard from './DriverCard/DriverCard.tsx';
@@ -36,7 +37,7 @@ function DriverSelectionGrid({
   }
   function handleDriverTypeChange(
     _: MouseEvent<HTMLElement>,
-    value: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID',
+    value: driverTypes,
   ) {
     handleTypeChange(value);
   }

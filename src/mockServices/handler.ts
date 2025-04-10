@@ -1,5 +1,6 @@
-import {rest} from 'msw';
 import {URL} from 'api/config.ts';
+import {rest} from 'msw';
+import {driverRoles} from 'utilities/enums';
 
 export const handlers = [
   rest.get(`${URL}warehouse/drivers`, (_, res, ctx) => {
@@ -9,7 +10,7 @@ export const handlers = [
         data: [
           {
             username: 'driver1',
-            business_role_id: 'VAN-SELLER',
+            business_role_id: driverRoles.VAN_SELLER,
             user_id: 'user_id_1',
             business_partner_id: 'partner_id_1',
             creation_date: '2024-05-30',
@@ -22,7 +23,7 @@ export const handlers = [
           },
           {
             username: 'driver2',
-            business_role_id: 'VAN-SELLER',
+            business_role_id: driverRoles.VAN_SELLER,
             user_id: 'user_id_2',
             business_partner_id: 'partner_id_2',
             creation_date: '2024-05-28',
@@ -46,7 +47,7 @@ export const handlers = [
         data: [
           {
             user_id: 'CA1051',
-            business_role_id: 'VAN-SELLER',
+            business_role_id: driverRoles.VAN_SELLER,
             employee_id: '479',
             is_active: true,
             device_token:
@@ -61,7 +62,7 @@ export const handlers = [
           },
           {
             user_id: 'TG1012',
-            business_role_id: 'VAN-SELLER',
+            business_role_id: driverRoles.VAN_SELLER,
             employee_id: '478',
             is_active: true,
             device_token:
@@ -316,3 +317,4 @@ export const handlers = [
     );
   }),
 ];
+

@@ -12,6 +12,7 @@ import {DriverNameGridHeaderProps} from 'component/DriverNameGridHeader/propType
 import {ChangeEvent, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import styles from 'styles/design-systems.module.scss';
+import {driverRoles} from 'utilities/enums';
 import './DriverNameGridHeader.scss';
 
 function DriverNameGridHeader({
@@ -63,7 +64,7 @@ function DriverNameGridHeader({
                 paddingX: 2,
                 paddingY: 0.5,
               }}
-              value="VAN-SELLER">
+              value={driverRoles.VAN_SELLER}>
               {t('createLoadingOrder.vanSeller')}
             </ToggleButton>
             <ToggleButton
@@ -74,7 +75,7 @@ function DriverNameGridHeader({
                 paddingX: 2,
                 paddingY: 0.5,
               }}
-              value="DELIVERY">
+              value={driverRoles.DELIVERY}>
               {t('createLoadingOrder.delivery')}
             </ToggleButton>
             <ToggleButton
@@ -85,7 +86,7 @@ function DriverNameGridHeader({
                 paddingX: 2,
                 paddingY: 0.5,
               }}
-              value="HYBRID">
+              value={driverRoles.HYBRID}>
               {t('createLoadingOrder.hybrid')}
             </ToggleButton>
           </ToggleButtonGroup>
