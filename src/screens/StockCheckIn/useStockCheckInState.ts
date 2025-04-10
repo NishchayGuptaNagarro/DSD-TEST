@@ -1,24 +1,15 @@
-import {useState} from 'react';
-import {StockCheckInStates} from './propTypes/types.ts';
 import {Driver} from 'models/Driver.ts';
+import {driverTypes} from 'models/driverTypes.ts';
+import {useState} from 'react';
+import getInitialDriverType from 'utilities/getInitialDriverType.ts';
+import {StockCheckInStates} from './propTypes/types.ts';
 
 export function useStockCheckInState(): StockCheckInStates {
   const [driverArray, setDriverArray] = useState<Driver[]>([]);
-  function loadInitialType() {
-    const initialType = sessionStorage.getItem('selected_driver_type');
-    if (
-      initialType == 'VAN-SELLER' ||
-      initialType == 'DELIVERY' ||
-      initialType == 'HYBRID'
-    ) {
-      return initialType;
-    } else {
-      return 'VAN-SELLER';
-    }
-  }
-  const [driverType, setDriverType] = useState<
-    'VAN-SELLER' | 'DELIVERY' | 'HYBRID'
-  >(loadInitialType());
+
+  const [driverType, setDriverType] = useState<driverTypes>(
+    getInitialDriverType(),
+  );
   const [selectedDriver, setSelectedDriver] = useState<string>('');
   const [isDriverGridLoading, setIsDriverGridLoading] = useState(true);
   const [nextDisabled, setNextDisabled] = useState(true);
@@ -44,3 +35,4 @@ export function useStockCheckInState(): StockCheckInStates {
     setAlertOpen,
   };
 }
+

@@ -20,7 +20,9 @@ import PageDetails from 'component/PageDetails/PageDetails.tsx';
 import timelineContext from 'context/timeline/timelineContext.ts';
 import {createBrowserHistory} from 'history';
 import {Driver} from 'models/Driver.ts';
+import {driverTypes} from 'models/driverTypes.ts';
 import Lottie from 'react-lottie';
+import {driverRoles} from 'utilities/enums.ts';
 import {sendNotification} from 'utilities/sendNotification.ts';
 import {
   deliveryRoutes,
@@ -86,25 +88,24 @@ function StockCheckOut() {
     sessionStorage.setItem('selected_driver_type', driverType);
   }
   function handleAlertClose() {
-    
     clearLocalStorage();
     setAlertOpen(false);
     navigate('/home');
   }
-  function handleTypeChange(type: 'VAN-SELLER' | 'DELIVERY' | 'HYBRID') {
+  function handleTypeChange(type: driverTypes) {
     setDriverType(type);
     switch (type) {
-      case 'VAN-SELLER': {
+      case driverRoles.VAN_SELLER: {
         updateStepsArray(vanSellerSteps);
         updateOrderRoutes(vanSellerRoutes);
         break;
       }
-      case 'DELIVERY': {
+      case driverRoles.DELIVERY: {
         updateStepsArray(deliverySteps);
         updateOrderRoutes(deliveryRoutes);
         break;
       }
-      case 'HYBRID': {
+      case driverRoles.HYBRID: {
         updateStepsArray(hybridSteps);
         updateOrderRoutes(hybridRoutes);
         break;
@@ -119,27 +120,27 @@ function StockCheckOut() {
     const selectedDriverType = sessionStorage.getItem('selected_driver_type');
 
     switch (driverType) {
-      case 'VAN-SELLER': {
+      case driverRoles.VAN_SELLER: {
         if (currentStep == 2) {
           setNextDisabled(rows.length === 0);
         } else if (!selectedDriver) {
           setNextDisabled(true);
         } else {
-          setNextDisabled(selectedDriverType !== 'VAN-SELLER');
+          setNextDisabled(selectedDriverType !== driverRoles.VAN_SELLER);
         }
         break;
       }
-      case 'DELIVERY': {
+      case driverRoles.DELIVERY: {
         if (currentStep == 2) {
           setNextDisabled(rows.length === 0);
         } else if (!selectedDriver) {
           setNextDisabled(true);
         } else {
-          setNextDisabled(selectedDriverType !== 'DELIVERY');
+          setNextDisabled(selectedDriverType !== driverRoles.DELIVERY);
         }
         break;
       }
-      case 'HYBRID': {
+      case driverRoles.HYBRID: {
         setNextDisabled(true);
         break;
       }
@@ -149,43 +150,45 @@ function StockCheckOut() {
   }
 
   async function fetchDrivers() {
-
     try {
       // Make the API call to get all driver types
-      const  response: AxiosResponse<DriverApiResponse> = await api.get('/warehouse/drivers');
+      const response: AxiosResponse<DriverApiResponse> =
+        await api.get('/warehouse/drivers');
 
       // Check if 'VAN-SELLER' exists
-      const vanSellerDrivers: Driver[] = response.data.data['VAN-SELLER']
-        ? response.data.data['VAN-SELLER'].map((driver) => ({
-          driverName: driver.username,
-          driverId: driver.user_id,
-          driverType: 'VAN-SELLER',
-        }))
+      const vanSellerDrivers: Driver[] = response.data.data[
+        driverRoles.VAN_SELLER
+      ]
+        ? response.data.data[driverRoles.VAN_SELLER].map(driver => ({
+            driverName: driver.username,
+            driverId: driver.user_id,
+            driverType: driverRoles.VAN_SELLER,
+          }))
         : []; // If 'VAN-SELLER' is missing, set to an empty array
 
       // Check if 'DELIVERY' exists
-      const deliveryDrivers: Driver[] = response.data.data['DELIVERY']
-        ? response.data.data['DELIVERY'].map((driver) => ({
-          driverName: driver.username,
-          driverId: driver.user_id,
-          driverType: 'DELIVERY',
-        }))
+      const deliveryDrivers: Driver[] = response.data.data[driverRoles.DELIVERY]
+        ? response.data.data[driverRoles.DELIVERY].map(driver => ({
+            driverName: driver.username,
+            driverId: driver.user_id,
+            driverType: driverRoles.DELIVERY,
+          }))
         : []; // If 'DELIVERY' is missing, set to an empty array
 
       // Check if 'HYBRID' exists
-      const hybridDrivers: Driver[] = response.data.data['HYBRID']
-        ? response.data.data['HYBRID'].map((driver) => ({
-          driverName: driver.username,
-          driverId: driver.user_id,
-          driverType: 'HYBRID',
-        }))
+      const hybridDrivers: Driver[] = response.data.data[driverRoles.HYBRID]
+        ? response.data.data[driverRoles.HYBRID].map(driver => ({
+            driverName: driver.username,
+            driverId: driver.user_id,
+            driverType: driverRoles.HYBRID,
+          }))
         : []; // If 'HYBRID' is missing, set to an empty array
 
       // Set the driver data in the state, categorized by type
       setDriverArray({
         'VAN-SELLER': vanSellerDrivers,
-        'DELIVERY': deliveryDrivers,
-        'HYBRID': hybridDrivers,
+        DELIVERY: deliveryDrivers,
+        HYBRID: hybridDrivers,
       });
       setIsDriverGridLoading(false);
     } catch (error) {
@@ -200,7 +203,7 @@ function StockCheckOut() {
         '/warehouse/assign-initial-stock',
         {
           user_id: sessionStorage.getItem('selected_driver'),
-          business_role_id: 'VAN-SELLER', //This needs to be dynamic
+          business_role_id: driverRoles.VAN_SELLER, //This needs to be dynamic
         },
       );
       console.log(response);
@@ -311,7 +314,7 @@ function StockCheckOut() {
               <BlueBorderButton
                 size={'small'}
                 variant={'contained'}
-                onClick={()=>{
+                onClick={() => {
                   setRows([]);
                   decreaseSteps();
                 }}
@@ -335,7 +338,7 @@ function StockCheckOut() {
                   size={'small'}
                   variant={'contained'}
                   disabled={nextDisabled}
-                  onClick={()=>{
+                  onClick={() => {
                     setRows([]);
                     increaseSteps();
                   }}
@@ -352,3 +355,4 @@ function StockCheckOut() {
 }
 
 export default StockCheckOut;
+
