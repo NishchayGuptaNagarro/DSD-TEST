@@ -15,6 +15,7 @@ import confirmAnimation from 'assets/LOTTIE/ConfirmAnimation.json';
 import BlueBorderButton from 'component/BlueBorderButton/BlueBorderButton.tsx';
 import BlueButton from 'component/BlueButton/BlueButton.tsx';
 import Header from 'component/Header/Header.tsx';
+import InfoAlertDialog from 'component/InfoAlertDialog/InfoAlertDialog.tsx';
 import PageDetails from 'component/PageDetails/PageDetails.tsx';
 import timelineContext from 'context/timeline/timelineContext.ts';
 import {createBrowserHistory} from 'history';
@@ -24,6 +25,8 @@ import {DriverHistoryResponse} from 'models/DriverHistoryResponse.ts';
 import {driverTypes} from 'models/driverTypes.ts';
 import {Stock} from 'models/Stock.ts';
 import {TransactionHistory} from 'models/TransactionHistory.ts';
+import Lottie from 'react-lottie';
+import {driverRoles} from 'utilities/enums.ts';
 import {sendNotification} from 'utilities/sendNotification.ts';
 import {checkInRoutes} from 'utilities/timelineRoutes.ts';
 import {checkInSteps} from 'utilities/timelineSteps.ts';
@@ -33,8 +36,6 @@ import {
 } from './propTypes/types.ts';
 import './StockCheckIn.scss';
 import {useStockCheckInState} from './useStockCheckInState.ts';
-import InfoAlertDialog from 'component/InfoAlertDialog/InfoAlertDialog.tsx';
-import Lottie from 'react-lottie';
 
 function StockCheckIn() {
   const {t} = useTranslation();
@@ -139,29 +140,31 @@ function StockCheckIn() {
       response = await api.get('/warehouse/drivers/pending-checkin');
       console.log('🚀 ~ fetchDrivers ~ response pending-checkin:', response);
 
-      const vanSellerDrivers: Driver[] = response.data.data['VAN-SELLER']
-        ? response.data.data['VAN-SELLER'].map(driver => ({
+      const vanSellerDrivers: Driver[] = response.data.data[
+        driverRoles.VAN_SELLER
+      ]
+        ? response.data.data[driverRoles.VAN_SELLER].map(driver => ({
             driverName: driver.username,
             driverId: driver.user_id,
-            driverType: 'VAN-SELLER',
+            driverType: driverRoles.VAN_SELLER,
           }))
         : []; // If 'VAN-SELLER' is missing, set to an empty array
 
       // Check if 'DELIVERY' exists
-      const deliveryDrivers: Driver[] = response.data.data['DELIVERY']
-        ? response.data.data['DELIVERY'].map(driver => ({
+      const deliveryDrivers: Driver[] = response.data.data[driverRoles.DELIVERY]
+        ? response.data.data[driverRoles.DELIVERY].map(driver => ({
             driverName: driver.username,
             driverId: driver.user_id,
-            driverType: 'DELIVERY',
+            driverType: driverRoles.DELIVERY,
           }))
         : []; // If 'DELIVERY' is missing, set to an empty array
 
       // Check if 'HYBRID' exists
-      const hybridDrivers: Driver[] = response.data.data['HYBRID']
-        ? response.data.data['HYBRID'].map(driver => ({
+      const hybridDrivers: Driver[] = response.data.data[driverRoles.HYBRID]
+        ? response.data.data[driverRoles.HYBRID].map(driver => ({
             driverName: driver.username,
             driverId: driver.user_id,
-            driverType: 'HYBRID',
+            driverType: driverRoles.HYBRID,
           }))
         : []; // If 'HYBRID' is missing, set to an empty array
 
@@ -360,3 +363,4 @@ function StockCheckIn() {
 }
 
 export default StockCheckIn;
+

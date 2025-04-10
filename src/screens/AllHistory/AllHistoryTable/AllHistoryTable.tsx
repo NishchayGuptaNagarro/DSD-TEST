@@ -1,6 +1,5 @@
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import {AxiosResponse} from 'axios';
 import {useEffect, useState} from 'react';
 
 import Table from 'component/Table/Table.tsx';
@@ -10,6 +9,7 @@ import {transactionColDef} from 'utilities/TransactionColDef/TransactionColDef.t
 import {allHistoryColDef} from './AllHistoryColDef/AllHistoryColDef.tsx';
 
 import {api} from 'api/api.ts';
+import {AxiosResponse} from 'axios';
 import {Row} from 'component/Table/propTypes/types.ts';
 import TableDialogContent from 'component/TableDialogContent/TableDialogContent.tsx';
 import {Attachment} from 'models/Attachment.ts';
@@ -23,11 +23,8 @@ import {TransactionHistory} from 'models/TransactionHistory.ts';
 import {getAttachmentRowId} from 'utilities/getAttachmentRowId.ts';
 import {getStockRowId} from 'utilities/getStockRowId.ts';
 import {getTransactionRowId} from 'utilities/getTransactionRowId.ts';
-import {AllDriverHistory} from './propTypes/types.ts';
-function AllHistoryTable() {
-  const [driverHistoryArr, setDriverHistoryArr] = useState<AllDriverHistory[]>(
-    [],
-  );
+import {AllDriverHistory, AllHistoryProps} from './propTypes/types.ts';
+function AllHistoryTable({driverType, searchText}: AllHistoryProps) {
   const [transactionArr, setTransactionArr] = useState<TransactionHistory[]>(
     [],
   );
@@ -39,36 +36,19 @@ function AllHistoryTable() {
   const [showAttachments, setShowAttachments] = useState(false);
   const [showImage, setShowImage] = useState(false);
   const [imageSrc, setImageSrc] = useState('');
-  const [tableLoading, setTableLoading] = useState(true);
   const [selectedDriverId, setSelectedDriverId] = useState('');
+  const [driverHistoryArr, setDriverHistoryArr] = useState<AllDriverHistory[]>(
+    [],
+  );
+  const [filteredArray, setFilteredArray] = useState<AllDriverHistory[]>([]);
 
-  function handleOrdersClick(
-    transactions: TransactionHistory[],
-    driverId: string,
-  ) {
-    setSelectedDriverId(driverId);
-    setTransactionArr(transactions);
-    setShowTransaction(true);
-  }
-  function handleStocksClick(stocks: Stock[], driverId: string) {
-    setSelectedDriverId(driverId);
-    setStockArr(stocks);
-    setShowStocks(true);
-  }
-  function handleAttachmentsClick(attachments: Attachment[], driverId: string) {
-    setSelectedDriverId(driverId);
-    setAttachmentArr(attachments);
-    setShowAttachments(true);
-  }
-  function handleImageClick(src: string) {
-    setImageSrc(src);
-    setShowImage(true);
-  }
+  const [tableLoading, setTableLoading] = useState(true);
 
   async function fetchDriverHistory() {
+    setTableLoading(true);
     try {
       const response: AxiosResponse<AllDriverHistoryResponse> = await api.get(
-        '/warehouse/all/drivers/history',
+        `/warehouse/all/drivers/history?business_role_id=${driverType}`,
       );
       console.log(response);
       let parsedResponse: AllDriverHistory[] = [];
@@ -118,12 +98,53 @@ function AllHistoryTable() {
       );
       console.log(parsedResponse);
       setDriverHistoryArr(parsedResponse);
+      setFilteredArray(parsedResponse);
       setTableLoading(false);
     } catch (error) {
       console.error(error);
       setDriverHistoryArr([]);
+      setFilteredArray([]);
       setTableLoading(false);
     }
+  }
+
+  function filterByDriverId(searchText: string) {
+    setFilteredArray(
+      (driverHistoryArr || []).filter(driver =>
+        driver.driverId.toLowerCase().includes(searchText.toLowerCase()),
+      ),
+    );
+  }
+
+  useEffect(() => {
+    fetchDriverHistory();
+  }, [driverType]);
+
+  useEffect(() => {
+    filterByDriverId(searchText);
+  }, [searchText]);
+
+  function handleOrdersClick(
+    transactions: TransactionHistory[],
+    driverId: string,
+  ) {
+    setSelectedDriverId(driverId);
+    setTransactionArr(transactions);
+    setShowTransaction(true);
+  }
+  function handleStocksClick(stocks: Stock[], driverId: string) {
+    setSelectedDriverId(driverId);
+    setStockArr(stocks);
+    setShowStocks(true);
+  }
+  function handleAttachmentsClick(attachments: Attachment[], driverId: string) {
+    setSelectedDriverId(driverId);
+    setAttachmentArr(attachments);
+    setShowAttachments(true);
+  }
+  function handleImageClick(src: string) {
+    setImageSrc(src);
+    setShowImage(true);
   }
 
   function getAllHistoryRowId(row: Row) {
@@ -133,10 +154,6 @@ function AllHistoryTable() {
       throw new Error('row id should be number');
     }
   }
-
-  useEffect(() => {
-    fetchDriverHistory();
-  }, []);
 
   return (
     <>
@@ -214,7 +231,7 @@ function AllHistoryTable() {
         noOfRows={7}
         showMenu={true}
         minHeight={520}
-        rows={driverHistoryArr}
+        rows={filteredArray}
         columns={allHistoryColDef(
           handleOrdersClick,
           handleStocksClick,
