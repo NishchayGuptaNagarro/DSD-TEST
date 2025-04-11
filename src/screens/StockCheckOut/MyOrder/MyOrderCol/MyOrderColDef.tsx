@@ -2,13 +2,13 @@
 import {Button} from '@mui/material';
 import {GridColDef, GridColumnHeaderParams} from '@mui/x-data-grid';
 import ColumnHeader from 'component/ColumnHeader/ColumnHeader.tsx';
+import ProductIcon from 'component/ProductIcon/ProductIcon';
 import {useTranslation} from 'react-i18next';
 import styles from 'styles/design-systems.module.scss';
-import {OrderInfoButtonProps} from '../propTypes/types';
-import ProductIcon from 'component/ProductIcon/ProductIcon';
+import {MyOrderInfoButtonProps} from '../propTypes/types';
 
 export const myOrdercolumns: (
-  handleOrderInfoClick: (orderId: number) => void,
+  handleOrderInfoClick: (orderId: number | string) => void,
 ) => GridColDef[] = handleOrderInfoClick => {
   return [
     {
@@ -18,7 +18,7 @@ export const myOrdercolumns: (
         return <ColumnHeader headerName={params.colDef.headerName || ''} />;
       },
       renderCell: params => {
-        return <div className="myOrder-id-cell">{params.value}</div>;
+        return <div className="my-order-id-cell">{params.value}</div>;
       },
       headerClassName: 'font-md',
       flex: 0.3,
@@ -35,7 +35,7 @@ export const myOrdercolumns: (
         return <ColumnHeader headerName={params.colDef.headerName || ''} />;
       },
       renderCell: params => {
-        return <div className="myOrder-cell">{params.value}</div>;
+        return <div className="my-order-cell">{params.value}</div>;
       },
       headerClassName: 'font-md',
       flex: 0.3,
@@ -52,7 +52,7 @@ export const myOrdercolumns: (
         return <ColumnHeader headerName={params.colDef.headerName || ''} />;
       },
       renderCell: params => {
-        return <div className="myOrder-cell">{params.value}</div>;
+        return <div className="my-order-cell">{params.value}</div>;
       },
       headerClassName: 'font-md',
       flex: 0.3,
@@ -87,7 +87,7 @@ export const myOrdercolumns: (
   ];
 };
 
-function OrdersButton({orderId, handleOrderInfoClick}: OrderInfoButtonProps) {
+function OrdersButton({orderId, handleOrderInfoClick}: MyOrderInfoButtonProps) {
   const {t} = useTranslation();
   return (
     <Button
@@ -162,3 +162,4 @@ export const orderDetailsColumns: GridColDef[] = [
     align: 'center',
   },
 ];
+

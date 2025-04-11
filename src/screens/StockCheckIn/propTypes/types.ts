@@ -1,11 +1,11 @@
 import {DriverSelectionGridProps} from 'component/DriverSelectionGrid/propTypes/types.ts';
-import {Driver} from 'models/Driver.ts';
-import {Dispatch, SetStateAction} from 'react';
-import {driverTypes} from 'models/driverTypes.ts';
-import {AdminSignatureProps} from '../AdminSignature/propTypes/types.ts';
 import {Attachment} from 'models/Attachment.ts';
+import {Drivers} from 'models/Driver.ts';
+import {driverTypes} from 'models/driverTypes.ts';
 import {Stock} from 'models/Stock.ts';
 import {TransactionHistory} from 'models/TransactionHistory.ts';
+import {Dispatch, SetStateAction} from 'react';
+import {AdminSignatureProps} from '../AdminSignature/propTypes/types.ts';
 
 export interface StockCheckInContext
   extends DriverSelectionGridProps,
@@ -20,8 +20,10 @@ export interface StockCheckInStates {
   setNextDisabled: Dispatch<SetStateAction<boolean>>;
   isDriverGridLoading: boolean;
   setIsDriverGridLoading: Dispatch<SetStateAction<boolean>>;
-  driverArray: Driver[];
-  setDriverArray: Dispatch<SetStateAction<Driver[]>>;
+
+  driverArray: Drivers;
+  setDriverArray: Dispatch<SetStateAction<Drivers>>;
+
   selectedDriver: string;
   setSelectedDriver: Dispatch<SetStateAction<string>>;
   driverType: driverTypes;
@@ -38,6 +40,8 @@ export interface PendingCheckInResponse {
   msg?: string;
   data: {
     'VAN-SELLER': PendingDriver[];
+    DELIVERY: PendingDriver[];
+    HYBRID: PendingDriver[];
   };
 }
 
@@ -55,3 +59,4 @@ export interface PendingDriver {
   van_id: string;
   date_joined: string;
 }
+

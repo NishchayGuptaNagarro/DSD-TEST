@@ -1,6 +1,6 @@
 import {render, screen, waitFor, within} from '@testing-library/react';
 import {userEvent} from '@testing-library/user-event';
-import {Driver} from 'models/Driver.ts';
+import {Drivers} from 'models/Driver.ts';
 import {ReactNode} from 'react';
 import DriverSelectionGrid from './DriverSelectionGrid.tsx';
 
@@ -8,18 +8,34 @@ describe('Driver Selection Grid Tests', () => {
   const driverSelectionMock = jest.fn();
   const typeChangeMock = jest.fn();
   const driverTypeMock = 'VAN-SELLER';
-  const driverArrMock: Driver[] = [
-    {
-      driverId: '1A',
-      driverType: 'VAN-SELLER',
-      driverName: 'ABC',
-    },
-    {
-      driverId: '2B',
-      driverType: 'VAN-SELLER',
-      driverName: 'XYZ',
-    },
-  ];
+  const driverArrMock: Drivers = {
+    'VAN-SELLER': [
+      {
+        driverId: '1A',
+        driverType: 'VAN-SELLER',
+        driverName: 'ABC',
+      },
+      {
+        driverId: '2B',
+        driverType: 'VAN-SELLER',
+        driverName: 'XYZ',
+      },
+    ],
+    DELIVERY: [
+      {
+        driverId: '1A',
+        driverType: 'DELIVERY',
+        driverName: 'ABCD',
+      },
+    ],
+    HYBRID: [
+      {
+        driverId: '1A',
+        driverType: 'HYBRID',
+        driverName: 'ABCD',
+      },
+    ],
+  };
   let rerenderFunc: (ui: ReactNode) => void;
   beforeEach(() => {
     userEvent.setup();

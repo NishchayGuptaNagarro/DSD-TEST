@@ -5,7 +5,7 @@ import {Row} from 'component/Table/propTypes/types';
 export interface TableDialogContentProps {
   rows: Row[];
   columns: GridColDef[];
-  getRowId: (row: Row) => number | string ;
+  getRowId: (row: Row) => number;
   setShowDialog: (value: boolean) => void;
   selectedDriverId: string;
   dialogHeader: string;
