@@ -1,3 +1,5 @@
+import {Row} from 'component/Table/propTypes/types';
+
 export interface AllDriverHistoryResponse {
   status_code: number;
   msg?: string;
@@ -21,7 +23,7 @@ export interface DriverHistoryResponse {
     attachments: AttachmentsResponse[];
   };
 }
-export interface OrdersResponse {
+export interface OrdersResponse extends Row {
   user_id: string;
   order_number: string;
   status: string;

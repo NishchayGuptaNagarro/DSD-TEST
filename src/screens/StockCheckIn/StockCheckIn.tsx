@@ -135,10 +135,9 @@ function StockCheckIn() {
 
   async function fetchDrivers() {
     let response: AxiosResponse<PendingCheckInResponse>;
-    let driverData: Driver[];
     try {
       response = await api.get('/warehouse/drivers/pending-checkin');
-      console.log('🚀 ~ fetchDrivers ~ response pending-checkin:', response);
+      console.log(response);
 
       const vanSellerDrivers: Driver[] = response.data.data[
         driverRoles.VAN_SELLER
@@ -203,6 +202,7 @@ function StockCheckIn() {
           credit: transaction.payment_method.credit,
           cheque: transaction.payment_method.cheque,
         },
+        status: transaction.status,
       }));
 
       const parsedStocks = stocks.map(stock => ({

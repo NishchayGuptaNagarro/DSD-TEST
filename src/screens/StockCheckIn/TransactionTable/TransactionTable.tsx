@@ -1,35 +1,21 @@
+import {Dialog} from '@mui/material';
 import Table from 'component/Table/Table.tsx';
 import {useOutletContext} from 'react-router-dom';
 import {getTransactionRowId} from 'utilities/getTransactionRowId.ts';
-import {historyDetailsColDef, transactionColDef} from 'utilities/TransactionColDef/TransactionColDef.tsx';
 import {StockCheckInContext} from '../propTypes/types.ts';
-import {Dialog} from '@mui/material';
 
-import './TransactionTable.scss';
-import {useState} from 'react';
-import { Row } from 'component/Table/propTypes/types.ts';
 import TableDialogContent from 'component/TableDialogContent/TableDialogContent.tsx';
-import { OrdersResponse } from 'models/DriverHistoryResponse.ts';
+import {OrdersResponse} from 'models/DriverHistoryResponse.ts';
+import {useState} from 'react';
+import {historyDetailsColDef} from 'utilities/DeliveryTransactionColDef/DeliveryTransactionColDef.tsx';
+import {getTransactionColDef} from 'utilities/getTransactionColDef.ts';
 function TransactionTable() {
-  const {transactionArr} = useOutletContext<StockCheckInContext>();
+  const {transactionArr, driverType} = useOutletContext<StockCheckInContext>();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [isDialogTableLoading, setDialogTableLoading] = useState(false);
   const [dialogTableRow, setDialogTableRow] = useState<OrdersResponse[]>([]);
-  
-  const fetchOrderDetails = async (orderInfo: OrdersResponse) => {
-    setDialogTableLoading(true);
-    try {
-      setDialogTableRow([orderInfo]);
-    } catch (error) {
-      console.error(error);
-      setDialogTableRow([]);
-    } finally {
-      setDialogTableLoading(false);
-    }
-  };
 
   const handleOrderInfosClick = (orderInfo: OrdersResponse) => {
-    fetchOrderDetails(orderInfo);
+    setDialogTableRow([orderInfo]);
     setIsDialogOpen(true);
   };
 
@@ -46,7 +32,7 @@ function TransactionTable() {
           columns={historyDetailsColDef}
           getRowId={getTransactionRowId}
           setShowDialog={() => setIsDialogOpen(false)}
-          showLoading={isDialogTableLoading}
+          showLoading={false}
           selectedDriverId=""
           dialogHeader="table.orderDetails"
           noOfRows={3}
@@ -56,7 +42,7 @@ function TransactionTable() {
         noOfRows={5}
         showMenu={false}
         rows={transactionArr}
-        columns={transactionColDef(handleOrderInfosClick)}
+        columns={getTransactionColDef(driverType, handleOrderInfosClick)}
         getRowId={getTransactionRowId}
         showLoading={false}
         minHeight={480}
@@ -66,3 +52,4 @@ function TransactionTable() {
 }
 
 export default TransactionTable;
+

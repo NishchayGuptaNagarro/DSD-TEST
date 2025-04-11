@@ -73,7 +73,7 @@ function CustomNoRowsOverlay() {
   );
 }
 
-function CustomPagination({ handlePageChange }: CustomPaginationProps) {
+function CustomPagination({handlePageChange}: CustomPaginationProps) {
   const apiRef = useGridApiContext();
   const page = useGridSelector(apiRef, gridPageSelector);
   const pageCount = useGridSelector(apiRef, gridPageCountSelector);
@@ -143,7 +143,6 @@ export default function Table({
   minHeight = 270,
   withBorder = false,
   handlePageChange,
-
 }: TableProps) {
   return (
     <DataGrid
@@ -156,13 +155,15 @@ export default function Table({
         noRowsOverlay: CustomNoRowsOverlay,
         columnMenu: CustomColumnMenu,
         noResultsOverlay: CustomNoRowsOverlay,
-        pagination: () => <CustomPagination handlePageChange={handlePageChange} />,
+        pagination: () => (
+          <CustomPagination handlePageChange={handlePageChange} />
+        ),
       }}
       rows={rows}
       columns={columns}
       getRowId={getRowId}
       autoHeight={false}
-      getRowHeight={() => 52} //Passing function to automatically set row height of each row
+      getRowHeight={() => 'auto'} //Passing function to automatically set row height of each row
       getEstimatedRowHeight={() => 52} //giving estimated row height for performance enhancements
       initialState={{
         sorting: {

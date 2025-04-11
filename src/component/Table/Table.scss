@@ -67,3 +67,57 @@ $block-margin: 14px;
   }
 }
 
+.action-cell {
+  padding-bottom: 16px;
+  padding-top: 14px;
+}
+
+.action-button {
+  box-shadow: none;
+  padding-block: 2px;
+  padding-inline: 20px;
+  text-transform: none;
+  font-size: $font-sm;
+  font-weight: $font-normal;
+  border-radius: 33px;
+  &:hover {
+    background-color: $bg-white-smoke;
+  }
+}
+
+.myOrder-id-cell {
+  padding-inline: 10%;
+  width: 90%;
+  text-align: center;
+}
+.myOrder-cell {
+  width: auto;
+  padding: 5%;
+}
+
+.table-dialog {
+  & .MuiDialogContent-root {
+    padding-bottom: 8px;
+    padding-top: 30px;
+  }
+  & .MuiPaper-root.MuiDialog-paper {
+    border-radius: 12px;
+    padding-bottom: 0px;
+  }
+}
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .cross-container {
+    width: min-content;
+    padding-bottom: 28px;
+  }
+
+  .cross-img {
+    width: 28px;
+    height: 28px;
+  }
+}
+

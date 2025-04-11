@@ -8,6 +8,7 @@ export interface TransactionHistory extends Row {
   grossAmount: number;
   currIso: string;
   paymentMethods: PaymentMethods;
+  status: string;
 }
 
 export interface PaymentMethods {
