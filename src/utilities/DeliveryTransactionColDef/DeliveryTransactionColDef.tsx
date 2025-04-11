@@ -121,7 +121,7 @@ export const historyDetailsColDef: GridColDef[] = [
       return <ColumnHeader headerName={params.colDef.headerName || ''} />;
     },
     renderCell: params => {
-      return <div className="myOrder-cell">{params.value}</div>;
+      return <div className="my-order-cell">{params.value}</div>;
     },
     headerClassName: 'font-md',
     flex: 0.3,

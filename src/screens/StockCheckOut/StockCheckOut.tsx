@@ -203,7 +203,7 @@ function StockCheckOut() {
         '/warehouse/assign-initial-stock',
         {
           user_id: sessionStorage.getItem('selected_driver'),
-          business_role_id: driverType, //This needs to be dynamic
+          business_role_id: driverType,
         },
       );
       console.log(response);

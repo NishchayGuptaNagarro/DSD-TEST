@@ -7,11 +7,6 @@ export interface Order extends Row {
   name: string;
 }
 
-// export interface OrderInfoButtonProps {
-//     orderId: string | number | OrdersResponse;
-//     handleOrderInfoClick: (orderId: string | number) => void;
-// }
-
 export interface OrderInfoButtonProps {
   orderInfo: OrdersResponse;
   handleOrderInfoClick: (orderInfo: OrdersResponse) => void;
