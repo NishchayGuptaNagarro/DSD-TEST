@@ -85,6 +85,7 @@
   "table.items": "Articles",
   "table.amount": "Montant brut",
   "table.payment": "Méthodes de paiement",
+  "table.status": "Statut",
   "table.itembtn": "Afficher les articles",
   "table.itemsDesc": "Articles : ID",
   "table.remaining": "Restant",

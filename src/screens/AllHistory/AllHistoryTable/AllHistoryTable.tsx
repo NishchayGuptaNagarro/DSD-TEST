@@ -5,7 +5,6 @@ import {useEffect, useState} from 'react';
 import Table from 'component/Table/Table.tsx';
 import {attachmentColDef} from 'utilities/AttachmentColDef/AttachmentColDef.tsx';
 import {stockColDef} from 'utilities/StockColDef/StockColDef.tsx';
-import {transactionColDef} from 'utilities/TransactionColDef/TransactionColDef.tsx';
 import {allHistoryColDef} from './AllHistoryColDef/AllHistoryColDef.tsx';
 
 import {api} from 'api/api.ts';
@@ -20,8 +19,10 @@ import {
 } from 'models/DriverHistoryResponse.ts';
 import {Stock} from 'models/Stock.ts';
 import {TransactionHistory} from 'models/TransactionHistory.ts';
+import {historyDetailsColDef} from 'utilities/DeliveryTransactionColDef/DeliveryTransactionColDef.tsx';
 import {getAttachmentRowId} from 'utilities/getAttachmentRowId.ts';
 import {getStockRowId} from 'utilities/getStockRowId.ts';
+import {getTransactionColDef} from 'utilities/getTransactionColDef.ts';
 import {getTransactionRowId} from 'utilities/getTransactionRowId.ts';
 import {AllDriverHistory, AllHistoryProps} from './propTypes/types.ts';
 function AllHistoryTable({driverType, searchText}: AllHistoryProps) {
@@ -72,6 +73,7 @@ function AllHistoryTable({driverType, searchText}: AllHistoryProps) {
                     credit: order.payment_method.credit,
                     cheque: order.payment_method.cheque,
                   },
+                  status: order.status,
                 };
                 return parsedOrder;
               },
@@ -155,6 +157,18 @@ function AllHistoryTable({driverType, searchText}: AllHistoryProps) {
     }
   }
 
+  // Nested delivery transaction state and functions
+  const [isDeliveryTransactionDialogOpen, setIsDeliveryTransactionDialogOpen] =
+    useState(false);
+  const [deliveryOrderInfo, setDeliveryOrderInfo] = useState<OrdersResponse[]>(
+    [],
+  );
+
+  const handleDeliveryOrderInfoClick = (orderInfo: OrdersResponse) => {
+    setDeliveryOrderInfo([orderInfo]);
+    setIsDeliveryTransactionDialogOpen(true);
+  };
+
   return (
     <>
       <Dialog
@@ -167,7 +181,10 @@ function AllHistoryTable({driverType, searchText}: AllHistoryProps) {
         }}>
         <TableDialogContent
           rows={transactionArr}
-          columns={transactionColDef}
+          columns={getTransactionColDef(
+            driverType,
+            handleDeliveryOrderInfoClick,
+          )}
           getRowId={getTransactionRowId}
           setShowDialog={() => {
             setShowTransaction(false);
@@ -177,6 +194,26 @@ function AllHistoryTable({driverType, searchText}: AllHistoryProps) {
           noOfRows={3}
         />
       </Dialog>
+
+      {/* Nested Delivery transaction table */}
+      <Dialog
+        className="dialog-position-center table-dialog"
+        fullWidth
+        maxWidth="md"
+        open={isDeliveryTransactionDialogOpen}
+        onClose={() => setIsDeliveryTransactionDialogOpen(false)}>
+        <TableDialogContent
+          rows={deliveryOrderInfo}
+          columns={historyDetailsColDef}
+          getRowId={getTransactionRowId}
+          setShowDialog={() => setIsDeliveryTransactionDialogOpen(false)}
+          showLoading={false}
+          selectedDriverId=""
+          dialogHeader="table.orderDetails"
+          noOfRows={3}
+        />
+      </Dialog>
+
       <Dialog
         className={'dialog-position-end table-dialog'}
         fullWidth={true}
