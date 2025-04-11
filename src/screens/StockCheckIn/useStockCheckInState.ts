@@ -1,11 +1,15 @@
-import {Driver} from 'models/Driver.ts';
+import {Drivers} from 'models/Driver.ts';
 import {driverTypes} from 'models/driverTypes.ts';
 import {useState} from 'react';
 import getInitialDriverType from 'utilities/getInitialDriverType.ts';
 import {StockCheckInStates} from './propTypes/types.ts';
 
 export function useStockCheckInState(): StockCheckInStates {
-  const [driverArray, setDriverArray] = useState<Driver[]>([]);
+  const [driverArray, setDriverArray] = useState<Drivers>({
+    'VAN-SELLER': [],
+    DELIVERY: [],
+    HYBRID: [],
+  });
 
   const [driverType, setDriverType] = useState<driverTypes>(
     getInitialDriverType(),

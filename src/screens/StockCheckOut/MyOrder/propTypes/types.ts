@@ -12,3 +12,8 @@ export interface OrderInfoButtonProps {
   handleOrderInfoClick: (orderInfo: OrdersResponse) => void;
 }
 
+export interface MyOrderInfoButtonProps {
+  orderId: number | string;
+  handleOrderInfoClick: (orderId: string | number) => void;
+}
+

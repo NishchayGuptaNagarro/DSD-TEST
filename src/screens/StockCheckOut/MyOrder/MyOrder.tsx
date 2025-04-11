@@ -1,18 +1,18 @@
+import {Dialog} from '@mui/material';
 import {api} from 'api/api.ts';
 import {AxiosResponse, isAxiosError} from 'axios';
 import {Row} from 'component/Table/propTypes/types';
+import Table from 'component/Table/Table.tsx';
+import TableDialogContent from 'component/TableDialogContent/TableDialogContent';
+import {useEffect, useState} from 'react';
+import {useOutletContext} from 'react-router-dom';
 import {
   MyOrderApiResponse,
   MyOrderDetailApiResponse,
   StockCheckOutContext,
 } from '../propTypes/types';
-import {useOutletContext} from 'react-router-dom';
-import {useEffect, useState} from 'react';
-import Table from 'component/Table/Table.tsx';
-import {myOrdercolumns, orderDetailsColumns} from './MyOrderCol/MyOrderColDef';
 import './MyOrder.scss';
-import {Dialog} from '@mui/material';
-import TableDialogContent from 'component/TableDialogContent/TableDialogContent';
+import {myOrdercolumns, orderDetailsColumns} from './MyOrderCol/MyOrderColDef';
 
 function MyOrder() {
   const {setRows, rows} = useOutletContext<StockCheckOutContext>();
@@ -53,7 +53,7 @@ function MyOrder() {
   };
 
   // Fetch order details
-  const fetchOrderDetails = async (orderId: number) => {
+  const fetchOrderDetails = async (orderId: number | string) => {
     setDialogTableLoading(true);
 
     try {
@@ -103,22 +103,19 @@ function MyOrder() {
     throw new Error('Order ID should be a number');
   };
 
-  function getDialogProductRowId(row: Row): string | number {
-    if (
-      typeof row.productId === 'string' ||
-      typeof row.productId === 'number'
-    ) {
+  function getDialogProductRowId(row: Row): number {
+    if (typeof row.productId === 'number') {
       return row.productId;
     }
-    throw new Error('Invalid product id: must be string or number');
+    throw new Error('Invalid product id: must be a number');
   }
 
-  const handleOrderInfosClick = (orderId: number) => {
+  const handleOrderInfosClick = (orderId: number | string) => {
     fetchOrderDetails(orderId);
     setIsDialogOpen(true);
   };
 
-  const handlePageChange = (page) => {
+  const handlePageChange = (page: number) => {
     fetchRows(page); // Fetch new data for the current page
   };
   // JSX rendering
@@ -151,11 +148,10 @@ function MyOrder() {
         getRowId={getProductRowId}
         minHeight={384}
         handlePageChange={handlePageChange}
-
       />
-
     </>
   );
 }
 
 export default MyOrder;
+
