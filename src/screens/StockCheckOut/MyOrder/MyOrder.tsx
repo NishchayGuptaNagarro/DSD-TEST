@@ -103,11 +103,14 @@ function MyOrder() {
     throw new Error('Order ID should be a number');
   };
 
-  function getDialogProductRowId(row: Row): number {
-    if (typeof row.productId === 'number') {
+  function getDialogProductRowId(row: Row): number | string {
+    if (
+      typeof row.productId === 'number' ||
+      typeof row.productId === 'string'
+    ) {
       return row.productId;
     }
-    throw new Error('Invalid product id: must be a number');
+    throw new Error('Invalid product id: must be a number or string');
   }
 
   const handleOrderInfosClick = (orderId: number | string) => {

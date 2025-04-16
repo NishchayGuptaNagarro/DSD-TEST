@@ -9,7 +9,7 @@ export interface Row {
 export interface TableProps {
   rows: Row[];
   columns: GridColDef[];
-  getRowId: (row: Row) => number;
+  getRowId: (row: Row) => string | number;
   showLoading: boolean;
   showMenu: boolean;
   noOfRows: number;
