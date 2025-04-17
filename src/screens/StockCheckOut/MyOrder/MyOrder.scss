@@ -23,6 +23,14 @@
   padding: 5%;
 }
 
+.customer-name-header {
+  padding-left: 40px;
+}
+
+.customer-name-cell {
+  padding-left: 4%;
+}
+
 .table-dialog {
   & .MuiDialogContent-root {
     padding-bottom: 8px;
@@ -48,3 +56,4 @@
     height: 28px;
   }
 }
+

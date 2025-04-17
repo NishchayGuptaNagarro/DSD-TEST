@@ -32,17 +32,21 @@ export const myOrdercolumns: (
       field: 'name',
       headerName: 'table.customerName',
       renderHeader: (params: GridColumnHeaderParams) => {
-        return <ColumnHeader headerName={params.colDef.headerName || ''} />;
+        return (
+          <div className="customer-name-header">
+            <ColumnHeader headerName={params.colDef.headerName || ''} />
+          </div>
+        );
       },
       renderCell: params => {
-        return <div className="my-order-cell">{params.value}</div>;
+        return <div className="customer-name-cell">{params.value}</div>;
       },
       headerClassName: 'font-md',
       flex: 0.3,
       cellClassName: 'stock font-sm',
       sortable: false,
-      headerAlign: 'center',
-      align: 'center',
+      headerAlign: 'left',
+      align: 'left',
     },
 
     {
