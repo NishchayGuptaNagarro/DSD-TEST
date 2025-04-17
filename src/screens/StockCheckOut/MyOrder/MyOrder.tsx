@@ -143,7 +143,7 @@ function MyOrder() {
       </Dialog>
 
       <Table
-        noOfRows={4}
+        noOfRows={5}
         showMenu={false}
         showLoading={!isTableLoaded}
         rows={rows}
