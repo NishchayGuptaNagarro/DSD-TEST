@@ -13,7 +13,7 @@ import {
   useGridSelector,
 } from '@mui/x-data-grid';
 
-import {TableProps} from './propTypes/types.ts';
+import {CustomPaginationProps, TableProps} from './propTypes/types.ts';
 import './Table.scss';
 
 import Box from '@mui/material/Box';
@@ -22,9 +22,7 @@ import PaginationItem from '@mui/material/PaginationItem';
 import NoDataAvailable from 'assets/PNG/NoDataAvailableIcon.png';
 import {useTranslation} from 'react-i18next';
 import styles from 'styles/design-systems.module.scss';
-interface CustomPaginationProps {
-  handlePageChange?: (value: number) => void;
-}
+
 const StyledGridOverlay = styled('div')(({theme}) => ({
   display: 'flex',
   flexDirection: 'column',
@@ -73,10 +71,16 @@ function CustomNoRowsOverlay() {
   );
 }
 
-function CustomPagination({handlePageChange}: CustomPaginationProps) {
+function CustomPagination({
+  page,
+  pageCount,
+  handlePageChange,
+}: CustomPaginationProps) {
+  console.log(page, pageCount);
   const apiRef = useGridApiContext();
-  const page = useGridSelector(apiRef, gridPageSelector);
-  const pageCount = useGridSelector(apiRef, gridPageCountSelector);
+  const currentPage = page ?? useGridSelector(apiRef, gridPageSelector);
+  const totalPageCount =
+    pageCount ?? useGridSelector(apiRef, gridPageCountSelector);
 
   return (
     <Pagination
@@ -101,8 +105,8 @@ function CustomPagination({handlePageChange}: CustomPaginationProps) {
       }}
       variant="outlined"
       shape="rounded"
-      page={page + 1}
-      count={pageCount}
+      page={currentPage + 1}
+      count={totalPageCount}
       renderItem={props => <PaginationItem {...props} />}
       onChange={(_, value) => {
         if (handlePageChange) {
@@ -143,6 +147,8 @@ export default function Table({
   minHeight = 270,
   withBorder = false,
   handlePageChange,
+  page,
+  pageCount,
 }: TableProps) {
   return (
     <DataGrid
@@ -156,7 +162,11 @@ export default function Table({
         columnMenu: CustomColumnMenu,
         noResultsOverlay: CustomNoRowsOverlay,
         pagination: () => (
-          <CustomPagination handlePageChange={handlePageChange} />
+          <CustomPagination
+            page={page}
+            pageCount={pageCount}
+            handlePageChange={handlePageChange}
+          />
         ),
       }}
       rows={rows}

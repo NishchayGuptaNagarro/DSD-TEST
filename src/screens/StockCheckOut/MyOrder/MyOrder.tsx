@@ -22,6 +22,8 @@ function MyOrder() {
   const [isTableLoaded, setIsTableLoaded] = useState(false);
   const [dialogTableRow, setDialogTableRow] = useState<Row[]>([]);
   const [isDialogTableLoading, setDialogTableLoading] = useState(false);
+  const [page, setPage] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
 
   // Fetch orders
   const fetchRows = async (page = 1) => {
@@ -37,6 +39,8 @@ function MyOrder() {
       }));
 
       setRows(orders);
+      setPageCount(response?.data?.data?.pagination?.total_pages || 0);
+      setPage(response?.data?.data?.pagination?.current_page || 0);
       setIsTableLoaded(true);
     } catch (error) {
       console.error(error);
@@ -149,8 +153,10 @@ function MyOrder() {
         rows={rows}
         columns={myOrdercolumns(handleOrderInfosClick)}
         getRowId={getProductRowId}
-        minHeight={384}
+        minHeight={396}
         handlePageChange={handlePageChange}
+        page={page - 1}
+        pageCount={pageCount}
       />
     </>
   );
