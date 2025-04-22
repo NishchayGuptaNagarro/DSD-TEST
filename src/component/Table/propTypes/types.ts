@@ -16,5 +16,13 @@ export interface TableProps {
   minHeight?: number;
   withBorder?: boolean;
   handlePageChange?: (page: number) => void;
+  page?: number;
+  pageCount?: number;
+}
+
+export interface CustomPaginationProps {
+  page?: number;
+  pageCount?: number;
+  handlePageChange?: (value: number) => void;
 }
 
