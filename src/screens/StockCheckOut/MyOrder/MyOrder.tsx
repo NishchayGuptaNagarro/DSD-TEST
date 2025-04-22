@@ -153,7 +153,7 @@ function MyOrder() {
         rows={rows}
         columns={myOrdercolumns(handleOrderInfosClick)}
         getRowId={getProductRowId}
-        minHeight={406}
+        minHeight={396}
         handlePageChange={handlePageChange}
         page={page - 1}
         pageCount={pageCount}
