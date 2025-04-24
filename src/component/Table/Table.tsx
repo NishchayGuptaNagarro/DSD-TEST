@@ -76,7 +76,6 @@ function CustomPagination({
   pageCount,
   handlePageChange,
 }: CustomPaginationProps) {
-  console.log(page, pageCount);
   const apiRef = useGridApiContext();
   const currentPage = page ?? useGridSelector(apiRef, gridPageSelector);
   const totalPageCount =

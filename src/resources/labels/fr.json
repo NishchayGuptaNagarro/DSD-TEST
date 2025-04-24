@@ -85,7 +85,7 @@
   "table.items": "Articles",
   "table.amount": "Montant brut",
   "table.payment": "Méthodes de paiement",
-  "table.status": "Statut",
+  "table.status": "Ordre Statut",
   "table.itembtn": "Afficher les articles",
   "table.itemsDesc": "Articles : ID",
   "table.remaining": "Restant",
@@ -131,6 +131,5 @@
   "toolTip.attachments": "Pour consulter les pièces jointes, l'utilisateur doit télécharger des fichiers",
 
   "timeline.option11": "Mes commandes"
-  
 }
 

@@ -117,9 +117,13 @@ export const orderDetailsColumns: GridColDef[] = [
     headerName: 'table.items',
     flex: 0.6,
     headerClassName: 'font-md',
-    headerAlign: 'center',
+    headerAlign: 'left',
     renderHeader: (params: GridColumnHeaderParams) => {
-      return <ColumnHeader headerName={params.colDef.headerName || ''} />;
+      return (
+        <div className="customer-id-header">
+          <ColumnHeader headerName={params.colDef.headerName || ''} />
+        </div>
+      );
     },
     // passing 'Product Icon' element to render cell function, so it is rendered instead of product name
     renderCell: params => {
@@ -135,7 +139,7 @@ export const orderDetailsColumns: GridColDef[] = [
   },
   {
     field: 'quantity',
-    headerName: 'table.initialStock',
+    headerName: 'timeline.option8',
     renderHeader: (params: GridColumnHeaderParams) => {
       return <ColumnHeader headerName={params.colDef.headerName || ''} />;
     },

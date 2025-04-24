@@ -18,17 +18,22 @@ import {
   SingleDriverHistoryResponse,
 } from 'models/DriverHistoryResponse.ts';
 import {Stock} from 'models/Stock.ts';
-import {TransactionHistory} from 'models/TransactionHistory.ts';
+import {
+  DeliveryTransactionHistory,
+  TransactionHistory,
+} from 'models/TransactionHistory.ts';
 import {historyDetailsColDef} from 'utilities/DeliveryTransactionColDef/DeliveryTransactionColDef.tsx';
+import {driverRoles} from 'utilities/enums.ts';
 import {getAttachmentRowId} from 'utilities/getAttachmentRowId.ts';
+import {getParsedOrders} from 'utilities/getParsedOrders.ts';
 import {getStockRowId} from 'utilities/getStockRowId.ts';
 import {getTransactionColDef} from 'utilities/getTransactionColDef.ts';
 import {getTransactionRowId} from 'utilities/getTransactionRowId.ts';
 import {AllDriverHistory, AllHistoryProps} from './propTypes/types.ts';
 function AllHistoryTable({driverType, searchText}: AllHistoryProps) {
-  const [transactionArr, setTransactionArr] = useState<TransactionHistory[]>(
-    [],
-  );
+  const [transactionArr, setTransactionArr] = useState<
+    TransactionHistory[] | DeliveryTransactionHistory[]
+  >([]);
   const [stockArr, setStockArr] = useState<Stock[]>([]);
   const [attachmentArr, setAttachmentArr] = useState<Attachment[]>([]);
 
@@ -59,24 +64,9 @@ function AllHistoryTable({driverType, searchText}: AllHistoryProps) {
             rowId: i,
             date: history.date,
             driverId: history.user_id,
-            transaction: history.orders.map(
-              (order: OrdersResponse, i: number) => {
-                const parsedOrder: TransactionHistory = {
-                  rowId: i,
-                  customerId: Number(order.customer.external_id),
-                  customerName: order.customer.customer_name,
-                  grossAmount: order.gross_amount,
-                  currIso: order.curr_iso,
-                  orderId: order.order_number || '0',
-                  paymentMethods: {
-                    cash: order.payment_method.cash,
-                    credit: order.payment_method.credit,
-                    cheque: order.payment_method.cheque,
-                  },
-                  status: order.status,
-                };
-                return parsedOrder;
-              },
+            transaction: getParsedOrders(
+              history.orders,
+              driverType ?? driverRoles.VAN_SELLER,
             ),
             stock: history.stocks.map(stock => {
               return {
@@ -127,7 +117,7 @@ function AllHistoryTable({driverType, searchText}: AllHistoryProps) {
   }, [searchText]);
 
   function handleOrdersClick(
-    transactions: TransactionHistory[],
+    transactions: TransactionHistory[] | DeliveryTransactionHistory[],
     driverId: string,
   ) {
     setSelectedDriverId(driverId);
@@ -164,8 +154,8 @@ function AllHistoryTable({driverType, searchText}: AllHistoryProps) {
     [],
   );
 
-  const handleDeliveryOrderInfoClick = (orderInfo: OrdersResponse) => {
-    setDeliveryOrderInfo([orderInfo]);
+  const handleDeliveryOrderInfoClick = (orderInfo: OrdersResponse[]) => {
+    setDeliveryOrderInfo(orderInfo);
     setIsDeliveryTransactionDialogOpen(true);
   };
 

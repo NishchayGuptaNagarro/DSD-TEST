@@ -1,27 +1,41 @@
 import {Button} from '@mui/material';
-import {GridColDef, GridColumnHeaderParams} from '@mui/x-data-grid';
+import {
+  GridColDef,
+  GridColumnHeaderParams,
+  GridRenderCellParams,
+} from '@mui/x-data-grid';
 import ColumnHeader from 'component/ColumnHeader/ColumnHeader.tsx';
 import {OrdersResponse} from 'models/DriverHistoryResponse';
+import {DeliveryTransactionHistory} from 'models/TransactionHistory';
 import {useTranslation} from 'react-i18next';
 import {OrderInfoButtonProps} from 'screens/StockCheckOut/MyOrder/propTypes/types';
 import styles from 'styles/design-systems.module.scss';
 import {commonTransactionColDef} from 'utilities/commonTransactionColDef/CommonTransactionColDef';
 export const deliveryTransactionColDef: (
-  handleOrderInfoClick: (orderInfo: OrdersResponse) => void,
+  handleOrderInfoClick: (orderInfo: OrdersResponse[]) => void,
 ) => GridColDef[] = handleOrderInfoClick => {
   return [
     {
-      field: 'orderId',
-      headerName: 'table.orderId',
-      flex: 0.2,
-      headerClassName: 'font-md font-normal',
+      field: 'customerId',
+      headerName: 'table.customerDesc',
       renderHeader: (params: GridColumnHeaderParams) => {
-        return <ColumnHeader headerName={params.colDef.headerName || ''} />;
+        return (
+          <div className="delivery-customer-id-header">
+            <ColumnHeader headerName={params.colDef.headerName || ''} />
+          </div>
+        );
       },
-      headerAlign: 'center',
-      align: 'center',
-      sortable: false,
+      headerAlign: 'left',
+      align: 'left',
+      headerClassName: 'font-md font-normal',
+      renderCell: (
+        params: GridRenderCellParams<DeliveryTransactionHistory>,
+      ) => {
+        return <div className="delivery-customer-id-cell">{params.value}</div>;
+      },
+      flex: 0.34,
       cellClassName: 'font-sm font-normal',
+      sortable: false,
     },
     {
       field: 'order_detail',
@@ -30,10 +44,11 @@ export const deliveryTransactionColDef: (
         return <ColumnHeader headerName={params.colDef.headerName || ''} />;
       },
       renderCell: params => {
+        console.log(params);
         return (
           <div className="action-cell">
             <OrdersButton
-              orderInfo={params?.row || {}}
+              orderInfo={params?.row?.orders || {}}
               handleOrderInfoClick={handleOrderInfoClick}
             />
           </div>
@@ -50,7 +65,19 @@ export const deliveryTransactionColDef: (
 };
 
 export const historyDetailsColDef: GridColDef[] = [
-  ...commonTransactionColDef,
+  {
+    field: 'orderId',
+    headerName: 'table.orderId',
+    flex: 0.2,
+    headerClassName: 'font-md font-normal',
+    renderHeader: (params: GridColumnHeaderParams) => {
+      return <ColumnHeader headerName={params.colDef.headerName || ''} />;
+    },
+    headerAlign: 'center',
+    align: 'center',
+    sortable: false,
+    cellClassName: 'font-sm font-normal',
+  },
   {
     field: 'status',
     headerName: 'table.status',
@@ -67,6 +94,7 @@ export const historyDetailsColDef: GridColDef[] = [
     headerAlign: 'center',
     align: 'center',
   },
+  ...commonTransactionColDef.slice(1),
 ];
 
 function OrdersButton({orderInfo, handleOrderInfoClick}: OrderInfoButtonProps) {

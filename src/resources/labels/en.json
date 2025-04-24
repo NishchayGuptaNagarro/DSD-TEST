@@ -90,7 +90,7 @@
   "table.items": "Items",
   "table.amount": "Gross Amount",
   "table.payment": "Payment Methods",
-  "table.status": "Status",
+  "table.status": "Order Status",
   "table.itembtn": "Show Items",
   "table.itemsDesc": "Items: ID",
   "table.remaining": "Remaining",
@@ -131,7 +131,6 @@
   "toolTip.stocks": "To view stocks, user needs to check-in",
   "toolTip.orders": "To view orders, user needs to create an order",
   "toolTip.attachments": "To view attachments, user needs to upload files",
-
 
   "timeline.option11": "My Orders"
 }

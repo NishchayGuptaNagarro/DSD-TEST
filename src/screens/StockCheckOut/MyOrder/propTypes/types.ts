@@ -8,8 +8,8 @@ export interface Order extends Row {
 }
 
 export interface OrderInfoButtonProps {
-  orderInfo: OrdersResponse;
-  handleOrderInfoClick: (orderInfo: OrdersResponse) => void;
+  orderInfo: OrdersResponse[];
+  handleOrderInfoClick: (orderInfo: OrdersResponse[]) => void;
 }
 
 export interface MyOrderInfoButtonProps {
