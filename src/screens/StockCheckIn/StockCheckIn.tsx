@@ -24,9 +24,13 @@ import {Driver} from 'models/Driver.ts';
 import {DriverHistoryResponse} from 'models/DriverHistoryResponse.ts';
 import {driverTypes} from 'models/driverTypes.ts';
 import {Stock} from 'models/Stock.ts';
-import {TransactionHistory} from 'models/TransactionHistory.ts';
+import {
+  DeliveryTransactionHistory,
+  TransactionHistory,
+} from 'models/TransactionHistory.ts';
 import Lottie from 'react-lottie';
 import {driverRoles} from 'utilities/enums.ts';
+import {getParsedOrders} from 'utilities/getParsedOrders.ts';
 import {sendNotification} from 'utilities/sendNotification.ts';
 import {checkInRoutes} from 'utilities/timelineRoutes.ts';
 import {checkInSteps} from 'utilities/timelineSteps.ts';
@@ -46,9 +50,9 @@ function StockCheckIn() {
   const subHeading = t('createLoadingOrder.subtitle');
   const firstRender = useRef(true);
   const [dataLoading, setDataLoading] = useState(false);
-  const [transactionArr, setTransactionArr] = useState<TransactionHistory[]>(
-    [],
-  );
+  const [transactionArr, setTransactionArr] = useState<
+    TransactionHistory[] | DeliveryTransactionHistory[]
+  >([]);
   const [stockArr, setStockArr] = useState<Stock[]>([]);
   const [attachmentArr, setAttachmentArr] = useState<Attachment[]>([]);
   const {
@@ -190,20 +194,10 @@ function StockCheckIn() {
       );
       const {orders, stocks, attachments} = response.data.data;
 
-      const parsedTransactions = orders.map((transaction, i) => ({
-        rowId: i,
-        customerId: Number(transaction.customer.external_id),
-        customerName: transaction.customer.customer_name,
-        grossAmount: transaction.gross_amount,
-        currIso: transaction.curr_iso,
-        orderId: transaction.order_number || '0',
-        paymentMethods: {
-          cash: transaction.payment_method.cash,
-          credit: transaction.payment_method.credit,
-          cheque: transaction.payment_method.cheque,
-        },
-        status: transaction.status,
-      }));
+      const parsedTransactions = getParsedOrders(
+        orders,
+        selectedDriverType ?? driverRoles.VAN_SELLER,
+      );
 
       const parsedStocks = stocks.map(stock => ({
         stockId: stock.id,

@@ -3,14 +3,17 @@ import {Attachment} from 'models/Attachment.ts';
 import {Drivers} from 'models/Driver.ts';
 import {driverTypes} from 'models/driverTypes.ts';
 import {Stock} from 'models/Stock.ts';
-import {TransactionHistory} from 'models/TransactionHistory.ts';
+import {
+  DeliveryTransactionHistory,
+  TransactionHistory,
+} from 'models/TransactionHistory.ts';
 import {Dispatch, SetStateAction} from 'react';
 import {AdminSignatureProps} from '../AdminSignature/propTypes/types.ts';
 
 export interface StockCheckInContext
   extends DriverSelectionGridProps,
     AdminSignatureProps {
-  transactionArr: TransactionHistory[];
+  transactionArr: TransactionHistory[] | DeliveryTransactionHistory[];
   stockArr: Stock[];
   attachmentArr: Attachment[];
 }

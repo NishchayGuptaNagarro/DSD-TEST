@@ -7,7 +7,7 @@ import {vanSellerTransactionColDef} from 'utilities/VanSellerTransactionColDef/V
 
 export const getTransactionColDef = (
   driverType: driverTypes,
-  handleOrderInfoClick?: (orderInfo: OrdersResponse) => void,
+  handleOrderInfoClick?: (orderInfo: OrdersResponse[]) => void,
 ): GridColDef[] => {
   if (driverType === driverRoles.DELIVERY) {
     if (!handleOrderInfoClick) {

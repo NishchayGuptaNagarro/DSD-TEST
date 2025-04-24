@@ -1,6 +1,7 @@
 import {Row} from 'component/Table/propTypes/types.ts';
 
 export interface TransactionHistory extends Row {
+  // Used to van-seller transaction history data
   rowId: number;
   orderId: string;
   customerId: number;
@@ -9,6 +10,13 @@ export interface TransactionHistory extends Row {
   currIso: string;
   paymentMethods: PaymentMethods;
   status: string;
+}
+
+export interface DeliveryTransactionHistory extends Row {
+  // Used to delivery transaction history data
+  rowId: number;
+  customerId: number | string;
+  orders: TransactionHistory[];
 }
 
 export interface PaymentMethods {

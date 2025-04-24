@@ -11,7 +11,10 @@ import ColumnHeader from 'component/ColumnHeader/ColumnHeader.tsx';
 import {InfoTooltip} from 'component/InfoTooltip/InfoTooltip.tsx';
 import {Attachment} from 'models/Attachment.ts';
 import {Stock} from 'models/Stock.ts';
-import {TransactionHistory} from 'models/TransactionHistory.ts';
+import {
+  DeliveryTransactionHistory,
+  TransactionHistory,
+} from 'models/TransactionHistory.ts';
 import {useTranslation} from 'react-i18next';
 import styles from 'styles/design-systems.module.scss';
 import {getLocalDate} from 'utilities/getLocalDate.ts';
@@ -31,7 +34,7 @@ const dateFilter = getGridDateOperators().filter(item => {
 
 export const allHistoryColDef: (
   handleOrdersClick: (
-    transactions: TransactionHistory[],
+    transactions: TransactionHistory[] | DeliveryTransactionHistory[],
     driverId: string,
   ) => void,
   handleStocksClick: (stocks: Stock[], driverId: string) => void,
@@ -96,7 +99,11 @@ export const allHistoryColDef: (
         </div>
       ),
       renderCell: (
-        params: GridRenderCellParams<AllDriverHistory, TransactionHistory[]>,
+        params: GridRenderCellParams<
+          AllDriverHistory,
+          TransactionHistory[],
+          DeliveryTransactionHistory[]
+        >,
       ) => {
         return (
           <div className="action-cell">

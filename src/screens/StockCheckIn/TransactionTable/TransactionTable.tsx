@@ -14,8 +14,8 @@ function TransactionTable() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [dialogTableRow, setDialogTableRow] = useState<OrdersResponse[]>([]);
 
-  const handleOrderInfosClick = (orderInfo: OrdersResponse) => {
-    setDialogTableRow([orderInfo]);
+  const handleOrderInfosClick = (orderInfo: OrdersResponse[]) => {
+    setDialogTableRow(orderInfo);
     setIsDialogOpen(true);
   };
 
