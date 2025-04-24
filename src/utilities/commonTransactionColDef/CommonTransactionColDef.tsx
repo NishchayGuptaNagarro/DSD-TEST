@@ -80,24 +80,14 @@ export const commonTransactionColDef: GridColDef[] = [
 ];
 
 function PaymentGrid({paymentMethods}: PaymentGridProps) {
-  const entries = [
-    {label: 'Credit', value: paymentMethods.credit ?? 0},
-    {label: 'Cash', value: paymentMethods.cash ?? 0},
-    {label: 'Cheque', value: paymentMethods.cheque ?? 0},
-  ];
-
   return (
     <Stack
       sx={{paddingBlock: '6px', pl: '20%'}}
-      flexDirection="column"
+      flexDirection={'column'}
       gap={0.2}>
-      {entries
-        .filter(entry => entry.value !== 0)
-        .map(entry => (
-          <div key={entry.label}>
-            {entry.label}: {entry.value.toFixed(2)}
-          </div>
-        ))}
+      <div>Credit: {(paymentMethods.credit ?? 0).toFixed(2)}</div>
+      <div>Cash: {(paymentMethods.cash ?? 0).toFixed(2)}</div>
+      <div>Cheque: {(paymentMethods.cheque ?? 0).toFixed(2)}</div>
     </Stack>
   );
 }

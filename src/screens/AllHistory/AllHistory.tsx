@@ -25,7 +25,10 @@ function AllHistory() {
     _: MouseEvent<HTMLElement>,
     value: driverTypes,
   ) {
-    setDriverType(value);
+    if (value !== null) {
+      setDriverType(value);
+      setSearchText('');
+    }
   }
 
   return (

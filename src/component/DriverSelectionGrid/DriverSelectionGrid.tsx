@@ -39,7 +39,10 @@ function DriverSelectionGrid({
     _: MouseEvent<HTMLElement>,
     value: driverTypes,
   ) {
-    handleTypeChange(value);
+    if (value !== null) {
+      handleTypeChange(value);
+      searchDriver('');
+    }
   }
   // This will set the search text, triggering the useEffect to filter the array
   // This function will be called after a delay, so its only called when user stops typing to avoid unnecessary re-renders
