@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import SearchIcon from 'assets/SVG/SearchIcon.svg';
 import {DriverNameGridHeaderProps} from 'component/DriverNameGridHeader/propTypes/types';
-import {ChangeEvent, useRef, useState} from 'react';
+import {ChangeEvent, useEffect, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import styles from 'styles/design-systems.module.scss';
 import {driverRoles} from 'utilities/enums';
@@ -39,6 +39,10 @@ function DriverNameGridHeader({
       searchDriver(event.target.value);
     }, 300);
   }
+
+  useEffect(() => {
+    setSearchInput('');
+  }, [driverType]);
 
   return (
     <Stack direction="column" spacing={1} sx={{marginBottom: 2}}>
