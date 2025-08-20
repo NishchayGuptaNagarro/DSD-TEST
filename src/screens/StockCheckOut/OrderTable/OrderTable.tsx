@@ -34,7 +34,7 @@ const OrderTable = () => {
 
       products = response.data.data.map(product => {
         const parsedRes: Product = {
-          productId: Number(product.product_id),
+          productId: product.product_id,
           externalId: product.external_id,
           name: product.description,
           description: product.description,
