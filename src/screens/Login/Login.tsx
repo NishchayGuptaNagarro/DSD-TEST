@@ -4,14 +4,12 @@ import {Typography} from '@mui/material';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
-
-import {AxiosResponse} from 'axios';
+import {AxiosError, AxiosResponse} from 'axios';
 import {useFormik} from 'formik';
 import {jwtDecode} from 'jwt-decode';
 import {useEffect, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import * as Yup from 'yup';
-
 import {api} from 'api/api.ts';
 import logo from 'assets/PNG/NagarroLogoWhite.png';
 import bgImage from 'assets/WEBP/LoginBackground.webp';
@@ -21,15 +19,16 @@ import styles from 'styles/design-systems.module.scss';
 import {isTokenValid} from 'utilities/isTokenValid.ts';
 import './Login.scss';
 import {LoginApiResponse} from './propTypes/types.ts';
-
 function Login() {
   const [apiError, setApiError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigator = useNavigate();
   const {t} = useTranslation();
   const user = localStorage.getItem('user');
   async function authenticateUser(values: {userId: string; password: string}) {
-    console.log(values);
+    setApiError('');
+    setIsLoading(true);
     try {
       const res: AxiosResponse<LoginApiResponse> = await api.post(
         'accounts/login',
@@ -39,26 +38,27 @@ function Login() {
         },
       );
       const responseData = res.data;
-
       localStorage.setItem('access_token', responseData.data.access_token);
-      const user = jwtDecode(responseData.data.access_token);
-
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('refresh_token', responseData.data.refresh_token);
+      const decodedUser = jwtDecode(responseData.data.access_token);
+      localStorage.setItem('user', JSON.stringify(decodedUser));
       navigator('/home');
     } catch (error) {
       console.error(error);
-      if (error instanceof Error) {
+      if (error instanceof AxiosError) {
+        setApiError(error.response?.data?.msg || error.message);
+      } else if (error instanceof Error) {
         setApiError(error.message);
       }
+    } finally {
+      setIsLoading(false);
     }
   }
-
   useEffect(() => {
     if (user && isTokenValid(user)) {
       navigator('/home');
     }
-  }, []);
-
+  }, [navigator, user]);
   // Using formik and yup to handle form states, validation and submission
   // we can add more validations in validation schema as per requirement
   const formik = useFormik({
@@ -74,12 +74,10 @@ function Login() {
       await authenticateUser(values);
     },
   });
-
   const userIdError = formik.touched.userId && formik.errors.userId;
   const passwordError = formik.touched.password && formik.errors.password;
   const loginDisabled =
-    formik.values.password === '' || formik.values.userId === '';
-
+    isLoading || formik.values.password === '' || formik.values.userId === '';
   if (user && isTokenValid(user)) {
     return null;
   } else {
@@ -200,6 +198,4 @@ function Login() {
     );
   }
 }
-
 export default Login;
-
