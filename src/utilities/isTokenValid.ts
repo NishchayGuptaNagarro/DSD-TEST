@@ -4,6 +4,6 @@ interface UserToken {
 }
 
 export function isTokenValid(user: string) {
-  const userToken: UserToken = JSON.parse(user || `{exp:${Date.now() / 1000}`);
+  const userToken: UserToken = JSON.parse(user || `{"exp":${Date.now() / 1000}}`);
   return Date.now() < userToken.exp * 1000;
 }

@@ -249,7 +249,7 @@ function StockCheckIn() {
     return () => {
       setNextDisabled(true);
     };
-  });
+  }, [dataLoading, currentStep, location.pathname]);
 
   useEffect(() => {
     const unlisten = history.listen(listener => {

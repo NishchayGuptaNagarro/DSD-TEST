@@ -236,7 +236,7 @@ function StockCheckOut() {
     return () => {
       setNextDisabled(true);
     };
-  });
+  }, [currentStep, location.pathname, rows.length]);
 
   // API CALLS
   useEffect(() => {

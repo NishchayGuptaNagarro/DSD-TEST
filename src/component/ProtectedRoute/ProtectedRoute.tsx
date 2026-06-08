@@ -13,7 +13,7 @@ function ProtectedRoute({children}: ProtectedRouteProps) {
       localStorage.clear();
       navigate('/');
     }
-  });
+  }, []);
   if (user && isTokenValid(user)) {
     return <>{children}</>;
   } else {
