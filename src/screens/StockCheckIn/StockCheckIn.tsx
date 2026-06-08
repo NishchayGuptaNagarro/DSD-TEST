@@ -272,7 +272,7 @@ function StockCheckIn() {
     } else {
       navigate(orderRoutes[currentStep - 1]);
     }
-  }, [currentStep]);
+  }, [currentStep, orderRoutes]);
   return (
     <ScreenLayout>
       <Header>

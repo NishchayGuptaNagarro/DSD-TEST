@@ -28,7 +28,7 @@ const OrderTable = () => {
     let products: Row[];
     try {
       response = await api.get(
-        `/warehouse/driver-dashboard-for-warehouse?business_role_id=${driverType}&&user_id=${sessionStorage.getItem('selected_driver')}`,
+        `/warehouse/driver-dashboard-for-warehouse?business_role_id=${driverType}&user_id=${sessionStorage.getItem('selected_driver')}`,
       );
       console.log(response);
 
