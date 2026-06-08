@@ -236,7 +236,7 @@ function StockCheckOut() {
     return () => {
       setNextDisabled(true);
     };
-  });
+  }, [currentStep, location.pathname, rows.length]);
 
   // API CALLS
   useEffect(() => {
@@ -260,7 +260,7 @@ function StockCheckOut() {
     } else {
       navigate(orderRoutes[currentStep - 1]);
     }
-  }, [currentStep]);
+  }, [currentStep, orderRoutes]);
   return (
     <ScreenLayout>
       <Header>

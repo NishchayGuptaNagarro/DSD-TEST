@@ -249,7 +249,7 @@ function StockCheckIn() {
     return () => {
       setNextDisabled(true);
     };
-  });
+  }, [dataLoading, currentStep, location.pathname]);
 
   useEffect(() => {
     const unlisten = history.listen(listener => {
@@ -272,7 +272,7 @@ function StockCheckIn() {
     } else {
       navigate(orderRoutes[currentStep - 1]);
     }
-  }, [currentStep]);
+  }, [currentStep, orderRoutes]);
   return (
     <ScreenLayout>
       <Header>

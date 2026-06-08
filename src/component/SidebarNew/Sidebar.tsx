@@ -15,7 +15,7 @@ function Sidebar() {
       location.pathname.startsWith(item.path),
     );
     updateCurrentNav(currentSidebarItem ? currentSidebarItem.id : 1);
-  }, []);
+  }, [location.pathname]);
 
   const handleSelectedNav = (id: number) => {
     updateCurrentNav(id);

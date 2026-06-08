@@ -68,7 +68,7 @@ function DriverSignature() {
     return () => {
       isFocused.current = false;
     };
-  });
+  }, [signatureURL]);
   return (
     <>
       <div className="signature-label">
