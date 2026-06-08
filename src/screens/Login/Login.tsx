@@ -21,10 +21,8 @@ import styles from 'styles/design-systems.module.scss';
 import {isTokenValid} from 'utilities/isTokenValid.ts';
 import './Login.scss';
 import {LoginApiResponse} from './propTypes/types.ts';
-
-interface UserPayload {
-  business_role_id: string
-}
+import { appRoles } from 'utilities/enums.ts';
+import { userPayload } from './propTypes/types.ts';
 
 function Login() {
   const [apiError, setApiError] = useState('');
@@ -45,10 +43,12 @@ function Login() {
       const responseData = res.data;
 
       localStorage.setItem('access_token', responseData.data.access_token);
-      const user : UserPayload = jwtDecode(responseData.data.access_token);
+      const user : userPayload = jwtDecode(responseData.data.access_token);
 
-      if (user.business_role_id !== "WMANAGER"){
-        throw new Error("Invalid Credentials: You are not authorized to access this application")
+      const userRole = user.business_role_id
+      if(userRole !== appRoles.WAREHOUSE_ADMIN){
+        setApiError(t('login.invalidRole'));
+        return;
       }
 
       localStorage.setItem('user', JSON.stringify(user));
