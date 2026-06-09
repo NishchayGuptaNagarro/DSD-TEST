@@ -6,7 +6,7 @@ import {Row} from 'component/Table/propTypes/types.ts';
 import Table from 'component/Table/Table.tsx';
 import timelineContext from 'context/timeline/timelineContext.ts';
 import {Product} from 'models/Product.ts';
-import {useContext, useEffect, useState} from 'react';
+import {useContext, useEffect, useRef, useState} from 'react';
 import Lottie from 'react-lottie';
 import {useOutletContext} from 'react-router-dom';
 import {getProductRowId} from 'utilities/getProductRowId.ts';
@@ -18,6 +18,7 @@ const OrderTable = () => {
   const {decreaseSteps} = useContext(timelineContext);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isTableLoaded, setIsTableLoaded] = useState(false);
+  const isMounted = useRef(true);
 
   function handleDialogDismiss() {
     decreaseSteps();
@@ -44,8 +45,10 @@ const OrderTable = () => {
         };
         return parsedRes;
       });
-      setRows(products);
-      setIsTableLoaded(true);
+      if (isMounted.current) {
+        setRows(products);
+        setIsTableLoaded(true);
+      }
     } catch (error) {
       console.error(error);
       const statusCode = isAxiosError(error) ? error.response?.status : null;
@@ -54,13 +57,16 @@ const OrderTable = () => {
         setIsTableLoaded(true);
         return;
       }
-      setRows([]);
-      setIsTableLoaded(true);
+      if (isMounted.current) {
+        setRows([]);
+        setIsTableLoaded(true);
+      }
     }
   }
   useEffect(() => {
     fetchRows();
     return () => {
+      isMounted.current = false;
       setRows([]);
     };
   }, []);

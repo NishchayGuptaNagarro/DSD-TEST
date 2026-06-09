@@ -4,7 +4,7 @@ import {AxiosResponse, isAxiosError} from 'axios';
 import {Row} from 'component/Table/propTypes/types';
 import Table from 'component/Table/Table.tsx';
 import TableDialogContent from 'component/TableDialogContent/TableDialogContent';
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {useOutletContext} from 'react-router-dom';
 import {
   MyOrderApiResponse,
@@ -24,6 +24,7 @@ function MyOrder() {
   const [isDialogTableLoading, setDialogTableLoading] = useState(false);
   const [page, setPage] = useState(0);
   const [pageCount, setPageCount] = useState(0);
+  const isMounted = useRef(true);
 
   // Fetch orders
   const fetchRows = async (page = 1) => {
@@ -38,10 +39,12 @@ function MyOrder() {
         orderId: Number(order.order_id),
       }));
 
-      setRows(orders);
-      setPageCount(response?.data?.data?.pagination?.total_pages || 0);
-      setPage(response?.data?.data?.pagination?.current_page || 0);
-      setIsTableLoaded(true);
+      if (isMounted.current) {
+        setRows(orders);
+        setPageCount(response?.data?.data?.pagination?.total_pages || 0);
+        setPage(response?.data?.data?.pagination?.current_page || 0);
+        setIsTableLoaded(true);
+      }
     } catch (error) {
       console.error(error);
 
@@ -51,8 +54,10 @@ function MyOrder() {
         setIsDialogOpen(true);
       }
 
-      setRows([]);
-      setIsTableLoaded(true);
+      if (isMounted.current) {
+        setRows([]);
+        setIsTableLoaded(true);
+      }
     }
   };
 
@@ -75,7 +80,9 @@ function MyOrder() {
         }),
       );
 
-      setDialogTableRow(orders);
+      if (isMounted.current) {
+        setDialogTableRow(orders);
+      }
     } catch (error) {
       console.error(error);
 
@@ -85,7 +92,9 @@ function MyOrder() {
         setIsDialogOpen(true);
       }
 
-      setDialogTableRow([]);
+      if (isMounted.current) {
+        setDialogTableRow([]);
+      }
     } finally {
       setDialogTableLoading(false);
     }
@@ -95,6 +104,7 @@ function MyOrder() {
     fetchRows();
 
     return () => {
+      isMounted.current = false;
       setRows([]);
     };
   }, []);
