@@ -8,3 +8,7 @@ export enum driverRoles {
   DELIVERY = 'DELIVERY',
   HYBRID = 'HYBRID',
 }
+
+export enum allowedRoles {
+  WAREHOUSE_ADMIN = "WMANAGER"
+}

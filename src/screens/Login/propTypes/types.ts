@@ -6,3 +6,8 @@ export interface LoginApiResponse {
     refresh_token: string;
   };
 }
+export interface userPayload {
+  username:string
+  password:string
+  business_role_id: string
+}
