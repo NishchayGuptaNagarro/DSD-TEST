@@ -64,6 +64,7 @@ function StockCheckOut() {
     setNextDisabled,
     setDriverType,
     driverType,
+    resetRows,
   } = useStockCheckOutState();
   const {
     currentStep,
@@ -75,6 +76,13 @@ function StockCheckOut() {
     updateStepsArray,
     setCurrentStep,
   } = useContext(timelineContext);
+
+  function handleStepChange(nextStep: number) {
+    if (nextStep < currentStep) {
+      resetRows();  // the buggy reset instead of setRows([])
+    }
+    setCurrentStep(nextStep);
+  }
 
   function clearLocalStorage() {
     sessionStorage.removeItem('selected_driver');
@@ -315,8 +323,7 @@ function StockCheckOut() {
                 size={'small'}
                 variant={'contained'}
                 onClick={() => {
-                  setRows([]);
-                  decreaseSteps();
+                  handleStepChange(currentStep-1)
                 }}
                 disableElevation>
                 {t('createLoadingOrder.back')}
@@ -339,8 +346,7 @@ function StockCheckOut() {
                   variant={'contained'}
                   disabled={nextDisabled}
                   onClick={() => {
-                    setRows([]);
-                    increaseSteps();
+                    handleStepChange(currentStep + 1)
                   }}
                   disableElevation>
                   {t('createLoadingOrder.next')}
