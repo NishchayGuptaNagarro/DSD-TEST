@@ -69,7 +69,6 @@ function StockCheckOut() {
   const {
     currentStep,
     steps,
-    decreaseSteps,
     increaseSteps,
     orderRoutes,
     updateOrderRoutes,
@@ -79,7 +78,7 @@ function StockCheckOut() {
 
   function handleStepChange(nextStep: number) {
     if (nextStep < currentStep) {
-      resetRows();  // the buggy reset instead of setRows([])
+      resetRows();
     }
     setCurrentStep(nextStep);
   }
@@ -97,6 +96,7 @@ function StockCheckOut() {
   }
   function handleAlertClose() {
     clearLocalStorage();
+    resetRows();
     setAlertOpen(false);
     navigate('/home');
   }
