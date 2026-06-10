@@ -83,6 +83,7 @@ function StockCheckOut() {
   }
   function handleDriverSelection(driverId: string): void {
     setSelectedDriver(driverId);
+    setRows([]);
     increaseSteps();
     sessionStorage.setItem('selected_driver', driverId);
     sessionStorage.setItem('selected_driver_type', driverType);
@@ -90,6 +91,10 @@ function StockCheckOut() {
   function handleAlertClose() {
     clearLocalStorage();
     setAlertOpen(false);
+    setRows([]);
+    setSelectedDriver('');
+    setIsSignatureLoaded(false);
+    setCurrentStep(1);
     navigate('/home');
   }
   function handleTypeChange(type: driverTypes) {
@@ -229,13 +234,16 @@ function StockCheckOut() {
 
   useEffect(() => {
     if (location.pathname == '/stock-check-out') {
+      setRows([]);
+      setSelectedDriver('');
+      setIsSignatureLoaded(false);
       navigate('driver');
       setCurrentStep(1);
     }
+  }, []);
+
+  useEffect(() => {
     buttonDisabled();
-    return () => {
-      setNextDisabled(true);
-    };
   });
 
   // API CALLS
