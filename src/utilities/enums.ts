@@ -4,11 +4,12 @@ export enum languages {
 }
 
 export enum driverRoles {
-  VAN_SELLER = 'VAN-SELLER',
-  DELIVERY = 'DELIVERY',
-  HYBRID = 'HYBRID',
+  VAN_SELLER = 'van-seller',
+  DELIVERY = 'delivery',
+  HYBRID = 'hybrid',
 }
 
 export enum allowedRoles {
-  WAREHOUSE_ADMIN = "WMANAGER"
+  WAREHOUSE_ADMIN = "WMANAGER",
+  DRIVER_ADMIN = "DRIVER",
 }

@@ -89,7 +89,7 @@ function StockCheckIn() {
   function handleDriverSelection(driverId: string): void {
     setSelectedDriver(driverId);
     sessionStorage.setItem('selected_driver', driverId);
-    sessionStorage.setItem('selected_driver_type', driverType);
+    sessionStorage.setItem('selected_driver_type', driverType.toUpperCase());
     fetchDriverHistory().then(() => {
       increaseSteps();
     });

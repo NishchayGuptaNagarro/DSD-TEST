@@ -100,7 +100,7 @@ function StockCheckOut() {
         updateOrderRoutes(vanSellerRoutes);
         break;
       }
-      case driverRoles.DELIVERY: {
+      case 'DELIVERY': {
         updateStepsArray(deliverySteps);
         updateOrderRoutes(deliveryRoutes);
         break;
