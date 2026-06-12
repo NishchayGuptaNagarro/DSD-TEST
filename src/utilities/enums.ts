@@ -4,9 +4,9 @@ export enum languages {
 }
 
 export enum driverRoles {
-  VAN_SELLER = 'van-seller',
-  DELIVERY = 'delivery',
-  HYBRID = 'hybrid',
+  VAN_SELLER = 'VAN-SELLER',
+  DELIVERY = 'DELIVERY',
+  HYBRID = 'HYBRID',
 }
 
 export enum allowedRoles {

@@ -9,7 +9,7 @@ export const getTransactionColDef = (
   driverType: driverTypes,
   handleOrderInfoClick?: (orderInfo: OrdersResponse[]) => void,
 ): GridColDef[] => {
-  if (driverType === 'DELIVERY') {
+  if (driverType === driverRoles.DELIVERY) {
     if (!handleOrderInfoClick) {
       return [];
     }
