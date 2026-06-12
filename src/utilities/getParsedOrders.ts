@@ -27,7 +27,7 @@ export function getParsedOrders(
   );
 
   // If driverType is 'Delivery', group transactions by customer
-  if (driverType === 'DELIVERY') {
+  if (driverType === driverRoles.DELIVERY) {
     const grouped: Record<string, TransactionHistory[]> = {};
 
     mappedTransactions.forEach(order => {
