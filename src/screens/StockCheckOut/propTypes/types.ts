@@ -107,5 +107,6 @@ export interface SelectDriverStates {
   nextDisabled: boolean;
   setNextDisabled: Dispatch<SetStateAction<boolean>>;
   driverType: driverTypes;
+  resetRows: () => void;
   setDriverType: Dispatch<SetStateAction<driverTypes>>;
 }

@@ -22,6 +22,8 @@ export function useStockCheckOutState(): SelectDriverStates {
   const [isSignatureLoaded, setIsSignatureLoaded] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
   const [nextDisabled, setNextDisabled] = useState(true);
+  const resetRows = () => setRows([]);
+
   return {
     driverArray,
     setDriverArray,
@@ -39,6 +41,7 @@ export function useStockCheckOutState(): SelectDriverStates {
     setNextDisabled,
     setDriverType,
     driverType,
+    resetRows,
   };
 }
 
