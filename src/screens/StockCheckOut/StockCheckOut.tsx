@@ -64,17 +64,24 @@ function StockCheckOut() {
     setNextDisabled,
     setDriverType,
     driverType,
+    resetRows,
   } = useStockCheckOutState();
   const {
     currentStep,
     steps,
-    decreaseSteps,
     increaseSteps,
     orderRoutes,
     updateOrderRoutes,
     updateStepsArray,
     setCurrentStep,
   } = useContext(timelineContext);
+
+  function handleStepChange(nextStep: number): void {
+    if (nextStep < currentStep) {
+      resetRows();
+    }
+    setCurrentStep(nextStep);
+  }
 
   function clearLocalStorage() {
     sessionStorage.removeItem('selected_driver');
@@ -83,12 +90,14 @@ function StockCheckOut() {
   }
   function handleDriverSelection(driverId: string): void {
     setSelectedDriver(driverId);
+    resetRows();
     increaseSteps();
     sessionStorage.setItem('selected_driver', driverId);
     sessionStorage.setItem('selected_driver_type', driverType);
   }
   function handleAlertClose() {
     clearLocalStorage();
+    resetRows();
     setAlertOpen(false);
     navigate('/home');
   }
@@ -100,7 +109,7 @@ function StockCheckOut() {
         updateOrderRoutes(vanSellerRoutes);
         break;
       }
-      case driverRoles.DELIVERY: {
+      case 'DELIVERY': {
         updateStepsArray(deliverySteps);
         updateOrderRoutes(deliveryRoutes);
         break;
@@ -229,13 +238,14 @@ function StockCheckOut() {
 
   useEffect(() => {
     if (location.pathname == '/stock-check-out') {
+      resetRows();
       navigate('driver');
       setCurrentStep(1);
     }
+  }, []);
+
+  useEffect(() => {
     buttonDisabled();
-    return () => {
-      setNextDisabled(true);
-    };
   });
 
   // API CALLS
@@ -315,8 +325,7 @@ function StockCheckOut() {
                 size={'small'}
                 variant={'contained'}
                 onClick={() => {
-                  setRows([]);
-                  decreaseSteps();
+                  handleStepChange(currentStep - 1);
                 }}
                 disableElevation>
                 {t('createLoadingOrder.back')}
@@ -339,8 +348,7 @@ function StockCheckOut() {
                   variant={'contained'}
                   disabled={nextDisabled}
                   onClick={() => {
-                    setRows([]);
-                    increaseSteps();
+                    handleStepChange(currentStep + 1);
                   }}
                   disableElevation>
                   {t('createLoadingOrder.next')}

@@ -7,6 +7,8 @@
   "login.forgotPassword.label": "Oublié ?",
   "login.button.label": "Se connecter",
   "login.quote": "La plupart des gens passent à côté de l'opportunité parce qu'elle est vêtue d'une salopette et ressemble à du travail.",
+  "login.invalidRole": "Vous n'êtes pas autorisé à accéder à cette application.",
+
   "forgotPassword.title": "Vous avez oublié votre mot de passe?",
   "forgotPassword.description": "Pas de souci, nous vous enverrons des instructions de réinitialisation.",
   "forgotPassword.email.label": "Entrez votre email et nous vous enverrons le code pour réinitialiser votre mot de passe",
