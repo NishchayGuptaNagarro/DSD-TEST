@@ -3,7 +3,6 @@ import {
   DeliveryTransactionHistory,
   TransactionHistory,
 } from 'models/TransactionHistory';
-import {driverRoles} from 'utilities/enums';
 
 export function getParsedOrders(
   orders: OrdersResponse[],
@@ -27,7 +26,7 @@ export function getParsedOrders(
   );
 
   // If driverType is 'Delivery', group transactions by customer
-  if (driverType === 'DELIVERY') {
+  if (driverType?.toUpperCase() === 'DELIVERY') {
     const grouped: Record<string, TransactionHistory[]> = {};
 
     mappedTransactions.forEach(order => {
