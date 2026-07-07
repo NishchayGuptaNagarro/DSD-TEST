@@ -22,7 +22,7 @@ export function useStockCheckOutState(): SelectDriverStates {
   const [alertOpen, setAlertOpen] = useState(false);
   const [nextDisabled, setNextDisabled] = useState(true);
   const resetRows = () => {
-    setRows([]); // Create a new empty array to ensure proper state update
+    setRows([]);
   };
 
   return {

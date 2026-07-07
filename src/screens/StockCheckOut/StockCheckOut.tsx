@@ -78,9 +78,7 @@ function StockCheckOut() {
   } = useContext(timelineContext);
 
   function handleStepChange(nextStep: number) {
-    if (nextStep < currentStep) {
-      resetRows();  // the buggy reset instead of setRows([])
-    }
+    resetRows();
     setCurrentStep(nextStep);
   }
 
