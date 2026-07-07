@@ -15,13 +15,16 @@ export function useStockCheckOutState(): SelectDriverStates {
   const [driverType, setDriverType] = useState<driverTypes>(
     getInitialDriverType(),
   );
-
   const [rows, setRows] = useState<Row[]>([]);
   const [selectedDriver, setSelectedDriver] = useState<string>('');
   const [isDriverGridLoading, setIsDriverGridLoading] = useState(true);
   const [isSignatureLoaded, setIsSignatureLoaded] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
   const [nextDisabled, setNextDisabled] = useState(true);
+  const resetRows = () => {
+    setRows([]);
+  };
+
   return {
     driverArray,
     setDriverArray,
@@ -39,6 +42,7 @@ export function useStockCheckOutState(): SelectDriverStates {
     setNextDisabled,
     setDriverType,
     driverType,
+    resetRows,
   };
 }
 

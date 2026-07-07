@@ -1,4 +1,4 @@
-export const URL = 'https://django-backend.cfapps.eu20-001.hana.ondemand.com/';
+export const URL = 'https://django-backend.cfapps.eu10-004.hana.ondemand.com';
 // export const URL =
 //   'https://django-backend-demo.cfapps.eu20-001.hana.ondemand.com';
 // Add exception list for idempotency key
