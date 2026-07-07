@@ -89,12 +89,14 @@ function StockCheckOut() {
   }
   function handleDriverSelection(driverId: string): void {
     setSelectedDriver(driverId);
+    resetRows();
     increaseSteps();
     sessionStorage.setItem('selected_driver', driverId);
     sessionStorage.setItem('selected_driver_type', driverType);
   }
   function handleAlertClose() {
     clearLocalStorage();
+    resetRows();
     setAlertOpen(false);
     navigate('/home');
   }
@@ -235,13 +237,14 @@ function StockCheckOut() {
 
   useEffect(() => {
     if (location.pathname == '/stock-check-out') {
+      resetRows();
       navigate('driver');
       setCurrentStep(1);
     }
+  }, []);
+
+  useEffect(() => {
     buttonDisabled();
-    return () => {
-      setNextDisabled(true);
-    };
   });
 
   // API CALLS
