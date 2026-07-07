@@ -88,12 +88,14 @@ function StockCheckOut() {
     sessionStorage.removeItem('currentStep');
   }
   function handleDriverSelection(driverId: string): void {
+    resetRows();
     setSelectedDriver(driverId);
     increaseSteps();
     sessionStorage.setItem('selected_driver', driverId);
     sessionStorage.setItem('selected_driver_type', driverType);
   }
   function handleAlertClose() {
+    resetRows();
     clearLocalStorage();
     setAlertOpen(false);
     navigate('/home');
@@ -235,6 +237,7 @@ function StockCheckOut() {
 
   useEffect(() => {
     if (location.pathname == '/stock-check-out') {
+      resetRows();
       navigate('driver');
       setCurrentStep(1);
     }
