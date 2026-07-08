@@ -141,7 +141,13 @@ function StockCheckOut() {
         break;
       }
       case driverRoles.HYBRID: {
-        setNextDisabled(true);
+        if (currentStep == 2) {
+          setNextDisabled(rows.length === 0);
+        } else if (!selectedDriver) {
+          setNextDisabled(true);
+        } else {
+          setNextDisabled(selectedDriverType !== driverRoles.HYBRID);
+        }
         break;
       }
       default:

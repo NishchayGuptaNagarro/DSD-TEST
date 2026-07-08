@@ -95,7 +95,8 @@ function StockCheckIn() {
     });
   }
   function buttonDisabled() {
-    if (sessionStorage.getItem('selected_driver') && !dataLoading) {
+    const selectedDriver = sessionStorage.getItem('selected_driver');
+    if (selectedDriver && !dataLoading) {
       setNextDisabled(false);
     } else {
       setNextDisabled(true);
