@@ -5,8 +5,6 @@ export const vanSellerSteps = [
 ];
 export const hybridSteps = [
   'timeline.option1',
-  'timeline.option4',
-  'timeline.option5',
   'timeline.option2',
   'timeline.option3',
 ];

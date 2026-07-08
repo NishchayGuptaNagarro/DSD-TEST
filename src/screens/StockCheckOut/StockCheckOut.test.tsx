@@ -50,7 +50,7 @@ describe('Stock Check Out Screen Tests For VAN SELLER', () => {
     await userEvent.click(toggleBtnArr[1]);
     expect(screen.getAllByTestId('step')).toHaveLength(4);
     await userEvent.click(toggleBtnArr[2]);
-    expect(screen.getAllByTestId('step')).toHaveLength(5);
+    expect(screen.getAllByTestId('step')).toHaveLength(3);
   });
 
   test('should have next enabled', async () => {

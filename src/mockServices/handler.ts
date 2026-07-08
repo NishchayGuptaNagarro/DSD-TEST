@@ -2,40 +2,96 @@ import {URL} from 'api/config.ts';
 import {rest} from 'msw';
 import {driverRoles} from 'utilities/enums';
 
+const vanSellerDrivers = [
+  {
+    username: 'VanSeller Number1',
+    business_role_id: driverRoles.VAN_SELLER,
+    user_id: 'VS001',
+    business_partner_id: 'partner_id_1',
+    van_id: 'L001',
+    creation_date: '2024-05-30',
+    employee_id: 'E001',
+    email: 'vanseller1@example.com',
+    is_active: true,
+    device_token: null,
+    updated_at: '2024-05-29',
+    date_joined: '2024-01-01',
+  },
+  {
+    username: 'VanSeller Number2',
+    business_role_id: driverRoles.VAN_SELLER,
+    user_id: 'VS002',
+    business_partner_id: 'partner_id_2',
+    van_id: 'L002',
+    creation_date: '2024-05-28',
+    employee_id: 'E002',
+    email: 'vanseller2@example.com',
+    is_active: true,
+    device_token: null,
+    updated_at: '2024-05-25',
+    date_joined: '2024-02-15',
+  },
+];
+
+const deliveryDrivers = [
+  {
+    username: 'Delivery Driver 1',
+    business_role_id: driverRoles.DELIVERY,
+    user_id: 'DL001',
+    business_partner_id: 'partner_id_3',
+    van_id: 'L003',
+    creation_date: '2024-05-30',
+    employee_id: 'E003',
+    email: 'delivery1@example.com',
+    is_active: true,
+    device_token: null,
+    updated_at: '2024-05-29',
+    date_joined: '2024-01-01',
+  },
+  {
+    username: 'Delivery Driver 2',
+    business_role_id: driverRoles.DELIVERY,
+    user_id: 'DL002',
+    business_partner_id: 'partner_id_4',
+    van_id: 'L004',
+    creation_date: '2024-05-28',
+    employee_id: 'E004',
+    email: 'delivery2@example.com',
+    is_active: true,
+    device_token: null,
+    updated_at: '2024-05-25',
+    date_joined: '2024-02-15',
+  },
+];
+
+const hybridDrivers = [
+  {
+    username: 'Hybrid Driver 1',
+    business_role_id: driverRoles.HYBRID,
+    user_id: 'HY001',
+    business_partner_id: 'partner_id_5',
+    van_id: 'L005',
+    creation_date: '2024-05-30',
+    employee_id: 'E005',
+    email: 'hybrid1@example.com',
+    is_active: true,
+    device_token: null,
+    updated_at: '2024-05-29',
+    date_joined: '2024-01-01',
+  },
+];
+
 export const handlers = [
   rest.get(`${URL}warehouse/drivers`, (_, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
-        data: [
-          {
-            username: 'driver1',
-            business_role_id: driverRoles.VAN_SELLER,
-            user_id: 'user_id_1',
-            business_partner_id: 'partner_id_1',
-            creation_date: '2024-05-30',
-            territory: 'territory_1',
-            employee_id: 'employee_id_1',
-            email: 'driver1@example.com',
-            is_active: true,
-            date_joined: '2024-01-01',
-            updated_at: '2024-05-29',
-          },
-          {
-            username: 'driver2',
-            business_role_id: driverRoles.VAN_SELLER,
-            user_id: 'user_id_2',
-            business_partner_id: 'partner_id_2',
-            creation_date: '2024-05-28',
-            territory: null, // Set to null if territory is unknown
-            employee_id: 'employee_id_2',
-            email: 'driver2@example.com',
-            is_active: false,
-            date_joined: '2024-02-15',
-            updated_at: '2024-05-25',
-          },
-        ],
         status_code: 200,
+        data: {
+          'VAN-SELLER': vanSellerDrivers,
+          DELIVERY: deliveryDrivers,
+          HYBRID: hybridDrivers,
+        },
       }),
     );
   }),
@@ -44,38 +100,11 @@ export const handlers = [
       ctx.status(200),
       ctx.json({
         status_code: 200,
-        data: [
-          {
-            user_id: 'CA1051',
-            business_role_id: driverRoles.VAN_SELLER,
-            employee_id: '479',
-            is_active: true,
-            device_token:
-              'dnP3XVzrSEyAP97zYr8Y1D:APA91bFN3hUsr7EZDUfFGb0rPAK9NpSpoKyh0bUypdRbXWsckLjByrWygpxjL0pYdWvYlIx1o7bVIG6IUCQl5ih5Dq3qSnHm1b211KpiLeHnjb47U3qUMUokZ_RjNNUp7uZPcpBjtH2B',
-            creation_date: '2024-05-06T23:19:12.325828',
-            updated_at: '2024-05-08T18:10:54.289945',
-            email: 'yugam.ghogia@nagarro.com',
-            username: 'VanSeller Number2',
-            business_partner_id: '8000000611',
-            van_id: 'L031',
-            date_joined: '2024-04-05T04:50:57.319000',
-          },
-          {
-            user_id: 'TG1012',
-            business_role_id: driverRoles.VAN_SELLER,
-            employee_id: '478',
-            is_active: true,
-            device_token:
-              'dnP3XVzrSEyAP97zYr8Y1D:APA91bFN3hUsr7EZDUfFGb0rPAK9NpSpoKyh0bUypdRbXWsckLjByrWygpxjL0pYdWvYlIx1o7bVIG6IUCQl5ih5Dq3qSnHm1b211KpiLeHnjb47U3qUMUokZ_RjNNUp7uZPcpBjtH2B',
-            creation_date: '2024-05-06T23:19:44.137256',
-            updated_at: '2024-05-09T06:29:01.412549',
-            email: 'abhishek.kumar05@nagarro.com',
-            username: 'VanSeller Number1',
-            business_partner_id: '8000000610',
-            van_id: 'L003',
-            date_joined: '2024-04-05T04:49:03.684000',
-          },
-        ],
+        data: {
+          'VAN-SELLER': vanSellerDrivers,
+          DELIVERY: deliveryDrivers,
+          HYBRID: hybridDrivers,
+        },
       }),
     );
   }),
