@@ -34,10 +34,7 @@ import {getParsedOrders} from 'utilities/getParsedOrders.ts';
 import {sendNotification} from 'utilities/sendNotification.ts';
 import {checkInRoutes} from 'utilities/timelineRoutes.ts';
 import {checkInSteps} from 'utilities/timelineSteps.ts';
-import {
-  PendingCheckInResponse,
-  StockCheckInContext,
-} from './propTypes/types.ts';
+import {StockCheckInContext} from './propTypes/types.ts';
 import './StockCheckIn.scss';
 import {useStockCheckInState} from './useStockCheckInState.ts';
 
@@ -138,44 +135,42 @@ function StockCheckIn() {
   };
 
   async function fetchDrivers() {
-    let response: AxiosResponse<PendingCheckInResponse>;
+    let response: AxiosResponse;
     try {
       response = await api.get('/warehouse/drivers/pending-checkin');
       console.log(response);
 
-      const vanSellerDrivers: Driver[] = response.data.data[
-        driverRoles.VAN_SELLER
-      ]
-        ? response.data.data[driverRoles.VAN_SELLER].map(driver => ({
-            driverName: driver.username,
-            driverId: driver.user_id,
-            driverType: driverRoles.VAN_SELLER,
-          }))
-        : []; // If 'VAN-SELLER' is missing, set to an empty array
+      const drivers: Driver[] = [];
+      const rawData = response.data.data || response.data;
+      if (Array.isArray(rawData)) {
+        rawData.forEach((driver: {username: string; user_id: string; business_role_id?: string}) => {
+          const role = driver.business_role_id as driverTypes | undefined;
+          if (role && (role === driverRoles.VAN_SELLER || role === driverRoles.DELIVERY || role === driverRoles.HYBRID)) {
+            drivers.push({
+              driverName: driver.username,
+              driverId: driver.user_id,
+              driverType: role,
+            });
+          }
+        });
+      } else {
+        Object.entries(rawData as Record<string, Array<{username: string; user_id: string}>>).forEach(([role, driverList]) => {
+          if (Array.isArray(driverList)) {
+            driverList.forEach(driver => {
+              drivers.push({
+                driverName: driver.username,
+                driverId: driver.user_id,
+                driverType: role as driverTypes,
+              });
+            });
+          }
+        });
+      }
 
-      // Check if 'DELIVERY' exists
-      const deliveryDrivers: Driver[] = response.data.data[driverRoles.DELIVERY]
-        ? response.data.data[driverRoles.DELIVERY].map(driver => ({
-            driverName: driver.username,
-            driverId: driver.user_id,
-            driverType: driverRoles.DELIVERY,
-          }))
-        : []; // If 'DELIVERY' is missing, set to an empty array
-
-      // Check if 'HYBRID' exists
-      const hybridDrivers: Driver[] = response.data.data[driverRoles.HYBRID]
-        ? response.data.data[driverRoles.HYBRID].map(driver => ({
-            driverName: driver.username,
-            driverId: driver.user_id,
-            driverType: driverRoles.HYBRID,
-          }))
-        : []; // If 'HYBRID' is missing, set to an empty array
-
-      // Set the driver data in the state, categorized by type
       setDriverArray({
-        'VAN-SELLER': vanSellerDrivers,
-        DELIVERY: deliveryDrivers,
-        HYBRID: hybridDrivers,
+        'VAN-SELLER': drivers.filter(d => d.driverType === driverRoles.VAN_SELLER),
+        DELIVERY: drivers.filter(d => d.driverType === driverRoles.DELIVERY),
+        HYBRID: drivers.filter(d => d.driverType === driverRoles.HYBRID),
       });
       setIsDriverGridLoading(false);
     } catch (error) {
