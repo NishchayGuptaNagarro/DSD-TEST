@@ -3,6 +3,20 @@ import {rest} from 'msw';
 import {driverRoles} from 'utilities/enums';
 
 export const handlers = [
+  rest.post(`${URL}accounts/login`, (_, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        status_code: 200,
+        msg: 'Login successful',
+        data: {
+          access_token:
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiVklOQVJfU0VMTEVSIiwic3ViIjoiVklOQVJfU0VMTEVSIiwicm9sZSI6InZhbi1zZWxsZXIiLCJleHAiOjk5OTk5OTk5OTk5fQ.test',
+          refresh_token: 'test-refresh-token',
+        },
+      }),
+    );
+  }),
   rest.get(`${URL}warehouse/drivers`, (_, res, ctx) => {
     return res(
       ctx.status(200),
